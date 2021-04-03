@@ -1,0 +1,7 @@
+{
+  "name": "ionic-vue3.0-ts-lamplight",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
