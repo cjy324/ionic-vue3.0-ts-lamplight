@@ -1,0 +1,32 @@
+<template>
+  <ion-page>
+    <ion-custom-header>게시물 - 상세페이지</ion-custom-header>
+    <ion-content :fullscreen="true">
+      <ion-header collapse="condense">
+        <ion-toolbar>
+          <ion-title size="large">게시물 - 상세페이지</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-custom-body></ion-custom-body>
+    </ion-content>
+  </ion-page>
+</template>
+
+<style>
+</style>
+
+<script lang="ts">
+import { IonCustomHeader, IonCustomBody} from '@/components';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import { useGlobalState } from '@/stores'
+export default  {
+  name: 'Detail',
+  components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonCustomHeader, IonCustomBody},
+  setup() {
+    const globalState = useGlobalState();
+    return {
+      globalState
+    }
+  }
+}
+</script> 
