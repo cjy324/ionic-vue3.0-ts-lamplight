@@ -1,7 +1,7 @@
 import { GlobalState } from '@/types'
 import { reactive } from "@vue/reactivity"
 import { inject, computed } from "vue"
-import { Member } from "@/types";
+import { Client } from "@/types";
 
 //Symbol()
 //'심볼(symbol)'은 유일한 식별자(unique identifier)를 만들고 싶을 때 사용합니다.
@@ -39,55 +39,54 @@ export const createGlobalState = () => {
   //만약, Singleton에 globalState가 없으면 다시 생성
   if( Singleton.globalState == null){
     const globalState: any = reactive({
-      loginedMember: {
+      loginedClient: {
         id:0,
         regDate:"",
         updateDate:"",
-        authLevel:0,
         cellphoneNo:"",
         email:"",
         /* eslint-disable @typescript-eslint/camelcase */
         extra__thumbImg:"",
         loginId:"",
         name:"",
-        nickname:""
+        region:"",
       },
       authKey: "",
-      isLogined: computed(() => globalState.loginedMember.id != 0),
-      setLogined: function(authKey: string, member: Member) {
+      isLogined: computed(() => globalState.loginedClient.id != 0),
+      setLogined: function(authKey: string, client: Client) {
         localStorage.setItem("authKey", authKey);
-        localStorage.setItem("loginedMemberJsonStr", JSON.stringify(member));
+        localStorage.setItem("loginedClientJsonStr", JSON.stringify(client));
 
         globalState.authKey = authKey;
 
-        globalState.loginedMember = member;
+        globalState.loginedClient = client;
       },
       setLogouted: function() {
         globalState.authKey = "";
 
-        globalState.loginedMember.id = 0;
-        globalState.loginedMember.regDate = "";
-        globalState.loginedMember.updateDate = "";
-        globalState.loginedMember.authLevel = 0;
-        globalState.loginedMember.cellphoneNo = "";
-        globalState.loginedMember.email = "";
-        globalState.loginedMember.extra__thumbImg = "";
-        globalState.loginedMember.loginId = "";
-        globalState.loginedMember.name = "";
-        globalState.loginedMember.nickname = "";
+        globalState.loginedClient.id = 0;
+        globalState.loginedClient.regDate = "";
+        globalState.loginedClient.updateDate = "";
+        globalState.loginedClient.cellphoneNo = "";
+        globalState.loginedClient.email = "";
+        globalState.loginedClient.extra__thumbImg = "";
+        globalState.loginedClient.loginId = "";
+        globalState.loginedClient.name = "";
+        globalState.loginedClient.region = "";
+
 
         localStorage.removeItem("authKey");
-        localStorage.removeItem("loginedMemberJsonStr");
+        localStorage.removeItem("loginedClientJsonStr");
       }
     });
     const loadLoginInfoFromLocalStorage = () => {
       const authKey = localStorage.getItem("authKey");
-      const loginedMemberJsonStr = localStorage.getItem("loginedMemberJsonStr");
+      const loginedClientJsonStr = localStorage.getItem("loginedClientJsonStr");
 
-      if ( !!authKey && !!loginedMemberJsonStr ) {
-        const loginedMember: Member = JSON.parse(loginedMemberJsonStr);
+      if ( !!authKey && !!loginedClientJsonStr ) {
+        const loginedClient: Client = JSON.parse(loginedClientJsonStr);
 
-        globalState.setLogined(authKey, loginedMember);
+        globalState.setLogined(authKey, loginedClient);
       }
     }
 

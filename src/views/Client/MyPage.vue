@@ -25,6 +25,7 @@ import { IonCustomBody, IonCustomHeader } from '@/components/';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useRouter } from 'vue-router';
+import * as util from '@/utils';
 
 
 export default  {
@@ -39,7 +40,9 @@ export default  {
     
     const logout = () => {
       globalState.setLogouted();
-      router.replace('/member/login');
+
+      util.showAlert('로그아웃');
+      router.replace('/client/login');
     };
 
 

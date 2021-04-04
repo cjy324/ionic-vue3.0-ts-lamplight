@@ -36,7 +36,7 @@
             <ion-button type="submit" expand="block">로그인</ion-button>
           </div>
           <div class="py-2 px-4">
-            아직 회원이 아니신가요? <ion-custom-link to="/member/join">회원가입</ion-custom-link>
+            아직 회원이 아니신가요? <ion-custom-link to="/client/join">회원가입</ion-custom-link>
           </div>
         </form>
       </ion-custom-body>
@@ -75,29 +75,6 @@ export default  {
     const router = useRouter();
     //const mainApi = useMainApi();  //mainService를 통해 mainAPI를 가져오는 방식으로 변경
     const mainService = useMainService();
-    
-    
-    //21.04.01
-    //then() 방식에서 async-await 방식으로 변경
-
-    // function login(loginId: string, loginPw: string) {
-    //   mainService.member_authKey(loginId, loginPw) //mainService를 통해 mainAPI를 가져오는 방식으로 변경
-    //     .then(axiosResponse => {
-
-    //       //ionic alert으로 변경
-    //       util.showAlert(axiosResponse.data.msg);
-
-    //       if ( axiosResponse.data.fail ) {
-    //         return;
-    //       }
-    //       const authKey = axiosResponse.data.body.authKey;
-    //       const loginedMember = axiosResponse.data.body.member;
-
-    //       globalState.setLogined(authKey, loginedMember);
-          
-    //       router.replace('/');
-    //     });
-    // }
 
     //await??
     //비동기식 로직을 동기식으로 바꿔주는 함수?
@@ -106,19 +83,18 @@ export default  {
     
     async function login(loginId: string, loginPw: string) {
       
-      const axiosResponse = await mainService.member_authKey(loginId, loginPw)
+      const axiosResponse = await mainService.client_authKey(loginId, loginPw)
 
       util.showAlert(axiosResponse.data.msg);
       if ( axiosResponse.data.fail ) {
         return;
       }
       const authKey = axiosResponse.data.body.authKey;
-      const loginedMember = axiosResponse.data.body.member;
+      const loginedMember = axiosResponse.data.body.client;
       globalState.setLogined(authKey, loginedMember);
       
       router.replace('/');
     }
-
 
     function checkAndLogin() {
       if ( loginFormState.loginId.trim().length == 0 ) {
@@ -131,8 +107,6 @@ export default  {
       }
       login(loginFormState.loginId, loginFormState.loginPw);
     }
-
-
 
     return {
       globalState,

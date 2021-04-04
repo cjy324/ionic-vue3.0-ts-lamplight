@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { inject } from 'vue';
-import { Article, Member } from '@/types'
+import { Article, Client, Order, Expert, Assistant, Review, Funeral, Rating } from '@/types'
 
 // API 원형
 abstract class HttpClient {
@@ -95,9 +95,9 @@ interface Base__ResponseBodyType1 {
 /* eslint-disable @typescript-eslint/camelcase */
 export interface MainApi__article_list__ResponseBody extends Base__ResponseBodyType1 {
   body: {
-    /* eslint-disable @typescript-eslint/member-delimiter-style */
-    articles: Article[]
-  }
+    
+    articles: Article[];
+  };
 }
 
 // /usr/article/detail 의 응답 타입
@@ -105,7 +105,7 @@ export interface MainApi__article_list__ResponseBody extends Base__ResponseBodyT
 /* eslint-disable @typescript-eslint/camelcase */
 export interface MainApi__article_detail__ResponseBody extends Base__ResponseBodyType1 {
   body: {
-    article: Article,
+    article: Article;
   };
 }
 
@@ -113,22 +113,22 @@ export interface MainApi__article_detail__ResponseBody extends Base__ResponseBod
 /* eslint-disable @typescript-eslint/camelcase */
 export interface MainApi__article_doWrite__ResponseBody extends Base__ResponseBodyType1 {
   body: {
-    id: number,
+    id: number;
   };
 }
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 /* eslint-disable @typescript-eslint/camelcase */
-export interface MainApi__member_authKey__ResponseBody extends Base__ResponseBodyType1 {
+export interface MainApi__client_authKey__ResponseBody extends Base__ResponseBodyType1 {
   body: {
-    authKey: string,
-    member: Member,
+    authKey: string;
+    client: Client;
   };
 }
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 /* eslint-disable @typescript-eslint/camelcase */
-export interface MainApi__member_doJoin__ResponseBody extends Base__ResponseBodyType1 {
+export interface MainApi__client_doJoin__ResponseBody extends Base__ResponseBodyType1 {
   body: {
     id: number;
   };
@@ -142,13 +142,316 @@ export interface MainApi__common_genFile_doUpload__ResponseBody extends Base__Re
   };
 }
 
+
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/article/list 의 응답 타입
+export interface MainApi__order_list__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    orders: Order[];
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/article/list 의 응답 타입
+export interface MainApi__funeral_list__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    funerals: Funeral[];
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/article/list 의 응답 타입
+export interface MainApi__funeral_myList__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    funerals: Funeral[];
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/doModify 의 응답 타입
+export interface MainApi__funeral_asstApplyForFuneral__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/doModify 의 응답 타입
+export interface MainApi__funeral_asstCancleApplyForFuneral__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/article/detail 의 응답 타입
+export interface MainApi__order_detail__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    order: Order;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/doJoin 의 응답 타입
+export interface MainApi__client_doJoin__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/doJoin 의 응답 타입
+export interface MainApi__expert_doJoin__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/doJoin 의 응답 타입
+export interface MainApi__assistant_doJoin__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /common/genFile/doUpload 의 응답 타입
+export interface MainApi__common_genFile_doUpload__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    genFileIdsStr: string;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/authKey 의 응답 타입
+export interface MainApi__client_authKey__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    authKey: string;
+    client: Client;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/authKey 의 응답 타입
+export interface MainApi__expert_authKey__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    authKey: string;
+    expert: Expert;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/authKey 의 응답 타입
+export interface MainApi__assistant_authKey__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    authKey: string;
+    assistant: Assistant;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/list 의 응답 타입
+export interface MainApi__expert_list__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    //응답을 받기위해선 key명이 백엔드와 동일해야 함
+    //또한 백엔드로부터 ResultData와 같이 json형태로 받아야 함
+    //ex) return new ResultData("S-1", "성공", "members", members);
+    experts: Expert[];
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/list 의 응답 타입
+export interface MainApi__assistant_list__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    //응답을 받기위해선 key명이 백엔드와 동일해야 함
+    //또한 백엔드로부터 ResultData와 같이 json형태로 받아야 함
+    //ex) return new ResultData("S-1", "성공", "members", members);
+    assistants: Assistant[];
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/detail 의 응답 타입
+export interface MainApi__client_detail__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    client: Client;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/detail 의 응답 타입
+export interface MainApi__expert_detail__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    expert: Expert;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/detail 의 응답 타입
+export interface MainApi__assistant_detail__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    assistant: Assistant;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/doModify 의 응답 타입
+export interface MainApi__client_doModify__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    client: Client;
+    id: number;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/doModify 의 응답 타입
+export interface MainApi__expert_doModify__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    expert: Expert;
+    id: number;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/doModify 의 응답 타입
+export interface MainApi__assistant_doModify__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    assistant: Assistant;
+    id: number;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/order/doAdd 의 응답 타입
+export interface MainApi__order_doAdd__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/order/doModify 의 응답 타입
+export interface MainApi__order_doModify__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+    order: Order;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+export interface MainApi__order_changeStepLevel__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/review/doAdd 의 응답 타입
+export interface MainApi__review_doAdd__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/review/doAdd 의 응답 타입
+export interface MainApi__review_doModify__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/review/doDelete 의 응답 타입
+export interface MainApi__review_doDelete__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/list 의 응답 타입
+export interface MainApi__review_list__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    reviews: Review[];
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/member/list 의 응답 타입
+export interface MainApi__review_detail__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    review: Review;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/rating/doAdd 의 응답 타입
+export interface MainApi__rating_doAdd__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/rating/doAdd 의 응답 타입
+export interface MainApi__rating_getRatingRelClient__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    rating: Rating;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+// /usr/rating/doAdd 의 응답 타입
+export interface MainApi__rating_doModify__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+
+
 // http://localhost:8021/usr/ 와의 통신장치
 // mainService에게 넘기기 위해 export 추가
 export class MainApi extends HttpClient {
   public constructor() {
     super(
       axios.create({
-        baseURL:'http://localhost:8024/',
+        baseURL:'http://localhost:8090/',
       })
     );
   }
@@ -165,12 +468,17 @@ export class MainApi extends HttpClient {
       alert('로그인 후 이용해주세요.');
 
       localStorage.removeItem("authKey");
-      localStorage.removeItem("loginedMemberId");
-      localStorage.removeItem("loginedMemberName");
-      localStorage.removeItem("loginedMemberNickname");
-      localStorage.removeItem("loginedMemberProfileImgUrl");
+      localStorage.removeItem("loginedClientId");
+      localStorage.removeItem("loginedClientName");
+      localStorage.removeItem("loginedClientProfileImgUrl");
+      localStorage.removeItem("loginedAssistantId");
+      localStorage.removeItem("loginedAssistantName");
+      localStorage.removeItem("loginedAssistantProfileImgUrl");
+      localStorage.removeItem("loginedExpertId");
+      localStorage.removeItem("loginedExpertName");
+      localStorage.removeItem("loginedExpertProfileImgUrl");
 
-      location.replace('/member/login');
+      location.replace('/client/login');
     }
 
     return axiosResponse;
@@ -181,52 +489,331 @@ export class MainApi extends HttpClient {
     return this.get<MainApi__article_list__ResponseBody>(`/usr/article/list?boardId=${boardId}`);
   }
 
-  // http://localhost:8021/usr/detail/id?id=? 를 요청하고 응답을 받아오는 함수
-  public article_detail(id: number) {
-    return this.get<MainApi__article_detail__ResponseBody>(`/usr/article/detail?id=${id}`);
+  // http://localhost:8090/usr/article/list?boardId=? 를 요청하고 응답을 받아오는 함수
+  public order_list(memberId: number, memberType: string) {
+    return this.get<MainApi__order_list__ResponseBody>(`/usr/order/list?memberId=${memberId}&memberType=${memberType}`);
+  }
+  // http://localhost:8090/usr/article/list?boardId=? 를 요청하고 응답을 받아오는 함수
+  public funeral_list() {
+    return this.get<MainApi__funeral_list__ResponseBody>(`/usr/funeral/list`);
+  }
+  // http://localhost:8090/usr/article/list?boardId=? 를 요청하고 응답을 받아오는 함수
+  public funeral_myList(memberId: number, memberType: string) {
+    return this.get<MainApi__funeral_myList__ResponseBody>(`/usr/funeral/myList?memberId=${memberId}&memberType=${memberType}`);
   }
 
-  public article_doWrite(boardId: number, title: string, body: string) {
-    return this.postByForm<MainApi__article_doWrite__ResponseBody>(
-      `/article/doAdd`, {
-        boardId,
+  // http://localhost:8090/usr/member/doOrder/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
+  // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
+  public funeral_asstApplyForFuneral(funeralId: number, assistantId: number) {
+    return this.postByForm<MainApi__funeral_asstApplyForFuneral__ResponseBody>(
+      `/usr/funeral/asstApplyForFuneral`, {
+        funeralId,
+        assistantId,
+      }
+    );
+  }
+  // http://localhost:8090/usr/article/list?boardId=? 를 요청하고 응답을 받아오는 함수
+  public funeral_asstCancleApplyForFuneral(funeralId: number, assistantId: number) {
+    return this.get<MainApi__funeral_asstCancleApplyForFuneral__ResponseBody>(`/usr/funeral/asstCancleApplyForFuneral?funeralId=${funeralId}&assistantId=${assistantId}`);
+  }
+
+  // http://localhost:8090/usr/detail/id?id=? 를 요청하고 응답을 받아오는 함수
+  public order_detail(id: number) {
+    return this.get<MainApi__order_detail__ResponseBody>(`/usr/order/detail?id=${id}`);
+  }
+
+  // http://localhost:8090/usr/member/doOrder/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
+  // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
+  public order_doAdd(title: string, funeralHome: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
+    return this.postByForm<MainApi__order_doAdd__ResponseBody>(
+      `/usr/order/doAdd`, {
         title,
-        body
+        funeralHome,
+        head,
+        religion,
+        startDate,
+        endDate,
+        body,
+        expertId,
+        clientId
       }
     );
   }
 
-  public member_authKey(loginId: string, loginPw: string) {
-    return this.postByForm<MainApi__member_authKey__ResponseBody>(
-      `/usr/member/authKey`,
-      {
-        loginId,
-        loginPw
+  // http://localhost:8090/usr/member/doOrder/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
+  // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
+  public order_doModify(id: number, title: string, funeralHome: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
+    return this.postByForm<MainApi__order_doModify__ResponseBody>(
+      `/usr/order/doModify`, {
+        id,
+        title,
+        funeralHome,
+        head,
+        religion,
+        startDate,
+        endDate,
+        body,
+        expertId,
+        clientId
       }
     );
   }
 
-  public member_doJoin(loginId: string, loginPw: string, name: string, nickname: string, cellphoneNo: string, email: string, genFileIdsStr: string) {
-    return this.postByForm<MainApi__member_doJoin__ResponseBody>(
-      `/usr/member/doJoin`, {
+  // http://localhost:8090/usr/detail/id?id=? 를 요청하고 응답을 받아오는 함수
+  public order_changeStepLevel(id: number, stepLevel: number) {
+    return this.get<MainApi__order_changeStepLevel__ResponseBody>(`/usr/order/changeStepLevel?id=${id}&stepLevel=${stepLevel}`);
+  }
+
+  
+  /* Member 관련 */
+
+  // http://localhost:8024/usr/member/doJoin/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
+  // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
+  public client_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string) {
+    return this.postByForm<MainApi__client_doJoin__ResponseBody>(
+      `/usr/client/doJoin`, {
         loginId,
         loginPw,
         name,
-        nickname,
         cellphoneNo,
         email,
+        region,
         genFileIdsStr
       }
     );
   }
 
-  public common_genFile_doUpload(profileImg: File) {
-    const formDate = new FormData();
-    formDate.append("file__member__0__common__attachment__1", profileImg);
-    return this.post<MainApi__common_genFile_doUpload__ResponseBody>(
-      `/common/genFile/doUpload`, formDate
+  // http://localhost:8024/usr/member/doJoin/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
+  // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
+  public expert_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, license: string, career: string, genFileIdsStr: string) {
+    return this.postByForm<MainApi__expert_doJoin__ResponseBody>(
+      `/usr/expert/doJoin`, {
+        loginId,
+        loginPw,
+        name,
+        cellphoneNo,
+        email,
+        region,
+        career,
+        license,
+        genFileIdsStr
+      }
     );
   }
+
+  // http://localhost:8024/usr/member/doJoin/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
+  // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
+  public assistant_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr: string) {
+    return this.postByForm<MainApi__assistant_doJoin__ResponseBody>(
+      `/usr/assistant/doJoin`, {
+        loginId,
+        loginPw,
+        name,
+        cellphoneNo,
+        email,
+        region,
+        career,
+        genFileIdsStr
+      }
+    );
+  }
+
+  // http://localhost:8024/common/genFile/doUpload=?&profileImg=?...... 를 요청하고 응답을 받아오는 함수
+  public common_genFile_doUpload(profileImg: File) {
+    const formData = new FormData();
+    formData.append("file__client__0__common__attachment__1", profileImg);
+    return this.post<MainApi__common_genFile_doUpload__ResponseBody>(
+      `/common/genFile/doUpload`, formData
+    );
+  }
+
+  // http://localhost:8090/usr/member/authKey/loginId=?&loginPw=? 를 요청하고 응답을 받아오는 함수
+  public client_authKey(loginId: string, loginPw: string) {
+    return this.postByForm<MainApi__client_authKey__ResponseBody>(
+      `/usr/client/authKey`, {
+        loginId,
+        loginPw,
+      }
+    );
+  }
+
+  // http://localhost:8090/usr/member/authKey/loginId=?&loginPw=? 를 요청하고 응답을 받아오는 함수
+  public expert_authKey(loginId: string, loginPw: string) {
+    return this.postByForm<MainApi__expert_authKey__ResponseBody>(
+      `/usr/expert/authKey`, {
+        loginId,
+        loginPw,
+      }
+    );
+  }
+
+  // http://localhost:8090/usr/member/authKey/loginId=?&loginPw=? 를 요청하고 응답을 받아오는 함수
+  public assistant_authKey(loginId: string, loginPw: string) {
+    return this.postByForm<MainApi__assistant_authKey__ResponseBody>(
+      `/usr/assistant/authKey`, {
+        loginId,
+        loginPw,
+      }
+    );
+  }
+
+  // http://localhost:8090/usr/detail/id?id=? 를 요청하고 응답을 받아오는 함수
+  public client_detail(id: number) {
+    return this.get<MainApi__client_detail__ResponseBody>(`/usr/client/detail?id=${id}`);
+  }
+
+  // http://localhost:8090/usr/detail/id?id=? 를 요청하고 응답을 받아오는 함수
+  public expert_detail(id: number) {
+    return this.get<MainApi__expert_detail__ResponseBody>(`/usr/expert/detail?id=${id}`);
+  }
+
+  // http://localhost:8090/usr/detail/id?id=? 를 요청하고 응답을 받아오는 함수
+  public assistant_detail(id: number) {
+    return this.get<MainApi__assistant_detail__ResponseBody>(`/usr/assistant/detail?id=${id}`);
+  }
+
+  // http://localhost:8090/usr/member/list?boardId=? 를 요청하고 응답을 받아오는 함수
+  public expert_list() {
+    return this.get<MainApi__expert_list__ResponseBody>(`/usr/expert/list`);
+  }
+
+  // http://localhost:8090/usr/member/list?boardId=? 를 요청하고 응답을 받아오는 함수
+  public assistant_list() {
+    return this.get<MainApi__assistant_list__ResponseBody>(`/usr/assistant/list`);
+  }
+
+  // http://localhost:8024/usr/member/doJoin/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
+  // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
+  public client_doModify(id: number, loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string) {
+    return this.postByForm<MainApi__client_doModify__ResponseBody>(
+      `/usr/client/doModify`, {
+        id,
+        loginId,
+        loginPw,
+        name,
+        cellphoneNo,
+        email,
+        region,
+        genFileIdsStr
+      }
+    );
+  }
+
+  // http://localhost:8024/usr/member/doJoin/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
+  // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
+  public expert_doModify(id: number, loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, acknowledgment_step: string, region: string, license: string, career: string, genFileIdsStr: string) {
+    return this.postByForm<MainApi__expert_doModify__ResponseBody>(
+      `/usr/expert/doModify`, {
+        id,
+        loginId,
+        loginPw,
+        name,
+        cellphoneNo,
+        email,
+        acknowledgment_step,
+        region,
+        license,
+        career,
+        genFileIdsStr
+      }
+    );
+  }
+
+  // http://localhost:8024/usr/member/doJoin/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
+  // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
+  public assistant_doModify(id: number, loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr: string) {
+    return this.postByForm<MainApi__assistant_doModify__ResponseBody>(
+      `/usr/client/doModify`, {
+        id,
+        loginId,
+        loginPw,
+        name,
+        cellphoneNo,
+        email,
+        region,
+        career,
+        genFileIdsStr
+      }
+    );
+  }
+
+
+  // http://localhost:8090/usr/member/doOrder/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
+  // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
+  public review_doAdd(relTypeCode: string, relId: number, body: string, clientId: number) {
+    return this.postByForm<MainApi__review_doAdd__ResponseBody>(
+      `/usr/review/doAdd`, {
+        relTypeCode,
+        relId,
+        body,
+        clientId,
+        
+      }
+    );
+  }
+
+  // http://localhost:8090/usr/member/list?boardId=? 를 요청하고 응답을 받아오는 함수
+  public review_doDelete(id: number) {
+    return this.get<MainApi__review_doDelete__ResponseBody>(`/usr/review/doDelete?id=${id}`);
+  }
+
+  // http://localhost:8090/usr/member/list?boardId=? 를 요청하고 응답을 받아오는 함수
+  public review_list(relTypeCode: string) {
+    return this.get<MainApi__review_list__ResponseBody>(`/usr/review/list?relTypeCode=${relTypeCode}`);
+  }
+
+  // http://localhost:8090/usr/member/list?boardId=? 를 요청하고 응답을 받아오는 함수
+  public review_detail(id: number) {
+    return this.get<MainApi__review_detail__ResponseBody>(`/usr/review/detail?id=${id}`);
+  }
+
+  // http://localhost:8090/usr/member/doOrder/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
+  // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
+  public review_doModify(id: number, body: string, clientId: number) {
+    return this.postByForm<MainApi__review_doModify__ResponseBody>(
+      `/usr/review/doModify`, {
+        id,
+        body,
+        clientId,
+        
+      }
+    );
+  }
+   
+
+  // http://localhost:8090/usr/member/doOrder/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
+  // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
+  public rating_doAdd(relTypeCode: string, relId: number, point: number, clientId: number) {
+    return this.postByForm<MainApi__rating_doAdd__ResponseBody>(
+      `/usr/rating/doAdd`, {
+        relTypeCode,
+        relId,
+        point,
+        clientId,
+        
+      }
+    );
+  }
+
+  // http://localhost:8090/usr/member/list?boardId=? 를 요청하고 응답을 받아오는 함수
+  public rating_getRatingRelClient(relTypeCode: string, relId: number, clientId: number) {
+    return this.get<MainApi__rating_getRatingRelClient__ResponseBody>(`/usr/rating/getRatingRelClient?relTypeCode=${relTypeCode}&relId=${relId}&clientId=${clientId}`);
+  }
+
+  // http://localhost:8090/usr/member/doOrder/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
+  // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
+  public rating_doModify(relTypeCode: string, relId: number, point: number, clientId: number) {
+    return this.postByForm<MainApi__rating_doModify__ResponseBody>(
+      `/usr/rating/doModify`, {
+        relTypeCode,
+        relId,
+        point,
+        clientId,
+        
+      }
+    );
+  }
+
 }
 
 export const mainApiSymbol = Symbol('mainApiSymbol');

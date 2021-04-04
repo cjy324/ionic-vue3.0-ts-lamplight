@@ -10,6 +10,7 @@
       <ion-custom-body>
         <div class="bg-red-500">
           {{globalState.isLogined}}
+          asdasdasdasdasdasd
         </div>
       </ion-custom-body>
     </ion-content>

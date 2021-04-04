@@ -1,7 +1,7 @@
 //service를 통해 mainAPI를 가져오는 방식으로 변경
 //MVC패턴 같은 느낌
 //import { MainService } from "@/types";
-import { Member } from "@/types";
+import { Client } from "@/types";
 import { inject } from "vue";
 import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 가져오는 방식으로 변경
 
@@ -13,14 +13,14 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     }
 
     //camelcase??
-    //일반적으로 객체 명명은 memberAuthKey 이런식으로 함
+    //일반적으로 객체 명명은 clientAuthKey 이런식으로 함
     //이런 명명법을 camelcase라고함
     //typescript에선 camelcase방식을 권장하지만 이것을 무시할 수도 있음(큰 문제는 없음)
     //이를 무시하기 위해 아래와 같이 주석을 달아줌
   
     /* eslint-disable @typescript-eslint/camelcase */
-    member_authKey(loginId: string, loginPw: string) {
-      return this.mainApi.member_authKey(loginId, loginPw);
+    client_authKey(loginId: string, loginPw: string) {
+      return this.mainApi.client_authKey(loginId, loginPw);
     }
 
     /* eslint-disable @typescript-eslint/camelcase */
@@ -32,9 +32,9 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     // //이미지를 리사이징해주는 유틸 적용
     // //사용하려면 작동을 시켜야 함..일단은 적용 보류(21.04.01)
     // /* eslint-disable @typescript-eslint/no-inferrable-types */
-    // getMemberThumbImgUrl(id: number, width: number = 40, height: number = 40) {
+    // getClientThumbImgUrl(id: number, width: number = 40, height: number = 40) {
 
-    //   const originUrl = 'http://localhost:8021/common/genFile/file/member/' + id + '/common/attachment/1';
+    //   const originUrl = 'http://localhost:8021/common/genFile/file/client/' + id + '/common/attachment/1';
     //   const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=U.U&width=${width}&height=${height}&url=` + originUrl;
     //   return url;
     // }
@@ -46,7 +46,7 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     //   return url;
     //  }
   
-    getMemberThumbImgUrl(id: number) {
+    getClientThumbImgUrl(id: number) {
       return "https://i.pravatar.cc/45?img=13&k=" + id
     }
 

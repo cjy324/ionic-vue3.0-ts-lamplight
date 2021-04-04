@@ -8,7 +8,7 @@ const globalState = getGlobalState();
 const routes: Array<RouteRecordRaw> = [
   {     //앨리어싱
     path: '/', //만약, path가 '/' 이렇게 들어올 경우 '/home/Main'으로 redirect
-    redirect: '/home/Main'
+    redirect: '/Home/Main'
   },
   {
     path: '/home/',  //'/home/'로 시작하면 
@@ -16,33 +16,33 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        redirect: '/home/Main'
+        redirect: '/Home/Main'
       },
       {
         path: 'main',
-        component: () => import('@/views/home/Main.vue')
+        component: () => import('@/views/Home/Main.vue')
       },
     ]
   },
   {
-    path: '/member/',
+    path: '/client/',
     component: Tabs,
     children: [
       { 
         path: '', 
-        redirect: () => globalState.isLogined ? '/member/myPage' : '/member/login'
+        redirect: () => globalState.isLogined ? '/client/myPage' : '/client/login'
       },
       {
         path: 'login',
-        component: () => import('@/views/member/Login.vue')
+        component: () => import('@/views/Client/Login.vue')
       },
       {
         path: 'join',
-        component: () => import('@/views/member/Join.vue')
+        component: () => import('@/views/Client/Join.vue')
       },
       {
         path: 'myPage',
-        component: () => import('@/views/member/MyPage.vue')
+        component: () => import('@/views/Client/MyPage.vue')
       },
     ]
   },
@@ -82,7 +82,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'main',
-        component: () => import('@/views/setting/Main.vue')
+        component: () => import('@/views/Setting/Main.vue')
       },
     ]
   }

@@ -2,12 +2,12 @@
   <ion-page>
     <ion-tabs>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="home" :href="tabsState.hrefHome">
+        <ion-tab-button tab="Home" :href="tabsState.hrefHome">
           <font-awesome-icon class="text-lg h-7" icon="home" />
           <ion-label>홈</ion-label>
         </ion-tab-button>
         
-        <ion-tab-button tab="member" :href="tabsState.hrefMember">
+        <ion-tab-button tab="Client" :href="tabsState.hrefClient">
           <font-awesome-icon class="text-lg h-7" icon="user" />
           <ion-label>회원</ion-label>
         </ion-tab-button>
@@ -17,7 +17,7 @@
           <ion-label>게시물</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="setting" :href="tabsState.hrefSetting">
+        <ion-tab-button tab="Setting" :href="tabsState.hrefSetting">
           <font-awesome-icon class="text-lg h-7" icon="cog" />
           <ion-label>설정</ion-label>
         </ion-tab-button>
@@ -41,24 +41,24 @@ export default {
     const globalState = useGlobalState();
 
     const tabsState = reactive({
-      'hrefHome':'/home',
-      'hrefMember':'/member',
+      'hrefHome':'/Home',
+      'hrefClient':'/Client',
       'hrefArticle':'/article',
-      'hrefSetting':'/setting',
+      'hrefSetting':'/Setting',
     });
     /* ionic 리다이렉트 URL로의 다중클릭으로 인한 버그를 고치기 위한 코드 - 시작 */
     /* 버그가 해결되면 없애도 됩니다. */
     const route = useRoute();
-    if ( route.path.startsWith("/home") ) {
+    if ( route.path.startsWith("/Home") ) {
       tabsState.hrefHome = route.fullPath;
     }
-    else if ( route.path.startsWith("/member") ) {
-      tabsState.hrefMember = route.fullPath;
+    else if ( route.path.startsWith("/Client") ) {
+      tabsState.hrefClient = route.fullPath;
     }
     else if ( route.path.startsWith("/article") ) {
       tabsState.hrefArticle = route.fullPath;
     }
-    else if ( route.path.startsWith("/setting") ) {
+    else if ( route.path.startsWith("/Setting") ) {
       tabsState.hrefSetting = route.fullPath;
     }
     /* ionic 리다이렉트 URL로의 다중클릭으로 인한 버그를 고치기 위한 코드 - 끝 */
