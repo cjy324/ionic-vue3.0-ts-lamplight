@@ -30,7 +30,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       { 
         path: '', 
-        redirect: () => globalState.isLogined ? '/client/myPage' : '/client/login'
+        redirect: () => globalState.isLogined ? '/client/myPage?id=' + globalState.loginedClient.id : '/client/login'
       },
       {
         path: 'login',

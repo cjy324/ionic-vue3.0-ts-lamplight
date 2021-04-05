@@ -34,6 +34,11 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     }
 
     /* eslint-disable @typescript-eslint/camelcase */
+    client_detail(id: number) {
+      return this.mainApi.client_detail(id);
+    }
+
+    /* eslint-disable @typescript-eslint/camelcase */
     expert_list() {
       return this.mainApi.expert_list();
     }
