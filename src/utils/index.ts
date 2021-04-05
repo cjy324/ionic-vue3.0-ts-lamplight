@@ -10,6 +10,31 @@ export async function showAlert(msg: string) {
   return alert.present();
 } 
 
+export async function showAlertConfirm(msg: string) {
+  const alert = await alertController
+    .create({
+      header: 'Confirm',
+      message: msg,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            console.log('Confirm Okay')
+          },
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: blah => {
+            console.log('Confirm Cancel:', blah)
+          },
+        },
+      ],
+    });
+  return alert.present();
+}
+
 export function isEmptyObject(param: {}) {
   return Object.keys(param).length === 0 && param.constructor === Object;
 }

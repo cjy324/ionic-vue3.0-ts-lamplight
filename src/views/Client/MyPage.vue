@@ -13,8 +13,8 @@
       <div class="px-6 py-6 bg-white rounded-lg shadow-md">
         <div v-if="globalState.isLogined">
           <div title="프로필 이미지">
-            <img v-if="state.client.extra__thumbImg != null" class="h-96 rounded-lg object-cover object-center" :src="'http://localhost:8090' + state.client.extra__thumbImg">
-            <img v-if="state.client.extra__thumbImg == null" class="h-96 rounded-lg object-cover object-center" :src="'http://via.placeholder.com/300?text=NoImage'">
+            <img v-if="globalState.loginedClient.extra__thumbImg != null" class="h-96 rounded-lg object-cover object-center" :src="'http://localhost:8090' + globalState.loginedClient.extra__thumbImg">
+            <img v-if="globalState.loginedClient.extra__thumbImg == null" class="h-96 rounded-lg object-cover object-center" :src="'http://via.placeholder.com/300?text=NoImage'">
           </div>
           <div title="회원유형">
             <p>회원유형</p>
@@ -22,27 +22,27 @@
           </div>
           <div title="아이디">
             <p>아이디</p>
-            {{state.client.loginId}}
+            {{globalState.loginedClient.loginId}}
           </div>
           <div title="이름">
             <p>이름</p>
-            {{state.client.name}}
+            {{globalState.loginedClient.name}}
           </div>
           <div title="전화번호">
             <p>전화번호</p>
-            {{state.client.cellphoneNo}}
+            {{globalState.loginedClient.cellphoneNo}}
           </div>
           <div title="이메일">
             <p>이메일</p>
-            {{state.client.email}}
+            {{globalState.loginedClient.email}}
           </div>
           <div title="지역">
             <p>지역</p>
-            {{state.client.region}}
+            {{globalState.loginedClient.region}}
           </div>
           <div>
             <div class="btns mt-2">
-              <ion-button :href="'/client/doModify?id=' + state.client.id">
+              <ion-button :href="'/client/modify?id=' + globalState.loginedClient.id">
                 회원정보수정
               </ion-button>
             </div>
@@ -62,7 +62,7 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader } from '@/components/';
+import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
   IonPage, 
   IonHeader, 
@@ -86,7 +86,8 @@ export default  {
     IonContent, 
     IonPage, 
     IonCustomBody, 
-    IonCustomHeader, 
+    IonCustomHeader,
+    IonCustomLink, 
     IonButton 
   },
   
@@ -95,23 +96,23 @@ export default  {
     const mainService = useMainService();
     
     
-    const state = reactive({
-      client: {} as Client
-    });
+    // const state = reactive({
+    //   client: {} as Client
+    // });
 
-    const id = globalState.loginedClient.id;
+    // const id = globalState.loginedClient.id;
 
-    async function loadClient(id: number) {
-      const axRes = await mainService.client_detail(id)
-      state.client = axRes.data.body.client;
-    }
-    onMounted(() => {
-      loadClient(id);
-    });
+    // async function loadClient(id: number) {
+    //   const axRes = await mainService.client_detail(id)
+    //   state.client = axRes.data.body.client;
+    // }
+    // onMounted(() => {
+    //   loadClient(id);
+    // });
 
     return {
       globalState,
-      state
+      //state
     }
   }
 }

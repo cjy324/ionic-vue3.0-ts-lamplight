@@ -1,74 +1,68 @@
 <template>
   <ion-page>
-    <ion-custom-header>회원 - 가입</ion-custom-header>
+    <ion-custom-header>회원 - 정보 수정</ion-custom-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">회원 - 가입</ion-title>
+          <ion-title size="large">회원 - 정보 수정</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-custom-body class="justify-center">
-        <div class="logo-box text-center">
-          <span>
-            <span class="text-3xl">
-              <font-awesome-icon icon="lemon" />
-            </span>
-            <span class="font-bold text-3xl">
-              DESIGN LEMON
-            </span>
-          </span>
-        </div>
-        <form @submit.prevent="checkAndJoin">
+      <ion-custom-body class="justify-center mt-8">
+        <form v-if="globalState.isLogined" @submit.prevent="checkAndModify">
           <div>
             <ion-item>
+              <img v-if="globalState.loginedClient.extra__thumbImg != null" class="h-96 rounded-lg object-cover object-center" :src="'http://localhost:8090' + globalState.loginedClient.extra__thumbImg">
+              <img v-if="globalState.loginedClient.extra__thumbImg == null" class="h-96 rounded-lg object-cover object-center" :src="'http://via.placeholder.com/300?text=NoImage'">
+            </ion-item>
+            <ion-item>
               <ion-label position="stacked">프로필 이미지</ion-label>
-              <ion-input v-model="joinFormState.profileImg" type="file"></ion-input>
+              <ion-input v-model="modifyFormState.profileImg" type="file"></ion-input>
             </ion-item>
           </div>
           <div>
             <ion-item>
               <ion-label position="floating">아이디</ion-label>
-              <ion-input v-model="joinFormState.loginId" type="text" minlength="5" placeholder="아이디를 입력해주세요."></ion-input>
+              <ion-input v-model="modifyFormState.loginId" type="text" minlength="5" :placeholder="globalState.loginedClient.loginId"></ion-input>
             </ion-item>
           </div>
           <div>
             <ion-item>
               <ion-label position="floating">비밀번호</ion-label>
-              <ion-input v-model="joinFormState.loginPw" minlength="8" type="password" placeholder="비밀번호를 입력해주세요."></ion-input>
+              <ion-input v-model="modifyFormState.loginPw" minlength="8" type="password" placeholder="비밀번호를 입력해주세요."></ion-input>
             </ion-item>
           </div>
           <div>
             <ion-item>
               <ion-label position="floating">비밀번호 확인</ion-label>
-              <ion-input v-model="joinFormState.loginPwConfirm" minlength="8" type="password" placeholder="비밀번호 확인을 해주세요."></ion-input>
+              <ion-input v-model="modifyFormState.loginPwConfirm" minlength="8" type="password" placeholder="비밀번호 확인을 해주세요."></ion-input>
             </ion-item>
           </div>
           <div>
             <ion-item>
               <ion-label position="floating">이름</ion-label>
-              <ion-input v-model="joinFormState.name" minlength="2" placeholder="이름을 입력해주세요."></ion-input>
+              <ion-input v-model="modifyFormState.name" minlength="2" :placeholder="globalState.loginedClient.name"></ion-input>
             </ion-item>
           </div>
           <div>
             <ion-item>
               <ion-label position="floating">연락처</ion-label>
-              <ion-input v-model="joinFormState.cellphoneNo" type="tel" maxlength="11" placeholder="연락처를 입력해주세요."></ion-input>
+              <ion-input v-model="modifyFormState.cellphoneNo" type="tel" maxlength="11" :placeholder="globalState.loginedClient.cellphoneNo"></ion-input>
             </ion-item>
           </div>
           <div>
             <ion-item>
               <ion-label position="floating">이메일</ion-label>
-              <ion-input v-model="joinFormState.email" type="email" placeholder="이메일을 입력해주세요."></ion-input>
+              <ion-input v-model="modifyFormState.email" type="email" :placeholder="globalState.loginedClient.email"></ion-input>
             </ion-item>
           </div>
           <div>
             <ion-item>
               <ion-label position="floating">지역</ion-label>
-              <ion-input v-model="joinFormState.region" placeholder="시/도 주소를 입력해주세요."></ion-input>
+              <ion-input v-model="modifyFormState.region" :placeholder="globalState.loginedClient.region"></ion-input>
             </ion-item>
           </div>
           <div class="py-2 px-4">
-            <ion-button type="submit" expand="block">가입</ion-button>
+            <ion-button type="submit" expand="block">수정</ion-button>
           </div>
           <div class="px-4">
             <ion-button color="secondary" type="reset" expand="block">초기화</ion-button>
@@ -99,10 +93,11 @@ import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { useRouter } from 'vue-router';
 import * as util from '@/utils';
-import { reactive } from 'vue';
+import { reactive, onMounted } from 'vue';
+import { Client } from '@/types';
 
 
-const useJoinFormState = () => {
+const useModifyFormState = () => {
   return reactive({
     profileImg: [] as File[],
     loginId: '',
@@ -116,7 +111,7 @@ const useJoinFormState = () => {
 }
 
 export default {
-  name: 'Join',
+  name: 'Modify',
 
   components: { 
     IonHeader, 
@@ -134,25 +129,28 @@ export default {
 
   setup() {
     const globalState = useGlobalState();
-    const joinFormState = useJoinFormState();
+    const modifyFormState = useModifyFormState();
     const router = useRouter();
     const mainService = useMainService();
 
+    const id = globalState.loginedClient.id;
+
     // function confirmAlert(){
-    //   const msg = '해당 내용으로 가입하시겠습니까?'
+    //   const msg = '해당 내용으로 수정하시겠습니까?'
     //   util.showAlertConfirm(msg)
     // }
 
-    function checkAndJoin() {
+    function checkAndModify() {
+
        // 아이디 체크
-      const loginId = joinFormState.loginId.trim();
+      const loginId = modifyFormState.loginId.trim();
       
-      if ( joinFormState.loginId.trim().length == 0 ) {
+      if ( modifyFormState.loginId.trim().length == 0 ) {
         alert('아이디를 입력해주세요.');
         return;
       }
       // 비번 체크
-      const loginPw = joinFormState.loginPw.trim();
+      const loginPw = modifyFormState.loginPw.trim();
       
       if ( loginPw.length == 0 ) {
         alert('비밀번호를 입력해주세요.');
@@ -160,7 +158,7 @@ export default {
       }
       
       // 비번확인 체크
-      const loginPwConfirm = joinFormState.loginPwConfirm.trim();
+      const loginPwConfirm = modifyFormState.loginPwConfirm.trim();
       
       if ( loginPw != loginPwConfirm ) {
         alert('비밀번호가 일치하지 않습니다.');
@@ -168,7 +166,7 @@ export default {
       }
 
       // 이름 체크
-      const name = joinFormState.name.trim();
+      const name = modifyFormState.name.trim();
 
       if ( name.length == 0 ) {
         alert('이름을 입력해주세요.');
@@ -176,7 +174,7 @@ export default {
       }
       
       // 전화번호 체크
-      const cellphoneNo = joinFormState.cellphoneNo.trim();
+      const cellphoneNo = modifyFormState.cellphoneNo.trim();
       
       if ( cellphoneNo.length == 0 ) {
         alert('연락처를 입력해주세요.');
@@ -184,7 +182,7 @@ export default {
       }
 
       // 이메일 체크
-      const email = joinFormState.email.trim();
+      const email = modifyFormState.email.trim();
       
       if ( email.length == 0 ) {
         alert('이메일을 입력해주세요.');
@@ -192,10 +190,10 @@ export default {
       }
 
       // 시/도 주소 체크
-      const region = joinFormState.region.trim();
+      const region = modifyFormState.region.trim();
       
       if ( region.length == 0 ) {
-        alert('지역(시/도)을 입력해주세요.');
+        alert('지역을 입력해주세요.');
         return;
       }
 
@@ -205,12 +203,11 @@ export default {
         // ? => 만약 profileImgElRef.value?까지가 null이면 여기까지만 실행하겠다라는 의미
         // 즉, !!!profileImgElRef.value?.files의 의미는 해당 파일이 없는지 물어보는 것
         // 없으면 true
-        if(joinFormState.profileImg == null){
+        if(modifyFormState.profileImg == null){
           onSuccess("");  //파일이 없으면 다음 과정 생략하고 onSuccess() 즉시 실행
-          alert("파일 업로드 안됨")
           return;
         }
-        const axRes = await mainService.common_genFile_doUpload(joinFormState.profileImg[0])
+        const axRes = await mainService.common_genFile_doUpload(modifyFormState.profileImg[0])
 
         if ( axRes.data.fail ) {
           util.showAlert(axRes.data.msg);
@@ -221,8 +218,8 @@ export default {
         }
       }
 
-      async function join(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string) {
-        const axRes = await  mainService.client_doJoin(loginId, loginPw, name, cellphoneNo, email, region, genFileIdsStr);
+      async function modify(id: number, loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string) {
+        const axRes = await  mainService.client_doModify(id, loginId, loginPw, name, cellphoneNo, email, region, genFileIdsStr);
   
           util.showAlert(axRes.data.msg);
         
@@ -230,14 +227,14 @@ export default {
             return;
           }
 
-          router.replace('/client/login?loginId=' + loginId)
+          router.replace('/client/myPage?id=' + id)
       }
 
-      const startJoin = (genFileIdsStr: string) =>{
-          join(loginId, loginPw, name, cellphoneNo, email, region,  genFileIdsStr);
+      const startModify = (genFileIdsStr: string) =>{
+          modify(id, loginId, loginPw, name, cellphoneNo, email, region,  genFileIdsStr);
       }
  
-      startFileUpload(startJoin);
+      startFileUpload(startModify);
     }
 
     
@@ -245,8 +242,8 @@ export default {
     return {
       globalState,
       //confirmAlert,
-      joinFormState,
-      checkAndJoin,
+      modifyFormState,
+      checkAndModify,
       
     }
   }

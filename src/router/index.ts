@@ -44,6 +44,10 @@ const routes: Array<RouteRecordRaw> = [
         path: 'myPage',
         component: () => import('@/views/Client/MyPage.vue')
       },
+      {
+        path: 'modify',
+        component: () => import('@/views/Client/Modify.vue')
+      },
     ]
   },
   {
