@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { inject } from 'vue';
-import { Article, Client, Order, Expert, Assistant, Review, Funeral, Rating } from '@/types'
+import { Client, Order, Expert, Assistant, Review, Funeral, Rating } from '@/types'
 
 // API 원형
 abstract class HttpClient {
@@ -90,32 +90,6 @@ interface Base__ResponseBodyType1 {
   success: boolean;
 }
 
-// /usr/article/list 의 응답 타입
-/* eslint-disable @typescript-eslint/class-name-casing */
-/* eslint-disable @typescript-eslint/camelcase */
-export interface MainApi__article_list__ResponseBody extends Base__ResponseBodyType1 {
-  body: {
-    
-    articles: Article[];
-  };
-}
-
-// /usr/article/detail 의 응답 타입
-/* eslint-disable @typescript-eslint/class-name-casing */
-/* eslint-disable @typescript-eslint/camelcase */
-export interface MainApi__article_detail__ResponseBody extends Base__ResponseBodyType1 {
-  body: {
-    article: Article;
-  };
-}
-
-/* eslint-disable @typescript-eslint/class-name-casing */
-/* eslint-disable @typescript-eslint/camelcase */
-export interface MainApi__article_doWrite__ResponseBody extends Base__ResponseBodyType1 {
-  body: {
-    id: number;
-  };
-}
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 /* eslint-disable @typescript-eslint/camelcase */
@@ -146,7 +120,6 @@ export interface MainApi__common_genFile_doUpload__ResponseBody extends Base__Re
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 /* eslint-disable @typescript-eslint/camelcase */
-// /usr/article/list 의 응답 타입
 export interface MainApi__order_list__ResponseBody extends Base__ResponseBodyType1 {
   body: {
     orders: Order[];
@@ -155,7 +128,6 @@ export interface MainApi__order_list__ResponseBody extends Base__ResponseBodyTyp
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 /* eslint-disable @typescript-eslint/camelcase */
-// /usr/article/list 의 응답 타입
 export interface MainApi__funeral_list__ResponseBody extends Base__ResponseBodyType1 {
   body: {
     funerals: Funeral[];
@@ -164,7 +136,6 @@ export interface MainApi__funeral_list__ResponseBody extends Base__ResponseBodyT
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 /* eslint-disable @typescript-eslint/camelcase */
-// /usr/article/list 의 응답 타입
 export interface MainApi__funeral_myList__ResponseBody extends Base__ResponseBodyType1 {
   body: {
     funerals: Funeral[];
@@ -191,7 +162,6 @@ export interface MainApi__funeral_asstCancleApplyForFuneral__ResponseBody extend
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 /* eslint-disable @typescript-eslint/camelcase */
-// /usr/article/detail 의 응답 타입
 export interface MainApi__order_detail__ResponseBody extends Base__ResponseBodyType1 {
   body: {
     order: Order;
@@ -484,25 +454,19 @@ export class MainApi extends HttpClient {
     return axiosResponse;
   }
 
-  // http://localhost:8021/usr/article/list?boardId=? 를 요청하고 응답을 받아오는 함수
-  public article_list(boardId: number) {
-    return this.get<MainApi__article_list__ResponseBody>(`/usr/article/list?boardId=${boardId}`);
-  }
 
-  // http://localhost:8090/usr/article/list?boardId=? 를 요청하고 응답을 받아오는 함수
   public order_list(memberId: number, memberType: string) {
     return this.get<MainApi__order_list__ResponseBody>(`/usr/order/list?memberId=${memberId}&memberType=${memberType}`);
   }
-  // http://localhost:8090/usr/article/list?boardId=? 를 요청하고 응답을 받아오는 함수
+
   public funeral_list() {
     return this.get<MainApi__funeral_list__ResponseBody>(`/usr/funeral/list`);
   }
-  // http://localhost:8090/usr/article/list?boardId=? 를 요청하고 응답을 받아오는 함수
+
   public funeral_myList(memberId: number, memberType: string) {
     return this.get<MainApi__funeral_myList__ResponseBody>(`/usr/funeral/myList?memberId=${memberId}&memberType=${memberType}`);
   }
 
-  // http://localhost:8090/usr/member/doOrder/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
   public funeral_asstApplyForFuneral(funeralId: number, assistantId: number) {
     return this.postByForm<MainApi__funeral_asstApplyForFuneral__ResponseBody>(
@@ -512,17 +476,15 @@ export class MainApi extends HttpClient {
       }
     );
   }
-  // http://localhost:8090/usr/article/list?boardId=? 를 요청하고 응답을 받아오는 함수
+
   public funeral_asstCancleApplyForFuneral(funeralId: number, assistantId: number) {
     return this.get<MainApi__funeral_asstCancleApplyForFuneral__ResponseBody>(`/usr/funeral/asstCancleApplyForFuneral?funeralId=${funeralId}&assistantId=${assistantId}`);
   }
 
-  // http://localhost:8090/usr/detail/id?id=? 를 요청하고 응답을 받아오는 함수
   public order_detail(id: number) {
     return this.get<MainApi__order_detail__ResponseBody>(`/usr/order/detail?id=${id}`);
   }
 
-  // http://localhost:8090/usr/member/doOrder/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
   public order_doAdd(title: string, funeralHome: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
     return this.postByForm<MainApi__order_doAdd__ResponseBody>(
@@ -540,7 +502,6 @@ export class MainApi extends HttpClient {
     );
   }
 
-  // http://localhost:8090/usr/member/doOrder/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
   public order_doModify(id: number, title: string, funeralHome: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
     return this.postByForm<MainApi__order_doModify__ResponseBody>(
@@ -559,7 +520,6 @@ export class MainApi extends HttpClient {
     );
   }
 
-  // http://localhost:8090/usr/detail/id?id=? 를 요청하고 응답을 받아오는 함수
   public order_changeStepLevel(id: number, stepLevel: number) {
     return this.get<MainApi__order_changeStepLevel__ResponseBody>(`/usr/order/changeStepLevel?id=${id}&stepLevel=${stepLevel}`);
   }
@@ -567,7 +527,6 @@ export class MainApi extends HttpClient {
   
   /* Member 관련 */
 
-  // http://localhost:8024/usr/member/doJoin/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
   public client_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string) {
     return this.postByForm<MainApi__client_doJoin__ResponseBody>(
@@ -583,7 +542,6 @@ export class MainApi extends HttpClient {
     );
   }
 
-  // http://localhost:8024/usr/member/doJoin/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
   public expert_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, license: string, career: string, genFileIdsStr: string) {
     return this.postByForm<MainApi__expert_doJoin__ResponseBody>(
@@ -601,7 +559,6 @@ export class MainApi extends HttpClient {
     );
   }
 
-  // http://localhost:8024/usr/member/doJoin/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
   public assistant_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr: string) {
     return this.postByForm<MainApi__assistant_doJoin__ResponseBody>(
@@ -618,7 +575,6 @@ export class MainApi extends HttpClient {
     );
   }
 
-  // http://localhost:8024/common/genFile/doUpload=?&profileImg=?...... 를 요청하고 응답을 받아오는 함수
   public common_genFile_doUpload(profileImg: File) {
     const formData = new FormData();
     formData.append("file__client__0__common__attachment__1", profileImg);
@@ -627,7 +583,6 @@ export class MainApi extends HttpClient {
     );
   }
 
-  // http://localhost:8090/usr/member/authKey/loginId=?&loginPw=? 를 요청하고 응답을 받아오는 함수
   public client_authKey(loginId: string, loginPw: string) {
     return this.postByForm<MainApi__client_authKey__ResponseBody>(
       `/usr/client/authKey`, {
@@ -637,7 +592,6 @@ export class MainApi extends HttpClient {
     );
   }
 
-  // http://localhost:8090/usr/member/authKey/loginId=?&loginPw=? 를 요청하고 응답을 받아오는 함수
   public expert_authKey(loginId: string, loginPw: string) {
     return this.postByForm<MainApi__expert_authKey__ResponseBody>(
       `/usr/expert/authKey`, {
@@ -647,7 +601,6 @@ export class MainApi extends HttpClient {
     );
   }
 
-  // http://localhost:8090/usr/member/authKey/loginId=?&loginPw=? 를 요청하고 응답을 받아오는 함수
   public assistant_authKey(loginId: string, loginPw: string) {
     return this.postByForm<MainApi__assistant_authKey__ResponseBody>(
       `/usr/assistant/authKey`, {
@@ -657,32 +610,26 @@ export class MainApi extends HttpClient {
     );
   }
 
-  // http://localhost:8090/usr/detail/id?id=? 를 요청하고 응답을 받아오는 함수
   public client_detail(id: number) {
     return this.get<MainApi__client_detail__ResponseBody>(`/usr/client/detail?id=${id}`);
   }
 
-  // http://localhost:8090/usr/detail/id?id=? 를 요청하고 응답을 받아오는 함수
   public expert_detail(id: number) {
     return this.get<MainApi__expert_detail__ResponseBody>(`/usr/expert/detail?id=${id}`);
   }
 
-  // http://localhost:8090/usr/detail/id?id=? 를 요청하고 응답을 받아오는 함수
   public assistant_detail(id: number) {
     return this.get<MainApi__assistant_detail__ResponseBody>(`/usr/assistant/detail?id=${id}`);
   }
 
-  // http://localhost:8090/usr/member/list?boardId=? 를 요청하고 응답을 받아오는 함수
   public expert_list() {
     return this.get<MainApi__expert_list__ResponseBody>(`/usr/expert/list`);
   }
 
-  // http://localhost:8090/usr/member/list?boardId=? 를 요청하고 응답을 받아오는 함수
   public assistant_list() {
     return this.get<MainApi__assistant_list__ResponseBody>(`/usr/assistant/list`);
   }
 
-  // http://localhost:8024/usr/member/doJoin/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
   public client_doModify(id: number, loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string) {
     return this.postByForm<MainApi__client_doModify__ResponseBody>(
@@ -699,7 +646,6 @@ export class MainApi extends HttpClient {
     );
   }
 
-  // http://localhost:8024/usr/member/doJoin/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
   public expert_doModify(id: number, loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, acknowledgment_step: string, region: string, license: string, career: string, genFileIdsStr: string) {
     return this.postByForm<MainApi__expert_doModify__ResponseBody>(
@@ -719,7 +665,6 @@ export class MainApi extends HttpClient {
     );
   }
 
-  // http://localhost:8024/usr/member/doJoin/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
   public assistant_doModify(id: number, loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr: string) {
     return this.postByForm<MainApi__assistant_doModify__ResponseBody>(
@@ -737,8 +682,6 @@ export class MainApi extends HttpClient {
     );
   }
 
-
-  // http://localhost:8090/usr/member/doOrder/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
   public review_doAdd(relTypeCode: string, relId: number, body: string, clientId: number) {
     return this.postByForm<MainApi__review_doAdd__ResponseBody>(
@@ -752,22 +695,19 @@ export class MainApi extends HttpClient {
     );
   }
 
-  // http://localhost:8090/usr/member/list?boardId=? 를 요청하고 응답을 받아오는 함수
+
   public review_doDelete(id: number) {
     return this.get<MainApi__review_doDelete__ResponseBody>(`/usr/review/doDelete?id=${id}`);
   }
 
-  // http://localhost:8090/usr/member/list?boardId=? 를 요청하고 응답을 받아오는 함수
   public review_list(relTypeCode: string) {
     return this.get<MainApi__review_list__ResponseBody>(`/usr/review/list?relTypeCode=${relTypeCode}`);
   }
 
-  // http://localhost:8090/usr/member/list?boardId=? 를 요청하고 응답을 받아오는 함수
   public review_detail(id: number) {
     return this.get<MainApi__review_detail__ResponseBody>(`/usr/review/detail?id=${id}`);
   }
 
-  // http://localhost:8090/usr/member/doOrder/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
   public review_doModify(id: number, body: string, clientId: number) {
     return this.postByForm<MainApi__review_doModify__ResponseBody>(
@@ -780,8 +720,6 @@ export class MainApi extends HttpClient {
     );
   }
    
-
-  // http://localhost:8090/usr/member/doOrder/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
   public rating_doAdd(relTypeCode: string, relId: number, point: number, clientId: number) {
     return this.postByForm<MainApi__rating_doAdd__ResponseBody>(
@@ -795,12 +733,10 @@ export class MainApi extends HttpClient {
     );
   }
 
-  // http://localhost:8090/usr/member/list?boardId=? 를 요청하고 응답을 받아오는 함수
   public rating_getRatingRelClient(relTypeCode: string, relId: number, clientId: number) {
     return this.get<MainApi__rating_getRatingRelClient__ResponseBody>(`/usr/rating/getRatingRelClient?relTypeCode=${relTypeCode}&relId=${relId}&clientId=${clientId}`);
   }
 
-  // http://localhost:8090/usr/member/doOrder/loginId=?&loginPw=?...... 를 요청하고 응답을 받아오는 함수
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
   public rating_doModify(relTypeCode: string, relId: number, point: number, clientId: number) {
     return this.postByForm<MainApi__rating_doModify__ResponseBody>(

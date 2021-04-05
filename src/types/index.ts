@@ -19,14 +19,6 @@ export interface Entity {
   updateDate: string;
 }
 
-export interface Article extends Entity {  
-  boardId: number;
-  clientId: number;
-  title: string;
-  body: string;
-  extra__writer: string;
-}
-
 export interface Order extends Entity {
 	head:number;
 	religion:string;

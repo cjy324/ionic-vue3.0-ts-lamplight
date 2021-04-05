@@ -1,10 +1,10 @@
 <template>
   <ion-page>
-    <ion-custom-header>게시물 - 리스트</ion-custom-header>
+    <ion-custom-header>지도사 - 리스트</ion-custom-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">게시물 - 리스트</ion-title>
+          <ion-title size="large">지도사 - 리스트</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-custom-body>

@@ -8,7 +8,7 @@ const globalState = getGlobalState();
 const routes: Array<RouteRecordRaw> = [
   {     //앨리어싱
     path: '/', //만약, path가 '/' 이렇게 들어올 경우 '/home/Main'으로 redirect
-    redirect: '/Home/Main'
+    redirect: '/home/main'
   },
   {
     path: '/home/',  //'/home/'로 시작하면 
@@ -16,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        redirect: '/Home/Main'
+        redirect: '/home/main'
       },
       {
         path: 'main',
@@ -47,28 +47,20 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    path: '/article/',
+    path: '/expert/',
     component: Tabs,
     children: [
       {
         path: '',
-        redirect: '/article/list'
+        redirect: '/expert/list'
       },
       {
         path: 'list',
-        component: () => import('@/views/article/List.vue')
+        component: () => import('@/views/Expert/List.vue')
       },
       {
         path: 'detail',
-        component: () => import('@/views/article/Detail.vue')
-      },
-      {
-        path: 'write',
-        component: () => import('@/views/article/Write.vue')
-      },
-      {
-        path: 'modify',
-        component: () => import('@/views/article/Modify.vue')
+        component: () => import('@/views/Expert/Detail.vue')
       },
     ]
   },

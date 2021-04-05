@@ -12,9 +12,9 @@
           <ion-label>회원</ion-label>
         </ion-tab-button>
           
-        <ion-tab-button tab="article" :href="tabsState.hrefArticle">
+        <ion-tab-button tab="Expert" :href="tabsState.hrefExpert">
           <font-awesome-icon class="text-lg h-7" icon="list" />
-          <ion-label>게시물</ion-label>
+          <ion-label>지도사</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="Setting" :href="tabsState.hrefSetting">
@@ -43,7 +43,7 @@ export default {
     const tabsState = reactive({
       'hrefHome':'/Home',
       'hrefClient':'/Client',
-      'hrefArticle':'/article',
+      'hrefExpert':'/Expert',
       'hrefSetting':'/Setting',
     });
     /* ionic 리다이렉트 URL로의 다중클릭으로 인한 버그를 고치기 위한 코드 - 시작 */
@@ -55,8 +55,8 @@ export default {
     else if ( route.path.startsWith("/Client") ) {
       tabsState.hrefClient = route.fullPath;
     }
-    else if ( route.path.startsWith("/article") ) {
-      tabsState.hrefArticle = route.fullPath;
+    else if ( route.path.startsWith("/Expert") ) {
+      tabsState.hrefExpert = route.fullPath;
     }
     else if ( route.path.startsWith("/Setting") ) {
       tabsState.hrefSetting = route.fullPath;

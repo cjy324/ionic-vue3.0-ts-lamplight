@@ -17,6 +17,16 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     //이런 명명법을 camelcase라고함
     //typescript에선 camelcase방식을 권장하지만 이것을 무시할 수도 있음(큰 문제는 없음)
     //이를 무시하기 위해 아래와 같이 주석을 달아줌
+
+    /* eslint-disable @typescript-eslint/camelcase */
+    client_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string){
+      return this.mainApi.client_doJoin(loginId, loginPw, name, cellphoneNo, email, region, genFileIdsStr);
+    }
+
+    /* eslint-disable @typescript-eslint/camelcase */
+    common_genFile_doUpload(profileImg: File) {
+      return this.mainApi.common_genFile_doUpload(profileImg);
+    }
   
     /* eslint-disable @typescript-eslint/camelcase */
     client_authKey(loginId: string, loginPw: string) {
@@ -24,8 +34,12 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     }
 
     /* eslint-disable @typescript-eslint/camelcase */
-    article_list(boardId: number) {
-      return this.mainApi.article_list(boardId);
+    expert_list() {
+      return this.mainApi.expert_list();
+    }
+
+    review_doDelete(id: number) {
+      return this.mainApi.review_doDelete(id);
     }
 
 
