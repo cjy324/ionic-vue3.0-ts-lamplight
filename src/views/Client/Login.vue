@@ -51,10 +51,10 @@
 import { IonCustomHeader, IonCustomBody, IonCustomLink} from '@/components/';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonInput, IonItem, IonButton } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
-import { reactive } from 'vue';
+import { reactive, onMounted } from 'vue';
 //import { useMainApi } from '@/apis';  //mainService를 통해 mainAPI를 가져오는 방식으로 변경
 import { useMainService } from '@/services';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import * as util from '@/utils';
 
 const useLoginFormState = () => {
@@ -73,8 +73,19 @@ export default  {
     const globalState = useGlobalState();
     const loginFormState = useLoginFormState();
     const router = useRouter();
+    const route = useRoute();
     //const mainApi = useMainApi();  //mainService를 통해 mainAPI를 가져오는 방식으로 변경
     const mainService = useMainService();
+
+    onMounted(() => {
+      // 만약, route로 들어온 쿼리의 loginId가 null이 아니면
+      if ( route.query.loginId != null ) {
+
+        // loginIdElRef 값에 route.query.loginId 정보 담기
+        loginFormState.loginId = route.query.loginId as any;
+
+      }
+    })
 
     //await??
     //비동기식 로직을 동기식으로 바꿔주는 함수?

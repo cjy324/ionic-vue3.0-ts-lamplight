@@ -200,8 +200,9 @@ export default {
         // ? => 만약 profileImgElRef.value?까지가 null이면 여기까지만 실행하겠다라는 의미
         // 즉, !!!profileImgElRef.value?.files의 의미는 해당 파일이 없는지 물어보는 것
         // 없으면 true
-        if(joinFormState.profileImg == undefined || joinFormState.profileImg == null){
+        if(joinFormState.profileImg == null){
           onSuccess("");  //파일이 없으면 다음 과정 생략하고 onSuccess() 즉시 실행
+          alert("파일 업로드 안됨")
           return;
         }
         const axRes = await mainService.common_genFile_doUpload(joinFormState.profileImg[0])

@@ -44,7 +44,7 @@
         </ion-grid>
       </ion-label>
         <div>
-          <router-link :to="'/expert/detail?id=' + expert.id" class="block bg-blue-300 mt-2 h-10 w-full rounded-md">
+          <router-link :to="'/expert/detail?id=' + expert.id" class="block bg-blue-500 mt-2 h-10 w-full rounded-md">
             상세보기
           </router-link>
         </div>
@@ -72,7 +72,7 @@ import {
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
-import { reactive, computed, onMounted, ref  } from 'vue';
+import { reactive, computed, onMounted  } from 'vue';
 import { Expert, Review } from '@/types';
 
 const useSearchKeywordState = () => {
