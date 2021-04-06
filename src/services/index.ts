@@ -52,6 +52,18 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
       return this.mainApi.order_doAdd(deceasedName, bereavedName, funeralHome, head, religion, startDate, endDate, body, expertId, clientId);
     }
 
+    order_detail(id: number){
+      return this.mainApi.order_detail(id);
+    }
+
+    order_doModify(id: number, deceasedName: string, bereavedName: string, funeralHome: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number){
+      return this.mainApi.order_doModify(id, deceasedName, bereavedName, funeralHome, head, religion, startDate, endDate, body, expertId, clientId);
+    }
+
+    order_delete(id: number){
+      return this.mainApi.order_delete(id);
+    }
+
     review_doDelete(id: number) {
       return this.mainApi.review_doDelete(id);
     }

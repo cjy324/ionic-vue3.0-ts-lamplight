@@ -88,6 +88,10 @@ const routes: Array<RouteRecordRaw> = [
         path: 'detail',
         component: () => import('@/views/Order/Detail.vue')
       },
+      {
+        path: 'modify',
+        component: () => import('@/views/Order/Modify.vue')
+      },
     ]
   },
   {

@@ -344,6 +344,13 @@ export interface MainApi__order_changeStepLevel__ResponseBody extends Base__Resp
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 /* eslint-disable @typescript-eslint/camelcase */
+export interface MainApi__order_delete__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
 // /usr/review/doAdd 의 응답 타입
 export interface MainApi__review_doAdd__ResponseBody extends Base__ResponseBodyType1 {
   body: {
@@ -504,11 +511,12 @@ export class MainApi extends HttpClient {
   }
 
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
-  public order_doModify(id: number, title: string, funeralHome: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
+  public order_doModify(id: number, deceasedName: string, bereavedName: string, funeralHome: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
     return this.postByForm<MainApi__order_doModify__ResponseBody>(
       `/usr/order/doModify`, {
         id,
-        title,
+        deceasedName,
+        bereavedName,
         funeralHome,
         head,
         religion,
@@ -524,6 +532,11 @@ export class MainApi extends HttpClient {
   public order_changeStepLevel(id: number, stepLevel: number) {
     return this.get<MainApi__order_changeStepLevel__ResponseBody>(`/usr/order/changeStepLevel?id=${id}&stepLevel=${stepLevel}`);
   }
+
+  public order_delete(id: number) {
+    return this.get<MainApi__order_delete__ResponseBody>(`/usr/order/doDelete?id=${id}`);
+  }
+
 
   
   /* Member 관련 */

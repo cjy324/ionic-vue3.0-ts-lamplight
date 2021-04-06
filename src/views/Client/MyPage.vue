@@ -77,11 +77,16 @@
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
   IonPage, 
-  IonHeader, 
+  IonHeader,
+  IonListHeader,
   IonToolbar, 
   IonTitle, 
-  IonContent, 
-  IonButton 
+  IonContent,
+  IonList,
+  IonItem,
+  IonItemDivider,
+  IonLabel,  
+  IonButton,
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
@@ -92,15 +97,20 @@ export default  {
   name: 'MyPage',
 
   components: { 
-    IonHeader, 
+    IonCustomBody, 
+    IonCustomHeader, 
+    IonCustomLink,
+    IonPage, 
+    IonHeader,
+    IonListHeader,
     IonToolbar, 
     IonTitle, 
-    IonContent, 
-    IonPage, 
-    IonCustomBody, 
-    IonCustomHeader,
-    IonCustomLink, 
-    IonButton 
+    IonContent,
+    IonList,
+    IonItem,
+    IonItemDivider,
+    IonLabel,  
+    IonButton,
   },
   
   setup() {

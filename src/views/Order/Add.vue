@@ -11,14 +11,14 @@
         <form v-if="globalState.isLogined" @submit.prevent="checkAndAddOrder">
           <div>
             <ion-item>
-              <ion-label position="floating">고인 성함</ion-label>
-              <ion-input v-model="orderAddFormState.deceasedName" type="text" placeholder="고인의 성함을 입력해주세요."></ion-input>
+              <ion-label position="floating">고인 이름</ion-label>
+              <ion-input v-model="orderAddFormState.deceasedName" type="text" placeholder="고인의 이름을 입력해주세요."></ion-input>
             </ion-item>
           </div>
           <div>
             <ion-item>
-              <ion-label position="floating">상주 성함</ion-label>
-              <ion-input v-model="orderAddFormState.bereavedName" type="text" placeholder="상주의 성함 입력해주세요."></ion-input>
+              <ion-label position="floating">상주 이름</ion-label>
+              <ion-input v-model="orderAddFormState.bereavedName" type="text" placeholder="상주의 이름을 입력해주세요."></ion-input>
             </ion-item>
           </div>
           <div>

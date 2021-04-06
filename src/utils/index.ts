@@ -10,7 +10,11 @@ export async function showAlert(msg: string) {
   return alert.present();
 } 
 
-export async function showAlertConfirm(msg: string) {
+export async function showAlertConfirm(msg: string): Promise<boolean> {
+  let resolveFunction: (confirm: boolean) => void;
+  const promise = new Promise<boolean>(resolve => {
+    resolveFunction = resolve;
+  });
   const alert = await alertController
     .create({
       header: 'Confirm',
@@ -19,20 +23,21 @@ export async function showAlertConfirm(msg: string) {
         {
           text: 'OK',
           handler: () => {
-            console.log('Confirm Okay')
+            resolveFunction(true)
           },
         },
         {
           text: 'Cancel',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: blah => {
-            console.log('Confirm Cancel:', blah)
+          handler: () => {
+            resolveFunction(false)
           },
         },
       ],
     });
-  return alert.present();
+  alert.present();
+  return promise;
 }
 
 export function isEmptyObject(param: {}) {
