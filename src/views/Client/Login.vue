@@ -101,8 +101,9 @@ export default  {
         return;
       }
       const authKey = axiosResponse.data.body.authKey;
-      const loginedMember = axiosResponse.data.body.client;
-      globalState.setLogined(authKey, loginedMember);
+      const memberType = 'client' as string;
+      const loginedClient = axiosResponse.data.body.client;
+      globalState.setLoginedClient(authKey, memberType, loginedClient);
       
       router.replace('/');
     }

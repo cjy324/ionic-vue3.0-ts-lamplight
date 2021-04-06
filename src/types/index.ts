@@ -7,9 +7,12 @@
 
 export interface GlobalState {
   loginedClient: Client;
+  loginedExpert: Expert;
+  loginedAssistant: Assistant;
   authKey: string;
+  memberType: string;
   isLogined: boolean;
-  setLogined(authKey: string, client: Client): void;
+  setLoginedClient(authKey: string, memberType: string, client: Client): void;
   setLogouted(): void;
 }
 

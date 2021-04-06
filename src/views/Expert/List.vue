@@ -2,12 +2,12 @@
 <ion-custom-header>지도사 - 리스트</ion-custom-header>
 <ion-content >
   <ion-list class="mb-12">
-    <ion-select v-model="searchKeywordState.searchKeywordType">
+    <ion-select v-model="searchState.searchKeywordType">
       <ion-select-option value="region">지역</ion-select-option>
       <ion-select-option value="name">이름</ion-select-option>
     </ion-select>
     <ion-item>
-      <ion-searchbar show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchKeywordState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
+      <ion-searchbar show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
     </ion-item>
     <ion-list-header>지도사</ion-list-header>
     <template v-bind:key="expert.id" v-for="expert in returnFilteredExperts">
@@ -88,7 +88,7 @@ import { useMainService } from '@/services';
 import { reactive, computed, onMounted  } from 'vue';
 import { Expert, Review } from '@/types';
 
-const useSearchKeywordState = () => {
+const useSearchState = () => {
   return reactive({
     searchKeyword: '',
     searchKeywordType: 'region',
@@ -119,7 +119,7 @@ export default  {
   setup() {
     const globalState = useGlobalState();
     const mainService = useMainService();
-    const searchKeywordState = useSearchKeywordState();
+    const searchState = useSearchState();
 
     const state = reactive({
       experts: [] as Expert[],
@@ -128,8 +128,8 @@ export default  {
     });
 
     function onInput(event: any){
-      searchKeywordState.searchKeyword = event.target.value;
-      return searchKeywordState.searchKeyword;
+      searchState.searchKeyword = event.target.value;
+      return searchState.searchKeyword;
     }
 
 
@@ -137,11 +137,11 @@ export default  {
 
       let filteredExperts = state.experts;
       
-      if(searchKeywordState.searchKeywordType == "name"){
-        filteredExperts = state.experts.filter((expert: Expert) => expert.name.includes(searchKeywordState.searchKeyword))
+      if(searchState.searchKeywordType == "name"){
+        filteredExperts = state.experts.filter((expert: Expert) => expert.name.includes(searchState.searchKeyword))
       }
-      if(searchKeywordState.searchKeywordType == "region"){
-        filteredExperts = state.experts.filter((expert: Expert) => expert.region.includes(searchKeywordState.searchKeyword))
+      if(searchState.searchKeywordType == "region"){
+        filteredExperts = state.experts.filter((expert: Expert) => expert.region.includes(searchState.searchKeyword))
       }
       return filteredExperts
     })
@@ -177,7 +177,7 @@ export default  {
       globalState,
       mainService,
       state,
-      searchKeywordState,
+      searchState,
       returnFilteredExperts,
       doDeleteReview,
       onInput,

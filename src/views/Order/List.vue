@@ -1,10 +1,14 @@
 <template>
-<ion-custom-header>지도사 - 리스트</ion-custom-header>
+<ion-custom-header>의뢰 - 리스트</ion-custom-header>
 <ion-content >
   <ion-list class="mb-12">
-    <ion-select v-model="searchKeywordState.searchKeywordType">
-      <ion-select-option value="region">지역</ion-select-option>
-      <ion-select-option value="name">이름</ion-select-option>
+    <ion-select v-model="searchState.selectStepLevel">
+      <ion-select-option value="0">진행단계 전체</ion-select-option>
+      <ion-select-option value="1">요청서 검토중</ion-select-option>
+      <ion-select-option value="2">장례준비중</ion-select-option>
+      <ion-select-option value="3">장례진행중</ion-select-option>
+      <ion-select-option value="4">장례종료(확인대기중)</ion-select-option>
+      <ion-select-option value="5">장례종료(최종종료)</ion-select-option>
     </ion-select>
     <ion-item>
       <ion-searchbar show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchKeywordState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>

@@ -52,17 +52,23 @@ export const createGlobalState = () => {
         region:"",
       },
       authKey: "",
+      memberType: "",
       isLogined: computed(() => globalState.loginedClient.id != 0),
-      setLogined: function(authKey: string, client: Client) {
+
+      setLoginedClient: function(authKey: string, memberType: string, client: Client) {
         localStorage.setItem("authKey", authKey);
+        localStorage.setItem("memberType", memberType);
+
         localStorage.setItem("loginedClientJsonStr", JSON.stringify(client));
 
         globalState.authKey = authKey;
-
+        globalState.memberType = memberType;
         globalState.loginedClient = client;
       },
+
       setLogouted: function() {
         globalState.authKey = "";
+        globalState.memberType = "";
 
         globalState.loginedClient.id = 0;
         globalState.loginedClient.regDate = "";
@@ -76,17 +82,19 @@ export const createGlobalState = () => {
 
 
         localStorage.removeItem("authKey");
+        localStorage.removeItem("memberType");
         localStorage.removeItem("loginedClientJsonStr");
       }
     });
     const loadLoginInfoFromLocalStorage = () => {
       const authKey = localStorage.getItem("authKey");
+      const memberType = localStorage.getItem("memberType");
       const loginedClientJsonStr = localStorage.getItem("loginedClientJsonStr");
 
-      if ( !!authKey && !!loginedClientJsonStr ) {
+      if ( !!authKey && !!memberType && !!loginedClientJsonStr ) {
         const loginedClient: Client = JSON.parse(loginedClientJsonStr);
 
-        globalState.setLogined(authKey, loginedClient);
+        globalState.setLoginedClient(authKey, memberType, loginedClient);
       }
     }
 
