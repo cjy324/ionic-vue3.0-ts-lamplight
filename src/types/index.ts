@@ -24,7 +24,8 @@ export interface Order extends Entity {
 	religion:string;
 	startDate:string;
 	endDate:string;
-	title:string;
+	deceasedName:string;
+  bereavedName:string;
   funeralHome:string;
 	body:string;
 	expertId:number;
@@ -39,7 +40,8 @@ export interface Funeral extends Entity {
 	religion:string;
 	startDate:string;
 	endDate:string;
-	title:string;
+	deceasedName:string;
+  bereavedName:string;
   funeralHome:string;
 	body:string;
 	expertId:number;

@@ -69,6 +69,28 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
+    path: '/order/',
+    component: Tabs,
+    children: [
+      {
+        path: '',
+        redirect: '/order/list'
+      },
+      {
+        path: 'add',
+        component: () => import('@/views/Order/Add.vue')
+      },
+      {
+        path: 'list',
+        component: () => import('@/views/Order/List.vue')
+      },
+      {
+        path: 'detail',
+        component: () => import('@/views/Order/Detail.vue')
+      },
+    ]
+  },
+  {
     path: '/setting/',
     component: Tabs,
     children: [

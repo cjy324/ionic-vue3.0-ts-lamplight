@@ -39,13 +39,17 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     }
 
     /* eslint-disable @typescript-eslint/camelcase */
-    client_doModify(id: number, loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string){
-      return this.mainApi.client_doModify(id, loginId, loginPw, name, cellphoneNo, email, region, genFileIdsStr);
+    client_doModify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string){
+      return this.mainApi.client_doModify(id, loginPw, name, cellphoneNo, email, region, genFileIdsStr);
     }
 
     /* eslint-disable @typescript-eslint/camelcase */
     expert_list() {
       return this.mainApi.expert_list();
+    }
+
+    order_doAdd(deceasedName: string, bereavedName: string, funeralHome: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number){
+      return this.mainApi.order_doAdd(deceasedName, bereavedName, funeralHome, head, religion, startDate, endDate, body, expertId, clientId);
     }
 
     review_doDelete(id: number) {

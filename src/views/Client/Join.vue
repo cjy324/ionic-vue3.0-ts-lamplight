@@ -28,7 +28,7 @@
           <div>
             <ion-item>
               <ion-label position="floating">아이디</ion-label>
-              <ion-input v-model="joinFormState.loginId" type="text" minlength="5" placeholder="아이디를 입력해주세요."></ion-input>
+              <ion-input v-model="joinFormState.loginId" type="text" minlength="5" maxlength="12" placeholder="아이디를 입력해주세요."></ion-input>
             </ion-item>
           </div>
           <div>

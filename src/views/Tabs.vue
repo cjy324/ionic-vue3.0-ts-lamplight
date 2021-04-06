@@ -17,6 +17,11 @@
           <ion-label>지도사</ion-label>
         </ion-tab-button>
 
+        <ion-tab-button tab="Order" :href="tabsState.hrefOrder">
+          <font-awesome-icon class="text-lg h-7" icon="list" />
+          <ion-label>의뢰</ion-label>
+        </ion-tab-button>
+
         <ion-tab-button tab="Setting" :href="tabsState.hrefSetting">
           <font-awesome-icon class="text-lg h-7" icon="cog" />
           <ion-label>설정</ion-label>
@@ -44,6 +49,7 @@ export default {
       'hrefHome':'/Home',
       'hrefClient':'/Client',
       'hrefExpert':'/Expert',
+      'hrefOrder':'/Order',
       'hrefSetting':'/Setting',
     });
     /* ionic 리다이렉트 URL로의 다중클릭으로 인한 버그를 고치기 위한 코드 - 시작 */
@@ -57,6 +63,9 @@ export default {
     }
     else if ( route.path.startsWith("/Expert") ) {
       tabsState.hrefExpert = route.fullPath;
+    }
+    else if ( route.path.startsWith("/Order") ) {
+      tabsState.hrefOrder = route.fullPath;
     }
     else if ( route.path.startsWith("/Setting") ) {
       tabsState.hrefSetting = route.fullPath;

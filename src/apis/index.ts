@@ -486,10 +486,11 @@ export class MainApi extends HttpClient {
   }
 
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
-  public order_doAdd(title: string, funeralHome: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
+  public order_doAdd(deceasedName: string, bereavedName: string, funeralHome: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
     return this.postByForm<MainApi__order_doAdd__ResponseBody>(
       `/usr/order/doAdd`, {
-        title,
+        deceasedName,
+        bereavedName,
         funeralHome,
         head,
         religion,
@@ -631,11 +632,11 @@ export class MainApi extends HttpClient {
   }
 
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
-  public client_doModify(id: number, loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string) {
+  public client_doModify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string) {
     return this.postByForm<MainApi__client_doModify__ResponseBody>(
       `/usr/client/doModify`, {
         id,
-        loginId,
+        //loginId,
         loginPw,
         name,
         cellphoneNo,

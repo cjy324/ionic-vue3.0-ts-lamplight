@@ -7,10 +7,15 @@
           <ion-title size="large">홈 - 메인</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-custom-body>
-        <div class="bg-red-500">
-          {{globalState.isLogined}}
-          asdasdasdasdasdasd
+      <ion-custom-body class="justify-center">
+        <div v-if="globalState.isLogined" class="bg-green-500">
+          로그인 회원: {{globalState.loginedClient.name}}
+        </div>
+        <div v-else class="bg-red-500">
+          로그인 상태: {{globalState.isLogined}}
+        </div>
+        <div v-if="globalState.isLogined" class="logo-box text-center">
+          <ion-button @click="logout" expand="block">로그아웃</ion-button>
         </div>
       </ion-custom-body>
     </ion-content>
@@ -24,13 +29,27 @@
 import { IonCustomBody, IonCustomHeader } from '@/components/';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
+import { useRouter } from 'vue-router';
+
 export default  {
   name: 'Main',
+  
   components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonCustomBody, IonCustomHeader },
+  
   setup() {
     const globalState = useGlobalState();
+    const router = useRouter();
+    
+    
+    const logout = () => {
+      globalState.setLogouted();
+      router.replace('/member/login');
+    };
+
+
     return {
-      globalState
+      globalState,
+      logout
     }
   }
 }

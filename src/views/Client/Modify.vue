@@ -10,10 +10,10 @@
       <ion-custom-body class="justify-center mt-8">
         <form v-if="globalState.isLogined" @submit.prevent="checkAndModify">
           <div>
-            <ion-item>
-              <img v-if="globalState.loginedClient.extra__thumbImg != null" class="h-96 rounded-lg object-cover object-center" :src="'http://localhost:8090' + globalState.loginedClient.extra__thumbImg">
-              <img v-if="globalState.loginedClient.extra__thumbImg == null" class="h-96 rounded-lg object-cover object-center" :src="'http://via.placeholder.com/300?text=NoImage'">
-            </ion-item>
+            <ion-item-divider>
+              <img v-if="globalState.loginedClient.extra__thumbImg != null" class="h-32 rounded-3xl" :src="'http://localhost:8090' + globalState.loginedClient.extra__thumbImg">
+              <img v-if="globalState.loginedClient.extra__thumbImg == null" class="h-32 rounded-3xl" :src="'http://via.placeholder.com/300?text=NoImage'">
+            </ion-item-divider>
             <ion-item>
               <ion-label position="stacked">프로필 이미지</ion-label>
               <ion-input v-model="modifyFormState.profileImg" type="file"></ion-input>
@@ -21,44 +21,44 @@
           </div>
           <div>
             <ion-item>
-              <ion-label position="floating">아이디</ion-label>
-              <ion-input v-model="modifyFormState.loginId" type="text" minlength="5" :placeholder="globalState.loginedClient.loginId"></ion-input>
+              <ion-label position="stacked">아이디(변경불가)</ion-label>
+              <ion-input readonly>{{state.client.loginId}}</ion-input>
             </ion-item>
           </div>
           <div>
             <ion-item>
-              <ion-label position="floating">비밀번호</ion-label>
+              <ion-label position="stacked">비밀번호</ion-label>
               <ion-input v-model="modifyFormState.loginPw" minlength="8" type="password" placeholder="비밀번호를 입력해주세요."></ion-input>
             </ion-item>
           </div>
           <div>
             <ion-item>
-              <ion-label position="floating">비밀번호 확인</ion-label>
+              <ion-label position="stacked">비밀번호 확인</ion-label>
               <ion-input v-model="modifyFormState.loginPwConfirm" minlength="8" type="password" placeholder="비밀번호 확인을 해주세요."></ion-input>
             </ion-item>
           </div>
           <div>
             <ion-item>
-              <ion-label position="floating">이름</ion-label>
-              <ion-input v-model="modifyFormState.name" minlength="2" :placeholder="globalState.loginedClient.name"></ion-input>
+              <ion-label position="stacked">이름</ion-label>
+              <ion-input v-model="modifyFormState.name" minlength="2" :placeholder="state.client.name"></ion-input>
             </ion-item>
           </div>
           <div>
             <ion-item>
-              <ion-label position="floating">연락처</ion-label>
-              <ion-input v-model="modifyFormState.cellphoneNo" type="tel" maxlength="11" :placeholder="globalState.loginedClient.cellphoneNo"></ion-input>
+              <ion-label position="stacked">연락처</ion-label>
+              <ion-input v-model="modifyFormState.cellphoneNo" type="tel" maxlength="11" :placeholder="state.client.cellphoneNo"></ion-input>
             </ion-item>
           </div>
           <div>
             <ion-item>
-              <ion-label position="floating">이메일</ion-label>
-              <ion-input v-model="modifyFormState.email" type="email" :placeholder="globalState.loginedClient.email"></ion-input>
+              <ion-label position="stacked">이메일</ion-label>
+              <ion-input v-model="modifyFormState.email" type="email" :placeholder="state.client.email"></ion-input>
             </ion-item>
           </div>
           <div>
             <ion-item>
-              <ion-label position="floating">지역</ion-label>
-              <ion-input v-model="modifyFormState.region" :placeholder="globalState.loginedClient.region"></ion-input>
+              <ion-label position="stacked">지역</ion-label>
+              <ion-input v-model="modifyFormState.region" :placeholder="state.client.region"></ion-input>
             </ion-item>
           </div>
           <div class="py-2 px-4">
@@ -68,6 +68,9 @@
             <ion-button color="secondary" type="reset" expand="block">초기화</ion-button>
           </div>
         </form>
+        <div v-else class="py-2 px-4">
+          로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
+        </div>
       </ion-custom-body>
     </ion-content>
   </ion-page>
@@ -85,7 +88,8 @@ import {
   IonTitle, 
   IonContent,
   IonLabel, 
-  IonInput, 
+  IonInput,
+  IonItemDivider, 
   IonItem, 
   IonButton, 
 } from '@ionic/vue';
@@ -100,7 +104,7 @@ import { Client } from '@/types';
 const useModifyFormState = () => {
   return reactive({
     profileImg: [] as File[],
-    loginId: '',
+    //loginId: '',
     loginPw: '',
     loginPwConfirm: '',
     name: '',
@@ -118,7 +122,8 @@ export default {
     IonToolbar, 
     IonTitle,
     IonLabel, 
-    IonInput, 
+    IonInput,
+    IonItemDivider,  
     IonItem, 
     IonButton, 
     IonContent, 
@@ -133,7 +138,19 @@ export default {
     const router = useRouter();
     const mainService = useMainService();
 
+    const state = reactive({
+      client: {} as Client
+    });
+
     const id = globalState.loginedClient.id;
+
+    async function loadClient(id: number) {
+      const axRes = await mainService.client_detail(id)
+      state.client = axRes.data.body.client;
+    }
+    onMounted(() => {
+      loadClient(id);
+    });
 
     // function confirmAlert(){
     //   const msg = '해당 내용으로 수정하시겠습니까?'
@@ -142,13 +159,15 @@ export default {
 
     function checkAndModify() {
 
-       // 아이디 체크
-      const loginId = modifyFormState.loginId.trim();
+      // 아이디 체크
+      // let loginId = modifyFormState.loginId.trim();
       
-      if ( modifyFormState.loginId.trim().length == 0 ) {
-        alert('아이디를 입력해주세요.');
-        return;
-      }
+      // if ( modifyFormState.loginId.trim().length == 0 ) {
+      //   // alert('아이디를 입력해주세요.');
+      //   // return;
+      //   loginId = state.client.loginId;
+      // }
+
       // 비번 체크
       const loginPw = modifyFormState.loginPw.trim();
       
@@ -166,35 +185,39 @@ export default {
       }
 
       // 이름 체크
-      const name = modifyFormState.name.trim();
+      let name = modifyFormState.name.trim();
 
       if ( name.length == 0 ) {
-        alert('이름을 입력해주세요.');
-        return;
+        // alert('이름을 입력해주세요.');
+        // return;
+        name = state.client.name;
       }
       
       // 전화번호 체크
-      const cellphoneNo = modifyFormState.cellphoneNo.trim();
+      let cellphoneNo = modifyFormState.cellphoneNo.trim();
       
       if ( cellphoneNo.length == 0 ) {
-        alert('연락처를 입력해주세요.');
-        return;
+        // alert('연락처를 입력해주세요.');
+        // return;
+        cellphoneNo = state.client.cellphoneNo;
       }
 
       // 이메일 체크
-      const email = modifyFormState.email.trim();
+      let email = modifyFormState.email.trim();
       
       if ( email.length == 0 ) {
-        alert('이메일을 입력해주세요.');
-        return;
+        // alert('이메일을 입력해주세요.');
+        // return;
+        email = state.client.email;
       }
 
       // 시/도 주소 체크
-      const region = modifyFormState.region.trim();
+      let region = modifyFormState.region.trim();
       
       if ( region.length == 0 ) {
-        alert('지역을 입력해주세요.');
-        return;
+        // alert('지역을 입력해주세요.');
+        // return;
+        region = state.client.region;
       }
 
       async function startFileUpload(onSuccess: Function){
@@ -218,8 +241,8 @@ export default {
         }
       }
 
-      async function modify(id: number, loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string) {
-        const axRes = await  mainService.client_doModify(id, loginId, loginPw, name, cellphoneNo, email, region, genFileIdsStr);
+      async function modify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string) {
+        const axRes = await  mainService.client_doModify(id, loginPw, name, cellphoneNo, email, region, genFileIdsStr);
   
           util.showAlert(axRes.data.msg);
         
@@ -231,7 +254,7 @@ export default {
       }
 
       const startModify = (genFileIdsStr: string) =>{
-          modify(id, loginId, loginPw, name, cellphoneNo, email, region,  genFileIdsStr);
+          modify(id, loginPw, name, cellphoneNo, email, region,  genFileIdsStr);
       }
  
       startFileUpload(startModify);
@@ -241,6 +264,7 @@ export default {
 
     return {
       globalState,
+      state,
       //confirmAlert,
       modifyFormState,
       checkAndModify,

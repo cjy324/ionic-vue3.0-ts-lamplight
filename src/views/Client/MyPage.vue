@@ -10,49 +10,61 @@
 
       <ion-custom-body class="justify-center">
         <div class="container mx-auto">
-      <div class="px-6 py-6 bg-white rounded-lg shadow-md">
-        <div v-if="globalState.isLogined">
-          <div title="프로필 이미지">
-            <img v-if="globalState.loginedClient.extra__thumbImg != null" class="h-96 rounded-lg object-cover object-center" :src="'http://localhost:8090' + globalState.loginedClient.extra__thumbImg">
-            <img v-if="globalState.loginedClient.extra__thumbImg == null" class="h-96 rounded-lg object-cover object-center" :src="'http://via.placeholder.com/300?text=NoImage'">
-          </div>
-          <div title="회원유형">
-            <p>회원유형</p>
-            일반회원
-          </div>
-          <div title="아이디">
-            <p>아이디</p>
-            {{globalState.loginedClient.loginId}}
-          </div>
-          <div title="이름">
-            <p>이름</p>
-            {{globalState.loginedClient.name}}
-          </div>
-          <div title="전화번호">
-            <p>전화번호</p>
-            {{globalState.loginedClient.cellphoneNo}}
-          </div>
-          <div title="이메일">
-            <p>이메일</p>
-            {{globalState.loginedClient.email}}
-          </div>
-          <div title="지역">
-            <p>지역</p>
-            {{globalState.loginedClient.region}}
-          </div>
-          <div>
-            <div class="btns mt-2">
-              <ion-button :href="'/client/modify?id=' + globalState.loginedClient.id">
-                회원정보수정
-              </ion-button>
+          <div class="px-6 py-6 bg-white rounded-lg shadow-md">
+            <ion-list v-if="globalState.isLogined">
+              
+              <ion-list-header>
+                MyPage
+              </ion-list-header>
+              
+              <ion-item-divider>
+                <img slot="end" v-if="globalState.loginedClient.extra__thumbImg != null" class="h-32 rounded-3xl" :src="'http://localhost:8090' + globalState.loginedClient.extra__thumbImg">
+                <img slot="end" v-if="globalState.loginedClient.extra__thumbImg == null" class="h-32 rounded-3xl" :src="'http://via.placeholder.com/300?text=NoImage'">
+              </ion-item-divider>
+              
+              <ion-item>
+                <ion-label>회원유형</ion-label>
+                <ion-label slot="end" color="success">일반회원</ion-label>
+              </ion-item>
+              
+              <ion-item>
+                <ion-label>아이디</ion-label>
+                <ion-label slot="end" color="tertiary">{{state.client.loginId}}</ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>이름</ion-label>
+                <ion-label slot="end" color="tertiary">{{state.client.name}}</ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>연락처</ion-label>
+                <ion-label slot="end" color="tertiary">{{state.client.cellphoneNo}}</ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>e-mail</ion-label>
+                <ion-label slot="end" color="tertiary">{{state.client.email}}</ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>지역</ion-label>
+                <ion-label slot="end" color="warning">{{state.client.region}}</ion-label>
+              </ion-item>
+            
+            </ion-list>
+            <div v-else class="py-2 px-4">
+              로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
             </div>
+            <ion-list>
+              <ion-item-divider class="btns mt-2">
+                <ion-button slot="end" :href="'/client/modify?id=' + globalState.loginedClient.id">
+                  회원정보수정
+                </ion-button>
+              </ion-item-divider>
+            </ion-list>
           </div>
         </div>
-        <div v-else class="py-2 px-4">
-          로그인 후 이용가능합니다. <ion-custom-link to="/">홈</ion-custom-link> 으로 이동
-        </div>
-      </div>
-    </div>
       </ion-custom-body>
     </ion-content>
   </ion-page>
@@ -96,23 +108,23 @@ export default  {
     const mainService = useMainService();
     
     
-    // const state = reactive({
-    //   client: {} as Client
-    // });
+    const state = reactive({
+      client: {} as Client
+    });
 
-    // const id = globalState.loginedClient.id;
+    const id = globalState.loginedClient.id;
 
-    // async function loadClient(id: number) {
-    //   const axRes = await mainService.client_detail(id)
-    //   state.client = axRes.data.body.client;
-    // }
-    // onMounted(() => {
-    //   loadClient(id);
-    // });
+    async function loadClient(id: number) {
+      const axRes = await mainService.client_detail(id)
+      state.client = axRes.data.body.client;
+    }
+    onMounted(() => {
+      loadClient(id);
+    });
 
     return {
       globalState,
-      //state
+      state
     }
   }
 }
