@@ -236,8 +236,16 @@ export default {
       const startJoin = (genFileIdsStr: string) =>{
           join(loginId, loginPw, name, cellphoneNo, email, region,  genFileIdsStr);
       }
- 
-      startFileUpload(startJoin);
+
+      const msg = '해당 내용으로 가입하시겠습니까?'
+      util.showAlertConfirm(msg).then(confirm => {
+        if (confirm == false) {
+          return
+        } else{
+          startFileUpload(startJoin);
+        }
+      })
+      
     }
 
     

@@ -248,7 +248,15 @@ export default {
           router.replace("detail?id=" + newOrderId);
       }
 
-      modifyOrder(state.order.id, deceasedName, bereavedName, funeralHome, head, religion, startDate, endDate, body, expertId, globalState.loginedClient.id);
+      const msg = '해당 내용으로 수정하시겠습니까?'
+      util.showAlertConfirm(msg).then(confirm => {
+        if (confirm == false) {
+          return
+        } else{
+          modifyOrder(state.order.id, deceasedName, bereavedName, funeralHome, head, religion, startDate, endDate, body, expertId, globalState.loginedClient.id);
+        }
+      })
+
     }
 
     return {

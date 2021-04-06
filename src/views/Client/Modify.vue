@@ -65,7 +65,10 @@
             <ion-button type="submit" expand="block">수정</ion-button>
           </div>
           <div class="px-4">
-            <ion-button color="secondary" type="reset" expand="block">초기화</ion-button>
+            <ion-button color="warning" type="reset" expand="block">초기화</ion-button>
+          </div>
+          <div class="px-4">
+            <ion-button :href="'/client/myPage?id=' + globalState.loginedClient.id" color="danger" type="button" expand="block">취소</ion-button>
           </div>
         </form>
         <div v-else class="py-2 px-4">
@@ -80,7 +83,7 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader } from '@/components/';
+import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
   IonPage, 
   IonHeader, 
@@ -129,7 +132,8 @@ export default {
     IonContent, 
     IonPage, 
     IonCustomBody, 
-    IonCustomHeader 
+    IonCustomHeader,
+    IonCustomLink, 
   },
 
   setup() {
@@ -256,8 +260,16 @@ export default {
       const startModify = (genFileIdsStr: string) =>{
           modify(id, loginPw, name, cellphoneNo, email, region,  genFileIdsStr);
       }
+
+      const msg = '해당 내용으로 수정하시겠습니까?'
+      util.showAlertConfirm(msg).then(confirm => {
+        if (confirm == false) {
+          return
+        } else{
+          startFileUpload(startModify);
+        }
+      })
  
-      startFileUpload(startModify);
     }
 
     

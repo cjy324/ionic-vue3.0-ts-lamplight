@@ -76,6 +76,12 @@ import {
   IonList, 
   IonItem, 
   IonContent,
+  IonItemDivider,
+  IonCol,
+  IonRow,
+  IonGrid,
+  IonButton,
+
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
@@ -103,6 +109,11 @@ export default  {
     IonList, 
     IonItem, 
     IonContent,
+    IonItemDivider,
+    IonCol,
+    IonRow,
+    IonGrid,
+    IonButton,
   },
   
   setup() {

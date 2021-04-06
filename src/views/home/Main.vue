@@ -27,14 +27,31 @@
 
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader } from '@/components/';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import { 
+  IonPage, 
+  IonHeader, 
+  IonToolbar, 
+  IonTitle, 
+  IonContent,
+  IonButton,
+
+} from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useRouter } from 'vue-router';
 
 export default  {
   name: 'Main',
   
-  components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonCustomBody, IonCustomHeader },
+  components: { 
+    IonHeader, 
+    IonToolbar, 
+    IonTitle, 
+    IonContent, 
+    IonPage, 
+    IonCustomBody, 
+    IonCustomHeader,
+    IonButton,
+  },
   
   setup() {
     const globalState = useGlobalState();

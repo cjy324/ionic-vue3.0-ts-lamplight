@@ -158,6 +158,7 @@ export default {
     // }
 
     function checkAndAddOrder() {
+
       // 고인 이름 체크
       const deceasedName = orderAddFormState.deceasedName.trim();
       
@@ -238,7 +239,15 @@ export default {
           router.replace("detail?id=" + newOrderId);
       }
 
-      addOrder(deceasedName, bereavedName, funeralHome, head, religion, startDate, endDate, body, parseInt(expertId), globalState.loginedClient.id);
+      const msg = '해당 내용으로 의뢰하시겠습니까?'
+      util.showAlertConfirm(msg).then(confirm => {
+        if (confirm == false) {
+          return
+        } else{
+          addOrder(deceasedName, bereavedName, funeralHome, head, religion, startDate, endDate, body, parseInt(expertId), globalState.loginedClient.id);
+        }
+      })
+
     }
 
     return {

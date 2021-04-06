@@ -65,7 +65,7 @@
             </div>
             <ion-list>
               <ion-item-divider class="btns mt-2">
-                <ion-button color="success" slot="end" :href="'/order/modify?id=' + globalState.loginedClient.id">
+                <ion-button color="success" slot="end" :href="'/order/modify?id=' + state.order.id">
                   내용 수정
                 </ion-button>
                 <ion-button color="warning" slot="end" @click="deleteOrder(globalState.loginedClient.id)">
