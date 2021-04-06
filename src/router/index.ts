@@ -95,6 +95,32 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
+    path: '/review/',
+    component: Tabs,
+    children: [
+      {
+        path: '',
+        redirect: '/review/list'
+      },
+      {
+        path: 'add',
+        component: () => import('@/views/Review/Add.vue')
+      },
+      {
+        path: 'list',
+        component: () => import('@/views/Review/List.vue')
+      },
+      {
+        path: 'detail',
+        component: () => import('@/views/Review/Detail.vue')
+      },
+      {
+        path: 'modify',
+        component: () => import('@/views/Review/Modify.vue')
+      },
+    ]
+  },
+  {
     path: '/setting/',
     component: Tabs,
     children: [
@@ -109,6 +135,7 @@ const routes: Array<RouteRecordRaw> = [
     ]
   }
 ]
+
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

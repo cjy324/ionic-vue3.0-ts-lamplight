@@ -60,7 +60,7 @@ export default  {
     
     const logout = () => {
       globalState.setLogouted();
-      router.replace('/member/login');
+      router.replace('/');
     };
 
 

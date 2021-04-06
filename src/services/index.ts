@@ -48,6 +48,10 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
       return this.mainApi.expert_list();
     }
 
+    order_list(memberId: number, memberType: string){
+      return this.mainApi.order_list(memberId, memberType);
+    }
+
     order_doAdd(deceasedName: string, bereavedName: string, funeralHome: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number){
       return this.mainApi.order_doAdd(deceasedName, bereavedName, funeralHome, head, religion, startDate, endDate, body, expertId, clientId);
     }
@@ -62,6 +66,10 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
 
     order_delete(id: number){
       return this.mainApi.order_delete(id);
+    }
+
+    order_changeStepLevel(id: number, stepLevel: number){
+      return this.mainApi.order_changeStepLevel(id, stepLevel)
     }
 
     review_doDelete(id: number) {

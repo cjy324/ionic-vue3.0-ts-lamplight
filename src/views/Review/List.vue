@@ -87,34 +87,33 @@
           </ion-button>
         </ion-item-divider>
         <ion-item-divider class="mt-2">
-          <ion-button v-if="globalState.loginedClient.id == order.clientId" color="success" slot="end" :href="'/review/add?relTypeCode=expert&relId=' + order.expertId">
+          <ion-button v-if="globalState.loginedClient.id == order.clientId" color="success" slot="end" :href="'/review/doAdd?relTypeCode=expert&relId=' + order.expertId">
             후기/평점 작성
           </ion-button>
         </ion-item-divider>
 
-        <ion-item-divider class="mt-2" v-if="globalState.loginedClient.id !== order.clientId">
-          <ion-button v-if="order.stepLevel==1" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
+        <div class="btns text-center" v-if="globalState.loginedExpert.id == order.expertId">
+          <button v-if="order.stepLevel==1" class="btn-secondary" @click="changeStepLevel(order.id, order.stepLevel)">
             의뢰수락(장례준비)
-          </ion-button>
-          <ion-button v-if="order.stepLevel==2" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
+          </button>
+          <button v-if="order.stepLevel==2" class="btn-success" @click="changeStepLevel(order.id, order.stepLevel)">
             장례진행
-          </ion-button>
-          <ion-button v-if="order.stepLevel==3" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
+          </button>
+          <button v-if="order.stepLevel==2" class="btn-success" @click="changeStepLevel(order.id, order.stepLevel)">
             장례종료(확인요청)
-          </ion-button>
-        </ion-item-divider>
-
-        <ion-item-divider class="mt-2" v-if="globalState.loginedClient.id == order.clientId">
-          <ion-button v-if="order.stepLevel==2" color="success" slot="end">
+          </button>
+        </div>
+        <div class="btns text-center" v-if="globalState.loginedClient.id == order.clientId">
+          <div v-if="order.stepLevel==2" class="btn-success">
             장례준비중
-          </ion-button>
-          <ion-button v-if="order.stepLevel==3" color="success" slot="end">
+          </div>
+          <div v-if="order.stepLevel==3" class="btn-success">
             장례진행중
-          </ion-button>
-          <ion-button v-if="order.stepLevel==4" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
+          </div>
+          <button v-if="order.stepLevel==4" class="btn-success" @click="changeStepLevel(order.id, order.stepLevel)">
             장례종료(확인)
-          </ion-button>
-        </ion-item-divider>
+          </button>
+        </div>
         
 
       </div>
@@ -146,9 +145,7 @@ import {
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
-import { reactive, computed, onMounted, watch } from 'vue';
-import * as util from '@/utils';
-import { useRoute } from 'vue-router';
+import { reactive, computed, onMounted  } from 'vue';
 import { Order } from '@/types';
 
 const useSearchState = () => {
@@ -183,7 +180,6 @@ export default  {
     const globalState = useGlobalState();
     const mainService = useMainService();
     const searchState = useSearchState();
-    const route = useRoute();
 
     const state = reactive({
       orders: [] as Order[],
@@ -276,41 +272,24 @@ export default  {
     //   });
     // }
 
-    async function doChangeStepLevel(id: number, stepLevel: number){
-      const axRes = await mainService.order_changeStepLevel(id, stepLevel)
-          util.showAlert(axRes.data.msg)
-
-          if ( axRes.data.fail ) {
-            return;
-          }
-          window.location.reload();
-    }
-
-    function changeStepLevel(id: number, stepLevel: number){
-
-      const msg = '해당 의뢰를 수락하시겠습니까?'
-      util.showAlertConfirm(msg).then(confirm => {
-        if (confirm == false) {
-          return
-        } else{
-          doChangeStepLevel(id, stepLevel)
-        }
-      })
-      
-    }
-
-    let loginedMemberId = 0;
-    let loginedMemberType = '';
-
-    if(globalState.loginedClient.id != null){
-        loginedMemberId = globalState.loginedClient.id
-        loginedMemberType = 'client'
-    }
+    // function changeStepLevel(id:number, stepLevel:number){
+    //   if(confirm('정말 수락하시겠습니까?') == false){
+    //     return;
+    //   }
+    //   mainApi.order_changeStepLevel(id, stepLevel)
+    //   .then(axiosResponse => {
+    //       alert(axiosResponse.data.msg);
+    //       if ( axiosResponse.data.fail ) {
+    //         return;
+    //       }
+    //     window.location.reload();
+    //   });
+    // }
 
     // onMounted 바로 실행하는 것이 아닌 모든 것이 준비되었을때 실행됨
     onMounted(() => {
       //alert("3");
-      loadOrders(loginedMemberId, loginedMemberType);
+      loadOrders(globalState.loginedClient.id, globalState.memberType);
      // loadReviews(relTypeCode);
     });
 
@@ -324,7 +303,7 @@ export default  {
       //doDeleteReview,
       onInput,
       returnToString,
-      changeStepLevel,
+      //changeStepLevel,
       //onClickInput,
     }
   }
