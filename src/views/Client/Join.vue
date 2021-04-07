@@ -22,7 +22,7 @@
           <div>
             <ion-item>
               <ion-label position="stacked">프로필 이미지</ion-label>
-              <input ref="profileImgElRef" type="file"/>
+              <input ref="profileImgElRef" type="file">
             </ion-item>
           </div>
           <div>
@@ -217,7 +217,7 @@ export default {
         // 즉, !!!profileImgElRef.value?.files의 의미는 해당 파일이 없는지 물어보는 것
         // 없으면 true
         if(profileImgElRef.value?.files == undefined || profileImgElRef.value?.files == null){
-          //onSuccess("");  //파일이 없으면 다음 과정 생략하고 onSuccess() 즉시 실행
+          onSuccess("");  //파일이 없으면 다음 과정 생략하고 onSuccess() 즉시 실행
           alert("파일 업로드 안됨")
           return;
         }

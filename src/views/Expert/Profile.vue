@@ -18,8 +18,7 @@
               </ion-list-header>
               
               <ion-item-divider>
-                <img slot="end" v-if="state.expert.extra__thumbImg != null" class="h-32 rounded-3xl" :src="'http://localhost:8090' + state.expert.extra__thumbImg">
-                <img slot="end" v-else class="h-32 rounded-3xl" :src="'http://via.placeholder.com/300?text=NoImage'">
+                <img slot="end" class="h-32 rounded-3xl" :src="mainService.getExpertThumbImgUrl(state.expert.id)">
               </ion-item-divider>
               
               <ion-item>

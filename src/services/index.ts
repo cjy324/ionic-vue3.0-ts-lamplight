@@ -108,9 +108,23 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     // //이미지를 리사이징해주는 유틸 적용
     //사용하려면 작동을 시켜야 함..일단은 적용 보류(21.04.01)
     /* eslint-disable @typescript-eslint/no-inferrable-types */
-    getClientThumbImgUrl(id: number, width: number = 40, height: number = 40) {
+    getClientThumbImgUrlForHeader(id: number, width: number = 40, height: number = 40) {
 
       const originUrl = 'http://localhost:8090/common/genFile/file/client/' + id + '/common/attachment/1';
+      const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
+      return url;
+    }
+
+    getClientThumbImgUrl(id: number, width: number = 500, height: number = 500) {
+
+      const originUrl = 'http://localhost:8090/common/genFile/file/client/' + id + '/common/attachment/1';
+      const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
+      return url;
+    }
+
+    getExpertThumbImgUrl(id: number, width: number = 500, height: number = 500) {
+
+      const originUrl = 'http://localhost:8090/common/genFile/file/expert/' + id + '/common/attachment/1';
       const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return url;
     }

@@ -11,12 +11,11 @@
         <form v-if="globalState.isLogined" @submit.prevent="checkAndModify">
           <div>
             <ion-item-divider>
-              <img v-if="globalState.loginedClient.extra__thumbImg != null" class="h-32 rounded-3xl" :src="'http://localhost:8090' + globalState.loginedClient.extra__thumbImg">
-              <img v-if="globalState.loginedClient.extra__thumbImg == null" class="h-32 rounded-3xl" :src="'http://via.placeholder.com/300?text=NoImage'">
+              <img slot="end" class="h-32 rounded-3xl" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
             </ion-item-divider>
             <ion-item>
               <ion-label position="stacked">프로필 이미지</ion-label>
-              <ion-input v-model="modifyFormState.profileImg" type="file"></ion-input>
+              <input ref="profileImgElRef" type="file">
             </ion-item>
           </div>
           <div>
@@ -100,13 +99,13 @@ import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { useRouter } from 'vue-router';
 import * as util from '@/utils';
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, ref } from 'vue';
 import { Client } from '@/types';
 
 
 const useModifyFormState = () => {
   return reactive({
-    profileImg: [] as File[],
+    //profileImg: [] as File[],
     //loginId: '',
     loginPw: '',
     loginPwConfirm: '',
@@ -141,6 +140,8 @@ export default {
     const modifyFormState = useModifyFormState();
     const router = useRouter();
     const mainService = useMainService();
+
+    const profileImgElRef = ref<HTMLInputElement>();
 
     const state = reactive({
       client: {} as Client
@@ -226,11 +227,12 @@ export default {
         // ? => 만약 profileImgElRef.value?까지가 null이면 여기까지만 실행하겠다라는 의미
         // 즉, !!!profileImgElRef.value?.files의 의미는 해당 파일이 없는지 물어보는 것
         // 없으면 true
-        if(modifyFormState.profileImg == null){
+        if(profileImgElRef.value?.files == undefined || profileImgElRef.value?.files == null){
           onSuccess("");  //파일이 없으면 다음 과정 생략하고 onSuccess() 즉시 실행
+          alert("파일 업로드 안됨")
           return;
         }
-        const axRes = await mainService.common_genFile_doUpload(modifyFormState.profileImg[0])
+        const axRes = await mainService.common_genFile_doUpload(profileImgElRef.value?.files[0])
 
         if ( axRes.data.fail ) {
           util.showAlert(axRes.data.msg);
@@ -272,7 +274,9 @@ export default {
 
     return {
       globalState,
+      mainService,
       state,
+      profileImgElRef,
       //confirmAlert,
       modifyFormState,
       checkAndModify,

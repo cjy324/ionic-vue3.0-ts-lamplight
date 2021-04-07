@@ -18,8 +18,7 @@
               </ion-list-header>
               
               <ion-item-divider>
-                <img slot="end" v-if="globalState.loginedClient.extra__thumbImg != null" class="h-32 rounded-3xl" :src="'http://localhost:8090' + globalState.loginedClient.extra__thumbImg">
-                <img slot="end" v-if="globalState.loginedClient.extra__thumbImg == null" class="h-32 rounded-3xl" :src="'http://via.placeholder.com/300?text=NoImage'">
+                <img slot="end" class="h-32 rounded-3xl" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
               </ion-item-divider>
               
               <ion-item>
@@ -134,7 +133,8 @@ export default  {
 
     return {
       globalState,
-      state
+      mainService,
+      state,
     }
   }
 }

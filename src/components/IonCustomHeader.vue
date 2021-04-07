@@ -6,7 +6,7 @@
           {{globalState.loginedClient.name}}
         </div>
         <router-link v-if="globalState.isLogined" to="/client/myPage" class="cursor-pointer">
-          <img class="rounded-full" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)" alt="">
+          <img class="rounded-full" :src="mainService.getClientThumbImgUrlForHeader(globalState.loginedClient.id)" alt="">
         </router-link>
         <ion-item>
           <ion-button v-if="globalState.isLogined" @click="logout">로그아웃</ion-button>

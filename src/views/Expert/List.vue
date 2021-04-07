@@ -13,7 +13,7 @@
     <template v-bind:key="expert.id" v-for="expert in returnFilteredExperts">
     <ion-item>
       <ion-avatar class="w-24 mb-14" slot="start">
-        <img class="" :src="'http://via.placeholder.com/300?text=NoImage'">
+        <img slot="end" class="h-32 rounded-3xl" :src="mainService.getExpertThumbImgUrl(expert.id)">
       </ion-avatar>
       <ion-label>
         <ion-grid>
