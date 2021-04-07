@@ -83,7 +83,7 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     getClientThumbImgUrl(id: number, width: number = 40, height: number = 40) {
 
       const originUrl = 'http://localhost:8090/common/genFile/file/client/' + id + '/common/attachment/1';
-      const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=U.U&width=${width}&height=${height}&url=` + originUrl;
+      const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return url;
     }
 

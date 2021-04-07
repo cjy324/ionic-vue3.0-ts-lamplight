@@ -74,7 +74,11 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        redirect: '/order/add'
+        redirect: '/order/main'
+      },
+      {
+        path: 'main',
+        component: () => import('@/views/Order/Main.vue')
       },
       {
         path: 'add',
