@@ -37,7 +37,6 @@ import {
 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
-import { useRouter } from 'vue-router';
 
 export default  {
   name: 'Main',
@@ -55,14 +54,11 @@ export default  {
   
   setup() {
     const globalState = useGlobalState();
-    const router = useRouter();
-    
-    
+
     const logout = () => {
       globalState.setLogouted();
       window.location.reload();
     };
-
 
     return {
       globalState,

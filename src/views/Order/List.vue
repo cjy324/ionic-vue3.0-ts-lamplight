@@ -17,6 +17,7 @@
       <ion-select-option value="deceasedName">고인명</ion-select-option>
       <ion-select-option value="bereavedName">상주명</ion-select-option>
       <ion-select-option value="extra__clientName">의뢰인명</ion-select-option>
+      <ion-select-option value="region">지역</ion-select-option>
       <ion-select-option value="body">내용</ion-select-option>
       <ion-select-option value="funeralHome">장례식장</ion-select-option>
     </ion-select>
@@ -62,6 +63,9 @@
             </ion-col>
           </ion-row>
           <ion-row>
+            <ion-col size="10">
+              지역: {{order.region}}
+            </ion-col>
             <ion-col size="10">
               장례식장: {{order.funeralHome}}
             </ion-col>
@@ -230,6 +234,9 @@ export default  {
         if(searchState.searchKeywordType == "extra__clientName"){
           filteredOrders = state.orders.filter((order: Order) => order.extra__clientName.includes(searchState.searchKeyword))
         }
+        if(searchState.searchKeywordType == "region"){
+          filteredOrders = state.orders.filter((order: Order) => order.region.includes(searchState.searchKeyword))
+        }
         if(searchState.searchKeywordType == "body"){
           filteredOrders = state.orders.filter((order: Order) => order.body.includes(searchState.searchKeyword))
         }
@@ -246,6 +253,9 @@ export default  {
         }
         if(searchState.searchKeywordType == "extra__clientName"){
           filteredOrders = state.orders.filter((order: Order) => order.extra__clientName.includes(searchState.searchKeyword) && order.stepLevel === parseInt(searchState.selectStepLevel))
+        }
+        if(searchState.searchKeywordType == "region"){
+          filteredOrders = state.orders.filter((order: Order) => order.region.includes(searchState.searchKeyword) && order.stepLevel === parseInt(searchState.selectStepLevel))
         }
         if(searchState.searchKeywordType == "body"){
           filteredOrders = state.orders.filter((order: Order) => order.body.includes(searchState.searchKeyword) && order.stepLevel === parseInt(searchState.selectStepLevel))

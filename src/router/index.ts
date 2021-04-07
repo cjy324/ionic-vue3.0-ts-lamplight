@@ -74,7 +74,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        redirect: '/order/list'
+        redirect: '/order/add'
       },
       {
         path: 'add',

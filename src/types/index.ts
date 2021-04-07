@@ -30,6 +30,7 @@ export interface Order extends Entity {
 	deceasedName:string;
   bereavedName:string;
   funeralHome:string;
+  region:string;
 	body:string;
 	expertId:number;
 	clientId:number;
@@ -46,6 +47,7 @@ export interface Funeral extends Entity {
 	deceasedName:string;
   bereavedName:string;
   funeralHome:string;
+  region:string;
 	body:string;
 	expertId:number;
 	clientId:number;

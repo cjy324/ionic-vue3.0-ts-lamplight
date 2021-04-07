@@ -23,8 +23,19 @@
           </div>
           <div>
             <ion-item>
+              <ion-label position="floating">지역</ion-label>
+              <ion-select v-model="orderAddFormState.region">
+                <ion-select-option value="서울특별시">서울</ion-select-option>
+                <ion-select-option value="대전광역시">대전</ion-select-option>
+                <ion-select-option value="인천광역시">인천</ion-select-option>
+                <ion-select-option value="부산광역시">부산</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+          <div>
+            <ion-item>
               <ion-label position="floating">장례식장</ion-label>
-              <ion-input v-model="orderAddFormState.funeralHome" type="text" placeholder="장례식장을 입력해주세요."></ion-input>
+              <ion-input v-model="orderAddFormState.funeralHome" type="text" placeholder="장례식장을 입력해주세요.(미정이면 '미정'입력)"></ion-input>
             </ion-item>
           </div>
           <div>
@@ -116,6 +127,7 @@ const useOrderAddFormState = () => {
     deceasedName: '',
     bereavedName: '',
     funeralHome:'',
+    region:'',
     head: '',
     religion: '',
     startDate: '',
@@ -175,10 +187,18 @@ export default {
       }
 
       // 장례식장 체크
-      const funeralHome = orderAddFormState.funeralHome;
+      const funeralHome = orderAddFormState.funeralHome.trim();
       
       if ( funeralHome.length == 0 ) {
         alert('장례식장을 입력해주세요.');
+        return;
+      }
+
+      // 지역 체크
+      const region = orderAddFormState.region.trim();
+      
+      if ( region.length == 0 ) {
+        alert('지역을 입력해주세요.');
         return;
       }
       
@@ -227,8 +247,8 @@ export default {
         expertId = util.toIntOrUnd(route.query.expertId)
       }
 
-      async function addOrder(deceasedName: string, bereavedName: string, funeralHome: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
-        const axRes = await mainService.order_doAdd(deceasedName, bereavedName, funeralHome, head, religion, startDate, endDate, body, expertId, clientId);
+      async function addOrder(deceasedName: string, bereavedName: string, funeralHome: string, region: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
+        const axRes = await mainService.order_doAdd(deceasedName, bereavedName, funeralHome, region, head, religion, startDate, endDate, body, expertId, clientId);
   
           if ( axRes.data.fail ) {
             return;
@@ -244,7 +264,7 @@ export default {
         if (confirm == false) {
           return
         } else{
-          addOrder(deceasedName, bereavedName, funeralHome, head, religion, startDate, endDate, body, parseInt(expertId), globalState.loginedClient.id);
+          addOrder(deceasedName, bereavedName, funeralHome, region, head, religion, startDate, endDate, body, parseInt(expertId), globalState.loginedClient.id);
         }
       })
 

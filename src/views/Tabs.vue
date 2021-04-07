@@ -54,22 +54,22 @@ export default {
     });
     /* ionic 리다이렉트 URL로의 다중클릭으로 인한 버그를 고치기 위한 코드 - 시작 */
     /* 버그가 해결되면 없애도 됩니다. */
-    const route = useRoute();
-    if ( route.path.startsWith("/Home") ) {
-      tabsState.hrefHome = route.fullPath;
-    }
-    else if ( route.path.startsWith("/Client") ) {
-      tabsState.hrefClient = route.fullPath;
-    }
-    else if ( route.path.startsWith("/Expert") ) {
-      tabsState.hrefExpert = route.fullPath;
-    }
-    else if ( route.path.startsWith("/Order") ) {
-      tabsState.hrefOrder = route.fullPath;
-    }
-    else if ( route.path.startsWith("/Setting") ) {
-      tabsState.hrefSetting = route.fullPath;
-    }
+    // const route = useRoute();
+    // if ( route.path.startsWith("/Home") ) {
+    //   tabsState.hrefHome = route.fullPath;
+    // }
+    // else if ( route.path.startsWith("/Client") ) {
+    //   tabsState.hrefClient = route.fullPath;
+    // }
+    // else if ( route.path.startsWith("/Expert") ) {
+    //   tabsState.hrefExpert = route.fullPath;
+    // }
+    // else if ( route.path.startsWith("/Order") ) {
+    //   tabsState.hrefOrder = route.fullPath;
+    // }
+    // else if ( route.path.startsWith("/Setting") ) {
+    //   tabsState.hrefSetting = route.fullPath;
+    // }
     /* ionic 리다이렉트 URL로의 다중클릭으로 인한 버그를 고치기 위한 코드 - 끝 */
 
     return {

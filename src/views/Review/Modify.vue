@@ -23,6 +23,17 @@
           </div>
           <div>
             <ion-item>
+              <ion-label position="floating">지역</ion-label>
+              <ion-select v-model="orderModifyFormState.region" :placeholder="state.order.region">
+                <ion-select-option value="서울특별시">서울</ion-select-option>
+                <ion-select-option value="대전광역시">대전</ion-select-option>
+                <ion-select-option value="인천광역시">인천</ion-select-option>
+                <ion-select-option value="부산광역시">부산</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+          <div>
+            <ion-item>
               <ion-label position="stacked">장례식장</ion-label>
               <ion-input v-model="orderModifyFormState.funeralHome" type="text" :placeholder="state.order.funeralHome"></ion-input>
             </ion-item>
@@ -117,6 +128,7 @@ const useOrderModifyFormState = () => {
     deceasedName: '',
     bereavedName: '',
     funeralHome:'',
+    region:'',
     head: '',
     religion: '',
     startDate: '',
@@ -196,6 +208,13 @@ export default {
       if ( funeralHome.length == 0 ) {
         funeralHome = state.order.funeralHome;
       }
+
+      // 지역 체크
+      let region = orderModifyFormState.region.trim();
+      
+      if ( region.length == 0 ) {
+        region = state.order.region;
+      }
       
       // 예상 인원 체크
       let head = parseInt(orderModifyFormState.head);
@@ -236,8 +255,8 @@ export default {
 
       const expertId = state.order.expertId;
 
-      async function modifyOrder(id: number, deceasedName: string, bereavedName: string, funeralHome: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
-        const axRes = await mainService.order_doModify(id, deceasedName, bereavedName, funeralHome, head, religion, startDate, endDate, body, expertId, clientId);
+      async function modifyOrder(id: number, deceasedName: string, bereavedName: string, funeralHome: string, region: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
+        const axRes = await mainService.order_doModify(id, deceasedName, bereavedName, funeralHome, region, head, religion, startDate, endDate, body, expertId, clientId);
   
           if ( axRes.data.fail ) {
             return;
@@ -253,7 +272,7 @@ export default {
         if (confirm == false) {
           return
         } else{
-          modifyOrder(state.order.id, deceasedName, bereavedName, funeralHome, head, religion, startDate, endDate, body, expertId, globalState.loginedClient.id);
+          modifyOrder(state.order.id, deceasedName, bereavedName, funeralHome, region, head, religion, startDate, endDate, body, expertId, globalState.loginedClient.id);
         }
       })
 
