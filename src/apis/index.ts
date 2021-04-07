@@ -493,14 +493,13 @@ export class MainApi extends HttpClient {
   }
 
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
-  public order_doAdd(deceasedName: string, bereavedName: string, funeralHome: string, region: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
+  public order_doAdd(deceasedName: string, bereavedName: string, funeralHome: string, region: string, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
     return this.postByForm<MainApi__order_doAdd__ResponseBody>(
       `/usr/order/doAdd`, {
         deceasedName,
         bereavedName,
         funeralHome,
         region,
-        head,
         religion,
         startDate,
         endDate,
@@ -512,7 +511,7 @@ export class MainApi extends HttpClient {
   }
 
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
-  public order_doModify(id: number, deceasedName: string, bereavedName: string, funeralHome: string, region: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
+  public order_doModify(id: number, deceasedName: string, bereavedName: string, funeralHome: string, region: string, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
     return this.postByForm<MainApi__order_doModify__ResponseBody>(
       `/usr/order/doModify`, {
         id,
@@ -520,7 +519,6 @@ export class MainApi extends HttpClient {
         bereavedName,
         funeralHome,
         region,
-        head,
         religion,
         startDate,
         endDate,
@@ -712,8 +710,8 @@ export class MainApi extends HttpClient {
   }
 
 
-  public review_doDelete(id: number) {
-    return this.get<MainApi__review_doDelete__ResponseBody>(`/usr/review/doDelete?id=${id}`);
+  public review_doDelete(relTypeCode: string, relId: number, id: number, clientId: number) {
+    return this.get<MainApi__review_doDelete__ResponseBody>(`/usr/review/doDelete?relTypeCode=${relTypeCode}&relId=${relId}&id=${id}&clientId=${clientId}`);
   }
 
   public review_list(relTypeCode: string) {

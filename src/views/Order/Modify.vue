@@ -40,18 +40,6 @@
           </div>
           <div>
             <ion-item>
-              <ion-label position="stacked">예상인원</ion-label>
-              <ion-select v-model="orderModifyFormState.head" :placeholder="state.order.head">
-                <ion-select-option value="100">100명</ion-select-option>
-                <ion-select-option value="200">200명</ion-select-option>
-                <ion-select-option value="300">300명</ion-select-option>
-                <ion-select-option value="400">400명</ion-select-option>
-                <ion-select-option value="500">500명</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
               <ion-label position="stacked">종교</ion-label>
               <ion-select v-model="orderModifyFormState.religion" :placeholder="state.order.religion">
                 <ion-select-option value="기독교">기독교</ion-select-option>
@@ -129,7 +117,6 @@ const useOrderModifyFormState = () => {
     bereavedName: '',
     funeralHome:'',
     region:'',
-    head: '',
     religion: '',
     startDate: '',
     endDate: '',
@@ -216,14 +203,14 @@ export default {
         region = state.order.region;
       }
       
-      // 예상 인원 체크
-      let head = parseInt(orderModifyFormState.head);
+      // // 예상 인원 체크
+      // let head = parseInt(orderModifyFormState.head);
       
-      //전역 NaN 속성은 Not-A-Number(숫자가 아님)를 나타냄
-      //isNaN() 함수로 NaN 여부를 확인
-      if ( isNaN(head) || head == 0) {
-        head = state.order.head;
-      }
+      // //전역 NaN 속성은 Not-A-Number(숫자가 아님)를 나타냄
+      // //isNaN() 함수로 NaN 여부를 확인
+      // if ( isNaN(head) || head == 0) {
+      //   head = state.order.head;
+      // }
 
       // 종교 체크
       let religion = orderModifyFormState.religion.trim();
@@ -255,8 +242,8 @@ export default {
 
       const expertId = state.order.expertId;
 
-      async function modifyOrder(id: number, deceasedName: string, bereavedName: string, funeralHome: string, region: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
-        const axRes = await mainService.order_doModify(id, deceasedName, bereavedName, funeralHome, region, head, religion, startDate, endDate, body, expertId, clientId);
+      async function modifyOrder(id: number, deceasedName: string, bereavedName: string, funeralHome: string, region: string, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
+        const axRes = await mainService.order_doModify(id, deceasedName, bereavedName, funeralHome, region, religion, startDate, endDate, body, expertId, clientId);
   
           if ( axRes.data.fail ) {
             return;
@@ -272,7 +259,7 @@ export default {
         if (confirm == false) {
           return
         } else{
-          modifyOrder(state.order.id, deceasedName, bereavedName, funeralHome, region, head, religion, startDate, endDate, body, expertId, globalState.loginedClient.id);
+          modifyOrder(state.order.id, deceasedName, bereavedName, funeralHome, region, religion, startDate, endDate, body, expertId, globalState.loginedClient.id);
         }
       })
 

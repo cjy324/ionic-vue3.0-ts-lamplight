@@ -43,9 +43,48 @@
           </ion-row>
         </ion-grid>
       </ion-label>
+
+      <!--평점-->
+        <div class="flex justify-center items-center w-full text-center mt-3">
+          <div class="font-bold text-xl mr-5">
+            '{{ expert.name }}'님의 전체 평점
+          </div>
+          <div class="border rounded-full h-24 w-24 bg-yellow-500 flex justify-center items-center">
+            <div class="font-bold text-2xl text-white">
+              {{ expert.extra__ratingPoint.toFixed(1) }}/5
+            </div>
+          </div>
+        </div>
+        <!--후기-->
+        <div class="flex justify-between items-end h-8 w-full border-b-4 font-semibold">
+          <p class="pb-1">
+            매칭 후기
+          </p>
+          <div class="text-sm cursor-pointer hover:text-blue-500">
+            더보기
+          </div>
+        </div>
+        <!--template를 활용하면 v-for문 내 v-for문 즉, 이중v-for문 사용이 가능해진다.-->
+        <!--또한, vue3.0부터는 동일 태그내에 v-for랑 v-if를 사용할 수 없는 것 같다.(권장하는 방법이 아닌듯..) -->
+        <!--하지만 template를 활용해 v-for를 분리해주면 v-for와 v-if를 동시에 사용가능해진다. -->
+        <div class="mt-2 border-b-2 border-t-2" v-bind:key="review.id" v-for="review in expert.extra__reviews.slice(0, 3)">
+            <p class="text-gray-900 p-2">
+              {{review.body}}
+            </p>
+            <p class="text-gray-500 p-2 text-sm">
+              {{review.updateDate}} / {{review.extra__clientName}}
+            </p>
+            <div class="btns" v-if="globalState.loginedClient.id === review.clientId">
+                <ion-button :href="'/review/modify?relTypeCode=expert&relId=' + expert.id + '&id=' + review.id" class="btn-secondary">
+                  수정
+                </ion-button >
+                <button class="btn-warning" @click="doDeleteReview(expert.id, review.id, globalState.loginedClient.id)">삭제</button>
+            </div>
+        </div>
+
       <div class="flex-col">
         <ion-item-divider class="mt-2">
-          <ion-button color="" slot="end" :href="'/expert/detail?id=' + expert.id">
+          <ion-button color="" slot="end" :href="'/expert/profile?id=' + expert.id">
             상세보기
           </ion-button>
         </ion-item-divider>
@@ -87,6 +126,7 @@ import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { reactive, computed, onMounted  } from 'vue';
 import { Expert, Review } from '@/types';
+import * as util from '@/utils';
 
 const useSearchState = () => {
   return reactive({
@@ -151,18 +191,30 @@ export default  {
       state.experts = axRes.data.body.experts;
     }
 
-    function doDeleteReview(id: number) {
-      if(confirm('정말 삭제하시겠습니까?') == false){
-        return;
-      }
-      mainService.review_doDelete(id)
-      .then(axiosResponse => {
-          alert(axiosResponse.data.msg);
-          if ( axiosResponse.data.fail ) {
+    async function deleteReview(relTypeCode: string, relId: number, id: number, clientId: number) {
+
+      const axRes = await mainService.review_doDelete(relTypeCode, relId, id, clientId)
+
+          util.showAlert(axRes.data.msg);
+          if ( axRes.data.fail ) {
             return;
           }
         window.location.reload();
-      });
+
+    }
+
+    const relTypeCode = 'expert';
+
+    function doDeleteReview(relId: number, id: number, clientId: number) { 
+    const msg = '해당 리뷰를 삭제하시겠습니까?'
+    
+      util.showAlertConfirm(msg).then(confirm => {
+        if (confirm == false) {
+          return
+        } else{
+          deleteReview(relTypeCode, relId, id, clientId);
+        }
+      })
     }
 
     // onMounted 바로 실행하는 것이 아닌 모든 것이 준비되었을때 실행됨

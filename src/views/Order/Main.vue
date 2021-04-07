@@ -10,7 +10,7 @@
       <ion-custom-body class="justify-center">
         <div v-if="globalState.isLogined">
           <div class="px-4">
-            <ion-button href="/order/add" color="primary" type="button" expand="block">의뢰 요청</ion-button>
+            <ion-button href="/order/add" color="primary" type="button" expand="block">새 의뢰 요청</ion-button>
           </div>
           <div class="px-4">
             <ion-button href="/order/list" color="secondary" type="button" expand="block">내 의뢰 현황 보기</ion-button>

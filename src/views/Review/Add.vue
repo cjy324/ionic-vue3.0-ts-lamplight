@@ -1,92 +1,41 @@
 <template>
   <ion-page>
-    <ion-custom-header>의뢰 - 요청서 작성</ion-custom-header>
+    <ion-custom-header>후기/평점 작성</ion-custom-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">의뢰 - 요청서 작성</ion-title>
+          <ion-title size="large">후기/평점 작성</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-custom-body class="justify-center">
-        <form v-if="globalState.isLogined" @submit.prevent="checkAndAddOrder">
+        <form v-if="globalState.isLogined" @submit.prevent="checkAndAddReview">
           <div>
             <ion-item>
-              <ion-label position="floating">고인 이름</ion-label>
-              <ion-input v-model="orderAddFormState.deceasedName" type="text" placeholder="고인의 이름을 입력해주세요."></ion-input>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="floating">상주 이름</ion-label>
-              <ion-input v-model="orderAddFormState.bereavedName" type="text" placeholder="상주의 이름을 입력해주세요."></ion-input>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="floating">지역</ion-label>
-              <ion-select v-model="orderAddFormState.region">
-                <ion-select-option value="서울특별시">서울</ion-select-option>
-                <ion-select-option value="대전광역시">대전</ion-select-option>
-                <ion-select-option value="인천광역시">인천</ion-select-option>
-                <ion-select-option value="부산광역시">부산</ion-select-option>
+              <ion-label position="floating">평점</ion-label>
+              <ion-select v-model="reviewAddFormState.point" interface="action-sheet">
+                <ion-select-option value="5">5점</ion-select-option>
+                <ion-select-option value="4">4점</ion-select-option>
+                <ion-select-option value="3">3점</ion-select-option>
+                <ion-select-option value="2">2점</ion-select-option>
+                <ion-select-option value="1">1점</ion-select-option>
               </ion-select>
             </ion-item>
           </div>
+
           <div>
-            <ion-item>
-              <ion-label position="floating">장례식장</ion-label>
-              <ion-input v-model="orderAddFormState.funeralHome" type="text" placeholder="장례식장을 입력해주세요.(미정이면 '미정'입력)"></ion-input>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="floating">예상인원</ion-label>
-              <ion-select v-model="orderAddFormState.head">
-                <ion-select-option value="100">100명</ion-select-option>
-                <ion-select-option value="200">200명</ion-select-option>
-                <ion-select-option value="300">300명</ion-select-option>
-                <ion-select-option value="400">400명</ion-select-option>
-                <ion-select-option value="500">500명</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="floating">종교</ion-label>
-              <ion-select v-model="orderAddFormState.religion">
-                <ion-select-option value="기독교">기독교</ion-select-option>
-                <ion-select-option value="천주교">천주교</ion-select-option>
-                <ion-select-option value="불교">불교</ion-select-option>
-                <ion-select-option value="기타">기타</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="stacked">시작일</ion-label>
-              <ion-input v-model="orderAddFormState.startDate" type="date"></ion-input>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="stacked">종료일</ion-label>
-              <ion-input v-model="orderAddFormState.endDate" type="date"></ion-input>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="floating">추가 요청 사항</ion-label>
-              <ion-textarea v-model="orderAddFormState.body" placeholder="추가 요청 사항을 입력해주세요."></ion-textarea>
+            <ion-item >
+              <ion-label position="floating">후기</ion-label>
+              <ion-textarea class="h-12" v-model="reviewAddFormState.body" placeholder="후기를 입력해주세요."></ion-textarea>
             </ion-item>
           </div>
           <div class="py-2 px-4">
-            <ion-button type="submit" expand="block">작성 완료(의뢰 요청)</ion-button>
+            <ion-button type="submit" expand="block">작성 완료</ion-button>
           </div>
           <div class="px-4">
             <ion-button color="secondary" type="reset" expand="block">초기화</ion-button>
           </div>
           <div class="px-4">
-            <ion-button href="/expert/list" color="secondary" type="button" expand="block">취소</ion-button>
+            <ion-button href="/order/list" color="secondary" type="button" expand="block">취소</ion-button>
           </div>
         </form>
         <div v-else class="py-2 px-4">
@@ -111,7 +60,7 @@ import {
   IonSelect, 
   IonSelectOption, 
   IonLabel, 
-  IonInput,
+  //IonInput,
   IonTextarea, 
   IonItem, 
   IonButton, 
@@ -122,22 +71,15 @@ import { useRoute, useRouter } from 'vue-router';
 import * as util from '@/utils';
 import { reactive } from 'vue';
 
-const useOrderAddFormState = () => {
+const useReviewAddFormState = () => {
   return reactive({
-    deceasedName: '',
-    bereavedName: '',
-    funeralHome:'',
-    region:'',
-    head: '',
-    religion: '',
-    startDate: '',
-    endDate: '',
+    point: '',
     body: '',
   })
 }
 
 export default {
-  name: 'OrderAdd',
+  name: 'ReviewAdd',
 
   components: { 
     IonHeader, 
@@ -147,7 +89,7 @@ export default {
     IonSelect, 
     IonSelectOption, 
     IonLabel, 
-    IonInput,
+    //IonInput,
     IonTextarea,
     IonItem, 
     IonButton, 
@@ -159,7 +101,7 @@ export default {
 
   setup() {
     const globalState = useGlobalState();
-    const orderAddFormState = useOrderAddFormState();
+    const reviewAddFormState = useReviewAddFormState();
     const router = useRouter();
     const route = useRoute();
     const mainService = useMainService();
@@ -169,102 +111,72 @@ export default {
     //   util.showAlertConfirm(msg)
     // }
 
-    function checkAndAddOrder() {
-
-      // 고인 이름 체크
-      const deceasedName = orderAddFormState.deceasedName.trim();
+    function checkAndAddReview() {
       
-      if ( deceasedName.length == 0 ) {
-        alert('고인의 이름을 입력해주세요.');
-        return;
-      }
-      // 상주 이름 체크
-      const bereavedName = orderAddFormState.bereavedName.trim();
+      // 평점 체크
+      const point = parseInt(reviewAddFormState.point);
       
-      if ( bereavedName.length == 0 ) {
-        alert('상주의 이름를 입력해주세요.');
+      if ( point == 0 ) {
+        alert('평점을 입력해 주세요');
         return;
       }
 
-      // 장례식장 체크
-      const funeralHome = orderAddFormState.funeralHome.trim();
-      
-      if ( funeralHome.length == 0 ) {
-        alert('장례식장을 입력해주세요.');
-        return;
-      }
-
-      // 지역 체크
-      const region = orderAddFormState.region.trim();
-      
-      if ( region.length == 0 ) {
-        alert('지역을 입력해주세요.');
-        return;
-      }
-      
-      // 예상 인원 체크
-      const head = parseInt(orderAddFormState.head);
-      
-      if ( head == 0 ) {
-        alert('예상 조문인원을 입력해주세요.');
-        return;
-      }
-
-      // 종교 체크
-      const religion = orderAddFormState.religion.trim();
-
-      if ( religion.length == 0 ) {
-        alert('종교를 입력해주세요.');
-        return;
-      }
-      
-      // 시작일 체크
-      const startDate = orderAddFormState.startDate.trim();
-      
-      if ( startDate.length == 0 ) {
-        alert('장례 시작일을 입력해주세요.');
-        return;
-      }
-
-      // 종료일 체크
-      const endDate = orderAddFormState.endDate.trim();
-      
-      if ( endDate.length == 0 ) {
-        alert('장례 종료일을 입력해주세요.');
-        return;
-      }
-
-      // 추가 요청 사항 체크
-      let body = orderAddFormState.body.trim();
+      // 후기 체크
+      const body = reviewAddFormState.body.trim();
       
       if ( body.length == 0 ) {
-        body = '추가 요청 사항이 없습니다.';
+        alert('후기를 입력해 주세요');
+        return;
       }
 
-      let expertId = '';
+      let relTypeCode = '';
 
-      if ( route.query.expertId != null ) {
-        expertId = util.toIntOrUnd(route.query.expertId)
+      if ( route.query.relTypeCode != null ) {
+        relTypeCode = util.toStringOrNull(route.query.relTypeCode)
       }
 
-      async function addOrder(deceasedName: string, bereavedName: string, funeralHome: string, region: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
-        const axRes = await mainService.order_doAdd(deceasedName, bereavedName, funeralHome, region, head, religion, startDate, endDate, body, expertId, clientId);
+      let relId = 0;
+
+      if ( route.query.relId != null ) {
+        relId = util.toIntOrUnd(route.query.relId)
+      }
+
+      async function ratingAdd(onSuccess: Function){
+        const axRes = await mainService.rating_doAdd(relTypeCode, relId, point, globalState.loginedClient.id)
+
+          if ( axRes.data.fail ) {
+            util.showAlert(axRes.data.msg);
+            return;
+          }
+
+          else{
+            onSuccess();
+          }
+      }
+
+      async function addReview(relTypeCode: string, relId: number, body: string, clientId: number) {
+        const axRes = await mainService.review_doAdd(relTypeCode, relId, body, clientId);
   
+          util.showAlert(axRes.data.msg);
           if ( axRes.data.fail ) {
             return;
           }
-          util.showAlert(axRes.data.msg);
-          const newOrderId = axRes.data.body.id;
+          //const newReviewId = axRes.data.body.id;
 
-          router.replace("detail?id=" + newOrderId);
+          router.replace("/");
       }
 
-      const msg = '해당 내용으로 의뢰하시겠습니까?'
+      const startAddReview = () =>{
+      // 작성 함수로 보내기
+          addReview(relTypeCode, relId, body, globalState.loginedClient.id);
+      }
+
+      const msg = '해당 내용으로 작성하시겠습니까?'
       util.showAlertConfirm(msg).then(confirm => {
         if (confirm == false) {
           return
         } else{
-          addOrder(deceasedName, bereavedName, funeralHome, region, head, religion, startDate, endDate, body, parseInt(expertId), globalState.loginedClient.id);
+          ratingAdd(startAddReview);
         }
       })
 
@@ -273,8 +185,8 @@ export default {
     return {
       globalState,
       //confirmAlert,
-      orderAddFormState,
-      checkAndAddOrder,
+      reviewAddFormState,
+      checkAndAddReview,
       
     }
   }

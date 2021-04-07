@@ -40,18 +40,6 @@
           </div>
           <div>
             <ion-item>
-              <ion-label position="floating">예상인원</ion-label>
-              <ion-select v-model="orderAddFormState.head">
-                <ion-select-option value="100">100명</ion-select-option>
-                <ion-select-option value="200">200명</ion-select-option>
-                <ion-select-option value="300">300명</ion-select-option>
-                <ion-select-option value="400">400명</ion-select-option>
-                <ion-select-option value="500">500명</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
               <ion-label position="floating">종교</ion-label>
               <ion-select v-model="orderAddFormState.religion">
                 <ion-select-option value="기독교">기독교</ion-select-option>
@@ -86,7 +74,7 @@
             <ion-button color="secondary" type="reset" expand="block">초기화</ion-button>
           </div>
           <div class="px-4">
-            <ion-button href="/expert/list" color="secondary" type="button" expand="block">취소</ion-button>
+            <ion-button href="/order/main" color="warning" type="button" expand="block">취소</ion-button>
           </div>
         </form>
         <div v-else class="py-2 px-4">
@@ -128,7 +116,6 @@ const useOrderAddFormState = () => {
     bereavedName: '',
     funeralHome:'',
     region:'',
-    head: '',
     religion: '',
     startDate: '',
     endDate: '',
@@ -202,13 +189,13 @@ export default {
         return;
       }
       
-      // 예상 인원 체크
-      const head = parseInt(orderAddFormState.head);
+      // // 예상 인원 체크
+      // const head = parseInt(orderAddFormState.head);
       
-      if ( head == 0 ) {
-        alert('예상 조문인원을 입력해주세요.');
-        return;
-      }
+      // if ( head == 0 ) {
+      //   alert('예상 조문인원을 입력해주세요.');
+      //   return;
+      // }
 
       // 종교 체크
       const religion = orderAddFormState.religion.trim();
@@ -247,8 +234,8 @@ export default {
         expertId = util.toIntOrUnd(route.query.expertId)
       }
 
-      async function addOrder(deceasedName: string, bereavedName: string, funeralHome: string, region: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
-        const axRes = await mainService.order_doAdd(deceasedName, bereavedName, funeralHome, region, head, religion, startDate, endDate, body, expertId, clientId);
+      async function addOrder(deceasedName: string, bereavedName: string, funeralHome: string, region: string, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number) {
+        const axRes = await mainService.order_doAdd(deceasedName, bereavedName, funeralHome, region, religion, startDate, endDate, body, expertId, clientId);
   
           if ( axRes.data.fail ) {
             return;
@@ -264,7 +251,7 @@ export default {
         if (confirm == false) {
           return
         } else{
-          addOrder(deceasedName, bereavedName, funeralHome, region, head, religion, startDate, endDate, body, parseInt(expertId), globalState.loginedClient.id);
+          addOrder(deceasedName, bereavedName, funeralHome, region, religion, startDate, endDate, body, parseInt(expertId), globalState.loginedClient.id);
         }
       })
 

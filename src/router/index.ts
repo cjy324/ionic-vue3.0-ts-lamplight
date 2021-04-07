@@ -63,8 +63,8 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Expert/List.vue')
       },
       {
-        path: 'detail',
-        component: () => import('@/views/Expert/Detail.vue')
+        path: 'profile',
+        component: () => import('@/views/Expert/Profile.vue')
       },
     ]
   },
@@ -109,14 +109,6 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'add',
         component: () => import('@/views/Review/Add.vue')
-      },
-      {
-        path: 'list',
-        component: () => import('@/views/Review/List.vue')
-      },
-      {
-        path: 'detail',
-        component: () => import('@/views/Review/Detail.vue')
       },
       {
         path: 'modify',

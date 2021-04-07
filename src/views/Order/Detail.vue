@@ -33,11 +33,6 @@
               </ion-item>
 
               <ion-item>
-                <ion-label>예상인원</ion-label>
-                <ion-label slot="end" color="tertiary">{{state.order.head}}</ion-label>
-              </ion-item>
-
-              <ion-item>
                 <ion-label>종교</ion-label>
                 <ion-label slot="end" color="tertiary">{{state.order.religion}}</ion-label>
               </ion-item>

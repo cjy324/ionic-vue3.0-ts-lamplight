@@ -48,20 +48,24 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
       return this.mainApi.expert_list();
     }
 
+    expert_detail(id: number){
+      return this.mainApi.expert_detail(id);
+    }
+
     order_list(memberId: number, memberType: string){
       return this.mainApi.order_list(memberId, memberType);
     }
 
-    order_doAdd(deceasedName: string, bereavedName: string, funeralHome: string, region: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number){
-      return this.mainApi.order_doAdd(deceasedName, bereavedName, funeralHome, region, head, religion, startDate, endDate, body, expertId, clientId);
+    order_doAdd(deceasedName: string, bereavedName: string, funeralHome: string, region: string, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number){
+      return this.mainApi.order_doAdd(deceasedName, bereavedName, funeralHome, region, religion, startDate, endDate, body, expertId, clientId);
     }
 
     order_detail(id: number){
       return this.mainApi.order_detail(id);
     }
 
-    order_doModify(id: number, deceasedName: string, bereavedName: string, funeralHome: string, region: string, head: number, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number){
-      return this.mainApi.order_doModify(id, deceasedName, bereavedName, funeralHome, region, head, religion, startDate, endDate, body, expertId, clientId);
+    order_doModify(id: number, deceasedName: string, bereavedName: string, funeralHome: string, region: string, religion: string, startDate: string, endDate: string, body: string, expertId: number, clientId: number){
+      return this.mainApi.order_doModify(id, deceasedName, bereavedName, funeralHome, region, religion, startDate, endDate, body, expertId, clientId);
     }
 
     order_delete(id: number){
@@ -72,8 +76,32 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
       return this.mainApi.order_changeStepLevel(id, stepLevel)
     }
 
-    review_doDelete(id: number) {
-      return this.mainApi.review_doDelete(id);
+    rating_doAdd(relTypeCode: string, relId: number, point: number, clientId: number){
+      return this.mainApi.rating_doAdd(relTypeCode, relId, point, clientId)
+    }
+
+    rating_getRatingRelClient(relTypeCode: string, relId: number, clientId: number){
+      return this.mainApi.rating_getRatingRelClient(relTypeCode, relId, clientId)
+    }
+
+    rating_doModify(relTypeCode: string, relId: number, point: number, clientId: number){
+      return this.mainApi.rating_doModify(relTypeCode, relId, point, clientId)
+    }
+
+    review_doAdd(relTypeCode: string, relId: number, body: string, clientId: number){
+      return this.mainApi.review_doAdd(relTypeCode, relId, body, clientId)
+    }
+
+    review_detail(id: number){
+      return this.mainApi.review_detail(id)
+    }
+
+    review_doModify(id: number, body: string, clientId: number){
+      return this.mainApi.review_doModify(id, body, clientId)
+    }
+    
+    review_doDelete(relTypeCode: string, relId: number, id: number, clientId: number) {
+      return this.mainApi.review_doDelete(relTypeCode, relId, id, clientId);
     }
 
 

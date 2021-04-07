@@ -156,10 +156,6 @@ export default {
       loadClient(id);
     });
 
-    // function confirmAlert(){
-    //   const msg = '해당 내용으로 수정하시겠습니까?'
-    //   util.showAlertConfirm(msg)
-    // }
 
     function checkAndModify() {
 

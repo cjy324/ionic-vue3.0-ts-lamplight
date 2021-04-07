@@ -11,15 +11,15 @@
           <font-awesome-icon class="text-lg h-7" icon="user" />
           <ion-label>회원</ion-label>
         </ion-tab-button>
+
+        <ion-tab-button tab="Order" :href="tabsState.hrefOrder">
+          <font-awesome-icon class="text-lg h-7" icon="check" />
+          <ion-label>의뢰</ion-label>
+        </ion-tab-button>
           
         <ion-tab-button tab="Expert" :href="tabsState.hrefExpert">
           <font-awesome-icon class="text-lg h-7" icon="list" />
           <ion-label>지도사</ion-label>
-        </ion-tab-button>
-
-        <ion-tab-button tab="Order" :href="tabsState.hrefOrder">
-          <font-awesome-icon class="text-lg h-7" icon="list" />
-          <ion-label>의뢰</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="Setting" :href="tabsState.hrefSetting">
@@ -36,7 +36,7 @@
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonPage } from '@ionic/vue';
 import { useGlobalState } from '@/stores';
 import { reactive } from 'vue';
-import { useRoute } from 'vue-router';
+//import { useRoute } from 'vue-router';
 
 
 export default {

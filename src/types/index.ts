@@ -23,7 +23,6 @@ export interface Entity {
 }
 
 export interface Order extends Entity {
-	head:number;
 	religion:string;
 	startDate:string;
 	endDate:string;
@@ -40,7 +39,6 @@ export interface Order extends Entity {
 }
 
 export interface Funeral extends Entity {
-	head:number;
 	religion:string;
 	startDate:string;
 	endDate:string;

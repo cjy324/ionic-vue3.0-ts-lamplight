@@ -70,9 +70,6 @@
               장례식장: {{order.funeralHome}}
             </ion-col>
             <ion-col size="10">
-              인원: {{order.head}} 명
-            </ion-col>
-            <ion-col size="10">
               종교: {{order.religion}}
             </ion-col>
             <ion-col size="10">
@@ -152,7 +149,6 @@ import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { reactive, computed, onMounted, watch } from 'vue';
 import * as util from '@/utils';
-import { useRoute } from 'vue-router';
 import { Order } from '@/types';
 
 const useSearchState = () => {
@@ -187,7 +183,6 @@ export default  {
     const globalState = useGlobalState();
     const mainService = useMainService();
     const searchState = useSearchState();
-    const route = useRoute();
 
     const state = reactive({
       orders: [] as Order[],
