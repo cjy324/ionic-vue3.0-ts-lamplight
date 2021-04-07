@@ -22,7 +22,7 @@
           <div>
             <ion-item>
               <ion-label position="stacked">프로필 이미지</ion-label>
-              <ion-input v-model="joinFormState.profileImg" type="file"></ion-input>
+              <input ref="profileImgElRef" type="file"/>
             </ion-item>
           </div>
           <div>
@@ -64,7 +64,12 @@
           <div>
             <ion-item>
               <ion-label position="floating">지역</ion-label>
-              <ion-input v-model="joinFormState.region" placeholder="시/도 주소를 입력해주세요."></ion-input>
+              <ion-select v-model="joinFormState.region">
+                <ion-select-option value="서울특별시">서울</ion-select-option>
+                <ion-select-option value="대전광역시">대전</ion-select-option>
+                <ion-select-option value="인천광역시">인천</ion-select-option>
+                <ion-select-option value="부산광역시">부산</ion-select-option>
+              </ion-select>
             </ion-item>
           </div>
           <div class="py-2 px-4">
@@ -92,19 +97,21 @@ import {
   IonContent,
   IonLabel, 
   IonInput, 
-  IonItem, 
+  IonItem,
+  IonSelect,
+  IonSelectOption,
   IonButton, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { useRouter } from 'vue-router';
 import * as util from '@/utils';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 
 
 const useJoinFormState = () => {
   return reactive({
-    profileImg: [] as File[],
+    //profileImg: [] as File[],
     loginId: '',
     loginPw: '',
     loginPwConfirm: '',
@@ -124,6 +131,8 @@ export default {
     IonTitle,
     IonLabel, 
     IonInput, 
+    IonSelect,
+    IonSelectOption,
     IonItem, 
     IonButton, 
     IonContent, 
@@ -137,6 +146,8 @@ export default {
     const joinFormState = useJoinFormState();
     const router = useRouter();
     const mainService = useMainService();
+
+    const profileImgElRef = ref<HTMLInputElement>();
 
     // function confirmAlert(){
     //   const msg = '해당 내용으로 가입하시겠습니까?'
@@ -205,12 +216,12 @@ export default {
         // ? => 만약 profileImgElRef.value?까지가 null이면 여기까지만 실행하겠다라는 의미
         // 즉, !!!profileImgElRef.value?.files의 의미는 해당 파일이 없는지 물어보는 것
         // 없으면 true
-        if(joinFormState.profileImg == null){
-          onSuccess("");  //파일이 없으면 다음 과정 생략하고 onSuccess() 즉시 실행
+        if(profileImgElRef.value?.files == undefined || profileImgElRef.value?.files == null){
+          //onSuccess("");  //파일이 없으면 다음 과정 생략하고 onSuccess() 즉시 실행
           alert("파일 업로드 안됨")
           return;
         }
-        const axRes = await mainService.common_genFile_doUpload(joinFormState.profileImg[0])
+        const axRes = await mainService.common_genFile_doUpload(profileImgElRef.value?.files[0])
 
         if ( axRes.data.fail ) {
           util.showAlert(axRes.data.msg);
@@ -255,6 +266,7 @@ export default {
       //confirmAlert,
       joinFormState,
       checkAndJoin,
+      profileImgElRef,
       
     }
   }

@@ -78,29 +78,29 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
 
 
     // //이미지를 리사이징해주는 유틸 적용
-    // //사용하려면 작동을 시켜야 함..일단은 적용 보류(21.04.01)
-    // /* eslint-disable @typescript-eslint/no-inferrable-types */
-    // getClientThumbImgUrl(id: number, width: number = 40, height: number = 40) {
+    //사용하려면 작동을 시켜야 함..일단은 적용 보류(21.04.01)
+    /* eslint-disable @typescript-eslint/no-inferrable-types */
+    getClientThumbImgUrl(id: number, width: number = 40, height: number = 40) {
 
-    //   const originUrl = 'http://localhost:8021/common/genFile/file/client/' + id + '/common/attachment/1';
-    //   const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=U.U&width=${width}&height=${height}&url=` + originUrl;
-    //   return url;
-    // }
+      const originUrl = 'http://localhost:8090/common/genFile/file/client/' + id + '/common/attachment/1';
+      const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=U.U&width=${width}&height=${height}&url=` + originUrl;
+      return url;
+    }
 
     // /* eslint-disable @typescript-eslint/no-inferrable-types */
     // getArticleThumbImgUrl(id: number, width: number = 100, height: number = 100) {
-    //   const originUrl = 'http://localhost:8021/common/genFile/file/article/' + id + '/common/attachment/1';
+    //   const originUrl = 'http://localhost:8090/common/genFile/file/article/' + id + '/common/attachment/1';
     //   const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=U.U&width=${width}&height=${height}&url=` + originUrl;
     //   return url;
     //  }
   
-    getClientThumbImgUrl(id: number) {
-      return "https://i.pravatar.cc/45?img=13&k=" + id
-    }
+    // getClientThumbImgUrl(id: number) {
+    //   return "https://i.pravatar.cc/45?img=13&k=" + id
+    // }
 
-    getArticleThumbImgUrl(id: number) {
-      return "https://i.pravatar.cc/45?img=13&k=" + id
-    }
+    // getArticleThumbImgUrl(id: number) {
+    //   return "https://i.pravatar.cc/45?img=13&k=" + id
+    // }
   }
   
   export const mainServiceSymbol = Symbol('globalState');
