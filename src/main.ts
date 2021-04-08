@@ -28,10 +28,10 @@ import './index.css';
 /* FontAwesome 불러오기 */
 import { library } from '@fortawesome/fontawesome-svg-core'
 //원하는 아이콘이 있을때마다 불러오고 library에 추가해야 함...
-import { faHome, faUser, faList, faCheck, faCog, faLemon } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faUser, faList, faCheck, faCog, faLemon, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faHome, faUser, faList, faCheck, faCog, faLemon);
+library.add(faHome, faUser, faList, faCheck, faCog, faLemon, faPlus);
 
 // 전역상태 불러오기
 import { createGlobalState, globalStateSymbol } from "@/stores"

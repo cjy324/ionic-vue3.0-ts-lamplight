@@ -1,38 +1,51 @@
 <template>
-  <ion-page>
+  <ion-app>
     <ion-tabs>
-      <ion-tab-bar slot="bottom">
+      <ion-tab-bar slot="bottom" class="">
+        <!--홈-->
         <ion-tab-button tab="Home" :href="tabsState.hrefHome">
           <font-awesome-icon class="text-lg h-7" icon="home" />
         </ion-tab-button>
-        
+
+        <!--회원-->
         <ion-tab-button tab="Member" :href="tabsState.hrefMember">
           <font-awesome-icon class="text-lg h-7" icon="user" />
         </ion-tab-button>
-
-        <ion-tab-button tab="Order" :href="tabsState.hrefOrder">
-          <font-awesome-icon class="text-lg h-7" icon="check" />
+        
+        <!--none-->
+        <ion-tab-button disabled="true">
         </ion-tab-button>
-          
+
+        <!-- 의뢰 -->
+        <ion-fab vertical="center" horizontal="center" >
+          <ion-fab-button tab="Order" :href="tabsState.hrefOrder">
+            <font-awesome-icon class="text-lg h-7" icon="check" />
+          </ion-fab-button>
+        </ion-fab>
+        <!--리스트-->  
         <ion-tab-button tab="Expert" :href="tabsState.hrefExpert">
           <font-awesome-icon class="text-lg h-7" icon="list" />
         </ion-tab-button>
 
+        <!--설정-->
         <ion-tab-button tab="Setting" :href="tabsState.hrefSetting">
           <font-awesome-icon class="text-lg h-7" icon="cog" />
         </ion-tab-button>
         
       </ion-tab-bar>
     </ion-tabs>
-  </ion-page>
+  </ion-app>
 </template>
 
 <script lang="ts">
 import { 
   IonTabBar, 
-  IonTabButton, 
+  IonTabButton,
+  IonFabButton,
+  IonFab,
   IonTabs, 
-  IonPage 
+  //IonPage,
+  IonApp, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores';
 import { reactive } from 'vue';
@@ -44,8 +57,11 @@ export default {
   components: { 
     IonTabs, 
     IonTabBar, 
-    IonTabButton, 
-    IonPage 
+    IonTabButton,
+    IonFabButton,
+    IonFab,
+    //IonPage,
+    IonApp,
   },
   setup() {
     const globalState = useGlobalState();

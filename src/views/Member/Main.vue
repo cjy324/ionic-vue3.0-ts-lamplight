@@ -1,15 +1,29 @@
 <template>
-  <ion-page>
+  <ion-page >
     <ion-custom-header></ion-custom-header>
     <ion-content :fullscreen="true">
       <ion-custom-body class="justify-center">
-        <div>
-          <div class="px-4">
-            <ion-button href="/client/login" color="primary" type="button" expand="block">일반회원 로그인</ion-button>
+        <div class="logo-box text-center flex justify-center items-center mb-3">
+            <div class="w-32 text-2xl border-b">
+              회원 유형
+            </div>
+        </div>
+        <div class="mb-2">
+          <div class="px-4 mb-2">
+            <ion-button size="" color="tertiary" href="/client/login" type="button" expand="block">의뢰인 Log-in</ion-button>
           </div>
           <div class="px-4">
-            <ion-button href="/expert/login" color="secondary" type="button" expand="block">지도사회원 로그인</ion-button>
+            <ion-button size="" color="secondary" href="/expert/login" type="button" expand="block">지도사 Log-in</ion-button>
           </div>
+        </div>
+        <div class="py-2 px-6 text-sm">
+            아직 Lamplight의 회원이 아니시라면?
+            <div class="mt-2 ml-2">
+              <span class="font-extrabold">'의뢰인'</span>으로 <ion-custom-link to="/client/join">Sign-in</ion-custom-link>
+            </div>
+            <div  class="ml-2">
+              <span class="font-extrabold">'지도사'</span>로 <ion-custom-link to="/expert/join">Sign-in</ion-custom-link>
+            </div>
         </div>
       </ion-custom-body>
     </ion-content>
@@ -20,7 +34,7 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader } from '@/components/';
+import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
   IonPage,  
   IonContent,
@@ -36,7 +50,8 @@ export default {
     IonContent, 
     IonPage, 
     IonCustomBody, 
-    IonCustomHeader 
+    IonCustomHeader,
+    IonCustomLink
   },
 
   setup() {
