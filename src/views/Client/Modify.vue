@@ -15,7 +15,7 @@
             </ion-item-divider>
             <ion-item>
               <ion-label position="stacked">프로필 이미지</ion-label>
-              <input ref="profileImgElRef" type="file">
+              <input class="mt-3" ref="profileImgElRef" type="file">
             </ion-item>
           </div>
           <div>

@@ -55,6 +55,14 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Client/Login.vue')
       },
       {
+        path: 'findLoginId',
+        component: () => import('@/views/Client/FindLoginId.vue')
+      },
+      {
+        path: 'findLoginPw',
+        component: () => import('@/views/Client/FindLoginPw.vue')
+      },
+      {
         path: 'join',
         component: () => import('@/views/Client/Join.vue')
       },

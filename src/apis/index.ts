@@ -216,6 +216,20 @@ export interface MainApi__client_authKey__ResponseBody extends Base__ResponseBod
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 /* eslint-disable @typescript-eslint/camelcase */
+export interface MainApi__client_findLoginId__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    loginId: string;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+export interface MainApi__client_findLoginPw__ResponseBody extends Base__ResponseBodyType1 {
+  body: {};
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
 // /usr/member/authKey 의 응답 타입
 export interface MainApi__expert_authKey__ResponseBody extends Base__ResponseBodyType1 {
   body: {
@@ -602,6 +616,24 @@ export class MainApi extends HttpClient {
       `/usr/client/authKey`, {
         loginId,
         loginPw,
+      }
+    );
+  }
+
+  public client_findLoginId(name: string, email: string) {
+    return this.postByForm<MainApi__client_findLoginId__ResponseBody>(
+      `/usr/client/doFindLoginId`, {
+        name,
+        email,
+      }
+    );
+  }
+
+  public client_findLoginPw(loginId: string, email: string) {
+    return this.postByForm<MainApi__client_findLoginPw__ResponseBody>(
+      `/usr/client/doFindLoginPw`, {
+        loginId,
+        email,
       }
     );
   }

@@ -33,6 +33,14 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
       return this.mainApi.client_authKey(loginId, loginPw);
     }
 
+    client_findLoginId(name: string, email: string){
+      return this.mainApi.client_findLoginId(name, email)
+    }
+
+    client_findLoginPw(loginId: string, email: string){
+      return this.mainApi.client_findLoginPw(loginId, email)
+    }
+
     /* eslint-disable @typescript-eslint/camelcase */
     client_detail(id: number) {
       return this.mainApi.client_detail(id);
