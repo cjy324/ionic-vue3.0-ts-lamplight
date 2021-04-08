@@ -1,5 +1,5 @@
 <template>
-<ion-custom-header>의뢰 - 리스트</ion-custom-header>
+<ion-custom-header>My의뢰 - 리스트</ion-custom-header>
 <ion-content >
   <ion-list class="mb-12">
     <ion-item>
@@ -14,9 +14,9 @@
     </ion-item>
     <ion-item>
     <ion-select v-model="searchState.searchKeywordType">
-      <ion-select-option value="deceasedName">고인명</ion-select-option>
-      <ion-select-option value="bereavedName">상주명</ion-select-option>
-      <ion-select-option value="extra__clientName">의뢰인명</ion-select-option>
+      <ion-select-option value="deceasedName">고인이름</ion-select-option>
+      <ion-select-option value="bereavedName">상주이름</ion-select-option>
+      <ion-select-option value="extra__clientName">의뢰인이름</ion-select-option>
       <ion-select-option value="region">지역</ion-select-option>
       <ion-select-option value="body">내용</ion-select-option>
       <ion-select-option value="funeralHome">장례식장</ion-select-option>
@@ -85,6 +85,11 @@
         <ion-item-divider class="mt-2">
           <ion-button color="" slot="end" :href="'/order/detail?id=' + order.id">
             상세보기
+          </ion-button>
+        </ion-item-divider>
+        <ion-item-divider class="mt-2">
+          <ion-button v-if="globalState.loginedClient.id == order.clientId" color="" slot="end" :href="'/order/detail?id=' + order.id">
+            연락처: {{order.extra__expertCellphoneNo}}
           </ion-button>
         </ion-item-divider>
         <ion-item-divider class="mt-2">

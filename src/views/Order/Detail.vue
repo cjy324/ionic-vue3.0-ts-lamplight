@@ -27,6 +27,22 @@
                 <ion-label slot="end" color="tertiary">{{state.order.bereavedName}}</ion-label>
               </ion-item>
 
+              <ion-item v-if="globalState.loginedClient.id == state.order.clientId">
+                <ion-label>담당지도사</ion-label>
+                <ion-label slot="end" color="tertiary">{{state.order.extra__expertName}}</ion-label>
+                <ion-button v-if="globalState.loginedClient.id == state.order.clientId" color="" slot="end">
+                  연락처: {{state.order.extra__expertCellphoneNo}}
+                </ion-button>
+              </ion-item>
+
+              <!-- <ion-item v-if="globalState.loginedExpert.id == state.order.expertId">
+                <ion-label>의뢰인</ion-label>
+                <ion-label slot="end" color="tertiary">{{state.order.extra__clientName}}</ion-label>
+                <ion-button v-if="globalState.loginedExpert.id == state.order.expertId" color="" slot="end">
+                  연락처: {{state.order.extra__expertCellphoneNo}}
+                </ion-button>
+              </ion-item> -->
+
               <ion-item>
                 <ion-label>장례식장</ion-label>
                 <ion-label slot="end" color="tertiary">{{state.order.funeralHome}}</ion-label>
@@ -50,9 +66,9 @@
               <ion-item>
                 <ion-label>추가 요청 사항</ion-label>
               </ion-item>
-              <ion-item>
+              <ion-item-divider>
                 <ion-text slot="start" color="">{{state.order.body}}</ion-text>
-              </ion-item>
+              </ion-item-divider>
             
             </ion-list>
             <div v-else class="py-2 px-4">
@@ -128,7 +144,7 @@ export default  {
     const route = useRoute();
     const router = useRouter();
     
-    let id = '';
+    let id = 0;
 
     if ( route.query.id != null ) {
       id = util.toIntOrUnd(route.query.id)
@@ -143,7 +159,7 @@ export default  {
       state.order = axRes.data.body.order;
     }
     onMounted(() => {
-      loadOrder(parseInt(id));
+      loadOrder(id);
     });
 
     async function doDeleteOrder(id: number) {

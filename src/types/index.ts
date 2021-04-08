@@ -36,6 +36,8 @@ export interface Order extends Entity {
   stepLevel:number;
   extra__clientName:string;
   extra__expertName:string;
+  extra__clientCellphoneNo:string;
+	extra__expertCellphoneNo:string;
 }
 
 export interface Funeral extends Entity {
