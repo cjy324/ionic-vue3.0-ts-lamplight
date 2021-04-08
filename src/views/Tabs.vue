@@ -4,27 +4,22 @@
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="Home" :href="tabsState.hrefHome">
           <font-awesome-icon class="text-lg h-7" icon="home" />
-          <ion-label>홈</ion-label>
         </ion-tab-button>
         
-        <ion-tab-button tab="Client" :href="tabsState.hrefClient">
+        <ion-tab-button tab="Member" :href="tabsState.hrefMember">
           <font-awesome-icon class="text-lg h-7" icon="user" />
-          <ion-label>회원</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="Order" :href="tabsState.hrefOrder">
           <font-awesome-icon class="text-lg h-7" icon="check" />
-          <ion-label>의뢰</ion-label>
         </ion-tab-button>
           
         <ion-tab-button tab="Expert" :href="tabsState.hrefExpert">
           <font-awesome-icon class="text-lg h-7" icon="list" />
-          <ion-label>지도사</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="Setting" :href="tabsState.hrefSetting">
           <font-awesome-icon class="text-lg h-7" icon="cog" />
-          <ion-label>설정</ion-label>
         </ion-tab-button>
         
       </ion-tab-bar>
@@ -33,7 +28,12 @@
 </template>
 
 <script lang="ts">
-import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonPage } from '@ionic/vue';
+import { 
+  IonTabBar, 
+  IonTabButton, 
+  IonTabs, 
+  IonPage 
+} from '@ionic/vue';
 import { useGlobalState } from '@/stores';
 import { reactive } from 'vue';
 //import { useRoute } from 'vue-router';
@@ -41,13 +41,18 @@ import { reactive } from 'vue';
 
 export default {
   name: 'Tabs',
-  components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonPage },
+  components: { 
+    IonTabs, 
+    IonTabBar, 
+    IonTabButton, 
+    IonPage 
+  },
   setup() {
     const globalState = useGlobalState();
 
     const tabsState = reactive({
       'hrefHome':'/Home',
-      'hrefClient':'/Client',
+      'hrefMember':'/Member',
       'hrefExpert':'/Expert',
       'hrefOrder':'/Order',
       'hrefSetting':'/Setting',

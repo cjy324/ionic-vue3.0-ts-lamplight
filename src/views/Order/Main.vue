@@ -40,7 +40,7 @@ import {
 import { useGlobalState } from '@/stores'
 
 export default {
-  name: 'OrderAdd',
+  name: 'OrderMain',
 
   components: { 
     IonHeader, 

@@ -1,6 +1,8 @@
 <template>
   <ion-page>
-    <ion-custom-header>회원 - My Page</ion-custom-header>
+    <ion-custom-header>
+      <ion-label>회원 - My Page</ion-label>
+    </ion-custom-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>

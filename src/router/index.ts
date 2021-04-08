@@ -19,8 +19,26 @@ const routes: Array<RouteRecordRaw> = [
         redirect: '/home/main'
       },
       {
+        path: 'test',
+        component: () => import('@/views/Home/Test.vue')
+      },
+      {
         path: 'main',
         component: () => import('@/views/Home/Main.vue')
+      },
+    ]
+  },
+  {
+    path: '/member/',
+    component: Tabs,
+    children: [
+      { 
+        path: '', 
+        redirect: () => globalState.isLogined ? '/' + globalState.memberType + '/myPage?id=' + globalState.memberId : '/member/main'
+      },
+      {
+        path: 'main',
+        component: () => import('@/views/Member/Main.vue')
       },
     ]
   },
@@ -65,6 +83,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'profile',
         component: () => import('@/views/Expert/Profile.vue')
+      },
+      {
+        path: 'login',
+        component: () => import('@/views/Expert/Login.vue')
       },
     ]
   },

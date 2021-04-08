@@ -1,23 +1,25 @@
 <template>
   <ion-header>
     <ion-toolbar>
-      <div class="pr-5" slot="end">
-        <div v-if="globalState.isLogined">
-          {{globalState.loginedClient.name}}
-        </div>
-        <router-link v-if="globalState.isLogined" to="/client/myPage" class="cursor-pointer">
+      <ion-buttons> 
+        <ion-menu-button auto-hide="false"></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="primary" v-if="globalState.isLogined">
+        <router-link to="/client/myPage" class="mr-2">
           <img class="rounded-full" :src="mainService.getClientThumbImgUrlForHeader(globalState.loginedClient.id)" alt="">
         </router-link>
-        <ion-item>
-          <ion-button v-if="globalState.isLogined" @click="logout">로그아웃</ion-button>
-        </ion-item>
-      </div>
-
-          
-
-      <ion-title>
-        <slot></slot>
-      </ion-title>
+        <ion-button @click="logout" class="mr-2 text-sm">
+          로그아웃
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="primary" v-else>
+        <router-link to="/client/login" class="mr-2 text-sm">
+          로그인
+        </router-link>
+        <router-link to="/client/join" class="mr-2 text-sm">
+          회원가입
+        </router-link>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 </template>
@@ -29,8 +31,10 @@ import { useRouter } from 'vue-router'
 import { 
   IonHeader, 
   IonToolbar, 
-  IonTitle,
-  IonItem,
+  //IonTitle,
+  //IonItem,
+  IonMenuButton,
+  IonButtons,
   IonButton,
 } from '@ionic/vue';
 import * as util from '@/utils';
@@ -41,8 +45,10 @@ export default {
   components: { 
     IonHeader, 
     IonToolbar, 
-    IonTitle,
-    IonItem,
+    //IonTitle,
+    //IonItem,
+    IonMenuButton,
+    IonButtons,
     IonButton,
   },
 

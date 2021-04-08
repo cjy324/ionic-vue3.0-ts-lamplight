@@ -1,28 +1,25 @@
 <template>
   <ion-page>
-    <ion-custom-header>회원 - 가입</ion-custom-header>
+    <ion-custom-header></ion-custom-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">회원 - 가입</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-custom-body class="justify-center">
+      <ion-custom-body class="justify-center mt-6">
         <div class="logo-box text-center">
           <span>
-            <span class="text-3xl">
-              <font-awesome-icon icon="lemon" />
+            <div class="logo-box text-center flex justify-center items-center">
+            <div class="w-12">
+              <img src="@/images/logo.png">
+            </div>
+            <span class="ml-2 font-bold text-3xl">
+              Lamplight
             </span>
-            <span class="font-bold text-3xl">
-              DESIGN LEMON
-            </span>
+          </div>
           </span>
         </div>
         <form @submit.prevent="checkAndJoin">
           <div>
             <ion-item>
               <ion-label position="stacked">프로필 이미지</ion-label>
-              <input ref="profileImgElRef" type="file">
+              <input class="mt-3" ref="profileImgElRef" type="file">
             </ion-item>
           </div>
           <div>
@@ -72,8 +69,8 @@
               </ion-select>
             </ion-item>
           </div>
-          <div class="py-2 px-4">
-            <ion-button type="submit" expand="block">가입</ion-button>
+          <div class="py-1 px-4">
+            <ion-button color="primary" type="submit" expand="block">가입</ion-button>
           </div>
           <div class="px-4">
             <ion-button color="secondary" type="reset" expand="block">초기화</ion-button>
@@ -91,9 +88,9 @@
 import { IonCustomBody, IonCustomHeader } from '@/components/';
 import { 
   IonPage, 
-  IonHeader, 
-  IonToolbar, 
-  IonTitle, 
+  //IonHeader, 
+  //IonToolbar, 
+  //IonTitle, 
   IonContent,
   IonLabel, 
   IonInput, 
@@ -126,9 +123,9 @@ export default {
   name: 'Join',
 
   components: { 
-    IonHeader, 
-    IonToolbar, 
-    IonTitle,
+    //IonHeader, 
+  //IonToolbar, 
+  //IonTitle, 
     IonLabel, 
     IonInput, 
     IonSelect,

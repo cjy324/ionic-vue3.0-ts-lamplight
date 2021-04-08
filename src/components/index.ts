@@ -11,5 +11,5 @@ import IonCustomLink from './IonCustomLink.vue';
 export {
   IonCustomHeader,
   IonCustomBody,
-  IonCustomLink
+  IonCustomLink,
 }; 
