@@ -31,6 +31,7 @@ import {
   IonToolbar, 
   IonTitle,
   IonItem,
+  IonButton,
 } from '@ionic/vue';
 import * as util from '@/utils';
 
@@ -42,6 +43,7 @@ export default {
     IonToolbar, 
     IonTitle,
     IonItem,
+    IonButton,
   },
 
   setup() {

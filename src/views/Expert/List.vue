@@ -12,9 +12,7 @@
     <ion-list-header>지도사</ion-list-header>
     <template v-bind:key="expert.id" v-for="expert in returnFilteredExperts">
     <ion-item>
-      <ion-avatar class="w-24 mb-14" slot="start">
-        <img slot="end" class="h-32 rounded-3xl" :src="mainService.getExpertThumbImgUrl(expert.id)">
-      </ion-avatar>
+        <img slot="start" class="h-32 rounded-3xl" :src="mainService.getExpertThumbImgUrl(expert.id)">
       <ion-label>
         <ion-grid>
           <ion-row>
@@ -110,7 +108,7 @@ import {
   IonSelectOption, 
   IonSearchbar, 
   IonLabel, 
-  IonAvatar, 
+ // IonAvatar, 
   IonListHeader, 
   IonList, 
   IonItem, 
@@ -144,7 +142,7 @@ export default  {
     IonSearchbar, 
     IonCustomHeader, 
     IonLabel, 
-    IonAvatar, 
+ //   IonAvatar, 
     IonListHeader, 
     IonList, 
     IonItem, 
