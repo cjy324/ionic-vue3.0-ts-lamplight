@@ -8,16 +8,16 @@
         <router-link to="/client/myPage" class="mr-2">
           <img class="rounded-full" :src="mainService.getClientThumbImgUrlForHeader(globalState.loginedClient.id)" alt="">
         </router-link>
-        <ion-button @click="logout" class="mr-2 text-sm">
-          로그아웃
+        <ion-button @click="logout" class="mr-2 font-bold text-md text-gray-600">
+          Log-Out
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="primary" v-else>
-        <router-link to="/client/login" class="mr-2 text-sm">
-          로그인
+        <router-link to="/client/login" class="mr-3 font-bold text-md text-blue-600">
+          Log-In
         </router-link>
-        <router-link to="/client/join" class="mr-2 text-sm">
-          회원가입
+        <router-link to="/client/join" class="mr-2 font-bold text-md text-gray-600">
+          Sign-In
         </router-link>
       </ion-buttons>
     </ion-toolbar>

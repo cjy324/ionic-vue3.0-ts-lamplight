@@ -9,7 +9,7 @@
 
         <!--회원-->
         <ion-tab-button tab="Member" :href="tabsState.hrefMember">
-          <font-awesome-icon class="text-lg h-7" icon="user" />
+          <font-awesome-icon class="text-lg h-7" icon="user-circle" />
         </ion-tab-button>
         
         <!--none-->
@@ -19,12 +19,12 @@
         <!-- 의뢰 -->
         <ion-fab vertical="center" horizontal="center" >
           <ion-fab-button tab="Order" :href="tabsState.hrefOrder">
-            <font-awesome-icon class="text-lg h-7" icon="check" />
+            <font-awesome-icon class="text-lg h-7" icon="clipboard-check" />
           </ion-fab-button>
         </ion-fab>
         <!--리스트-->  
         <ion-tab-button tab="Expert" :href="tabsState.hrefExpert">
-          <font-awesome-icon class="text-lg h-7" icon="list" />
+          <font-awesome-icon class="text-lg h-7" icon="users" />
         </ion-tab-button>
 
         <!--설정-->

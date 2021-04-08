@@ -1,23 +1,29 @@
 <template>
   <ion-page>
-    <ion-custom-header>의뢰</ion-custom-header>
+    <ion-custom-header></ion-custom-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">의뢰</ion-title>
-        </ion-toolbar>
-      </ion-header>
       <ion-custom-body class="justify-center">
-        <div v-if="globalState.isLogined">
-          <div class="px-4">
-            <ion-button href="/order/add" color="primary" type="button" expand="block">새 의뢰 요청</ion-button>
-          </div>
-          <div class="px-4">
-            <ion-button href="/order/list" color="secondary" type="button" expand="block">내 의뢰 현황 보기</ion-button>
+        <div class="logo-box text-center flex justify-center items-center mb-3">
+          <div class="w-32 text-2xl font-bold border-b">
+            ORDER
           </div>
         </div>
-        <div v-else class="py-2 px-4">
-          로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
+        <div v-if="globalState.isLogined">
+          <div class="px-4">
+            <ion-button class="btn-primary" href="/order/add" color="" type="button" expand="block">
+              <font-awesome-icon class="mr-2" icon="edit"></font-awesome-icon>
+              새 의뢰 요청
+            </ion-button>
+          </div>
+          <div class="px-4">
+            <ion-button class="btn-secondary" href="/order/list" color="" type="button" expand="block">
+              <font-awesome-icon class="mr-2" icon="clipboard-list"></font-awesome-icon>
+              내 의뢰 현황 보기
+            </ion-button>
+          </div>
+        </div>
+        <div v-else class="py-2 px-4 w-full text-center">
+          로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
         </div>
       </ion-custom-body>
     </ion-content>
@@ -25,6 +31,12 @@
 </template>
 
 <style>
+.btn-primary{
+  --background:var(--ion-color-tertiary-shade)
+}
+.btn-secondary{
+  --background:var(--ion-color-secondary-shade)
+}
 </style>
 
 <script lang="ts">
@@ -43,10 +55,10 @@ export default {
   name: 'OrderMain',
 
   components: { 
-    IonHeader, 
-    IonToolbar,
+    //IonHeader, 
+    //IonToolbar,
     IonCustomLink, 
-    IonTitle,
+    //IonTitle,
     IonButton, 
     IonContent, 
     IonPage, 

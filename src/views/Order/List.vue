@@ -1,33 +1,34 @@
 <template>
-<ion-custom-header>My의뢰 - 리스트</ion-custom-header>
-<ion-content >
-  <ion-list class="mb-12">
-    <ion-item>
-    <ion-select v-model="searchState.selectStepLevel">
-      <ion-select-option value="0">진행단계 전체</ion-select-option>
-      <ion-select-option value="1">요청서 검토중</ion-select-option>
-      <ion-select-option value="2">장례준비중</ion-select-option>
-      <ion-select-option value="3">장례진행중</ion-select-option>
-      <ion-select-option value="4">장례종료(확인대기중)</ion-select-option>
-      <ion-select-option value="5">장례종료(최종종료)</ion-select-option>
-    </ion-select>
-    </ion-item>
-    <ion-item>
-    <ion-select v-model="searchState.searchKeywordType">
-      <ion-select-option value="deceasedName">고인이름</ion-select-option>
-      <ion-select-option value="bereavedName">상주이름</ion-select-option>
-      <ion-select-option value="extra__clientName">의뢰인이름</ion-select-option>
-      <ion-select-option value="region">지역</ion-select-option>
-      <ion-select-option value="body">내용</ion-select-option>
-      <ion-select-option value="funeralHome">장례식장</ion-select-option>
-    </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-searchbar show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
-    </ion-item>
-    <ion-list-header>MyOrderList</ion-list-header>
-    <template v-bind:key="order.id" v-for="order in returnFilteredOrders">
-    <ion-item>
+<ion-custom-header></ion-custom-header>
+<ion-content :fullscreen="true">
+  <ion-custom-body class="justify-center">
+    <ion-list v-if="state.orders.length !== 0" class="mb-12">
+      <ion-item>
+        <ion-select v-model="searchState.selectStepLevel">
+          <ion-select-option value="0">진행단계 전체</ion-select-option>
+          <ion-select-option value="1">요청서 검토중</ion-select-option>
+          <ion-select-option value="2">장례준비중</ion-select-option>
+          <ion-select-option value="3">장례진행중</ion-select-option>
+          <ion-select-option value="4">장례종료(확인대기중)</ion-select-option>
+          <ion-select-option value="5">장례종료(최종종료)</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-select v-model="searchState.searchKeywordType">
+          <ion-select-option value="deceasedName">고인 이름</ion-select-option>
+          <ion-select-option value="bereavedName">상주 이름</ion-select-option>
+          <ion-select-option value="extra__clientName">의뢰인 이름</ion-select-option>
+          <ion-select-option value="region">지역</ion-select-option>
+          <ion-select-option value="body">내용</ion-select-option>
+          <ion-select-option value="funeralHome">장례식장</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-searchbar show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
+      </ion-item>
+      <ion-list-header>My Order List</ion-list-header>
+      <template v-bind:key="order.id" v-for="order in returnFilteredOrders">
+      <ion-item>
       <!--진행단계-->
         <div v-if="order.stepLevel==1" class="btn-success">
           진행단계: {{returnToString(order.stepLevel)}}
@@ -44,97 +45,111 @@
         <div v-if="order.stepLevel==5" class="btn-primary">
           진행단계: {{returnToString(order.stepLevel)}}
         </div>
-      <ion-label>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="12" class="bg-gray-300 border rounded-md">
-              고인명: {{order.deceasedName}}
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="4">
-              상주명: {{order.bereavedName}}
-            </ion-col>
-            <ion-col size="10">
-              의뢰인: {{order.extra__clientName}}
-            </ion-col>
-            <ion-col size="10">
-              담당지도사: {{order.extra__expertName}}
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="10">
-              지역: {{order.region}}
-            </ion-col>
-            <ion-col size="10">
-              장례식장: {{order.funeralHome}}
-            </ion-col>
-            <ion-col size="10">
-              종교: {{order.religion}}
-            </ion-col>
-            <ion-col size="10">
-              장례시작일: {{order.startDate}}
-            </ion-col>
-            <ion-col size="10">
-              장례종료일: {{order.endDate}}
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-label>
-      <div class="flex-col">
-        <ion-item-divider class="mt-2">
-          <ion-button color="" slot="end" :href="'/order/detail?id=' + order.id">
-            상세보기
-          </ion-button>
-        </ion-item-divider>
-        <ion-item-divider class="mt-2">
-          <ion-button v-if="globalState.loginedClient.id == order.clientId" color="" slot="end" :href="'/order/detail?id=' + order.id">
-            연락처: {{order.extra__expertCellphoneNo}}
-          </ion-button>
-        </ion-item-divider>
-        <ion-item-divider class="mt-2">
-          <ion-button v-if="globalState.loginedClient.id == order.clientId" color="success" slot="end" :href="'/review/add?relTypeCode=expert&relId=' + order.expertId">
-            후기/평점 작성
-          </ion-button>
-        </ion-item-divider>
+        <ion-label>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" class="bg-gray-300 border rounded-md">
+                고인명: {{order.deceasedName}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="4">
+                상주명: {{order.bereavedName}}
+              </ion-col>
+              <ion-col size="10">
+                의뢰인: {{order.extra__clientName}}
+              </ion-col>
+              <ion-col size="10">
+                담당지도사: {{order.extra__expertName}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="10">
+                지역: {{order.region}}
+              </ion-col>
+              <ion-col size="10">
+                장례식장: {{order.funeralHome}}
+              </ion-col>
+              <ion-col size="10">
+                종교: {{order.religion}}
+              </ion-col>
+              <ion-col size="10">
+                장례시작일: {{order.startDate}}
+              </ion-col>
+              <ion-col size="10">
+                장례종료일: {{order.endDate}}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-label>
+        <div class="flex-col">
+          <ion-item-divider class="mt-2">
+            <ion-button color="" slot="end" :href="'/order/detail?id=' + order.id">
+              상세보기
+            </ion-button>
+          </ion-item-divider>
+          <ion-item-divider class="mt-2">
+            <ion-button v-if="globalState.loginedClient.id == order.clientId" color="" slot="end" :href="'/order/detail?id=' + order.id">
+              연락처: {{order.extra__expertCellphoneNo}}
+            </ion-button>
+          </ion-item-divider>
+          <ion-item-divider class="mt-2">
+            <ion-button v-if="globalState.loginedClient.id == order.clientId" color="success" slot="end" :href="'/review/add?relTypeCode=expert&relId=' + order.expertId">
+              후기/평점 작성
+            </ion-button>
+          </ion-item-divider>
 
-        <ion-item-divider class="mt-2" v-if="globalState.loginedClient.id !== order.clientId">
-          <ion-button v-if="order.stepLevel==1" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
-            의뢰수락(장례준비)
-          </ion-button>
-          <ion-button v-if="order.stepLevel==2" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
-            장례진행
-          </ion-button>
-          <ion-button v-if="order.stepLevel==3" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
-            장례종료(확인요청)
-          </ion-button>
-        </ion-item-divider>
+          <ion-item-divider class="mt-2" v-if="globalState.loginedClient.id !== order.clientId">
+            <ion-button v-if="order.stepLevel==1" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
+              의뢰수락(장례준비)
+            </ion-button>
+            <ion-button v-if="order.stepLevel==2" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
+              장례진행
+            </ion-button>
+            <ion-button v-if="order.stepLevel==3" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
+              장례종료(확인요청)
+            </ion-button>
+          </ion-item-divider>
 
-        <ion-item-divider class="mt-2" v-if="globalState.loginedClient.id == order.clientId">
-          <ion-button v-if="order.stepLevel==2" color="success" slot="end">
-            장례준비중
-          </ion-button>
-          <ion-button v-if="order.stepLevel==3" color="success" slot="end">
-            장례진행중
-          </ion-button>
-          <ion-button v-if="order.stepLevel==4" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
-            장례종료(확인)
-          </ion-button>
-        </ion-item-divider>
+          <ion-item-divider class="mt-2" v-if="globalState.loginedClient.id == order.clientId">
+            <ion-button v-if="order.stepLevel==2" color="success" slot="end">
+              장례준비중
+            </ion-button>
+            <ion-button v-if="order.stepLevel==3" color="success" slot="end">
+              장례진행중
+            </ion-button>
+            <ion-button v-if="order.stepLevel==4" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
+              장례종료(확인)
+            </ion-button>
+          </ion-item-divider>
         
-
-      </div>
+        </div>
       </ion-item>
     </template>
-  </ion-list>
+    </ion-list>
+    <div v-else class="ifEmptyOeders">
+      <div class="py-2 px-4 w-full text-center">
+        현재 진행중인 의뢰가 없습니다.
+      </div>
+      <div class="px-4">
+        <ion-button class="btn-primary" href="/order/add" color="" type="button" expand="block">
+          <font-awesome-icon class="mr-2" icon="edit"></font-awesome-icon>
+            새 의뢰 요청
+        </ion-button>
+      </div>
+    </div>
+  </ion-custom-body>
 </ion-content>
 </template>
 
 <style>
+.btn-primary{
+  --background:var(--ion-color-tertiary-shade)
+}
 </style>
 
 <script lang="ts">
-import { IonCustomHeader } from '@/components/';
+import { IonCustomHeader, IonCustomBody } from '@/components/';
 import { 
   IonSelect, 
   IonSelectOption, 
@@ -171,7 +186,8 @@ export default  {
     IonSelect, 
     IonSelectOption, 
     IonSearchbar, 
-    IonCustomHeader, 
+    IonCustomHeader,
+    IonCustomBody, 
     IonLabel, 
     IonListHeader, 
     IonList, 

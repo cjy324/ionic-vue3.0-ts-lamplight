@@ -1,12 +1,7 @@
 <template>
   <ion-page>
-    <ion-custom-header>의뢰 - 요청서 작성</ion-custom-header>
+    <ion-custom-header></ion-custom-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">의뢰 - 요청서 작성</ion-title>
-        </ion-toolbar>
-      </ion-header>
       <ion-custom-body class="justify-center">
         <form v-if="globalState.isLogined" @submit.prevent="checkAndAddOrder">
           <div>
@@ -63,19 +58,23 @@
           </div>
           <div>
             <ion-item>
-              <ion-label position="floating">추가 요청 사항</ion-label>
+              <ion-label position="stacked">추가 요청 사항</ion-label>
               <ion-textarea v-model="orderAddFormState.body" placeholder="추가 요청 사항을 입력해주세요."></ion-textarea>
             </ion-item>
           </div>
-          <div class="py-2 px-4">
-            <ion-button type="submit" expand="block">작성 완료(의뢰 요청)</ion-button>
-          </div>
-          <div class="px-4">
-            <ion-button color="secondary" type="reset" expand="block">초기화</ion-button>
-          </div>
-          <div class="px-4">
-            <ion-button href="/order/main" color="warning" type="button" expand="block">취소</ion-button>
-          </div>
+          <ion-list>
+            <ion-item-divider>
+              <ion-button slot="end" color="light" type="reset" size="small">
+                <font-awesome-icon class="text-gray-600" icon="redo-alt"/>
+              </ion-button>
+            </ion-item-divider>
+            <div class="mb-2 px-4">
+              <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
+            </div>
+            <div class="px-4">
+              <ion-button class="btn-cancel" href='/order/main' color="" type="button" expand="block">취소</ion-button>
+            </div>
+          </ion-list>
         </form>
         <div v-else class="py-2 px-4">
           로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
@@ -86,6 +85,12 @@
 </template>
 
 <style>
+.btn-success{
+  --background:var(--ion-color-success-shade)
+}
+.btn-cancel{
+  --background:var(--ion-color-medium-shade)
+}
 </style>
 
 <script lang="ts">
@@ -127,10 +132,10 @@ export default {
   name: 'OrderAdd',
 
   components: { 
-    IonHeader, 
-    IonToolbar,
+    //IonHeader, 
+    //IonToolbar,
     IonCustomLink, 
-    IonTitle,
+    //IonTitle,
     IonSelect, 
     IonSelectOption, 
     IonLabel, 

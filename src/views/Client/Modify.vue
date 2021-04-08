@@ -1,18 +1,14 @@
 <template>
   <ion-page>
-    <ion-custom-header>회원 - 정보 수정</ion-custom-header>
+    <ion-custom-header></ion-custom-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">회원 - 정보 수정</ion-title>
-        </ion-toolbar>
-      </ion-header>
       <ion-custom-body class="justify-center mt-8">
         <form v-if="globalState.isLogined" @submit.prevent="checkAndModify">
           <div>
             <ion-item-divider>
-              <img slot="end" class="h-32 rounded-3xl" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
+              <img slot="end" class="h-32 rounded-full mr-4" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
             </ion-item-divider>
+            
             <ion-item>
               <ion-label position="stacked">프로필 이미지</ion-label>
               <input class="mt-3" ref="profileImgElRef" type="file">
@@ -60,15 +56,19 @@
               <ion-input v-model="modifyFormState.region" :placeholder="state.client.region"></ion-input>
             </ion-item>
           </div>
-          <div class="py-2 px-4">
-            <ion-button type="submit" expand="block">수정</ion-button>
-          </div>
-          <div class="px-4">
-            <ion-button color="warning" type="reset" expand="block">초기화</ion-button>
-          </div>
-          <div class="px-4">
-            <ion-button :href="'/client/myPage?id=' + globalState.loginedClient.id" color="danger" type="button" expand="block">취소</ion-button>
-          </div>
+          <ion-list>
+            <ion-item-divider>
+              <ion-button slot="end" color="light" type="reset" size="small">
+                <font-awesome-icon class="text-gray-600" icon="redo-alt"/>
+              </ion-button>
+            </ion-item-divider>
+            <div class="mb-2 px-4">
+              <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
+            </div>
+            <div class="px-4">
+              <ion-button class="btn-cancel" :href="'/client/myPage?id=' + globalState.loginedClient.id" color="" type="button" expand="block">취소</ion-button>
+            </div>
+          </ion-list>
         </form>
         <div v-else class="py-2 px-4">
           로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
@@ -79,6 +79,13 @@
 </template>
 
 <style>
+.btn-success{
+  --background:var(--ion-color-success-shade)
+}
+.btn-cancel{
+  --background:var(--ion-color-medium-shade)
+}
+
 </style>
 
 <script lang="ts">
@@ -87,7 +94,8 @@ import {
   IonPage, 
   IonHeader, 
   IonToolbar, 
-  IonTitle, 
+  IonTitle,
+  IonList,
   IonContent,
   IonLabel, 
   IonInput,
@@ -120,11 +128,12 @@ export default {
   name: 'Modify',
 
   components: { 
-    IonHeader, 
-    IonToolbar, 
-    IonTitle,
+    //IonHeader, 
+    //IonToolbar, 
+    //IonTitle,
     IonLabel, 
     IonInput,
+    IonList,
     IonItemDivider,  
     IonItem, 
     IonButton, 

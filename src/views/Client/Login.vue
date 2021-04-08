@@ -4,12 +4,12 @@
     <ion-content :fullscreen="true">
       <ion-custom-body class="justify-center">
         <div class="logo-box text-center flex justify-center items-center mb-3">
-            <div class="w-32 text-2xl border-b">
+            <div class="w-32 text-2xl font-bold border-b">
               Log-In
             </div>
         </div>
         <form @submit.prevent="checkAndLogin" class="mx-3">
-          <div class="bg-white pb-3 pt-2 rounded-lg">
+          <div class="bg-white pb-3 pt-2 rounded-xl">
             <ion-item class="f_item">
               <ion-label position="floating">ID</ion-label>
               <ion-input v-model="loginFormState.loginId" maxlength="20" placeholder="ID를 입력해주세요."></ion-input>
@@ -23,13 +23,10 @@
             <ion-button type="submit" expand="block">로그인</ion-button>
           </div>
           <div class="pt-2 px-4">
-            아직 회원이 아니신가요? <ion-custom-link to="/client/join">회원가입</ion-custom-link>
+            아직 회원이 아니신가요? <ion-custom-link to="/client/join">Sign-In</ion-custom-link>
           </div>
           <div class="px-4">
-            ID를 잊어버리셨다면? <ion-custom-link to="/client/findLoginId">ID찾기</ion-custom-link>
-          </div>
-          <div class="px-4">
-            PW를 잊어버리셨다면? <ion-custom-link to="/client/findLoginPw">PW찾기</ion-custom-link>
+            ID/PW를 잊어버리셨다면? <ion-custom-link to="/client/findLoginId">ID찾기</ion-custom-link> / <ion-custom-link to="/client/findLoginPw">PW찾기</ion-custom-link>
           </div>
         </form>
       </ion-custom-body>
