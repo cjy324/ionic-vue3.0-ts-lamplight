@@ -2,7 +2,7 @@
     <ion-custom-header>내 정보</ion-custom-header>
     <ion-custom-body class="justify-center" >
       <ion-content :fullscreen="true">
-        <ion-list v-if="globalState.isLogined" >
+        <ion-list v-if="globalState.isLogined" class="mb-14">
  
           <ion-item-divider class="mt-8">
             <img slot="end" class="h-32 rounded-full mr-4 mb-4" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
@@ -37,18 +37,16 @@
             <ion-label color="medium">지역</ion-label>
             <ion-label slot="end" color="dark">{{state.client.region}}</ion-label>
           </ion-item>
-            
+
+          <div class="flex justify-end mr-4 mt-2">
+            <ion-button color="tertiary" slot="end" :href="'/client/modify?id=' + globalState.loginedClient.id">
+              정보수정
+            </ion-button>
+          </div>  
         </ion-list>
         <div v-else class="py-2 px-4">
           로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
         </div>
-        <ion-list>
-          <div class="flex justify-end mr-4">
-            <ion-button color="tertiary" slot="end" :href="'/client/modify?id=' + globalState.loginedClient.id">
-              정보수정
-            </ion-button>
-          </div>
-        </ion-list>
       </ion-content>
     </ion-custom-body>
     

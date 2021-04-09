@@ -1,9 +1,13 @@
 <template>
-  <ion-custom-header>의뢰 정보</ion-custom-header> 
+  <ion-custom-header>의뢰 정보</ion-custom-header>
   <ion-custom-body class="justify-center">
     <ion-content :fullscreen="true">
-      <ion-list v-if="globalState.isLogined">
-  
+      <ion-list v-if="globalState.isLogined" class="mb-14">
+        
+        <ion-item-divider :color="returnColorByLevel(state.order.stepLevel)">
+          <ion-label color="">진행 현황 : {{returnToString(state.order.stepLevel)}}</ion-label>
+        </ion-item-divider>
+
         <ion-item color="light">
           <ion-label color="medium">고인 이름</ion-label>
           <ion-label slot="end" color="dark">{{state.order.deceasedName}}</ion-label>
@@ -22,13 +26,11 @@
         <ion-item v-if="globalState.loginedClient.id == state.order.clientId">
           <ion-label slot="" color="medium">연락처</ion-label>
           <ion-label slot="end" color="">
-          <ion-button v-if="globalState.loginedClient.id == state.order.clientId" color="" slot="end">
-            {{state.order.extra__expertCellphoneNo}}
-          </ion-button>
+            <ion-button v-if="globalState.loginedClient.id == state.order.clientId" color="" slot="end">
+              {{state.order.extra__expertCellphoneNo}}
+            </ion-button>
           </ion-label>
         </ion-item>
-
-        
 
         <!-- <ion-item v-if="globalState.loginedExpert.id == state.order.expertId">
           <ion-label>의뢰인</ion-label>
@@ -64,22 +66,22 @@
         <ion-item-divider>
           <ion-text slot="start" color="dark">{{state.order.body}}</ion-text>
         </ion-item-divider>
-            
-      </ion-list>
-      
-      <div v-else class="py-2 px-4">
-        로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
-      </div>
-      <ion-list>
+
         <div class="btns mt-2 w-full flex justify-end">
+          <ion-button v-if="globalState.memberType == 'expert'" :color="returnColorByLevel(state.order.stepLevel+1)" slot="end" @click="changeStepLevel(state.order.id, state.order.stepLevel)">
+            {{returnToString(state.order.stepLevel+1)}}
+          </ion-button>
           <ion-button color="tertiary" slot="end" :href="'/order/modify?id=' + state.order.id">
             수정
           </ion-button>
-          <ion-button class="btn-cancel2" color="" slot="end" @click="deleteOrder(globalState.loginedClient.id)">
+          <ion-button v-if="state.order.stepLevel < 3" class="btn-cancel2" color="" slot="end" @click="deleteOrder(globalState.loginedClient.id)">
             의뢰 취소
           </ion-button>
         </div>
       </ion-list>
+      <div v-else class="py-2 px-4">
+        로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
+      </div>
     </ion-content>
   </ion-custom-body>
 </template>
@@ -160,15 +162,78 @@ export default  {
       loadOrder(id);
     });
 
+    function returnColorByLevel(stepLevel: any) {
+      let stepLevelToStr = ''; 
+      if(stepLevel == 1){
+        stepLevelToStr = 'medium';
+      }
+      if(stepLevel == 2){
+        stepLevelToStr = 'success';
+      }
+      if(stepLevel == 3){
+        stepLevelToStr = 'primary';
+      }
+      if(stepLevel == 4){
+        stepLevelToStr = 'warning';
+      }
+      if(stepLevel == 5){
+        stepLevelToStr = 'daek';
+      }
+      
+      return stepLevelToStr;
+    }
+
+    function returnToString(stepLevel: any) {
+      let stepLevelToStr = ''; 
+      if(stepLevel == 1){
+        stepLevelToStr = '의뢰요청';
+      }
+      if(stepLevel == 2){
+        stepLevelToStr = '의뢰검토(장례준비중)';
+      }
+      if(stepLevel == 3){
+        stepLevelToStr = '장례진행중';
+      }
+      if(stepLevel == 4){
+        stepLevelToStr = '장례종료(종료확인요청)';
+      }
+      if(stepLevel == 5){
+        stepLevelToStr = '종료확인(최종종료)';
+      }
+      
+      return stepLevelToStr;
+    }
+
+    async function doChangeStepLevel(id: number, stepLevel: number){
+      const axRes = await mainService.order_changeStepLevel(id, stepLevel)
+
+          util.showAlert(axRes.data.msg)
+          if ( axRes.data.fail ) {
+            return;
+          }
+        window.location.reload();
+    }
+
+    async function changeStepLevel(id: number, stepLevel: number){
+      const msg = '다음 단계를 진행하시겠습니까?'
+
+      util.showAlertConfirm(msg).then(confirm => {
+        if (confirm == false) {
+          return
+        } else {
+          doChangeStepLevel(id, stepLevel)
+        }
+      })
+    }
+
     async function doDeleteOrder(id: number) {
       const axRes = await mainService.order_delete(id)
       
+      util.showAlert(axRes.data.msg)
       if(axRes.data.fail){
-        util.showAlert(axRes.data.msg)
         return
       }
-      util.showAlert(axRes.data.msg)
-
+      
       router.replace("list");
     }
 
@@ -176,19 +241,20 @@ export default  {
       const msg = '정말 취소하시겠습니까?'
 
       util.showAlertConfirm(msg).then(confirm => {
-      if (confirm == false) {
-        return
-      } else {
-        doDeleteOrder(id)
-      }
-    })
-   
-      
+        if (confirm == false) {
+          return
+        } else {
+          doDeleteOrder(id)
+        }
+      })
     }
 
     return {
       globalState,
       state,
+      returnColorByLevel,
+      returnToString,
+      changeStepLevel,
       deleteOrder
     }
   }

@@ -1,8 +1,8 @@
 <template>
   <ion-custom-header>정보 수정</ion-custom-header>
   <ion-custom-body class="justify-center mt-8">
-    <ion-content :fullscreen="true">
-      <form v-if="globalState.isLogined" @submit.prevent="checkAndModify">
+    <ion-content :fullscreen="true" >
+      <form v-if="globalState.isLogined" @submit.prevent="checkAndModify" class="mb-24">
         <div>
           <ion-item-divider>
             <img slot="end" class="h-32 rounded-full mr-4" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
