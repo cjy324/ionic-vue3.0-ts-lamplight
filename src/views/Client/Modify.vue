@@ -5,7 +5,7 @@
       <form v-if="globalState.isLogined" @submit.prevent="checkAndModify" class="mb-24">
         <div>
           <ion-item-divider>
-            <img slot="end" class="h-32 rounded-full mr-4" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
+            <img slot="start" class="h-32 rounded-full mr-4" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
           </ion-item-divider>
           
           <ion-item>
@@ -40,7 +40,7 @@
         <div>
           <ion-item>
             <ion-label position="stacked">연락처</ion-label>
-            <ion-input v-model="modifyFormState.cellphoneNo" type="tel" maxlength="11" :placeholder="state.client.cellphoneNo"></ion-input>
+            <ion-input v-model="modifyFormState.cellphoneNo" type="tel" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required :placeholder="state.client.cellphoneNo"></ion-input>
           </ion-item>
         </div>
         <div>

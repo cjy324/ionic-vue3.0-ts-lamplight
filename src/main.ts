@@ -44,7 +44,9 @@ import {
   faUserTie,
   faSignInAlt,
   faSignOutAlt,
-  faUserEdit, 
+  faUserEdit,
+  faUserCog,
+  faBan,   
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -64,7 +66,9 @@ library.add(
   faUserTie,
   faSignInAlt,
   faSignOutAlt,
-  faUserEdit,  
+  faUserEdit,
+  faUserCog,
+  faBan,   
 );
 
 // 전역상태 불러오기

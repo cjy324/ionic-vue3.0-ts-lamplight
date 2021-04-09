@@ -2,7 +2,7 @@
   <ion-custom-header>의뢰요청</ion-custom-header>
   <ion-custom-body class="justify-center">
     <ion-content :fullscreen="true">
-      <form v-if="globalState.isLogined" @submit.prevent="checkAndAddOrder">
+      <form v-if="globalState.isLogined" @submit.prevent="checkAndAddOrder" class="mb-14">
         <div>
           <ion-item>
             <ion-label position="floating">고인 이름</ion-label>

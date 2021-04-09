@@ -3,9 +3,17 @@
     <ion-custom-body class="justify-center" >
       <ion-content :fullscreen="true">
         <ion-list v-if="globalState.isLogined" class="mb-14">
- 
-          <ion-item-divider class="mt-8">
-            <img slot="end" class="h-32 rounded-full mr-4 mb-4" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
+          
+          <div class="flex justify-end mr-4 mt-2">
+            <ion-buttons>
+              <ion-button :href="'/client/modify?id=' + globalState.loginedClient.id">
+                <font-awesome-icon class="text-lg h-7" icon="user-cog" />
+              </ion-button>
+            </ion-buttons>
+          </div>  
+
+          <ion-item-divider class="mt-2">
+            <img slot="start" class="h-32 rounded-full mr-4 mb-4" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
           </ion-item-divider>
               
           <ion-item color="light">
@@ -38,11 +46,6 @@
             <ion-label slot="end" color="dark">{{state.client.region}}</ion-label>
           </ion-item>
 
-          <div class="flex justify-end mr-4 mt-2">
-            <ion-button color="tertiary" slot="end" :href="'/client/modify?id=' + globalState.loginedClient.id">
-              정보수정
-            </ion-button>
-          </div>  
         </ion-list>
         <div v-else class="py-2 px-4">
           로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
@@ -69,7 +72,7 @@ import {
   IonItem,
   IonItemDivider,
   IonLabel,  
-  IonButton,
+  IonButtons,
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
@@ -93,7 +96,7 @@ export default  {
     IonItem,
     IonItemDivider,
     IonLabel,  
-    IonButton,
+    IonButtons,
   },
   
   setup() {

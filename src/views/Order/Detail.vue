@@ -4,9 +4,20 @@
     <ion-content :fullscreen="true">
       <ion-list v-if="globalState.isLogined" class="mb-14">
         
-        <ion-item-divider :color="returnColorByLevel(state.order.stepLevel)">
-          <ion-label color="">진행 현황 : {{returnToString(state.order.stepLevel)}}</ion-label>
+        <ion-item-divider :color="returnColorByLevel(3)">
+          <ion-label color="">진행 현황 : {{returnToString(3)}}</ion-label>
         </ion-item-divider>
+
+        <div class="flex justify-end mr-2 mt-2">
+          <ion-buttons color="light">
+            <ion-button :href="'/order/modify?id=' + state.order.id">
+              <font-awesome-icon class="text-lg h-7" icon="edit" />
+            </ion-button>
+            <ion-button v-if="state.order.stepLevel < 3" @click="deleteOrder(globalState.loginedClient.id)">
+              <font-awesome-icon class="text-lg h-7" icon="ban" />
+            </ion-button>
+          </ion-buttons>
+        </div>
 
         <ion-item color="light">
           <ion-label color="medium">고인 이름</ion-label>
@@ -68,14 +79,8 @@
         </ion-item-divider>
 
         <div class="btns mt-2 w-full flex justify-end">
-          <ion-button v-if="globalState.memberType == 'expert'" :color="returnColorByLevel(state.order.stepLevel+1)" slot="end" @click="changeStepLevel(state.order.id, state.order.stepLevel)">
+          <ion-button v-if="globalState.memberType !== 'expert'" :color="returnColorByLevel(state.order.stepLevel+1)" slot="end" @click="changeStepLevel(state.order.id, state.order.stepLevel)">
             {{returnToString(state.order.stepLevel+1)}}
-          </ion-button>
-          <ion-button color="tertiary" slot="end" :href="'/order/modify?id=' + state.order.id">
-            수정
-          </ion-button>
-          <ion-button v-if="state.order.stepLevel < 3" class="btn-cancel2" color="" slot="end" @click="deleteOrder(globalState.loginedClient.id)">
-            의뢰 취소
           </ion-button>
         </div>
       </ion-list>

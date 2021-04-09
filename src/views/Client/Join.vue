@@ -2,7 +2,7 @@
   <ion-custom-header>가입</ion-custom-header>
   <ion-custom-body class="justify-center mt-6">
     <ion-content :fullscreen="true">
-      <form @submit.prevent="checkAndJoin">
+      <form @submit.prevent="checkAndJoin" class="mb-24">
         <div>
           <ion-item>
             <ion-label position="stacked">프로필 이미지</ion-label>
