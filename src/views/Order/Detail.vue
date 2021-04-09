@@ -4,17 +4,17 @@
     <ion-content :fullscreen="true">
       <ion-list v-if="globalState.isLogined" class="mb-14">
         
-        <ion-item-divider :color="returnColorByLevel(state.order.stepLevel)">
-          <ion-label color="">진행 현황 : {{returnToString(state.order.stepLevel)}}</ion-label>
+        <ion-item-divider :class="returnColorByLevel(state.order.stepLevel)">
+          <ion-label color="light">진행 현황 : {{returnToString(state.order.stepLevel)}}</ion-label>
         </ion-item-divider>
 
         <div class="flex justify-end mr-2 mt-2">
           <ion-buttons color="light">
             <ion-button :href="'/order/modify?id=' + state.order.id">
-              <font-awesome-icon class="text-lg h-7" icon="edit" />
+              수정<font-awesome-icon class="text-lg h-7 ml-2" icon="edit" />
             </ion-button>
             <ion-button v-if="state.order.stepLevel < 3" @click="deleteOrder(globalState.loginedClient.id)">
-              <font-awesome-icon class="text-lg h-7" icon="ban" />
+              취소<font-awesome-icon class="text-lg h-7 ml-1" icon="ban" />
             </ion-button>
           </ion-buttons>
         </div>
@@ -37,18 +37,26 @@
         <ion-item v-if="globalState.loginedClient.id == state.order.clientId">
           <ion-label slot="" color="medium">연락처</ion-label>
           <ion-label slot="end" color="">
-            <ion-button v-if="globalState.loginedClient.id == state.order.clientId" color="" slot="end">
+            <ion-button color="" slot="end">
+              <font-awesome-icon class="mr-2" icon="phone-alt"/>
               {{state.order.extra__expertCellphoneNo}}
             </ion-button>
           </ion-label>
         </ion-item>
 
-        <!-- <ion-item v-if="globalState.loginedExpert.id == state.order.expertId">
-          <ion-label>의뢰인</ion-label>
-          <ion-label slot="end" color="tertiary">{{state.order.extra__clientName}}</ion-label>
-          <ion-button v-if="globalState.loginedExpert.id == state.order.expertId" color="" slot="end">
-            연락처: {{state.order.extra__expertCellphoneNo}}
-          </ion-button>
+        <!-- <ion-item v-if="globalState.loginedExoert.id == state.order.expertId">
+            <ion-label color="medium">의뢰인</ion-label>
+            <ion-label slot="end" color="dark">{{state.order.extra__clientName}}</ion-label>
+        </ion-item>
+
+        <ion-item v-if="globalState.loginedExoert.id == state.order.expertId">
+          <ion-label slot="" color="medium">연락처</ion-label>
+          <ion-label slot="end" color="">
+            <ion-button color="" slot="end">
+              <font-awesome-icon class="mr-2" icon="phone-alt"/>
+              {{state.order.extra__clientCellphoneNo}}
+            </ion-button>
+          </ion-label>
         </ion-item> -->
 
         <ion-item>
@@ -78,8 +86,13 @@
           <ion-text slot="start" color="dark">{{state.order.body}}</ion-text>
         </ion-item-divider>
 
+        <div class="btns mt-2 px-2 w-full">
+          <ion-button v-if="globalState.memberType == 'client' && state.order.stepLevel > 3" :class="returnColorByLevel(state.order.stepLevel)" @click="changeStepLevel(state.order.id, state.order.stepLevel)" expand="block">
+            {{returnToString(state.order.stepLevel)}}
+          </ion-button>
+        </div>
         <div class="btns mt-2 w-full flex justify-end">
-          <ion-button v-if="globalState.memberType !== 'expert'" :color="returnColorByLevel(state.order.stepLevel+1)" slot="end" @click="changeStepLevel(state.order.id, state.order.stepLevel)">
+          <ion-button v-if="globalState.memberType == 'expert'" :class="returnColorByLevel(state.order.stepLevel+1)" @click="changeStepLevel(state.order.id, state.order.stepLevel)" expand="block">
             {{returnToString(state.order.stepLevel+1)}}
           </ion-button>
         </div>
@@ -94,6 +107,21 @@
 <style>
 .btn-cancel2{
   --background:var(--ion-color-danger-shade)
+}
+.step-first{
+  --background:var(--ion-color-medium-tint);
+}
+.step-second{
+  --background:var(--ion-color-medium-shade);
+}
+.step-third{
+  --background:var(--ion-color-secondary-shade);
+}
+.step-fourth{
+  --background:var(--ion-color-primary-tint);
+}
+.step-fifth{
+  --background:var(--ion-color-primary-shade);
 }
 </style>
 
@@ -170,19 +198,19 @@ export default  {
     function returnColorByLevel(stepLevel: any) {
       let stepLevelToStr = ''; 
       if(stepLevel == 1){
-        stepLevelToStr = 'medium';
+        stepLevelToStr = 'step-first';
       }
       if(stepLevel == 2){
-        stepLevelToStr = 'success';
+        stepLevelToStr = 'step-second';
       }
       if(stepLevel == 3){
-        stepLevelToStr = 'primary';
+        stepLevelToStr = 'step-third';
       }
       if(stepLevel == 4){
-        stepLevelToStr = 'warning';
+        stepLevelToStr = 'step-fourth';
       }
       if(stepLevel == 5){
-        stepLevelToStr = 'daek';
+        stepLevelToStr = 'step-fifth';
       }
       
       return stepLevelToStr;
