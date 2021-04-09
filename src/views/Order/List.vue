@@ -1,12 +1,14 @@
 <template>
 <ion-custom-header>의뢰 현황</ion-custom-header>
-<ion-content :fullscreen="true">
+
   <ion-custom-body class="justify-center">
+    <ion-content :fullscreen="true">
     <ion-list v-if="state.orders.length !== 0" class="mb-12">
-      <ion-item>
+      <ion-item >
+        <ion-label>진행단계</ion-label>
         <ion-select v-model="searchState.selectStepLevel">
-          <ion-select-option value="0">진행단계 전체</ion-select-option>
-          <ion-select-option value="1">요청서 검토중</ion-select-option>
+          <ion-select-option value="0">전체</ion-select-option>
+          <ion-select-option value="1">의뢰요청중</ion-select-option>
           <ion-select-option value="2">장례준비중</ion-select-option>
           <ion-select-option value="3">장례진행중</ion-select-option>
           <ion-select-option value="4">장례종료(확인대기중)</ion-select-option>
@@ -14,117 +16,113 @@
         </ion-select>
       </ion-item>
       <ion-item>
+        <ion-label>키워드 타입</ion-label>
         <ion-select v-model="searchState.searchKeywordType">
           <ion-select-option value="deceasedName">고인 이름</ion-select-option>
           <ion-select-option value="bereavedName">상주 이름</ion-select-option>
           <ion-select-option value="extra__clientName">의뢰인 이름</ion-select-option>
           <ion-select-option value="region">지역</ion-select-option>
-          <ion-select-option value="body">내용</ion-select-option>
           <ion-select-option value="funeralHome">장례식장</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item>
-        <ion-searchbar show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
+      <ion-item lines="none">
+        <ion-searchbar class="ion-searchbar" show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
       </ion-item>
-      <ion-list-header>My Order List</ion-list-header>
       <template v-bind:key="order.id" v-for="order in returnFilteredOrders">
-      <ion-item>
+      <div class="orderList">
       <!--진행단계-->
-        <div v-if="order.stepLevel==1" class="btn-success">
-          진행단계: {{returnToString(order.stepLevel)}}
-        </div>
-        <div v-if="order.stepLevel==2" class="btn-secondary">
-          진행단계: {{returnToString(order.stepLevel)}}
-        </div>
-        <div v-if="order.stepLevel==3" class="btn-warning">
-          진행단계: {{returnToString(order.stepLevel)}}
-        </div>
-        <div v-if="order.stepLevel==4" class="btn-primary">
-          진행단계: {{returnToString(order.stepLevel)}}
-        </div>
-        <div v-if="order.stepLevel==5" class="btn-primary">
-          진행단계: {{returnToString(order.stepLevel)}}
-        </div>
-        <ion-label>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="12" class="bg-gray-300 border rounded-md">
-                고인명: {{order.deceasedName}}
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="4">
-                상주명: {{order.bereavedName}}
-              </ion-col>
-              <ion-col size="10">
-                의뢰인: {{order.extra__clientName}}
-              </ion-col>
-              <ion-col size="10">
-                담당지도사: {{order.extra__expertName}}
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="10">
-                지역: {{order.region}}
-              </ion-col>
-              <ion-col size="10">
-                장례식장: {{order.funeralHome}}
-              </ion-col>
-              <ion-col size="10">
-                종교: {{order.religion}}
-              </ion-col>
-              <ion-col size="10">
-                장례시작일: {{order.startDate}}
-              </ion-col>
-              <ion-col size="10">
-                장례종료일: {{order.endDate}}
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-label>
-        <div class="flex-col">
-          <ion-item-divider class="mt-2">
-            <ion-button color="" slot="end" :href="'/order/detail?id=' + order.id">
-              상세보기
+        <div class="flex justify-between border-b-2">
+          <ion-buttons >
+            <ion-button slot="" :href="'/order/detail?id=' + order.id">
+              <font-awesome-icon class="text-gray-600 ml-4 mr-2" icon="clipboard-list"/>
             </ion-button>
-          </ion-item-divider>
-          <ion-item-divider class="mt-2">
-            <ion-button v-if="globalState.loginedClient.id == order.clientId" color="" slot="end" :href="'/order/detail?id=' + order.id">
-              연락처: {{order.extra__expertCellphoneNo}}
+            <ion-button v-if="globalState.loginedClient.id == order.clientId" color="" slot="end" :href="'/review/add?relTypeCode=expert&relId=' + order.expertId">
+              <font-awesome-icon class="text-gray-600 mr-2" icon="comment-dots"/>
             </ion-button>
-          </ion-item-divider>
-          <ion-item-divider class="mt-2">
-            <ion-button v-if="globalState.loginedClient.id == order.clientId" color="success" slot="end" :href="'/review/add?relTypeCode=expert&relId=' + order.expertId">
-              후기/평점 작성
-            </ion-button>
-          </ion-item-divider>
+          </ion-buttons>
+          <ion-item class="" color="" lines="none">
+            <ion-chip color="secondary">
+              <font-awesome-icon class="text-lg mr-2" icon="caret-right"/>
+              <ion-label color="">
+                {{returnToString(order.stepLevel)}}
+              </ion-label>
+            </ion-chip>
+          </ion-item>
+        </div>
+        <div>
+        <ion-item color="">
+          <ion-chip color="dark">
+            <ion-label color="">
+              고인명
+            </ion-label>
+          </ion-chip>
+          <ion-label color=""> 
+            {{order.deceasedName}}
+          </ion-label>
+        </ion-item>
+        <ion-item color="">
+          <ion-chip color="dark">
+            <ion-label color="">
+              의뢰인
+            </ion-label>
+          </ion-chip>
+          <ion-label color="">
+            {{order.extra__clientName}}
+          </ion-label>
+          <ion-button v-if="globalState.loginedClient.id == order.clientId" color="" slot="end" :href="'/order/detail?id=' + order.id">
+              <font-awesome-icon class="mr-2" icon="phone-alt"/>
+              {{order.extra__expertCellphoneNo}}
+          </ion-button>
+        </ion-item>
+        <ion-item color="">
+          <ion-chip color="dark">
+            <ion-label color="">
+              지도사
+            </ion-label>
+          </ion-chip>
+          <ion-label color="">
+            {{order.extra__expertName}}
+          </ion-label>
+          <ion-button v-if="globalState.loginedClient.id == order.clientId" color="" slot="end" :href="'/order/detail?id=' + order.id">
+            <font-awesome-icon class="mr-2" icon="phone-alt"/>
+            {{order.extra__expertCellphoneNo}}
+          </ion-button>
+        </ion-item>
+        <ion-item color="">
+          <ion-chip color="dark">
+            <ion-label color="">
+              지역
+            </ion-label>
+          </ion-chip>
+          <ion-label slot="" color="">
+            {{order.region}}
+          </ion-label>
+        </ion-item>
+        <ion-item color="" lines="none">
+          <ion-chip color="dark">
+            <ion-label color="">
+              장례 시작일/종료일
+            </ion-label>
+          </ion-chip>
+          <ion-label slot="" color="">
+            {{order.startDate}}/{{order.endDate}}
+          </ion-label>
+        </ion-item>
 
-          <ion-item-divider class="mt-2" v-if="globalState.loginedClient.id !== order.clientId">
-            <ion-button v-if="order.stepLevel==1" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
-              의뢰수락(장례준비)
-            </ion-button>
-            <ion-button v-if="order.stepLevel==2" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
-              장례진행
-            </ion-button>
-            <ion-button v-if="order.stepLevel==3" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
-              장례종료(확인요청)
-            </ion-button>
-          </ion-item-divider>
-
-          <ion-item-divider class="mt-2" v-if="globalState.loginedClient.id == order.clientId">
-            <ion-button v-if="order.stepLevel==2" color="success" slot="end">
-              장례준비중
-            </ion-button>
-            <ion-button v-if="order.stepLevel==3" color="success" slot="end">
-              장례진행중
-            </ion-button>
-            <ion-button v-if="order.stepLevel==4" color="success" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
-              장례종료(확인)
-            </ion-button>
-          </ion-item-divider>
+        </div>
         
-        </div>
-      </ion-item>
+          <div class="w-full px-4 pb-4 mb-2 border-b-8" v-if="globalState.loginedClient.id == order.clientId">
+            <ion-button v-if="globalState.memberType == 'client'" :class="returnColorByLevel(order.stepLevel)" slot="end" expand="block" @click="changeStepLevel(order.id, order.stepLevel)">
+              {{returnToString(order.stepLevel)}}
+            </ion-button>
+          </div>
+
+          <!-- <div class="w-full px-4" v-if="globalState.loginedExpert.id == order.expertId">
+            <ion-button v-if="globalState.memberType == 'expert'" :color="returnColorByLevel(order.stepLevel+1)" expand="block" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
+              {{returnToString(order.stepLevel+1)}}
+            </ion-button>
+          </div> -->
+      </div>
     </template>
     </ion-list>
     <div v-else class="ifEmptyOeders">
@@ -138,36 +136,61 @@
         </ion-button>
       </div>
     </div>
+    </ion-content>
   </ion-custom-body>
-</ion-content>
+
 </template>
 
 <style>
-.btn-primary{
-  --background:var(--ion-color-tertiary-shade)
+.step-first{
+  --background:var(--ion-color-medium-tint);
 }
+.step-second{
+  --background:var(--ion-color-medium-shade);
+}
+.step-third{
+  --background:var(--ion-color-secondary-shade);
+}
+.step-fourth{
+  --background:var(--ion-color-primary-tint);
+}
+.step-fifth{
+  --background:var(--ion-color-primary-shade);
+}
+
+.ion-searchbar{
+  --border-radius:10px 10px 10px 10px;
+}
+.itemTitle{
+  --padding-end:10px;
+  --border-radius:0px 5px 20px 0px;
+}
+
 </style>
 
 <script lang="ts">
-import { IonCustomHeader, IonCustomBody } from '@/components/';
+import { IonCustomHeader, IonCustomBody, IonCustomPopver } from '@/components/';
 import { 
   IonSelect, 
   IonSelectOption, 
   IonSearchbar, 
   IonLabel, 
-  IonListHeader, 
+  //IonListHeader, 
   IonList, 
   IonItem, 
   IonContent,
-  IonItemDivider,
-  IonCol,
-  IonRow,
-  IonGrid,
+  //IonItemDivider,
+  //IonCol,
+  //IonRow,
+  //IonGrid,
   IonButton,
+  IonButtons,
+  IonChip,
+  popoverController,
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
-import { reactive, computed, onMounted, watch } from 'vue';
+import { reactive, computed, onMounted } from 'vue';
 import * as util from '@/utils';
 import { Order } from '@/types';
 
@@ -184,20 +207,19 @@ export default  {
   
   components: { 
     IonSelect, 
-    IonSelectOption, 
+    IonSelectOption,
     IonSearchbar, 
     IonCustomHeader,
     IonCustomBody, 
     IonLabel, 
-    IonListHeader, 
+    //IonListHeader, 
     IonList, 
     IonItem, 
     IonContent,
-    IonItemDivider,
-    IonCol,
-    IonRow,
-    IonGrid,
+    //IonItemDivider,
     IonButton,
+    IonButtons,
+    IonChip,
   },
   
   setup() {
@@ -209,13 +231,44 @@ export default  {
       orders: [] as Order[],
     });
 
+    async function openPopover(ev: Event) {
+      const popover = await popoverController
+        .create({
+          component: IonCustomPopver,
+          event: ev,
+          translucent: true
+        })
+      return popover.present();
+    }
+
+    function returnColorByLevel(stepLevel: any) {
+      let stepLevelToStr = ''; 
+      if(stepLevel == 1){
+        stepLevelToStr = 'step-first';
+      }
+      if(stepLevel == 2){
+        stepLevelToStr = 'step-second';
+      }
+      if(stepLevel == 3){
+        stepLevelToStr = 'step-third';
+      }
+      if(stepLevel == 4){
+        stepLevelToStr = 'step-fourth';
+      }
+      if(stepLevel == 5){
+        stepLevelToStr = 'step-fifth';
+      }
+      
+      return stepLevelToStr;
+    }
+
     function returnToString(stepLevel: any) {
       let stepLevelToStr = ''; 
       if(stepLevel == 1){
-        stepLevelToStr = '의뢰요청(의뢰검토중)';
+        stepLevelToStr = '의뢰요청';
       }
       if(stepLevel == 2){
-        stepLevelToStr = '의뢰승인(장례준비중)';
+        stepLevelToStr = '의뢰검토(장례준비중)';
       }
       if(stepLevel == 3){
         stepLevelToStr = '장례진행중';
@@ -253,9 +306,6 @@ export default  {
         if(searchState.searchKeywordType == "region"){
           filteredOrders = state.orders.filter((order: Order) => order.region.includes(searchState.searchKeyword))
         }
-        if(searchState.searchKeywordType == "body"){
-          filteredOrders = state.orders.filter((order: Order) => order.body.includes(searchState.searchKeyword))
-        }
         if(searchState.searchKeywordType == "funeralHome"){
           filteredOrders = state.orders.filter((order: Order) => order.funeralHome.includes(searchState.searchKeyword))
         }
@@ -272,9 +322,6 @@ export default  {
         }
         if(searchState.searchKeywordType == "region"){
           filteredOrders = state.orders.filter((order: Order) => order.region.includes(searchState.searchKeyword) && order.stepLevel === parseInt(searchState.selectStepLevel))
-        }
-        if(searchState.searchKeywordType == "body"){
-          filteredOrders = state.orders.filter((order: Order) => order.body.includes(searchState.searchKeyword) && order.stepLevel === parseInt(searchState.selectStepLevel))
         }
         if(searchState.searchKeywordType == "funeralHome"){
           filteredOrders = state.orders.filter((order: Order) => order.funeralHome.includes(searchState.searchKeyword) && order.stepLevel === parseInt(searchState.selectStepLevel))
@@ -313,8 +360,11 @@ export default  {
     }
 
     function changeStepLevel(id: number, stepLevel: number){
-
-      const msg = '해당 의뢰를 수락하시겠습니까?'
+      
+      let msg = '해당 의뢰를 수락하시겠습니까?'
+      if(stepLevel !== 1){
+        msg = '다음 단계를 진행하시겠습니까?'
+      }
       util.showAlertConfirm(msg).then(confirm => {
         if (confirm == false) {
           return
@@ -349,8 +399,10 @@ export default  {
       returnFilteredOrders,
       //doDeleteReview,
       onInput,
+      returnColorByLevel,
       returnToString,
       changeStepLevel,
+      openPopover,
       //onClickInput,
     }
   }

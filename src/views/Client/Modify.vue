@@ -3,9 +3,14 @@
   <ion-custom-body class="justify-center mt-8">
     <ion-content :fullscreen="true" >
       <form v-if="globalState.isLogined" @submit.prevent="checkAndModify" class="mb-24">
-        <div>
+        <div >
           <ion-item-divider>
-            <img slot="start" class="h-32 rounded-full mr-4" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
+            <img slot="start" class="h-32 rounded-full" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
+            <ion-buttons slot="end" >
+              <ion-button color="medium" type="reset" size="small">
+                초기화<font-awesome-icon class="text-gray-600 ml-2 mr-4" icon="redo-alt"/>
+              </ion-button>
+            </ion-buttons>
           </ion-item-divider>
           
           <ion-item>
@@ -40,7 +45,7 @@
         <div>
           <ion-item>
             <ion-label position="stacked">연락처</ion-label>
-            <ion-input v-model="modifyFormState.cellphoneNo" type="tel" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required :placeholder="state.client.cellphoneNo"></ion-input>
+            <ion-input v-model="modifyFormState.cellphoneNo" type="tel" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" :placeholder="state.client.cellphoneNo"></ion-input>
           </ion-item>
         </div>
         <div>
@@ -56,11 +61,6 @@
           </ion-item>
         </div>
         <ion-list>
-          <ion-item-divider>
-            <ion-button slot="end" color="light" type="reset" size="small">
-              <font-awesome-icon class="text-gray-600" icon="redo-alt"/>
-            </ion-button>
-          </ion-item-divider>
           <div class="mb-2 px-4">
             <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
           </div>
@@ -99,7 +99,8 @@ import {
   IonInput,
   IonItemDivider, 
   IonItem, 
-  IonButton, 
+  IonButton,
+  IonButtons, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
@@ -134,7 +135,8 @@ export default {
     IonList,
     IonItemDivider,  
     IonItem, 
-    IonButton, 
+    IonButton,
+    IonButtons,  
     IonContent, 
     //IonPage, 
     IonCustomBody, 

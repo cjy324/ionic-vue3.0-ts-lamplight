@@ -46,7 +46,13 @@ import {
   faSignOutAlt,
   faUserEdit,
   faUserCog,
-  faBan,   
+  faBan,
+  faIdBadge,
+  faCalendarAlt,
+  faMapMarkedAlt,
+  faCommentDots,
+  faPhoneAlt,
+  faCaretRight,   
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -68,7 +74,13 @@ library.add(
   faSignOutAlt,
   faUserEdit,
   faUserCog,
-  faBan,   
+  faBan,
+  faIdBadge,
+  faCalendarAlt,
+  faMapMarkedAlt,
+  faCommentDots,
+  faPhoneAlt,
+  faCaretRight,    
 );
 
 // 전역상태 불러오기

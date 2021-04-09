@@ -7,9 +7,11 @@
 import IonCustomHeader from './IonCustomHeader.vue';
 import IonCustomBody from './IonCustomBody.vue';
 import IonCustomLink from './IonCustomLink.vue';
+import IonCustomPopver from './IonCustomPopver.vue';
 
 export {
   IonCustomHeader,
   IonCustomBody,
   IonCustomLink,
+  IonCustomPopver,
 }; 

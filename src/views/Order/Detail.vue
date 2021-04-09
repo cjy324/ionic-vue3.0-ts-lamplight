@@ -4,8 +4,8 @@
     <ion-content :fullscreen="true">
       <ion-list v-if="globalState.isLogined" class="mb-14">
         
-        <ion-item-divider :color="returnColorByLevel(3)">
-          <ion-label color="">진행 현황 : {{returnToString(3)}}</ion-label>
+        <ion-item-divider :color="returnColorByLevel(state.order.stepLevel)">
+          <ion-label color="">진행 현황 : {{returnToString(state.order.stepLevel)}}</ion-label>
         </ion-item-divider>
 
         <div class="flex justify-end mr-2 mt-2">
