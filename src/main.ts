@@ -52,7 +52,8 @@ import {
   faMapMarkedAlt,
   faCommentDots,
   faPhoneAlt,
-  faCaretRight,   
+  faCaretRight,
+  faUserCheck,   
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -80,7 +81,8 @@ library.add(
   faMapMarkedAlt,
   faCommentDots,
   faPhoneAlt,
-  faCaretRight,    
+  faCaretRight,
+  faUserCheck,    
 );
 
 // 전역상태 불러오기

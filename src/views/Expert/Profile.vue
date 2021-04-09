@@ -1,72 +1,51 @@
 <template>
   <ion-page>
     <ion-custom-header>프로필</ion-custom-header>
-    <ion-content :fullscreen="true">
+    
       <ion-custom-body class="justify-center">
-        <div class="container mx-auto">
-          <div class="px-6 py-6 bg-white rounded-lg shadow-md">
+        <ion-content :fullscreen="true">
+
             <ion-list>
               
-              <ion-list-header>
-                Profile
-              </ion-list-header>
-              
-              <ion-item-divider>
-                <img slot="end" class="h-32 rounded-3xl" :src="mainService.getExpertThumbImgUrl(state.expert.id)">
+              <ion-item-divider class="mt-2">
+                <img slot="start" class="h-32 rounded-full mr-4 mb-4" :src="mainService.getExpertThumbImgUrl(state.expert.id)">
               </ion-item-divider>
-              
-              <ion-item>
-                <ion-label>회원유형</ion-label>
-                <ion-label slot="end" color="success">지도사</ion-label>
+        
+              <ion-item color="light">
+                <ion-label color="medium">회원유형</ion-label>
+                <ion-label slot="end" color="dark">지도사</ion-label>
               </ion-item>
 
               <ion-item>
-                <ion-label>이름</ion-label>
-                <ion-label slot="end" color="tertiary">{{state.expert.name}}</ion-label>
+                <ion-label color="medium">이름</ion-label>
+                <ion-label slot="end" color="dark">{{state.expert.name}}</ion-label>
               </ion-item>
 
               <ion-item>
-                <ion-label>연락처</ion-label>
-                <ion-label slot="end" color="tertiary">{{state.expert.cellphoneNo}}</ion-label>
+                <ion-label color="medium">e-mail</ion-label>
+                <ion-label slot="end" color="dark">{{state.expert.email}}</ion-label>
               </ion-item>
 
               <ion-item>
-                <ion-label>e-mail</ion-label>
-                <ion-label slot="end" color="tertiary">{{state.expert.email}}</ion-label>
+                <ion-label color="medium">지역</ion-label>
+                <ion-label slot="end" color="dark">{{state.expert.region}}</ion-label>
               </ion-item>
 
               <ion-item>
-                <ion-label>지역</ion-label>
-                <ion-label slot="end" color="warning">{{state.expert.region}}</ion-label>
+                <ion-label color="medium">자격증</ion-label>
+                <ion-label slot="end" color="dark">{{state.expert.license}}</ion-label>
               </ion-item>
 
               <ion-item>
-                <ion-label>자격증</ion-label>
-                <ion-label slot="end" color="warning">{{state.expert.license}}</ion-label>
-              </ion-item>
-
-              <ion-item>
-                <ion-label>경력</ion-label>
-                <ion-label slot="end" color="warning">{{state.expert.career}}</ion-label>
+                <ion-label color="medium">경력</ion-label>
+                <ion-label slot="end" color="dark">{{state.expert.career}}</ion-label>
               </ion-item>
 
             </ion-list>
-            <ion-list>
-              <ion-item-divider class="btns mt-2">
-                <ion-button slot="end" href="/expert/list">
-                  리스트로 돌아가기
-                </ion-button>
-              </ion-item-divider>
-              <ion-item-divider class="btns mt-2">
-                <ion-button slot="end" @click="presentActionSheet">
-                  전화하기
-                </ion-button>
-              </ion-item-divider>
-            </ion-list>
-          </div>
-        </div>
+
+        </ion-content>
       </ion-custom-body>
-    </ion-content>
+    
   </ion-page>
 </template>
 
@@ -76,9 +55,9 @@
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader } from '@/components/';
 import { 
-  IonPage, 
+  //IonPage, 
   //IonHeader,
-  IonListHeader,
+  //IonListHeader,
   //IonToolbar, 
   //IonTitle, 
   IonContent,
@@ -86,8 +65,8 @@ import {
   IonItem,
   IonItemDivider,
   IonLabel,  
-  IonButton,
-  actionSheetController,
+  //IonButton,
+  //actionSheetController,
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
@@ -102,9 +81,9 @@ export default  {
   components: { 
     IonCustomBody, 
     IonCustomHeader, 
-    IonPage, 
+    //IonPage, 
     //IonHeader,
-    IonListHeader,
+    //IonListHeader,
     //IonToolbar, 
     //IonTitle, 
     IonContent,
@@ -112,7 +91,7 @@ export default  {
     IonItem,
     IonItemDivider,
     IonLabel,  
-    IonButton,
+    //IonButton,
   },
   
   setup() {
@@ -137,26 +116,27 @@ export default  {
       loadExpert(id);
     });
 
-    async function presentActionSheet() {
-      const actionSheet = await actionSheetController
-        .create({
-          header: '연락처',
-          buttons: [
-            {
-              text: state.expert.cellphoneNo,
-              handler: () => {
-                console.log('call clicked')
-              },
-            },
-          ],
-        });
-      return actionSheet.present();
-    }
+    // async function presentActionSheet() {
+    //   const actionSheet = await actionSheetController
+    //     .create({
+    //       header: '연락처',
+    //       buttons: [
+    //         {
+    //           text: state.expert.cellphoneNo,
+    //           handler: () => {
+    //             console.log('call clicked')
+    //           },
+    //         },
+    //       ],
+    //     });
+    //   return actionSheet.present();
+    // }
 
     return {
       globalState,
+      mainService,
       state,
-      presentActionSheet
+    //  presentActionSheet
     }
   }
 }

@@ -25,13 +25,15 @@
           <ion-select-option value="funeralHome">장례식장</ion-select-option>
         </ion-select>
       </ion-item>
+
       <ion-item lines="none">
         <ion-searchbar class="ion-searchbar" show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
       </ion-item>
+
       <template v-bind:key="order.id" v-for="order in returnFilteredOrders">
       <div class="orderList">
       <!--진행단계-->
-        <div class="flex justify-between border-b-2">
+        <div class="orderList_head flex justify-between border-b-2">
           <ion-buttons >
             <ion-button slot="" :href="'/order/detail?id=' + order.id">
               <font-awesome-icon class="text-gray-600 ml-4 mr-2" icon="clipboard-list"/>더보기
@@ -49,7 +51,8 @@
             </ion-chip>
           </ion-item>
         </div>
-        <div>
+
+        <div class="orderList_body">
         <ion-item color="">
           <ion-chip color="dark">
             <ion-label color="">
