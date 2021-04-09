@@ -1,99 +1,101 @@
 <template>
-  <ion-page>
-    <ion-custom-header>의뢰 정보</ion-custom-header>
+  <ion-custom-header>의뢰 정보</ion-custom-header> 
+  <ion-custom-body class="justify-center">
     <ion-content :fullscreen="true">
-      <ion-custom-body class="justify-center">
-        <div class="container mx-auto">
-          <div class="px-6 py-6 bg-white rounded-lg shadow-md">
-            <ion-list v-if="globalState.isLogined">
+      <ion-list v-if="globalState.isLogined">
+  
+        <ion-item color="light">
+          <ion-label color="medium">고인 이름</ion-label>
+          <ion-label slot="end" color="dark">{{state.order.deceasedName}}</ion-label>
+        </ion-item>
               
-              <ion-list-header>
-                MyOrder
-              </ion-list-header>
-              
-              <ion-item>
-                <ion-label>고인 이름</ion-label>
-                <ion-label slot="end" color="success">{{state.order.deceasedName}}</ion-label>
-              </ion-item>
-              
-              <ion-item>
-                <ion-label>상주 이름</ion-label>
-                <ion-label slot="end" color="tertiary">{{state.order.bereavedName}}</ion-label>
-              </ion-item>
+        <ion-item>
+          <ion-label color="medium">상주 이름</ion-label>
+          <ion-label slot="end" color="dark">{{state.order.bereavedName}}</ion-label>
+        </ion-item>
 
-              <ion-item v-if="globalState.loginedClient.id == state.order.clientId">
-                <ion-label>담당지도사</ion-label>
-                <ion-label slot="end" color="tertiary">{{state.order.extra__expertName}}</ion-label>
-                <ion-button v-if="globalState.loginedClient.id == state.order.clientId" color="" slot="end">
-                  연락처: {{state.order.extra__expertCellphoneNo}}
-                </ion-button>
-              </ion-item>
+        <ion-item v-if="globalState.loginedClient.id == state.order.clientId">
+            <ion-label color="medium">담당지도사</ion-label>
+            <ion-label slot="end" color="dark">{{state.order.extra__expertName}}</ion-label>
+        </ion-item>
 
-              <!-- <ion-item v-if="globalState.loginedExpert.id == state.order.expertId">
-                <ion-label>의뢰인</ion-label>
-                <ion-label slot="end" color="tertiary">{{state.order.extra__clientName}}</ion-label>
-                <ion-button v-if="globalState.loginedExpert.id == state.order.expertId" color="" slot="end">
-                  연락처: {{state.order.extra__expertCellphoneNo}}
-                </ion-button>
-              </ion-item> -->
+        <ion-item v-if="globalState.loginedClient.id == state.order.clientId">
+          <ion-label slot="" color="medium">연락처</ion-label>
+          <ion-label slot="end" color="">
+          <ion-button v-if="globalState.loginedClient.id == state.order.clientId" color="" slot="end">
+            {{state.order.extra__expertCellphoneNo}}
+          </ion-button>
+          </ion-label>
+        </ion-item>
 
-              <ion-item>
-                <ion-label>장례식장</ion-label>
-                <ion-label slot="end" color="tertiary">{{state.order.funeralHome}}</ion-label>
-              </ion-item>
+        
 
-              <ion-item>
-                <ion-label>종교</ion-label>
-                <ion-label slot="end" color="tertiary">{{state.order.religion}}</ion-label>
-              </ion-item>
+        <!-- <ion-item v-if="globalState.loginedExpert.id == state.order.expertId">
+          <ion-label>의뢰인</ion-label>
+          <ion-label slot="end" color="tertiary">{{state.order.extra__clientName}}</ion-label>
+          <ion-button v-if="globalState.loginedExpert.id == state.order.expertId" color="" slot="end">
+            연락처: {{state.order.extra__expertCellphoneNo}}
+          </ion-button>
+        </ion-item> -->
 
-              <ion-item>
-                <ion-label>시작일</ion-label>
-                <ion-label slot="end" color="warning">{{state.order.startDate}}</ion-label>
-              </ion-item>
+        <ion-item>
+          <ion-label color="medium">장례식장</ion-label>
+          <ion-label slot="end" color="dark">{{state.order.funeralHome}}</ion-label>
+        </ion-item>
 
-              <ion-item>
-                <ion-label>종료일</ion-label>
-                <ion-label slot="end" color="warning">{{state.order.endDate}}</ion-label>
-              </ion-item>
+        <ion-item>
+          <ion-label color="medium">종교</ion-label>
+          <ion-label slot="end" color="dark">{{state.order.religion}}</ion-label>
+        </ion-item>
 
-              <ion-item>
-                <ion-label>추가 요청 사항</ion-label>
-              </ion-item>
-              <ion-item-divider>
-                <ion-text slot="start" color="">{{state.order.body}}</ion-text>
-              </ion-item-divider>
+        <ion-item>
+          <ion-label color="medium">시작일</ion-label>
+          <ion-label slot="end" color="dark">{{state.order.startDate}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="medium">종료일</ion-label>
+          <ion-label slot="end" color="dark">{{state.order.endDate}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="medium">추가 요청 사항</ion-label>
+        </ion-item>
+        <ion-item-divider>
+          <ion-text slot="start" color="dark">{{state.order.body}}</ion-text>
+        </ion-item-divider>
             
-            </ion-list>
-            <div v-else class="py-2 px-4">
-              로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
-            </div>
-            <ion-list>
-              <ion-item-divider class="btns mt-2">
-                <ion-button color="success" slot="end" :href="'/order/modify?id=' + state.order.id">
-                  내용 수정
-                </ion-button>
-                <ion-button color="warning" slot="end" @click="deleteOrder(globalState.loginedClient.id)">
-                  의뢰 취소
-                </ion-button>
-              </ion-item-divider>
-            </ion-list>
-          </div>
+      </ion-list>
+      
+      <div v-else class="py-2 px-4">
+        로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
+      </div>
+      <ion-list>
+        <div class="btns mt-2 w-full flex justify-end">
+          <ion-button color="tertiary" slot="end" :href="'/order/modify?id=' + state.order.id">
+            수정
+          </ion-button>
+          <ion-button class="btn-cancel2" color="" slot="end" @click="deleteOrder(globalState.loginedClient.id)">
+            의뢰 취소
+          </ion-button>
         </div>
-      </ion-custom-body>
+      </ion-list>
     </ion-content>
-  </ion-page>
+  </ion-custom-body>
 </template>
 
 <style>
+.btn-cancel2{
+  --background:var(--ion-color-danger-shade)
+}
 </style>
 
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
-  IonPage, 
+  //IonPage, 
   //IonHeader,
-  IonListHeader,
+  //IonListHeader,
   //IonToolbar, 
   //IonTitle, 
   IonContent,
@@ -102,6 +104,7 @@ import {
   IonItemDivider,
   IonLabel,
   IonText,
+  //IonButtons,
   IonButton, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
@@ -118,9 +121,9 @@ export default  {
     IonCustomBody, 
     IonCustomHeader, 
     IonCustomLink,
-    IonPage, 
+    //IonPage, 
     //IonHeader,
-    IonListHeader,
+    //IonListHeader,
     //IonToolbar, 
     //IonTitle, 
     IonContent,
@@ -128,7 +131,8 @@ export default  {
     IonItem,
     IonItemDivider,
     IonLabel,
-    IonText,  
+    IonText,
+    //IonButtons,  
     IonButton, 
   },
   

@@ -15,10 +15,13 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^3.0.0-3",
+    "@ionic-native/call-number": "^5.32.0",
+    "@ionic-native/core": "^5.32.0",
     "@ionic/vue": "^5.4.0",
     "@ionic/vue-router": "^5.4.0",
     "@types/axios": "^0.14.0",
     "axios": "^0.21.1",
+    "call-number": "^1.0.1",
     "core-js": "^3.6.5",
     "vue": "^3.0.0-0",
     "vue-router": "^4.0.0-0"
