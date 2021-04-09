@@ -1,6 +1,6 @@
 <template>
   <ion-page >
-    <ion-custom-header></ion-custom-header>
+    <ion-custom-header>회원</ion-custom-header>
     <ion-content :fullscreen="true">
       <ion-custom-body class="justify-center">
         <div class="logo-box text-center flex justify-center items-center mb-3">

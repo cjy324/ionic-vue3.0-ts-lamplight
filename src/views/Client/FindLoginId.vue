@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-custom-header></ion-custom-header>
+    <ion-custom-header>ID 찾기</ion-custom-header>
     <ion-content :fullscreen="true">
       <ion-custom-body class="justify-center">
         <div class="logo-box text-center flex justify-center items-center mb-3">
@@ -20,7 +20,7 @@
             </ion-item>
           </div>
           <div class="py-2 px-4">
-            <ion-button type="submit" expand="block">ID 찾기</ion-button>
+            <ion-button type="submit" expand="block">찾기</ion-button>
           </div>
         </form>
       </ion-custom-body>

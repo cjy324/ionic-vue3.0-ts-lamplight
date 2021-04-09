@@ -1,5 +1,5 @@
 <template>
-<ion-custom-header></ion-custom-header>
+<ion-custom-header>의뢰 현황</ion-custom-header>
 <ion-content :fullscreen="true">
   <ion-custom-body class="justify-center">
     <ion-list v-if="state.orders.length !== 0" class="mb-12">

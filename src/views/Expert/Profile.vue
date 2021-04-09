@@ -1,13 +1,7 @@
 <template>
   <ion-page>
-    <ion-custom-header>지도사 - Profile</ion-custom-header>
+    <ion-custom-header>프로필</ion-custom-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">지도사 - Profile</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
       <ion-custom-body class="justify-center">
         <div class="container mx-auto">
           <div class="px-6 py-6 bg-white rounded-lg shadow-md">
@@ -83,10 +77,10 @@
 import { IonCustomBody, IonCustomHeader } from '@/components/';
 import { 
   IonPage, 
-  IonHeader,
+  //IonHeader,
   IonListHeader,
-  IonToolbar, 
-  IonTitle, 
+  //IonToolbar, 
+  //IonTitle, 
   IonContent,
   IonList,
   IonItem,
@@ -109,10 +103,10 @@ export default  {
     IonCustomBody, 
     IonCustomHeader, 
     IonPage, 
-    IonHeader,
+    //IonHeader,
     IonListHeader,
-    IonToolbar, 
-    IonTitle, 
+    //IonToolbar, 
+    //IonTitle, 
     IonContent,
     IonList,
     IonItem,

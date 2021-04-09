@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-custom-header></ion-custom-header>
+    <ion-custom-header>의뢰요청</ion-custom-header>
     <ion-content :fullscreen="true">
       <ion-custom-body class="justify-center">
         <form v-if="globalState.isLogined" @submit.prevent="checkAndAddOrder">

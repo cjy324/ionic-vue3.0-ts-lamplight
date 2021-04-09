@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-custom-header></ion-custom-header>
+    <ion-custom-header>정보 수정</ion-custom-header>
     <ion-content :fullscreen="true">
       <ion-custom-body class="justify-center mt-8">
         <form v-if="globalState.isLogined" @submit.prevent="checkAndModify">

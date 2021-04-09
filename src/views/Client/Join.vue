@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-custom-header></ion-custom-header>
+    <ion-custom-header>가입</ion-custom-header>
     <ion-content :fullscreen="true">
       <ion-custom-body class="justify-center mt-6">
         <div class="logo-box text-center">

@@ -1,9 +1,9 @@
 <template>
   <ion-header>
     <ion-toolbar>
-      <ion-buttons> 
-        <ion-menu-button auto-hide="false"></ion-menu-button>
-      </ion-buttons>
+      <div class="ml-2">
+        <slot ></slot>
+      </div>
       <ion-buttons slot="primary" v-if="globalState.isLogined">
         <router-link to="/client/myPage" class="mr-2">
           <img class="rounded-full" :src="mainService.getClientThumbImgUrlForHeader(globalState.loginedClient.id)" alt="">
@@ -33,7 +33,7 @@ import {
   IonToolbar, 
   //IonTitle,
   //IonItem,
-  IonMenuButton,
+  //IonMenuButton,
   IonButtons,
   IonButton,
 } from '@ionic/vue';
@@ -47,7 +47,7 @@ export default {
     IonToolbar, 
     //IonTitle,
     //IonItem,
-    IonMenuButton,
+    //IonMenuButton,
     IonButtons,
     IonButton,
   },

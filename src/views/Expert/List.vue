@@ -1,5 +1,5 @@
 <template>
-<ion-custom-header>지도사 - 리스트</ion-custom-header>
+<ion-custom-header>지도사 현황</ion-custom-header>
 <ion-content >
   <ion-list class="mb-12">
     <ion-select v-model="searchState.searchKeywordType">

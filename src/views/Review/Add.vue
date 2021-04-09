@@ -1,12 +1,7 @@
 <template>
   <ion-page>
-    <ion-custom-header>후기/평점 작성</ion-custom-header>
+    <ion-custom-header>후기</ion-custom-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">후기/평점 작성</ion-title>
-        </ion-toolbar>
-      </ion-header>
       <ion-custom-body class="justify-center">
         <form v-if="globalState.isLogined" @submit.prevent="checkAndAddReview">
           <div>
@@ -53,9 +48,9 @@
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
   IonPage, 
-  IonHeader, 
-  IonToolbar, 
-  IonTitle, 
+  //IonHeader, 
+  //IonToolbar, 
+  //IonTitle, 
   IonContent,
   IonSelect, 
   IonSelectOption, 
@@ -82,10 +77,10 @@ export default {
   name: 'ReviewAdd',
 
   components: { 
-    IonHeader, 
-    IonToolbar,
+    //IonHeader, 
+    //IonToolbar,
     IonCustomLink, 
-    IonTitle,
+    //IonTitle,
     IonSelect, 
     IonSelectOption, 
     IonLabel, 

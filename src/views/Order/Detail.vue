@@ -1,13 +1,7 @@
 <template>
   <ion-page>
-    <ion-custom-header>의뢰 - 상세보기</ion-custom-header>
+    <ion-custom-header>의뢰 정보</ion-custom-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">의뢰 - 상세보기</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
       <ion-custom-body class="justify-center">
         <div class="container mx-auto">
           <div class="px-6 py-6 bg-white rounded-lg shadow-md">
@@ -98,10 +92,10 @@
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
   IonPage, 
-  IonHeader,
+  //IonHeader,
   IonListHeader,
-  IonToolbar, 
-  IonTitle, 
+  //IonToolbar, 
+  //IonTitle, 
   IonContent,
   IonList,
   IonItem,
@@ -125,10 +119,10 @@ export default  {
     IonCustomHeader, 
     IonCustomLink,
     IonPage, 
-    IonHeader,
+    //IonHeader,
     IonListHeader,
-    IonToolbar, 
-    IonTitle, 
+    //IonToolbar, 
+    //IonTitle, 
     IonContent,
     IonList,
     IonItem,

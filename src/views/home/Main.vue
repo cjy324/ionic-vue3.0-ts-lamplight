@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-custom-header>홈 - 메인</ion-custom-header>
+    <ion-custom-header>홈</ion-custom-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>

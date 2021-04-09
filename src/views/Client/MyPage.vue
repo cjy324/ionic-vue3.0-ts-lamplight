@@ -1,16 +1,10 @@
 <template>
-  <ion-page >
-    <ion-custom-header></ion-custom-header>
-    <ion-content :fullscreen="true" >
-
-      <ion-custom-body class="justify-center" >
+    <ion-custom-header>내 정보</ion-custom-header>
+    <ion-custom-body class="justify-center" >
+      <ion-content :fullscreen="true">
         <ion-list v-if="globalState.isLogined" >
-              
-          <ion-list-header class="text-xl">
-            MyPage
-          </ion-list-header>
-              
-          <ion-item-divider>
+ 
+          <ion-item-divider class="mt-8">
             <img slot="end" class="h-32 rounded-full mr-4 mb-4" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
           </ion-item-divider>
               
@@ -55,9 +49,10 @@
             </ion-button>
           </div>
         </ion-list>
-      </ion-custom-body>
-    </ion-content>
-  </ion-page>
+      </ion-content>
+    </ion-custom-body>
+    
+
 </template>
 
 <style>
@@ -66,11 +61,11 @@
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
-  IonPage, 
-  IonHeader,
-  IonListHeader,
-  IonToolbar, 
-  IonTitle, 
+  //IonPage, 
+  //IonHeader,
+  //IonListHeader,
+  //IonToolbar, 
+  //IonTitle, 
   IonContent,
   IonList,
   IonItem,
@@ -90,9 +85,9 @@ export default  {
     IonCustomBody, 
     IonCustomHeader, 
     IonCustomLink,
-    IonPage, 
+    //IonPage, 
     //IonHeader,
-    IonListHeader,
+    //IonListHeader,
     //IonToolbar, 
     //IonTitle, 
     IonContent,
