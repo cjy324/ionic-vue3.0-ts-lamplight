@@ -34,10 +34,10 @@
         <div class="flex justify-between border-b-2">
           <ion-buttons >
             <ion-button slot="" :href="'/order/detail?id=' + order.id">
-              <font-awesome-icon class="text-gray-600 ml-4 mr-2" icon="clipboard-list"/>
+              <font-awesome-icon class="text-gray-600 ml-4 mr-2" icon="clipboard-list"/>더보기
             </ion-button>
-            <ion-button v-if="globalState.loginedClient.id == order.clientId" color="" slot="end" :href="'/review/add?relTypeCode=expert&relId=' + order.expertId">
-              <font-awesome-icon class="text-gray-600 mr-2" icon="comment-dots"/>
+            <ion-button v-if="order.stepLevel > 3" color="" slot="end" :href="'/review/add?relTypeCode=expert&relId=' + order.expertId">
+              <font-awesome-icon class="text-gray-600 mr-2" icon="comment-dots"/>후기작성
             </ion-button>
           </ion-buttons>
           <ion-item class="" color="" lines="none">
@@ -69,7 +69,7 @@
           <ion-label color="">
             {{order.extra__clientName}}
           </ion-label>
-          <ion-button v-if="globalState.loginedClient.id == order.clientId" color="" slot="end" :href="'/order/detail?id=' + order.id">
+          <ion-button v-if="globalState.loginedClient.id !== order.clientId" color="" slot="end" :href="'/order/detail?id=' + order.id">
               <font-awesome-icon class="mr-2" icon="phone-alt"/>
               {{order.extra__expertCellphoneNo}}
           </ion-button>

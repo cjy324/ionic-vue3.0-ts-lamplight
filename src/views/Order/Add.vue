@@ -63,9 +63,11 @@
         </div>
         <ion-list>
           <ion-item-divider>
-            <ion-button slot="end" color="light" type="reset" size="small">
-              <font-awesome-icon class="text-gray-600" icon="redo-alt"/>
-            </ion-button>
+            <ion-buttons slot="end" >
+              <ion-button color="medium" type="reset" size="small">
+                초기화<font-awesome-icon class="text-gray-600 ml-2 mr-4" icon="redo-alt"/>
+              </ion-button>
+            </ion-buttons>
           </ion-item-divider>
           <div class="mb-2 px-4">
             <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
