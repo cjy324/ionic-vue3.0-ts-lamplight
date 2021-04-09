@@ -30,6 +30,10 @@
         <ion-searchbar class="ion-searchbar" show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
       </ion-item>
 
+      <div class="w-full border-t-4 border-b-4 text-center bg-gray-600 text-white">
+        Total: {{returnFilteredOrders.length}}
+      </div>
+      
       <template v-bind:key="order.id" v-for="order in returnFilteredOrders">
       <div class="orderList">
       <!--진행단계-->
@@ -43,7 +47,7 @@
             </ion-button>
           </ion-buttons>
           <ion-item class="" color="" lines="none">
-            <ion-chip color="secondary">
+            <ion-chip color="tertiary">
               <font-awesome-icon class="text-lg mr-2" icon="caret-right"/>
               <ion-label color="">
                 {{returnToString(order.stepLevel)}}

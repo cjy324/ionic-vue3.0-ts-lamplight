@@ -10,7 +10,7 @@
 
         <div class="flex justify-end mr-2 mt-2">
           <ion-buttons color="light">
-            <ion-button :href="'/order/modify?id=' + state.order.id">
+            <ion-button v-if="state.order.stepLevel < 4" :href="'/order/modify?id=' + state.order.id">
               수정<font-awesome-icon class="text-lg h-7 ml-2" icon="edit" />
             </ion-button>
             <ion-button v-if="state.order.stepLevel < 3" @click="deleteOrder(globalState.loginedClient.id)">

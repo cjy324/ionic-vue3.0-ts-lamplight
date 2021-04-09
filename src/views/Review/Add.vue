@@ -3,6 +3,11 @@
     <ion-custom-header>후기</ion-custom-header>
     <ion-content :fullscreen="true">
       <ion-custom-body class="justify-center">
+        <div class="logo-box text-center flex justify-center items-center mb-3">
+            <div class="w-32 text-2xl font-bold border-b">
+              REVIEW
+            </div>
+        </div>
         <form v-if="globalState.isLogined" @submit.prevent="checkAndAddReview">
           <div>
             <ion-item>
@@ -27,10 +32,7 @@
             <ion-button type="submit" expand="block">작성 완료</ion-button>
           </div>
           <div class="px-4">
-            <ion-button color="secondary" type="reset" expand="block">초기화</ion-button>
-          </div>
-          <div class="px-4">
-            <ion-button href="/order/list" color="secondary" type="button" expand="block">취소</ion-button>
+            <ion-button class="btn-cancel" href="/order/list" color="" type="button" expand="block">취소</ion-button>
           </div>
         </form>
         <div v-else class="py-2 px-4">
@@ -42,6 +44,9 @@
 </template>
 
 <style>
+.btn-cancel{
+  --background:var(--ion-color-medium-shade)
+}
 </style>
 
 <script lang="ts">

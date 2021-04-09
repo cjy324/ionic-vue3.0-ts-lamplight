@@ -14,6 +14,10 @@
       <ion-searchbar class="ion-searchbar" show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
     </ion-item>
 
+    <div class="w-full border-t-4 border-b-4 text-center bg-gray-600 text-white">
+        Total: {{returnFilteredExperts.length}}
+    </div>
+
     <template v-bind:key="expert.id" v-for="expert in returnFilteredExperts">
     <div class="expertList border-t-2 border-b-8">
 
@@ -61,15 +65,15 @@
           </div>
         </div>
       </ion-item>  
-      <!--후기-->
+      <!--Review-->
       <ion-item lines="none">
       <div class="flex-col w-full">
         <div class="flex justify-between items-end h-8 w-full border-b">
           <span class="text-sm">
-            후기
+            Review
           </span>
           <div class="text-sm cursor-pointer hover:text-blue-500">
-            더보기
+            more
           </div>
         </div>
         <template v-if="expert.extra__reviews.length !== 0">

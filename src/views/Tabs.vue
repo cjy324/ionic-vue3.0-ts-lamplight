@@ -18,10 +18,39 @@
 
         <!-- 의뢰 -->
         <ion-fab vertical="center" horizontal="center" >
-          <ion-fab-button tab="Order" :href="tabsState.hrefOrder">
+          <ion-fab-button>
             <font-awesome-icon class="text-lg h-7" icon="clipboard-check" />
           </ion-fab-button>
+          <ion-fab-list side="top">
+          <ion-fab-button tab="Order" :href="tabsState.hrefOrder" color="light">
+            <ion-icon name="logo-vimeo"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button color="light">
+            <ion-icon name="logo-vimeo"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
         </ion-fab>
+
+        <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+        <ion-fab-button color="dark">
+          <ion-icon md="caret-up" ios="chevron-up-circle-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+          <ion-fab-button color="light">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button color="light">
+            <ion-icon name="logo-twitter"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button color="light">
+            <ion-icon name="logo-vimeo"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button color="light">
+            <ion-icon name="logo-google"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+
         <!--리스트-->  
         <ion-tab-button tab="Expert" :href="tabsState.hrefExpert">
           <font-awesome-icon class="text-lg h-7" icon="users" />
@@ -43,7 +72,9 @@ import {
   IonTabButton,
   IonFabButton,
   IonFab,
-  IonTabs, 
+  IonFabList,
+  IonTabs,
+  IonIcon, 
   //IonPage,
   IonApp, 
 } from '@ionic/vue';
@@ -60,8 +91,10 @@ export default {
     IonTabButton,
     IonFabButton,
     IonFab,
+    IonFabList,
     //IonPage,
     IonApp,
+    IonIcon,
   },
   setup() {
     const globalState = useGlobalState();
