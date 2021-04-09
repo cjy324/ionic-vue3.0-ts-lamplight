@@ -1,81 +1,79 @@
 <template>
-  <ion-page>
-    <ion-custom-header>정보 수정</ion-custom-header>
+  <ion-custom-header>정보 수정</ion-custom-header>
+  <ion-custom-body class="justify-center mt-8">
     <ion-content :fullscreen="true">
-      <ion-custom-body class="justify-center mt-8">
-        <form v-if="globalState.isLogined" @submit.prevent="checkAndModify">
-          <div>
-            <ion-item-divider>
-              <img slot="end" class="h-32 rounded-full mr-4" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
-            </ion-item-divider>
-            
-            <ion-item>
-              <ion-label position="stacked">프로필 이미지</ion-label>
-              <input class="mt-3" ref="profileImgElRef" type="file">
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="stacked">아이디(변경불가)</ion-label>
-              <ion-input readonly>{{state.client.loginId}}</ion-input>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="stacked">비밀번호</ion-label>
-              <ion-input v-model="modifyFormState.loginPw" minlength="8" type="password" placeholder="비밀번호를 입력해주세요."></ion-input>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="stacked">비밀번호 확인</ion-label>
-              <ion-input v-model="modifyFormState.loginPwConfirm" minlength="8" type="password" placeholder="비밀번호 확인을 해주세요."></ion-input>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="stacked">이름</ion-label>
-              <ion-input v-model="modifyFormState.name" minlength="2" :placeholder="state.client.name"></ion-input>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="stacked">연락처</ion-label>
-              <ion-input v-model="modifyFormState.cellphoneNo" type="tel" maxlength="11" :placeholder="state.client.cellphoneNo"></ion-input>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="stacked">이메일</ion-label>
-              <ion-input v-model="modifyFormState.email" type="email" :placeholder="state.client.email"></ion-input>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="stacked">지역</ion-label>
-              <ion-input v-model="modifyFormState.region" :placeholder="state.client.region"></ion-input>
-            </ion-item>
-          </div>
-          <ion-list>
-            <ion-item-divider>
-              <ion-button slot="end" color="light" type="reset" size="small">
-                <font-awesome-icon class="text-gray-600" icon="redo-alt"/>
-              </ion-button>
-            </ion-item-divider>
-            <div class="mb-2 px-4">
-              <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
-            </div>
-            <div class="px-4">
-              <ion-button class="btn-cancel" :href="'/client/myPage?id=' + globalState.loginedClient.id" color="" type="button" expand="block">취소</ion-button>
-            </div>
-          </ion-list>
-        </form>
-        <div v-else class="py-2 px-4">
-          로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
+      <form v-if="globalState.isLogined" @submit.prevent="checkAndModify">
+        <div>
+          <ion-item-divider>
+            <img slot="end" class="h-32 rounded-full mr-4" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
+          </ion-item-divider>
+          
+          <ion-item>
+            <ion-label position="stacked">프로필 이미지</ion-label>
+            <input class="mt-3" ref="profileImgElRef" type="file">
+          </ion-item>
         </div>
-      </ion-custom-body>
+        <div>
+          <ion-item>
+            <ion-label position="stacked">아이디(변경불가)</ion-label>
+            <ion-input readonly>{{state.client.loginId}}</ion-input>
+          </ion-item>
+        </div>
+        <div>
+          <ion-item>
+            <ion-label position="stacked">비밀번호</ion-label>
+            <ion-input v-model="modifyFormState.loginPw" minlength="8" type="password" placeholder="비밀번호를 입력해주세요."></ion-input>
+          </ion-item>
+        </div>
+        <div>
+          <ion-item>
+            <ion-label position="stacked">비밀번호 확인</ion-label>
+            <ion-input v-model="modifyFormState.loginPwConfirm" minlength="8" type="password" placeholder="비밀번호 확인을 해주세요."></ion-input>
+          </ion-item>
+        </div>
+        <div>
+          <ion-item>
+            <ion-label position="stacked">이름</ion-label>
+            <ion-input v-model="modifyFormState.name" minlength="2" :placeholder="state.client.name"></ion-input>
+          </ion-item>
+        </div>
+        <div>
+          <ion-item>
+            <ion-label position="stacked">연락처</ion-label>
+            <ion-input v-model="modifyFormState.cellphoneNo" type="tel" maxlength="11" :placeholder="state.client.cellphoneNo"></ion-input>
+          </ion-item>
+        </div>
+        <div>
+          <ion-item>
+            <ion-label position="stacked">이메일</ion-label>
+            <ion-input v-model="modifyFormState.email" type="email" :placeholder="state.client.email"></ion-input>
+          </ion-item>
+        </div>
+        <div>
+          <ion-item>
+            <ion-label position="stacked">지역</ion-label>
+            <ion-input v-model="modifyFormState.region" :placeholder="state.client.region"></ion-input>
+          </ion-item>
+        </div>
+        <ion-list>
+          <ion-item-divider>
+            <ion-button slot="end" color="light" type="reset" size="small">
+              <font-awesome-icon class="text-gray-600" icon="redo-alt"/>
+            </ion-button>
+          </ion-item-divider>
+          <div class="mb-2 px-4">
+            <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
+          </div>
+          <div class="px-4">
+            <ion-button class="btn-cancel" :href="'/client/myPage?id=' + globalState.loginedClient.id" color="" type="button" expand="block">취소</ion-button>
+          </div>
+        </ion-list>
+      </form>
+      <div v-else class="py-2 px-4">
+        로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
+      </div>
     </ion-content>
-  </ion-page>
+  </ion-custom-body>
 </template>
 
 <style>
@@ -91,10 +89,10 @@
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
-  IonPage, 
-  IonHeader, 
-  IonToolbar, 
-  IonTitle,
+  //IonPage, 
+  //IonHeader, 
+  //IonToolbar, 
+  //IonTitle,
   IonList,
   IonContent,
   IonLabel, 
@@ -138,7 +136,7 @@ export default {
     IonItem, 
     IonButton, 
     IonContent, 
-    IonPage, 
+    //IonPage, 
     IonCustomBody, 
     IonCustomHeader,
     IonCustomLink, 
