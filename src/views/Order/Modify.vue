@@ -1,9 +1,9 @@
 <template>
-
+  <ion-page>
     <ion-custom-header>의뢰 수정</ion-custom-header>
       <ion-custom-body class="justify-center">
         <ion-content v-if="globalState.isLogined" :fullscreen="true">
-        <form @submit.prevent="checkAndModifyOrder">
+        <form @submit.prevent="checkAndModifyOrder" class="mb-24">
           <div>
             <ion-item>
               <ion-label position="stacked">고인 이름</ion-label>
@@ -62,7 +62,7 @@
               <ion-textarea v-model="orderModifyFormState.body" :placeholder="state.order.body"></ion-textarea>
             </ion-item>
           </div>
-          <div class="py-2 px-4">
+          <div class="mt-2 mb-2 px-4">
             <ion-button class="btn-success" type="submit" expand="block">수정 완료</ion-button>
           </div>
           <div class="px-4">
@@ -73,7 +73,8 @@
     <div v-else class="py-2 px-4">
       로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
     </div>
-  </ion-custom-body>
+    </ion-custom-body>
+  </ion-page>
 </template>
 
 <style>
@@ -88,6 +89,7 @@
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
+  IonPage,
   IonContent,
   IonSelect, 
   IonSelectOption, 
@@ -121,6 +123,7 @@ export default {
   name: 'OrderModify',
 
   components: { 
+    IonPage,
     IonCustomLink, 
     IonSelect, 
     IonSelectOption, 

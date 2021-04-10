@@ -1,4 +1,5 @@
 <template>
+<ion-page>
   <ion-custom-header>정보 수정</ion-custom-header>
   <ion-custom-body class="justify-center mt-8">
     <ion-content v-if="globalState.isLogined" :fullscreen="true" >
@@ -6,11 +7,6 @@
         <div >
           <ion-item-divider>
             <img slot="start" class="h-32 rounded-full" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
-            <ion-buttons slot="end" >
-              <ion-button color="medium" type="reset" size="small">
-                초기화<font-awesome-icon class="text-gray-600 ml-2 mr-4" icon="redo-alt"/>
-              </ion-button>
-            </ion-buttons>
           </ion-item-divider>
           
           <ion-item>
@@ -74,6 +70,7 @@
       로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
     </div>
   </ion-custom-body>
+  </ion-page>
 </template>
 
 <style>
@@ -89,7 +86,7 @@
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
-  //IonPage, 
+  IonPage, 
   //IonHeader, 
   //IonToolbar, 
   //IonTitle,
@@ -100,7 +97,7 @@ import {
   IonItemDivider, 
   IonItem, 
   IonButton,
-  IonButtons, 
+  //IonButtons, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
@@ -136,9 +133,9 @@ export default {
     IonItemDivider,  
     IonItem, 
     IonButton,
-    IonButtons,  
+    //IonButtons,  
     IonContent, 
-    //IonPage, 
+    IonPage, 
     IonCustomBody, 
     IonCustomHeader,
     IonCustomLink, 

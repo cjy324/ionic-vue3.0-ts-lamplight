@@ -40,7 +40,7 @@
       
 </template>
 
-<style>
+<style scoped>
 .btn-primary{
   --background:var(--ion-color-tertiary-shade)
 }

@@ -1,4 +1,5 @@
 <template>
+  <ion-page>
     <ion-custom-header>내 정보</ion-custom-header>
     <ion-custom-body class="justify-center" >
       <ion-content v-if="globalState.isLogined" :fullscreen="true">
@@ -54,7 +55,7 @@
       </div>
     </ion-custom-body>
     
-
+  </ion-page>
 </template>
 
 <style>
@@ -63,7 +64,7 @@
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
-  //IonPage, 
+  IonPage, 
   //IonHeader,
   //IonListHeader,
   //IonToolbar, 
@@ -79,6 +80,7 @@ import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { reactive, onMounted } from 'vue';
 import { Client } from '@/types'
+import * as util from '@/utils';
 
 export default  {
   name: 'MyPage',
@@ -87,7 +89,7 @@ export default  {
     IonCustomBody, 
     IonCustomHeader, 
     IonCustomLink,
-    //IonPage, 
+    IonPage, 
     //IonHeader,
     //IonListHeader,
     //IonToolbar, 
@@ -113,6 +115,12 @@ export default  {
 
     async function loadClient(id: number) {
       const axRes = await mainService.client_detail(id)
+
+      if(axRes.data.fail){
+        util.showAlert(axRes.data.msg)
+        return
+      }
+
       state.client = axRes.data.body.client;
     }
     onMounted(() => {

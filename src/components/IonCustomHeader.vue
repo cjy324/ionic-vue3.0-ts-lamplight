@@ -1,4 +1,5 @@
 <template>
+
   <ion-header>
     <ion-toolbar>
       <div class="ml-2">
@@ -22,6 +23,7 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
+  
 </template>
 
 <script lang="ts">
@@ -30,7 +32,8 @@ import { useMainService } from '@/services'
 import { useRouter } from 'vue-router'
 import { 
   IonHeader, 
-  IonToolbar, 
+  IonToolbar,
+  //IonPage, 
   //IonTitle,
   //IonItem,
   //IonMenuButton,
@@ -43,6 +46,7 @@ export default {
   name: 'IonCustomHeader',
 
   components: { 
+    //IonPage, 
     IonHeader, 
     IonToolbar, 
     //IonTitle,

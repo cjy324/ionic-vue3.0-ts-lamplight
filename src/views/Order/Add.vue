@@ -1,8 +1,9 @@
 <template>
+<ion-page>
   <ion-custom-header>의뢰요청</ion-custom-header>
   <ion-custom-body class="justify-center">
     <ion-content v-if="globalState.isLogined" :fullscreen="true">
-      <form @submit.prevent="checkAndAddOrder" class="mb-14">
+      <form @submit.prevent="checkAndAddOrder" class="mb-24">
         <div>
           <ion-item>
             <ion-label position="floating">고인 이름</ion-label>
@@ -62,13 +63,6 @@
           </ion-item>
         </div>
         <ion-list>
-          <ion-item-divider>
-            <ion-buttons slot="end" >
-              <ion-button color="medium" type="reset" size="small">
-                초기화<font-awesome-icon class="text-gray-600 ml-2 mr-4" icon="redo-alt"/>
-              </ion-button>
-            </ion-buttons>
-          </ion-item-divider>
           <div class="mb-2 px-4">
             <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
           </div>
@@ -82,6 +76,7 @@
         로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
     </div>
   </ion-custom-body>
+</ion-page>
 </template>
 
 <style>
@@ -96,6 +91,7 @@
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
+  IonPage,
   IonContent,
   IonSelect, 
   IonSelectOption, 
@@ -137,7 +133,7 @@ export default {
     IonItem, 
     IonButton, 
     IonContent, 
-    //IonPage, 
+    IonPage, 
     IonCustomBody, 
     IonCustomHeader 
   },

@@ -4,17 +4,17 @@
       <ion-tabs class="ion-tabs">
         <ion-tab-bar slot="bottom" class="">
           <!--홈-->
-          <ion-tab-button tab="Home" :href="tabsState.hrefHome">
+          <ion-tab-button tab="home" :href="tabsState.hrefHome">
             <font-awesome-icon class="text-lg h-7" icon="home" />
           </ion-tab-button>
 
           <!--회원-->
-          <ion-tab-button tab="Member" :href="tabsState.hrefMember">
+          <ion-tab-button tab="member" :href="tabsState.hrefMember">
             <font-awesome-icon class="text-lg h-7" icon="user-circle" />
           </ion-tab-button>
         
           <!--none-->
-          <ion-tab-button disabled="true">
+          <ion-tab-button disabled>
           </ion-tab-button>
 
           <!-- 의뢰 -->
@@ -23,12 +23,12 @@
           </ion-tab-button> -->
 
           <!--리스트-->  
-          <ion-tab-button tab="Expert" :href="tabsState.hrefExpert">
+          <ion-tab-button tab="expert" :href="tabsState.hrefExpert">
             <font-awesome-icon class="text-lg h-7" icon="users" />
           </ion-tab-button>
 
           <!--설정-->
-          <ion-tab-button tab="Setting" :href="tabsState.hrefSetting">
+          <ion-tab-button tab="setting" :href="tabsState.hrefSetting">
             <font-awesome-icon class="text-lg h-7" icon="cog" />
           </ion-tab-button>
         
@@ -108,8 +108,8 @@ export default {
     // if ( route.path.startsWith("/Home") ) {
     //   tabsState.hrefHome = route.fullPath;
     // }
-    // else if ( route.path.startsWith("/Client") ) {
-    //   tabsState.hrefClient = route.fullPath;
+    // else if ( route.path.startsWith("/Member") ) {
+    //   tabsState.hrefMember = route.fullPath;
     // }
     // else if ( route.path.startsWith("/Expert") ) {
     //   tabsState.hrefExpert = route.fullPath;

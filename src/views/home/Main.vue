@@ -1,4 +1,5 @@
 <template>
+  <ion-page>
   <ion-custom-header>홈</ion-custom-header>
   <div class="w-full text-center bg-gray-600 text-white">
     <div class="h-32 flex items-center justify-center">
@@ -23,7 +24,7 @@
         </div>
 
         <div class="w-full px-3">
-          <ion-button v-if="globalState.isLogined && globalState.memberType == 'client'" color="dark" fill="outline" expand="block" @click="logout">Log-Out</ion-button>
+          <ion-button v-if="globalState.isLogined && globalState.memberType == 'client'" color="dark" fill="outline" expand="block" href="client/myPage" >MyPage</ion-button>
           <ion-button v-else color="" fill="outline" expand="block" href="client/login" >Log-In</ion-button>
         </div>
       </ion-card-content>
@@ -40,7 +41,7 @@
         </div>
 
         <div class="w-full px-3">
-          <ion-button v-if="globalState.isLogined && globalState.memberType == 'expert'" color="dark" fill="outline" expand="block" @click="logout">Log-Out</ion-button>
+          <ion-button v-if="globalState.isLogined && globalState.memberType == 'expert'" color="dark" fill="outline" expand="block"  href="expert/myPage" >MyPage</ion-button>
           <ion-button v-else color="" fill="outline" expand="block" href="expert/login" >Log-In</ion-button>
         </div>
       </ion-card-content>
@@ -95,25 +96,7 @@
       </ion-card-content>
     </ion-card>
   </ion-custom-grid-body>
-
-    <!-- <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">홈 - 메인</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-custom-body class="justify-center">
-        <div v-if="globalState.isLogined" class="bg-green-500">
-          로그인 회원: {{globalState.loginedClient.name}}
-        </div>
-        <div v-else class="bg-red-500">
-          로그인 상태: {{globalState.isLogined}}
-        </div>
-        <div v-if="globalState.isLogined" class="logo-box text-center">
-          <ion-button @click="logout" expand="block">로그아웃</ion-button>
-        </div>
-      </ion-custom-body>
-    </ion-content> -->
+  </ion-page>
 </template>
 
 <style>
@@ -127,6 +110,7 @@
 import { IonCustomHeader, IonCustomGridBody } from '@/components/';
 import { 
   //IonContent,
+  IonPage,
   IonButton,
   IonCard, 
   IonCardContent, 
@@ -141,6 +125,7 @@ export default  {
   name: 'Main',
   
   components: { 
+    IonPage,
     //IonContent, 
     IonCustomHeader,
     IonCustomGridBody,

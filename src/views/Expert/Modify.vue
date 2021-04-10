@@ -1,4 +1,5 @@
 <template>
+<ion-page>
   <ion-custom-header>정보 수정</ion-custom-header>
   <ion-custom-body class="justify-center mt-8">
     <ion-content v-if="globalState.isLogined" :fullscreen="true" >
@@ -74,6 +75,7 @@
       로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
     </div>
   </ion-custom-body>
+  </ion-page>
 </template>
 
 <style>
@@ -89,7 +91,7 @@
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
-  //IonPage, 
+  IonPage, 
   //IonHeader, 
   //IonToolbar, 
   //IonTitle,
@@ -138,7 +140,7 @@ export default {
     IonButton,
     IonButtons,  
     IonContent, 
-    //IonPage, 
+    IonPage, 
     IonCustomBody, 
     IonCustomHeader,
     IonCustomLink, 

@@ -1,4 +1,5 @@
 <template>
+<ion-page>
   <ion-custom-header>의뢰 정보</ion-custom-header>
   <ion-custom-body class="justify-center">
     <ion-content v-if="globalState.isLogined" :fullscreen="true">
@@ -8,13 +9,15 @@
           <ion-label color="light">진행 현황 : {{returnToString(state.order.stepLevel)}}</ion-label>
         </ion-item-divider>
 
-        <div class="flex justify-end mr-2 mt-2">
+        <div class="flex justify-end mr-2 mt-2 pb-1">
           <ion-buttons color="light">
             <ion-button v-if="state.order.stepLevel < 4" :href="'/order/modify?id=' + state.order.id">
-              수정<font-awesome-icon class="text-lg h-7 ml-2" icon="edit" />
+              <font-awesome-icon class="text-lg mr-1" icon="edit" />
+              <span class="text-gray-600 text-sm">수정</span>
             </ion-button>
             <ion-button v-if="state.order.stepLevel < 3" @click="deleteOrder(globalState.loginedClient.id)">
-              취소<font-awesome-icon class="text-lg h-7 ml-1" icon="ban" />
+              <font-awesome-icon class="text-lg mr-1" icon="ban" />
+              <span class="text-gray-600 text-sm">취소</span>
             </ion-button>
           </ion-buttons>
         </div>
@@ -102,6 +105,7 @@
       로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
     </div>
   </ion-custom-body>
+</ion-page>
 </template>
 
 <style>
@@ -128,7 +132,7 @@
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
-  //IonPage, 
+  IonPage, 
   //IonHeader,
   //IonListHeader,
   //IonToolbar, 
@@ -156,7 +160,7 @@ export default  {
     IonCustomBody, 
     IonCustomHeader, 
     IonCustomLink,
-    //IonPage, 
+    IonPage, 
     //IonHeader,
     //IonListHeader,
     //IonToolbar, 

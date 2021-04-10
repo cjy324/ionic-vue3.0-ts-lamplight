@@ -1,4 +1,5 @@
 <template>
+<ion-page>
   <ion-custom-header>가입</ion-custom-header>
   <ion-custom-body class="justify-center mt-6">
     <ion-content :fullscreen="true">
@@ -65,6 +66,7 @@
       </form>
     </ion-content>
   </ion-custom-body>
+</ion-page>
 </template>
 
 <style>
@@ -73,7 +75,7 @@
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader } from '@/components/';
 import { 
-  //IonPage, 
+  IonPage, 
   //IonHeader, 
   //IonToolbar, 
   //IonTitle, 
@@ -119,7 +121,7 @@ export default {
     IonItem, 
     IonButton, 
     IonContent, 
-    //IonPage, 
+    IonPage, 
     IonCustomBody, 
     IonCustomHeader 
   },

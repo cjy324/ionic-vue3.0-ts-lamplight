@@ -1,4 +1,5 @@
 <template>
+<ion-page>
 <ion-custom-header>의뢰 현황</ion-custom-header>
 
   <ion-custom-body class="justify-center">
@@ -30,20 +31,22 @@
         <ion-searchbar class="ion-searchbar" show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
       </ion-item>
 
-      <div class="w-full border-t-4 border-b-4 text-center bg-gray-600 text-white">
+      <div class="w-full border-t-4 border-b-4 text-center py-2">
         Total: {{returnFilteredOrders.length}}
       </div>
       
       <template v-bind:key="order.id" v-for="order in returnFilteredOrders">
       <div class="orderList">
       <!--진행단계-->
-        <div class="orderList_head flex justify-between border-b-2">
+        <div class="orderList_head flex justify-between items-center h-20 border-b-2">
           <ion-buttons >
-            <ion-button slot="" :href="'/order/detail?id=' + order.id">
-              <font-awesome-icon class="text-gray-600 ml-4 mr-2" icon="clipboard-list"/>더보기
+            <ion-button slot="" :href="'/order/detail?id=' + order.id" color="dark">
+              <font-awesome-icon class="text-gray-600 ml-4 mr-1" icon="clipboard"/>
+              <span class="text-gray-600 text-sm">자세히</span>
             </ion-button>
-            <ion-button v-if="order.stepLevel > 3" color="" slot="end" :href="'/review/add?relTypeCode=expert&relId=' + order.expertId">
-              <font-awesome-icon class="text-gray-600 mr-2" icon="comment-dots"/>후기작성
+            <ion-button v-if="order.stepLevel > 3" color="dark" slot="end" :href="'/review/add?relTypeCode=expert&relId=' + order.expertId">
+              <font-awesome-icon class="text-gray-600 mr-1" icon="comment-dots"/>
+              <span class="text-gray-600 text-sm">리뷰작성</span>
             </ion-button>
           </ion-buttons>
           <ion-item class="" color="" lines="none">
@@ -57,7 +60,7 @@
         </div>
 
         <div class="orderList_body">
-        <ion-item color="">
+        <ion-item color="" lines="none">
           <ion-chip color="dark">
             <ion-label color="">
               고인명
@@ -67,7 +70,7 @@
             {{order.deceasedName}}
           </ion-label>
         </ion-item>
-        <ion-item color="">
+        <ion-item color="" lines="none">
           <ion-chip color="dark">
             <ion-label color="">
               의뢰인
@@ -81,7 +84,7 @@
               {{order.extra__expertCellphoneNo}}
           </ion-button>
         </ion-item>
-        <ion-item color="">
+        <ion-item color="" lines="none">
           <ion-chip color="dark">
             <ion-label color="">
               지도사
@@ -95,7 +98,7 @@
             {{order.extra__expertCellphoneNo}}
           </ion-button>
         </ion-item>
-        <ion-item color="">
+        <ion-item color="" lines="none">
           <ion-chip color="dark">
             <ion-label color="">
               지역
@@ -118,7 +121,7 @@
 
         </div>
         
-          <div class="w-full px-4 pb-4 mb-2 border-b-8" v-if="globalState.loginedClient.id == order.clientId">
+          <div class="w-full px-10 pb-4 mb-2 mt-4 border-b-8" v-if="globalState.loginedClient.id == order.clientId">
             <ion-button v-if="globalState.memberType == 'client'" :class="returnColorByLevel(order.stepLevel)" slot="end" expand="block" @click="changeStepLevel(order.id, order.stepLevel)">
               {{returnToString(order.stepLevel)}}
             </ion-button>
@@ -148,7 +151,7 @@
       로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
     </div>
   </ion-custom-body>
-
+</ion-page>
 </template>
 
 <style>
@@ -181,6 +184,7 @@
 <script lang="ts">
 import { IonCustomHeader, IonCustomBody, IonCustomLink, IonCustomPopver } from '@/components/';
 import { 
+  IonPage,
   IonSelect, 
   IonSelectOption, 
   IonSearchbar, 
@@ -215,7 +219,8 @@ const useSearchState = () => {
 export default  {
   name: 'OrderList',
   
-  components: { 
+  components: {
+    IonPage, 
     IonSelect, 
     IonSelectOption,
     IonSearchbar, 

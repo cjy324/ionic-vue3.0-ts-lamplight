@@ -1,4 +1,5 @@
 <template>
+<ion-page>
 <ion-custom-header>지도사 현황</ion-custom-header>
 <ion-custom-body class="justify-center">
 <ion-content :fullscreen="true">
@@ -14,27 +15,29 @@
       <ion-searchbar class="ion-searchbar" show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
     </ion-item>
 
-    <div class="w-full border-t-4 border-b-4 text-center bg-gray-600 text-white">
+    <div class="w-full border-t-4 border-b-2 text-center py-2">
         Total: {{returnFilteredExperts.length}}
     </div>
 
     <template v-bind:key="expert.id" v-for="expert in returnFilteredExperts">
     <div class="expertList border-t-2 border-b-8">
 
-    <div class="expertList_head">
+    <div class="expertList_head border-b mb-3">
       <div class="w-full flex justify-end">
         <ion-buttons >
-          <ion-button slot="" :href="'/expert/profile?id=' + expert.id">
-            <font-awesome-icon class="text-gray-600 mr-1" icon="user-check"/>프로필
+          <ion-button color="dark" slot="" :href="'/expert/profile?id=' + expert.id">
+            <font-awesome-icon class="text-gray-600 mr-1 text-sm" icon="user-check"/>
+            <span class="text-gray-600 text-sm">프로필</span>
           </ion-button>
-          <ion-button color="" slot="end" :href="'/order/add?expertId=' + expert.id + '&clientId=' + globalState.loginedClient.id">
-            <font-awesome-icon class="text-gray-600 mr-1" icon="edit"/>의뢰
+          <ion-button color="dark" slot="end" :href="'/order/add?expertId=' + expert.id + '&clientId=' + globalState.loginedClient.id">
+            <font-awesome-icon class="text-gray-600 mr-1 text-sm" icon="edit"/>
+            <span class="text-gray-600 text-sm">의뢰</span>
           </ion-button>
         </ion-buttons>
       </div>
     </div>
 
-    <div class="expertList_body">
+    <div class="expertList_body ">
       <!--정보-->
       <ion-item lines="none">
         <div class="w-36">
@@ -42,7 +45,7 @@
         </div>
         <div class="flex-col w-full">
           <span class="ml-5 font-bold text-gray-700 border-b-2">
-            {{expert.name}}
+            {{expert.name}}님
           </span>
           <div class="flex ml-2">
             <ion-chip color="primary">
@@ -56,7 +59,7 @@
         <!--평점--> 
         <div class="w-32">
           <div class="flex justify-center items-center w-full text-center">
-            <div class="border rounded-full h-14 w-14 flex justify-center items-center mr-4 mt-2">
+            <div class="border border-gray-500 rounded-full h-14 w-14 flex justify-center items-center mr-4 mt-2">
               <div class="text-sm text-gray-500">
                 <span class="">평점</span>
                 {{ expert.extra__ratingPoint.toFixed(1) }}/5
@@ -70,11 +73,8 @@
       <div class="flex-col w-full">
         <div class="flex justify-between items-end h-8 w-full border-b">
           <span class="text-sm">
-            Review
+            후기
           </span>
-          <div class="text-sm cursor-pointer hover:text-blue-500">
-            more
-          </div>
         </div>
         <template v-if="expert.extra__reviews.length !== 0">
         <div class="border-b border-t bg-gray-100 mb-1" v-bind:key="review.id" v-for="review in expert.extra__reviews.slice(0, 3)">
@@ -111,6 +111,7 @@
   </ion-list>
 </ion-content>
 </ion-custom-body>
+</ion-page>
 </template>
 
 <style>
@@ -120,8 +121,9 @@
 </style>
 
 <script lang="ts">
-import { IonCustomHeader } from '@/components/';
+import { IonCustomHeader, IonCustomBody } from '@/components/';
 import { 
+  IonPage,
   IonSelect, 
   IonSelectOption, 
   IonSearchbar, 
@@ -152,11 +154,13 @@ const useSearchState = () => {
 export default  {
   name: 'ExpertList',
   
-  components: { 
+  components: {
+    IonPage, 
     IonSelect, 
     IonSelectOption, 
     IonSearchbar, 
-    IonCustomHeader, 
+    IonCustomHeader,
+    IonCustomBody, 
     IonLabel, 
   //  IonAvatar, 
   //  IonListHeader, 
