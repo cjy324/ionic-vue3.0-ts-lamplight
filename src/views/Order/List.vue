@@ -40,14 +40,18 @@
       <!--진행단계-->
         <div class="orderList_head flex justify-between items-center h-20 border-b-2">
           <ion-buttons >
-            <ion-button slot="" :href="'/order/detail?id=' + order.id" color="dark">
-              <font-awesome-icon class="text-gray-600 ml-4 mr-1" icon="clipboard"/>
-              <span class="text-gray-600 text-sm">자세히</span>
-            </ion-button>
-            <ion-button v-if="order.stepLevel > 3" color="dark" slot="end" :href="'/review/add?relTypeCode=expert&relId=' + order.expertId">
-              <font-awesome-icon class="text-gray-600 mr-1" icon="comment-dots"/>
-              <span class="text-gray-600 text-sm">리뷰작성</span>
-            </ion-button>
+            <router-link :to="'/order/detail?id=' + order.id">
+              <ion-button slot="" color="dark">
+                <font-awesome-icon class="text-gray-600 ml-4 mr-1" icon="clipboard"/>
+                <span class="text-gray-600 text-sm">자세히</span>
+              </ion-button>
+            </router-link>
+            <router-link :to="'/review/add?relTypeCode=expert&relId=' + order.expertId">
+              <ion-button v-if="order.stepLevel > 3" color="dark" slot="end">
+                <font-awesome-icon class="text-gray-600 mr-1" icon="comment-dots"/>
+                <span class="text-gray-600 text-sm">리뷰작성</span>
+              </ion-button>
+            </router-link>
           </ion-buttons>
           <ion-item class="" color="" lines="none">
             <ion-chip color="tertiary">
@@ -140,10 +144,12 @@
         현재 진행중인 의뢰가 없습니다.
       </div>
       <div class="px-4">
-        <ion-button class="btn-primary" href="/order/add" color="" type="button" expand="block">
-          <font-awesome-icon class="mr-2" icon="edit"></font-awesome-icon>
-            새 의뢰 요청
-        </ion-button>
+        <router-link to="/order/add">
+          <ion-button class="btn-primary" color="" type="button" expand="block">
+            <font-awesome-icon class="mr-2" icon="edit"></font-awesome-icon>
+              새 의뢰 요청
+          </ion-button>
+        </router-link>
       </div>
     </div>
     </ion-content>

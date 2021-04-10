@@ -19,10 +19,6 @@ const routes: Array<RouteRecordRaw> = [
         redirect: '/home/main'
       },
       {
-        path: 'test',
-        component: () => import('@/views/Home/Test.vue')
-      },
-      {
         path: 'main',
         component: () => import('@/views/Home/Main.vue')
       },

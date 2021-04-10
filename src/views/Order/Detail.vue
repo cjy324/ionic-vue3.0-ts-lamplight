@@ -3,7 +3,7 @@
   <ion-custom-header>의뢰 정보</ion-custom-header>
   <ion-custom-body class="justify-center">
     <ion-content v-if="globalState.isLogined" :fullscreen="true">
-      <ion-list class="mb-14">
+      <ion-list class="mb-24">
         
         <ion-item-divider :class="returnColorByLevel(state.order.stepLevel)">
           <ion-label color="light">진행 현황 : {{returnToString(state.order.stepLevel)}}</ion-label>
@@ -98,6 +98,14 @@
           <ion-button v-if="globalState.memberType == 'expert'" :class="returnColorByLevel(state.order.stepLevel+1)" @click="changeStepLevel(state.order.id, state.order.stepLevel)" expand="block">
             {{returnToString(state.order.stepLevel+1)}}
           </ion-button>
+        </div>
+
+        <div class="px-2">
+          <router-link to="/order/list">
+            <ion-button class="" color="medium" type="button" expand="block">
+              리스트로 돌아가기
+            </ion-button>
+          </router-link>
         </div>
       </ion-list>
     </ion-content>

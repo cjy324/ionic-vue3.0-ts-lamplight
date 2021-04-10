@@ -10,16 +10,20 @@
         </div>
         <div class="mb-2">
           <div class="px-4 mb-2">
-            <ion-button class="btn-primary" size="" color="" href="/client/join" type="button" expand="block">
-              <font-awesome-icon class="mr-2" icon="user"></font-awesome-icon>
-              의뢰인 Sign-Up
-            </ion-button>
+            <router-link to="/client/join">
+              <ion-button class="btn-primary" size="" color="" type="button" expand="block">
+                <font-awesome-icon class="mr-2" icon="user"></font-awesome-icon>
+                의뢰인 Sign-Up
+              </ion-button>
+            </router-link>
           </div>
           <div class="px-4">
-            <ion-button class="btn-secondary" size="" color="" href="/expert/join" type="button" expand="block">
-              <font-awesome-icon class="mr-2" icon="user-tie"></font-awesome-icon>
-              지도사 Sign-Up
-            </ion-button>
+            <router-link to="/expert/join">
+              <ion-button class="btn-secondary" size="" color="" type="button" expand="block">
+                <font-awesome-icon class="mr-2" icon="user-tie"></font-awesome-icon>
+                지도사 Sign-Up
+              </ion-button>
+            </router-link>
           </div>
         </div>
         <div class="w-full text-center py-2 px-6 text-sm">

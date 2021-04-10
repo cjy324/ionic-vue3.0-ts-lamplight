@@ -85,10 +85,12 @@
               {{review.updateDate}} / {{review.extra__clientName}}
             </span>
             <div v-if="globalState.loginedClient.id === review.clientId" class="w-full flex justify-end">
-              <ion-buttons >
-                <ion-button slot="" :href="'/review/modify?relTypeCode=expert&relId=' + expert.id + '&id=' + review.id">
-                  <span class="text-xs">수정</span>
-                </ion-button>
+              <ion-buttons>
+                <router-link :to="'/review/modify?relTypeCode=expert&relId=' + expert.id + '&id=' + review.id">
+                  <ion-button slot="">
+                    <span class="text-xs">수정</span>
+                  </ion-button>
+                </router-link>
                 <ion-button color="" slot="end" @click="doDeleteReview(expert.id, review.id, globalState.loginedClient.id)">
                   <span class="text-xs text-red-900">삭제</span>
                 </ion-button>

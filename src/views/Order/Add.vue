@@ -67,7 +67,11 @@
             <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
           </div>
           <div class="px-4">
-            <ion-button class="btn-cancel" href='/order/main' color="" type="button" expand="block">취소</ion-button>
+            <router-link to="/order/main">
+              <ion-button class="btn-cancel" color="" type="button" expand="block">
+                취소
+              </ion-button>
+            </router-link>
           </div>
         </ion-list>
       </form>

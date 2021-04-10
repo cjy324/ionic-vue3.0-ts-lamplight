@@ -7,9 +7,11 @@
           
           <div class="flex justify-end mr-4 mt-2">
             <ion-buttons>
-              <ion-button :href="'/client/modify?id=' + globalState.loginedClient.id">
-                <font-awesome-icon class="text-lg h-7" icon="user-cog" />
-              </ion-button>
+              <router-link :to="'/client/modify?id=' + globalState.loginedClient.id">
+                <ion-button>
+                  <font-awesome-icon class="text-lg h-7" icon="user-cog" />
+                </ion-button>
+              </router-link>
             </ion-buttons>
           </div>  
 

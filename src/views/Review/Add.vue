@@ -28,9 +28,10 @@
               <ion-textarea class="h-12" v-model="reviewAddFormState.body" placeholder="후기를 입력해주세요."></ion-textarea>
             </ion-item>
           </div>
-          <div class="py-2 px-4">
+          <div class="mb-2 mt-4 px-4">
             <ion-button type="submit" expand="block">작성 완료</ion-button>
           </div>
+          <!--21.04.10 페이지 invisible 버그로 라우터로 이동 적용 못함-->
           <div class="px-4">
             <ion-button class="btn-cancel" href="/order/list" color="" type="button" expand="block">취소</ion-button>
           </div>

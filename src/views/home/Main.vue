@@ -24,8 +24,16 @@
         </div>
 
         <div class="w-full px-3">
-          <ion-button v-if="globalState.isLogined && globalState.memberType == 'client'" color="dark" fill="outline" expand="block" href="client/myPage" >MyPage</ion-button>
-          <ion-button v-else color="" fill="outline" expand="block" href="client/login" >Log-In</ion-button>
+          <router-link v-if="globalState.isLogined && globalState.memberType == 'client'" to="/client/myPage">
+            <ion-button color="dark" fill="outline" expand="block" >
+              MyPage
+            </ion-button>
+          </router-link>
+          <router-link v-else to="/client/login">  
+            <ion-button color="" fill="outline" expand="block">
+              Log-In
+            </ion-button>
+          </router-link>
         </div>
       </ion-card-content>
     </ion-card>
@@ -41,8 +49,16 @@
         </div>
 
         <div class="w-full px-3">
-          <ion-button v-if="globalState.isLogined && globalState.memberType == 'expert'" color="dark" fill="outline" expand="block"  href="expert/myPage" >MyPage</ion-button>
-          <ion-button v-else color="" fill="outline" expand="block" href="expert/login" >Log-In</ion-button>
+          <router-link v-if="globalState.isLogined && globalState.memberType == 'expert'" to="/expert/myPage">
+            <ion-button color="dark" fill="outline" expand="block" >
+              MyPage
+            </ion-button>
+          </router-link>
+          <router-link v-else to="/expert/login">  
+            <ion-button color="" fill="outline" expand="block">
+              Log-In
+            </ion-button>
+          </router-link>
         </div>
       </ion-card-content>
     </ion-card>
@@ -75,7 +91,11 @@
         </div>
 
         <div class="w-full px-3">
-          <ion-button color="" fill="outline" expand="block" href="order/list">List</ion-button>
+          <router-link to="/order/list">
+            <ion-button color="" fill="outline" expand="block">
+              List
+            </ion-button>
+          </router-link>
         </div>
       </ion-card-content>
     </ion-card>
@@ -91,7 +111,11 @@
         </div>
 
         <div class="w-full px-3">
-          <ion-button color="" fill="outline" expand="block" href="expert/list">View</ion-button>
+          <router-link to="/expert/list">
+            <ion-button color="" fill="outline" expand="block">
+              List
+            </ion-button>
+          </router-link>
         </div>
       </ion-card-content>
     </ion-card>
