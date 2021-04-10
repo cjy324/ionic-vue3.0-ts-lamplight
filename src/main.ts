@@ -53,7 +53,9 @@ import {
   faCommentDots,
   faPhoneAlt,
   faCaretRight,
-  faUserCheck,   
+  faUserCheck,
+  faUserFriends,
+  faClipboard,   
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -61,13 +63,15 @@ library.add(
   faHome,
   faUserCircle, 
   faUser,
-  faUsers,  
+  faUsers,
+  faUserFriends,  
   faList, 
   faCheck, 
   faCog, 
   faPlus, 
   faRedoAlt, 
   faClipboardCheck, 
+  faClipboard,
   faClipboardList,
   faEdit,
   faUserTie,

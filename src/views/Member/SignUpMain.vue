@@ -10,25 +10,25 @@
         </div>
         <div class="mb-2">
           <div class="px-4 mb-2">
-            <ion-button class="btn-primary" size="" color="" href="/client/login" type="button" expand="block">
+            <ion-button class="btn-primary" size="" color="" href="/client/join" type="button" expand="block">
               <font-awesome-icon class="mr-2" icon="user"></font-awesome-icon>
-              의뢰인 Log-In
+              의뢰인 Sign-Up
             </ion-button>
           </div>
           <div class="px-4">
-            <ion-button class="btn-secondary" size="" color="" href="/expert/login" type="button" expand="block">
+            <ion-button class="btn-secondary" size="" color="" href="/expert/join" type="button" expand="block">
               <font-awesome-icon class="mr-2" icon="user-tie"></font-awesome-icon>
-              지도사 Log-In
+              지도사 Sign-Up
             </ion-button>
           </div>
         </div>
         <div class="w-full text-center py-2 px-6 text-sm">
-            아직 Lamplight의 회원이 아니라면?
+            이미 Lamplight의 회원이라면?
             <div class="mt-2">
-              <span class="font-semibold">'의뢰인'</span>으로 <ion-custom-link to="/client/join">Sign-Up</ion-custom-link>
+              <span class="font-semibold">'의뢰인'</span>으로 <ion-custom-link to="/client/login">Log-In</ion-custom-link>
             </div>
             <div  class="">
-              <span class="font-semibold">'지도사'</span>로 <ion-custom-link to="/expert/join">Sign-Up</ion-custom-link>
+              <span class="font-semibold">'지도사'</span>로 <ion-custom-link to="/expert/login">Log-In</ion-custom-link>
             </div>
         </div>
       </ion-custom-body>

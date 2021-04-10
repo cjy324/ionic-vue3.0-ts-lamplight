@@ -16,8 +16,8 @@
         <router-link to="/member/main" class="mr-3 font-bold text-md text-blue-600">
           Log-In
         </router-link>
-        <router-link to="/member/main" class="mr-2 font-bold text-md text-gray-600">
-          Sign-In
+        <router-link to="/member/signupMain" class="mr-2 font-bold text-md text-gray-600">
+          Sign-Up
         </router-link>
       </ion-buttons>
     </ion-toolbar>

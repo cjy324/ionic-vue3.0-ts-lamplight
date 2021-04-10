@@ -39,11 +39,11 @@
           <font-awesome-icon class="text-lg h-7" icon="clipboard-check" />
         </ion-fab-button>
         <ion-fab-list side="top">
-          <ion-fab-button href="/order/add" color="light">
-            <ion-icon :icon="createOutline" />
-          </ion-fab-button>
           <ion-fab-button href="/order/list" color="light">
             <font-awesome-icon class="text-lg" icon="clipboard-list" />
+          </ion-fab-button>
+          <ion-fab-button href="/order/add" color="light">
+            <ion-icon :icon="createOutline" />
           </ion-fab-button>
         </ion-fab-list>
       </ion-fab>
