@@ -11,15 +11,15 @@
           <!-- loginedExpert 생성 후 아래 주석 풀 것 -->
           <!-- <img v-if="globalState.memberType == 'expert'" class="rounded-full" :src="mainService.getExpertThumbImgUrlForHeader(globalState.loginedExpert.id)" alt=""> -->
         </ion-button>
-        <ion-button @click="logout" class="mr-2 font-bold text-md text-gray-600">
+        <ion-button @click="logout" class="mr-2 font-bold text-md" color="dark">
           Log-Out
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="primary" v-else>
-        <ion-button href="/member/main" class="mr-3 font-bold text-md text-blue-600">
+        <ion-button href="/member/main" class="mr-3 font-bold text-md" color="primary">
           Log-In
         </ion-button>
-        <ion-button href="/member/signupMain" class="mr-2 font-bold text-md text-gray-600">
+        <ion-button href="/member/signupMain" class="mr-2 font-bold text-md" color="dark">
           Sign-Up
         </ion-button>
       </ion-buttons>
@@ -31,7 +31,7 @@
 <script lang="ts">
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services'
-import { useRouter } from 'vue-router'
+//import { useRouter } from 'vue-router'
 import { 
   IonHeader, 
   IonToolbar,
@@ -62,7 +62,7 @@ export default defineComponent ({
   setup() {
     const globalState = useGlobalState();
     const mainService = useMainService();
-    const router = useRouter();
+    //const router = useRouter();
 
     const logout = () => {
       globalState.setLogouted();

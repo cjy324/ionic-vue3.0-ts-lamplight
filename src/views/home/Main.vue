@@ -86,7 +86,7 @@
         </div>
 
         <div class="w-full px-3">
-          <ion-button color="" fill="outline" expand="block" href="/order/list">
+          <ion-button color="tertiary" fill="outline" expand="block" href="/order/list">
             List
           </ion-button>
         </div>
@@ -104,7 +104,7 @@
         </div>
 
         <div class="w-full px-3">
-          <ion-button color="" fill="outline" expand="block" href="/expert/list">
+          <ion-button color="tertiary" fill="outline" expand="block" href="/expert/list">
             List
           </ion-button>
         </div>

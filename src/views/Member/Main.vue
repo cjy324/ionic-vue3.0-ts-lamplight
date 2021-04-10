@@ -27,13 +27,13 @@
             <div class="mt-2">
               <ion-buttons>
                 <span class="font-semibold">'의뢰인'</span>으로 
-                <ion-button class="underline" href="/client/join">Sign-Up</ion-button>
+                <ion-button class="underline" href="/client/join" color="primary">Sign-Up</ion-button>
               </ion-buttons>
             </div>
             <div class="">
               <ion-buttons>
                 <span class="font-semibold">'지도사'</span>로 
-                <ion-button class="underline" href="/expert/join">Sign-Up</ion-button>
+                <ion-button class="underline" href="/expert/join" color="primary">Sign-Up</ion-button>
               </ion-buttons>
             </div>
         </div>
