@@ -34,6 +34,10 @@
       </ion-custom-body>
     </ion-content>
   </ion-page>
+
+
+  
+      
 </template>
 
 <style>
@@ -50,7 +54,7 @@ import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
   IonPage,  
   IonContent,
-  IonButton, 
+  IonButton,
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 
@@ -63,7 +67,7 @@ export default {
     IonPage, 
     IonCustomBody, 
     IonCustomHeader,
-    IonCustomLink
+    IonCustomLink,
   },
 
   setup() {

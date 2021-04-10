@@ -42,10 +42,7 @@
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
-  IonPage, 
-  IonHeader, 
-  IonToolbar, 
-  IonTitle, 
+  IonPage,  
   IonContent,
   IonButton, 
 } from '@ionic/vue';
@@ -55,10 +52,7 @@ export default {
   name: 'OrderMain',
 
   components: { 
-    //IonHeader, 
-    //IonToolbar,
     IonCustomLink, 
-    //IonTitle,
     IonButton, 
     IonContent, 
     IonPage, 

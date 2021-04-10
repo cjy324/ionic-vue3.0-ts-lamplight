@@ -1,9 +1,9 @@
 <template>
-  <ion-page>
+
     <ion-custom-header>의뢰 수정</ion-custom-header>
-    <ion-content :fullscreen="true">
       <ion-custom-body class="justify-center">
-        <form v-if="globalState.isLogined" @submit.prevent="checkAndModifyOrder">
+        <ion-content v-if="globalState.isLogined" :fullscreen="true">
+        <form @submit.prevent="checkAndModifyOrder">
           <div>
             <ion-item>
               <ion-label position="stacked">고인 이름</ion-label>
@@ -63,33 +63,31 @@
             </ion-item>
           </div>
           <div class="py-2 px-4">
-            <ion-button type="submit" expand="block">수정 완료(의뢰 요청)</ion-button>
+            <ion-button class="btn-success" type="submit" expand="block">수정 완료</ion-button>
           </div>
           <div class="px-4">
-            <ion-button color="secondary" type="reset" expand="block">초기화</ion-button>
-          </div>
-          <div class="px-4">
-            <ion-button href="/expert/list" color="secondary" type="button" expand="block">취소</ion-button>
+            <ion-button class="btn-cancel" href="/order/list" color="" type="button" expand="block">취소</ion-button>
           </div>
         </form>
-        <div v-else class="py-2 px-4">
-          로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
-        </div>
-      </ion-custom-body>
     </ion-content>
-  </ion-page>
+    <div v-else class="py-2 px-4">
+      로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
+    </div>
+  </ion-custom-body>
 </template>
 
 <style>
+.btn-success{
+  --background:var(--ion-color-success-shade)
+}
+.btn-cancel{
+  --background:var(--ion-color-medium-shade)
+}
 </style>
 
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
-  IonPage, 
-  //IonHeader, 
-  //IonToolbar, 
-  //IonTitle, 
   IonContent,
   IonSelect, 
   IonSelectOption, 
@@ -123,10 +121,7 @@ export default {
   name: 'OrderModify',
 
   components: { 
-    //IonHeader, 
-    //IonToolbar,
     IonCustomLink, 
-    //IonTitle,
     IonSelect, 
     IonSelectOption, 
     IonLabel, 
@@ -135,7 +130,6 @@ export default {
     IonItem, 
     IonButton, 
     IonContent, 
-    IonPage, 
     IonCustomBody, 
     IonCustomHeader 
   },

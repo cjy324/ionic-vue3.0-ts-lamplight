@@ -93,6 +93,10 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Expert/Profile.vue')
       },
       {
+        path: 'join',
+        component: () => import('@/views/Expert/Join.vue')
+      },
+      {
         path: 'login',
         component: () => import('@/views/Expert/Login.vue')
       },

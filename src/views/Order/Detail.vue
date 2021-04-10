@@ -1,8 +1,8 @@
 <template>
   <ion-custom-header>의뢰 정보</ion-custom-header>
   <ion-custom-body class="justify-center">
-    <ion-content :fullscreen="true">
-      <ion-list v-if="globalState.isLogined" class="mb-14">
+    <ion-content v-if="globalState.isLogined" :fullscreen="true">
+      <ion-list class="mb-14">
         
         <ion-item-divider :class="returnColorByLevel(state.order.stepLevel)">
           <ion-label color="light">진행 현황 : {{returnToString(state.order.stepLevel)}}</ion-label>
@@ -97,10 +97,10 @@
           </ion-button>
         </div>
       </ion-list>
-      <div v-else class="py-2 px-4">
-        로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
-      </div>
     </ion-content>
+    <div v-else class="py-2 px-4">
+      로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
+    </div>
   </ion-custom-body>
 </template>
 

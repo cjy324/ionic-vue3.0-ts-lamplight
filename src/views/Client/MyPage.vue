@@ -1,8 +1,8 @@
 <template>
     <ion-custom-header>내 정보</ion-custom-header>
     <ion-custom-body class="justify-center" >
-      <ion-content :fullscreen="true">
-        <ion-list v-if="globalState.isLogined" class="mb-14">
+      <ion-content v-if="globalState.isLogined" :fullscreen="true">
+        <ion-list class="mb-14">
           
           <div class="flex justify-end mr-4 mt-2">
             <ion-buttons>
@@ -47,10 +47,11 @@
           </ion-item>
 
         </ion-list>
-        <div v-else class="py-2 px-4">
-          로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
-        </div>
+        
       </ion-content>
+      <div v-else class="py-2 px-4">
+        로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
+      </div>
     </ion-custom-body>
     
 

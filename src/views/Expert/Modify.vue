@@ -1,8 +1,8 @@
 <template>
   <ion-custom-header>정보 수정</ion-custom-header>
   <ion-custom-body class="justify-center mt-8">
-    <ion-content :fullscreen="true" >
-      <form v-if="globalState.isLogined" @submit.prevent="checkAndModify" class="mb-24">
+    <ion-content v-if="globalState.isLogined" :fullscreen="true" >
+      <form @submit.prevent="checkAndModify" class="mb-24">
         <div >
           <ion-item-divider>
             <img slot="start" class="h-32 rounded-full" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
@@ -69,10 +69,10 @@
           </div>
         </ion-list>
       </form>
-      <div v-else class="py-2 px-4">
-        로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
-      </div>
     </ion-content>
+    <div v-else class="py-2 px-4">
+      로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
+    </div>
   </ion-custom-body>
 </template>
 

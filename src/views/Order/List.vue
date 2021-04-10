@@ -2,7 +2,7 @@
 <ion-custom-header>의뢰 현황</ion-custom-header>
 
   <ion-custom-body class="justify-center">
-    <ion-content :fullscreen="true">
+    <ion-content v-if="globalState.isLogined" :fullscreen="true">
     <ion-list v-if="state.orders.length !== 0" class="mb-12">
       <ion-item >
         <ion-label>진행단계</ion-label>
@@ -144,6 +144,9 @@
       </div>
     </div>
     </ion-content>
+    <div v-else class="py-2 px-4">
+      로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
+    </div>
   </ion-custom-body>
 
 </template>
@@ -176,7 +179,7 @@
 </style>
 
 <script lang="ts">
-import { IonCustomHeader, IonCustomBody, IonCustomPopver } from '@/components/';
+import { IonCustomHeader, IonCustomBody, IonCustomLink, IonCustomPopver } from '@/components/';
 import { 
   IonSelect, 
   IonSelectOption, 
@@ -217,7 +220,8 @@ export default  {
     IonSelectOption,
     IonSearchbar, 
     IonCustomHeader,
-    IonCustomBody, 
+    IonCustomBody,
+    IonCustomLink, 
     IonLabel, 
     //IonListHeader, 
     IonList, 

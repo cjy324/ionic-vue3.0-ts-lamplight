@@ -1,8 +1,8 @@
 <template>
   <ion-custom-header>의뢰요청</ion-custom-header>
   <ion-custom-body class="justify-center">
-    <ion-content :fullscreen="true">
-      <form v-if="globalState.isLogined" @submit.prevent="checkAndAddOrder" class="mb-14">
+    <ion-content v-if="globalState.isLogined" :fullscreen="true">
+      <form @submit.prevent="checkAndAddOrder" class="mb-14">
         <div>
           <ion-item>
             <ion-label position="floating">고인 이름</ion-label>
@@ -77,10 +77,10 @@
           </div>
         </ion-list>
       </form>
-      <div v-else class="py-2 px-4">
-        로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
-      </div>
-    </ion-content>  
+    </ion-content>
+    <div v-else class="py-2 px-4">
+        로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
+    </div>
   </ion-custom-body>
 </template>
 
@@ -96,10 +96,6 @@
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
 import { 
-  //IonPage, 
-  //IonHeader, 
-  //IonToolbar, 
-  //IonTitle, 
   IonContent,
   IonSelect, 
   IonSelectOption, 
@@ -132,10 +128,7 @@ export default {
   name: 'OrderAdd',
 
   components: { 
-    //IonHeader, 
-    //IonToolbar,
     IonCustomLink, 
-    //IonTitle,
     IonSelect, 
     IonSelectOption, 
     IonLabel, 

@@ -36,7 +36,7 @@
           </div>
         </form>
         <div v-else class="py-2 px-4">
-          로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
+          로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
         </div>
       </ion-custom-body>
     </ion-content>

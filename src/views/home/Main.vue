@@ -1,7 +1,71 @@
 <template>
-  <ion-page>
     <ion-custom-header>홈</ion-custom-header>
-    <ion-content :fullscreen="true">
+    <ion-custom-grid-body class="grid-cols-2 grid-rows-2">
+    <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Client</ion-card-subtitle>
+      <ion-item>
+      <ion-button fill="outline" slot="end">View</ion-button>
+      <ion-card-title>Card Title</ion-card-title>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Expert</ion-card-subtitle>
+      <ion-item>
+      <ion-button fill="outline" slot="end">View</ion-button>
+      <ion-card-title>Card Title</ion-card-title>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Assistant</ion-card-subtitle>
+      <ion-item>
+      <ion-button fill="outline" slot="end">View</ion-button>
+      <ion-card-title>Card Title</ion-card-title>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Order</ion-card-subtitle>
+      <ion-item>
+      <ion-button fill="outline" slot="end">View</ion-button>
+      <ion-card-title>Card Title</ion-card-title>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+    </ion-card-content>
+  </ion-card>
+
+ 
+
+  </ion-custom-grid-body>
+
+    <!-- <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
           <ion-title size="large">홈 - 메인</ion-title>
@@ -18,22 +82,22 @@
           <ion-button @click="logout" expand="block">로그아웃</ion-button>
         </div>
       </ion-custom-body>
-    </ion-content>
-  </ion-page>
+    </ion-content> -->
 </template>
 
 <style>
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader } from '@/components/';
+import { IonCustomHeader, IonCustomGridBody } from '@/components/';
 import { 
-  IonPage, 
-  IonHeader, 
-  IonToolbar, 
-  IonTitle, 
-  IonContent,
+  //IonContent,
   IonButton,
+  IonCard, 
+  IonCardContent, 
+  IonCardSubtitle, 
+  IonCardTitle,  
+  IonItem, 
 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
@@ -42,14 +106,15 @@ export default  {
   name: 'Main',
   
   components: { 
-    IonHeader, 
-    IonToolbar, 
-    IonTitle, 
-    IonContent, 
-    IonPage, 
-    IonCustomBody, 
+    //IonContent, 
     IonCustomHeader,
+    IonCustomGridBody,
     IonButton,
+    IonCard, 
+    IonCardContent, 
+    IonCardSubtitle, 
+    IonCardTitle, 
+    IonItem, 
   },
   
   setup() {

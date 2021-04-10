@@ -82,7 +82,8 @@ library.add(
   faCommentDots,
   faPhoneAlt,
   faCaretRight,
-  faUserCheck,    
+  faUserCheck,
+      
 );
 
 // 전역상태 불러오기
