@@ -62,7 +62,7 @@
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader } from '@/components/';
 import { 
-  //IonPage, 
+  IonPage, 
   //IonHeader,
   //IonListHeader,
   //IonToolbar, 
@@ -72,23 +72,23 @@ import {
   IonItem,
   IonItemDivider,
   IonLabel,  
-  //IonButton,
+  IonButton,
   //actionSheetController,
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, defineComponent } from 'vue';
 import { Expert } from '@/types'
 import { useRoute } from 'vue-router';
 import * as util from '@/utils';
 
-export default  {
+export default defineComponent ({
   name: 'Profile',
 
   components: { 
     IonCustomBody, 
     IonCustomHeader, 
-    //IonPage, 
+    IonPage, 
     //IonHeader,
     //IonListHeader,
     //IonToolbar, 
@@ -98,7 +98,7 @@ export default  {
     IonItem,
     IonItemDivider,
     IonLabel,  
-    //IonButton,
+    IonButton,
   },
   
   setup() {
@@ -146,5 +146,5 @@ export default  {
     //  presentActionSheet
     }
   }
-}
+})
 </script> 

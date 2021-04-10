@@ -20,7 +20,9 @@
 import { IonCustomBody, IonCustomHeader } from '@/components/';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
-export default  {
+import { defineComponent } from 'vue'
+
+export default defineComponent ({
   name: 'Main',
   components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonCustomBody, IonCustomHeader },
   setup() {
@@ -44,5 +46,5 @@ export default  {
       globalState
     }
   }
-}
+})
 </script> 

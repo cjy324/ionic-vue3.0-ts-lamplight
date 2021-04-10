@@ -107,7 +107,7 @@ import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { useRoute, useRouter } from 'vue-router';
 import * as util from '@/utils';
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, defineComponent } from 'vue';
 import { Order } from '@/types';
 
 const useOrderModifyFormState = () => {
@@ -123,7 +123,7 @@ const useOrderModifyFormState = () => {
   })
 }
 
-export default {
+export default defineComponent ({
   name: 'OrderModify',
 
   components: { 
@@ -270,5 +270,5 @@ export default {
       
     }
   }
-}
+})
 </script> 

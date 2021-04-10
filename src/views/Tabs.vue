@@ -4,12 +4,12 @@
       <ion-tabs class="ion-tabs">
         <ion-tab-bar slot="bottom" class="">
           <!--홈-->
-          <ion-tab-button tab="home" :href="tabsState.hrefHome">
+          <ion-tab-button tab="home" href="/home">
             <font-awesome-icon class="text-lg h-7" icon="home" />
           </ion-tab-button>
 
           <!--회원-->
-          <ion-tab-button tab="member" :href="tabsState.hrefMember">
+          <ion-tab-button tab="member" href="/member">
             <font-awesome-icon class="text-lg h-7" icon="user-circle" />
           </ion-tab-button>
         
@@ -23,17 +23,18 @@
           </ion-tab-button> -->
 
           <!--리스트-->  
-          <ion-tab-button tab="expert" :href="tabsState.hrefExpert">
+          <ion-tab-button tab="expert" href="/expert">
             <font-awesome-icon class="text-lg h-7" icon="users" />
           </ion-tab-button>
 
           <!--설정-->
-          <ion-tab-button tab="setting" :href="tabsState.hrefSetting">
+          <ion-tab-button tab="setting" href="/setting">
             <font-awesome-icon class="text-lg h-7" icon="cog" />
           </ion-tab-button>
         
         </ion-tab-bar>
       </ion-tabs>
+      <!--의뢰 fab버튼-->
       <ion-fab vertical="bottom" horizontal="center">
         <ion-fab-button>
           <font-awesome-icon class="text-lg h-7 text-white" icon="clipboard-check" />
@@ -76,7 +77,7 @@ import {
 } from 'ionicons/icons';
 import { useGlobalState } from '@/stores';
 import { reactive } from 'vue';
-//import { useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 
 
 export default {
@@ -104,7 +105,7 @@ export default {
     });
     /* ionic 리다이렉트 URL로의 다중클릭으로 인한 버그를 고치기 위한 코드 - 시작 */
     /* 버그가 해결되면 없애도 됩니다. */
-    // const route = useRoute();
+    const route = useRoute();
     // if ( route.path.startsWith("/Home") ) {
     //   tabsState.hrefHome = route.fullPath;
     // }
@@ -126,6 +127,7 @@ export default {
       globalState,
       tabsState,
       createOutline,
+      route
     }
   }
 }

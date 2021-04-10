@@ -156,12 +156,12 @@ import {
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, defineComponent } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import * as util from '@/utils';
 import { Order } from '@/types';
 
-export default  {
+export default defineComponent ({
   name: 'MyOrder',
 
   components: { 
@@ -303,5 +303,5 @@ export default  {
       deleteOrder
     }
   }
-}
+})
 </script> 

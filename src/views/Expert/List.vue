@@ -25,14 +25,18 @@
     <div class="expertList_head border-b mb-3">
       <div class="w-full flex justify-end">
         <ion-buttons >
-          <ion-button color="dark" slot="" :href="'/expert/profile?id=' + expert.id">
-            <font-awesome-icon class="text-gray-600 mr-1 text-sm" icon="user-check"/>
-            <span class="text-gray-600 text-sm">프로필</span>
-          </ion-button>
-          <ion-button color="dark" slot="end" :href="'/order/add?expertId=' + expert.id + '&clientId=' + globalState.loginedClient.id">
-            <font-awesome-icon class="text-gray-600 mr-1 text-sm" icon="edit"/>
-            <span class="text-gray-600 text-sm">의뢰</span>
-          </ion-button>
+          <router-link :to="'/expert/profile?id=' + expert.id">
+            <ion-button color="dark" slot="">
+              <font-awesome-icon class="text-gray-600 mr-1 text-sm" icon="user-check"/>
+              <span class="text-gray-600 text-sm">프로필</span>
+            </ion-button>
+          </router-link>
+          <router-link :to="'/order/add?expertId=' + expert.id + '&clientId=' + globalState.loginedClient.id">
+            <ion-button color="dark" slot="end">
+              <font-awesome-icon class="text-gray-600 mr-1 text-sm" icon="edit"/>
+              <span class="text-gray-600 text-sm">의뢰</span>
+            </ion-button>
+          </router-link>
         </ion-buttons>
       </div>
     </div>
@@ -135,6 +139,7 @@ import {
   IonList, 
   IonItem, 
   IonContent,
+  IonChip,
  // IonItemDivider,
   IonButton,
   IonButtons,
@@ -142,7 +147,7 @@ import {
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
-import { reactive, computed, onMounted  } from 'vue';
+import { reactive, computed, onMounted, defineComponent } from 'vue';
 import { Expert, Review } from '@/types';
 import * as util from '@/utils';
 
@@ -153,7 +158,7 @@ const useSearchState = () => {
   })
 }
 
-export default  {
+export default defineComponent ({
   name: 'ExpertList',
   
   components: {
@@ -163,7 +168,8 @@ export default  {
     IonSearchbar, 
     IonCustomHeader,
     IonCustomBody, 
-    IonLabel, 
+    IonLabel,
+    IonChip, 
   //  IonAvatar, 
   //  IonListHeader, 
     IonList, 
@@ -254,7 +260,7 @@ export default  {
       //onClickInput,
     }
   }
-}
+})
 
 
 </script> 

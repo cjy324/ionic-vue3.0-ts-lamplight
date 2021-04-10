@@ -41,8 +41,9 @@ import {
   IonButton,
 } from '@ionic/vue';
 import * as util from '@/utils';
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent ({
   name: 'IonCustomHeader',
 
   components: { 
@@ -74,5 +75,5 @@ export default {
       logout
     }
   }
-}
+})
 </script> 

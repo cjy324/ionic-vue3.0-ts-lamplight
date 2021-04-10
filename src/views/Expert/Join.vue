@@ -91,7 +91,7 @@ import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { useRouter } from 'vue-router';
 import * as util from '@/utils';
-import { reactive, ref } from 'vue';
+import { reactive, ref, defineComponent } from 'vue';
 
 
 const useJoinFormState = () => {
@@ -107,7 +107,7 @@ const useJoinFormState = () => {
   })
 }
 
-export default {
+export default defineComponent({
   name: 'Join',
 
   components: { 
@@ -255,5 +255,5 @@ export default {
       
     }
   }
-}
+})
 </script>

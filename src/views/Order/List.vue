@@ -210,7 +210,7 @@ import {
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
-import { reactive, computed, onMounted } from 'vue';
+import { reactive, computed, onMounted, defineComponent } from 'vue';
 import * as util from '@/utils';
 import { Order } from '@/types';
 
@@ -222,7 +222,7 @@ const useSearchState = () => {
   })
 }
 
-export default  {
+export default defineComponent ({
   name: 'OrderList',
   
   components: {
@@ -428,7 +428,6 @@ export default  {
       //onClickInput,
     }
   }
-}
-
+})
 
 </script> 

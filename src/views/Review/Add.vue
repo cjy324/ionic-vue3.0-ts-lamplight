@@ -70,7 +70,7 @@ import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { useRoute, useRouter } from 'vue-router';
 import * as util from '@/utils';
-import { reactive } from 'vue';
+import { reactive, defineComponent } from 'vue';
 
 const useReviewAddFormState = () => {
   return reactive({
@@ -79,7 +79,7 @@ const useReviewAddFormState = () => {
   })
 }
 
-export default {
+export default defineComponent ({
   name: 'ReviewAdd',
 
   components: { 
@@ -191,5 +191,5 @@ export default {
       
     }
   }
-}
+})
 </script> 

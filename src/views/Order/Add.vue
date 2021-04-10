@@ -99,7 +99,8 @@ import {
   IonContent,
   IonSelect, 
   IonSelectOption, 
-  IonLabel, 
+  IonLabel,
+  IonList, 
   IonInput,
   IonTextarea, 
   IonItem, 
@@ -109,7 +110,7 @@ import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { useRoute, useRouter } from 'vue-router';
 import * as util from '@/utils';
-import { reactive } from 'vue';
+import { reactive, defineComponent } from 'vue';
 
 const useOrderAddFormState = () => {
   return reactive({
@@ -124,13 +125,14 @@ const useOrderAddFormState = () => {
   })
 }
 
-export default {
+export default defineComponent ({
   name: 'OrderAdd',
 
   components: { 
     IonCustomLink, 
     IonSelect, 
     IonSelectOption, 
+    IonList,
     IonLabel, 
     IonInput,
     IonTextarea,
@@ -263,5 +265,5 @@ export default {
       
     }
   }
-}
+})
 </script> 

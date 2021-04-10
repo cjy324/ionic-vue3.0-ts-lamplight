@@ -53,7 +53,7 @@ import {
   IonButton 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, defineComponent } from 'vue';
 //import { useMainApi } from '@/apis';  //mainService를 통해 mainAPI를 가져오는 방식으로 변경
 import { useMainService } from '@/services';
 import { useRoute, useRouter } from 'vue-router';
@@ -66,7 +66,7 @@ const useLoginFormState = () => {
   })
 }
 
-export default  {
+export default defineComponent ({
   name: 'Login',
   components: { 
     //IonHeader, 
@@ -142,5 +142,5 @@ export default  {
       checkAndLogin
     }
   }
-}
+})
 </script> 

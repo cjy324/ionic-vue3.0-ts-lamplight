@@ -73,7 +73,7 @@ import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { useRoute, useRouter } from 'vue-router';
 import * as util from '@/utils';
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, defineComponent } from 'vue';
 import { Rating, Review } from '@/types';
 
 const useReviewModifyFormState = () => {
@@ -83,7 +83,7 @@ const useReviewModifyFormState = () => {
   })
 }
 
-export default {
+export default defineComponent ({
   name: 'ReviewModify',
 
   components: { 
@@ -228,5 +228,5 @@ export default {
       
     }
   }
-}
+})
 </script> 

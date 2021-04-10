@@ -143,9 +143,10 @@ import {
   //IonItem, 
 
 } from '@ionic/vue';
-import { useGlobalState } from '@/stores'
+import { useGlobalState } from '@/stores';
+import { defineComponent } from 'vue';
 
-export default  {
+export default defineComponent ({
   name: 'Main',
   
   components: { 
@@ -174,5 +175,5 @@ export default  {
       logout
     }
   }
-}
+})
 </script>

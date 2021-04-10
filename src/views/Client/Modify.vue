@@ -107,7 +107,7 @@ import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { useRouter } from 'vue-router';
 import * as util from '@/utils';
-import { reactive, onMounted, ref } from 'vue';
+import { reactive, onMounted, ref, defineComponent } from 'vue';
 import { Client } from '@/types';
 
 
@@ -124,7 +124,7 @@ const useModifyFormState = () => {
   })
 }
 
-export default {
+export default defineComponent ({
   name: 'Modify',
 
   components: { 
@@ -293,5 +293,5 @@ export default {
       
     }
   }
-}
+})
 </script>

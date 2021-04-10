@@ -61,8 +61,9 @@ import {
   IonButton,
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent ({
   name: 'MemberMain',
 
   components: { 
@@ -82,5 +83,5 @@ export default {
       //confirmAlert,
     }
   }
-}
+})
 </script> 

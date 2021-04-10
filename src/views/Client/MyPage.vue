@@ -77,14 +77,15 @@ import {
   IonItemDivider,
   IonLabel,  
   IonButtons,
+  IonButton,
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, defineComponent } from 'vue';
 import { Client } from '@/types'
 import * as util from '@/utils';
 
-export default  {
+export default defineComponent ({
   name: 'MyPage',
 
   components: { 
@@ -102,6 +103,7 @@ export default  {
     IonItemDivider,
     IonLabel,  
     IonButtons,
+    IonButton,
   },
   
   setup() {
@@ -135,5 +137,5 @@ export default  {
       state,
     }
   }
-}
+})
 </script> 

@@ -8,7 +8,9 @@
 
 <script lang="ts">
 import { IonText } from '@ionic/vue';
-export default {
+import { defineComponent } from 'vue'
+
+export default defineComponent ({
   props: {
     color: {
       default: "primary",
@@ -17,5 +19,5 @@ export default {
   },
   components: {IonText},
   name: 'IonCustomLink',
-}
+})
 </script> 

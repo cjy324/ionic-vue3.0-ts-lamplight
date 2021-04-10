@@ -47,7 +47,7 @@ import {
   IonButton 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
-import { reactive } from 'vue';
+import { reactive, defineComponent } from 'vue';
 //import { useMainApi } from '@/apis';  //mainService를 통해 mainAPI를 가져오는 방식으로 변경
 import { useMainService } from '@/services';
 import { useRouter } from 'vue-router';
@@ -60,7 +60,7 @@ const useFindLoginIdFormState = () => {
   })
 }
 
-export default  {
+export default defineComponent ({
   name: 'FindLoginId',
   components: { 
     //IonHeader, 
@@ -116,5 +116,5 @@ export default  {
       checkAndFindLoginId
     }
   }
-}
+})
 </script> 
