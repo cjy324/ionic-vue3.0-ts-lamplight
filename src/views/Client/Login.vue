@@ -23,7 +23,9 @@
             <ion-button type="submit" expand="block">로그인</ion-button>
           </div>
           <div class="pt-2 px-4">
-            아직 회원이 아니신가요? <ion-custom-link to="/member/signupMain">Sign-Up</ion-custom-link>
+            <ion-buttons>
+            아직 회원이 아니신가요? <ion-button class="underline" href="/member/signupMain">Sign-Up</ion-button>
+            </ion-buttons>
           </div>
           <div class="px-4 text-md">
             ID/PW를 잊어버리셨다면? <ion-custom-link to="/client/findLoginId">ID찾기</ion-custom-link> / <ion-custom-link to="/client/findLoginPw">PW찾기</ion-custom-link>
@@ -50,7 +52,8 @@ import {
   IonLabel, 
   IonInput, 
   IonItem, 
-  IonButton 
+  IonButton,
+  IonButtons, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { reactive, onMounted, defineComponent } from 'vue';
@@ -75,7 +78,8 @@ export default defineComponent ({
     IonLabel, 
     IonInput, 
     IonItem, 
-    IonButton, 
+    IonButton,
+    IonButtons, 
     IonContent, 
     IonPage, 
     IonCustomHeader, 
@@ -121,7 +125,7 @@ export default defineComponent ({
       const loginedClient = axiosResponse.data.body.client;
       globalState.setLoginedClient(authKey, memberType, memberId, loginedClient);
       
-      router.replace('/');
+      router.replace('/client/myPage');
     }
 
     function checkAndLogin() {

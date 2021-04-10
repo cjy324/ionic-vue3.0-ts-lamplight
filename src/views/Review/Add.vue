@@ -31,13 +31,15 @@
           <div class="mb-2 mt-4 px-4">
             <ion-button type="submit" expand="block">작성 완료</ion-button>
           </div>
-          <!--21.04.10 페이지 invisible 버그로 라우터로 이동 적용 못함-->
           <div class="px-4">
             <ion-button class="btn-cancel" href="/order/list" color="" type="button" expand="block">취소</ion-button>
           </div>
         </form>
         <div v-else class="py-2 px-4">
-          로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
+          <ion-buttons>
+            로그인 후 이용가능합니다.
+            <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
+          </ion-buttons>
         </div>
       </ion-custom-body>
     </ion-content>
@@ -51,7 +53,7 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
+import { IonCustomBody, IonCustomHeader } from '@/components/';
 import { 
   IonPage, 
   //IonHeader, 
@@ -64,7 +66,8 @@ import {
   //IonInput,
   IonTextarea, 
   IonItem, 
-  IonButton, 
+  IonButton,
+  IonButtons, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
@@ -85,7 +88,6 @@ export default defineComponent ({
   components: { 
     //IonHeader, 
     //IonToolbar,
-    IonCustomLink, 
     //IonTitle,
     IonSelect, 
     IonSelectOption, 
@@ -93,7 +95,8 @@ export default defineComponent ({
     //IonInput,
     IonTextarea,
     IonItem, 
-    IonButton, 
+    IonButton,
+    IonButtons,  
     IonContent, 
     IonPage, 
     IonCustomBody, 
@@ -164,7 +167,7 @@ export default defineComponent ({
           }
           //const newReviewId = axRes.data.body.id;
 
-          router.replace("/");
+          window.location.replace('/order/list');
       }
 
       const startAddReview = () =>{

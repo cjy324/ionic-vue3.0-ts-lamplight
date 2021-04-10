@@ -5,6 +5,8 @@ import { getGlobalState } from '@/stores'
 
 const globalState = getGlobalState();
 
+//https://ionicframework.com/docs/vue/navigation
+
 const routes: Array<RouteRecordRaw> = [
   {     //앨리어싱
     path: '/', //만약, path가 '/' 이렇게 들어올 경우 '/home/Main'으로 redirect

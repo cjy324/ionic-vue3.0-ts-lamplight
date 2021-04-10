@@ -26,13 +26,19 @@
             </router-link>
           </div>
         </div>
-        <div class="w-full text-center py-2 px-6 text-sm">
+        <div class="w-full py-2 px-8 text-sm">
             이미 Lamplight의 회원이라면?
             <div class="mt-2">
-              <span class="font-semibold">'의뢰인'</span>으로 <ion-custom-link to="/client/login">Log-In</ion-custom-link>
+              <ion-buttons>
+                <span class="font-semibold">'의뢰인'</span>으로 
+                <ion-button class="underline" href="/client/login">Log-In</ion-button>
+              </ion-buttons>
             </div>
-            <div  class="">
-              <span class="font-semibold">'지도사'</span>로 <ion-custom-link to="/expert/login">Log-In</ion-custom-link>
+            <div class="">
+              <ion-buttons>
+                <span class="font-semibold">'지도사'</span>로 
+                <ion-button class="underline" href="/expert/login">Log-In</ion-button>
+              </ion-buttons>
             </div>
         </div>
       </ion-custom-body>
@@ -54,11 +60,12 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
+import { IonCustomBody, IonCustomHeader } from '@/components/';
 import { 
   IonPage,  
   IonContent,
   IonButton,
+  IonButtons,
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { defineComponent } from 'vue'
@@ -67,12 +74,12 @@ export default defineComponent ({
   name: 'MemberMain',
 
   components: { 
-    IonButton, 
+    IonButton,
+    IonButtons, 
     IonContent, 
     IonPage, 
     IonCustomBody, 
     IonCustomHeader,
-    IonCustomLink,
   },
 
   setup() {

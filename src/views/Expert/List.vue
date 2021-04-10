@@ -25,18 +25,14 @@
     <div class="expertList_head border-b mb-3">
       <div class="w-full flex justify-end">
         <ion-buttons >
-          <router-link :to="'/expert/profile?id=' + expert.id">
-            <ion-button color="dark" slot="">
+            <ion-button color="dark" slot="" :router-link="'/expert/profile?id=' + expert.id">
               <font-awesome-icon class="text-gray-600 mr-1 text-sm" icon="user-check"/>
               <span class="text-gray-600 text-sm">프로필</span>
             </ion-button>
-          </router-link>
-          <router-link :to="'/order/add?expertId=' + expert.id + '&clientId=' + globalState.loginedClient.id">
-            <ion-button color="dark" slot="end">
+            <ion-button color="dark" slot="end" :href="'/order/add?expertId=' + expert.id + '&clientId=' + globalState.loginedClient.id">
               <font-awesome-icon class="text-gray-600 mr-1 text-sm" icon="edit"/>
               <span class="text-gray-600 text-sm">의뢰</span>
             </ion-button>
-          </router-link>
         </ion-buttons>
       </div>
     </div>
@@ -90,11 +86,9 @@
             </span>
             <div v-if="globalState.loginedClient.id === review.clientId" class="w-full flex justify-end">
               <ion-buttons>
-                <router-link :to="'/review/modify?relTypeCode=expert&relId=' + expert.id + '&id=' + review.id">
-                  <ion-button slot="">
-                    <span class="text-xs">수정</span>
-                  </ion-button>
-                </router-link>
+                <ion-button slot="" :href="'/review/modify?relTypeCode=expert&relId=' + expert.id + '&id=' + review.id">
+                  <span class="text-xs">수정</span>
+                </ion-button>
                 <ion-button color="" slot="end" @click="doDeleteReview(expert.id, review.id, globalState.loginedClient.id)">
                   <span class="text-xs text-red-900">삭제</span>
                 </ion-button>

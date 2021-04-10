@@ -66,16 +66,17 @@
             <ion-button class="btn-success" type="submit" expand="block">수정 완료</ion-button>
           </div>
           <div class="px-4">
-            <router-link to="/order/list">
-              <ion-button class="btn-cancel" color="" type="button" expand="block">
-                취소
-              </ion-button>
-            </router-link>  
+            <ion-button class="btn-cancel" color="" type="button" expand="block" router-link="/order/list">
+              취소
+            </ion-button>
           </div>
         </form>
     </ion-content>
     <div v-else class="py-2 px-4">
-      로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
+      <ion-buttons>
+         로그인 후 이용가능합니다.
+        <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
+      </ion-buttons>
     </div>
     </ion-custom-body>
   </ion-page>
@@ -91,7 +92,7 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
+import { IonCustomBody, IonCustomHeader } from '@/components/';
 import { 
   IonPage,
   IonContent,
@@ -102,6 +103,7 @@ import {
   IonTextarea, 
   IonItem, 
   IonButton, 
+  IonButtons,
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
@@ -128,14 +130,14 @@ export default defineComponent ({
 
   components: { 
     IonPage,
-    IonCustomLink, 
     IonSelect, 
     IonSelectOption, 
     IonLabel, 
     IonInput,
     IonTextarea,
     IonItem, 
-    IonButton, 
+    IonButton,
+    IonButtons, 
     IonContent, 
     IonCustomBody, 
     IonCustomHeader 

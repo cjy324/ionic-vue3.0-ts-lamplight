@@ -40,18 +40,14 @@
       <!--진행단계-->
         <div class="orderList_head flex justify-between items-center h-20 border-b-2">
           <ion-buttons >
-            <router-link :to="'/order/detail?id=' + order.id">
-              <ion-button slot="" color="dark">
-                <font-awesome-icon class="text-gray-600 ml-4 mr-1" icon="clipboard"/>
-                <span class="text-gray-600 text-sm">자세히</span>
-              </ion-button>
-            </router-link>
-            <router-link :to="'/review/add?relTypeCode=expert&relId=' + order.expertId">
-              <ion-button v-if="order.stepLevel > 3" color="dark" slot="end">
-                <font-awesome-icon class="text-gray-600 mr-1" icon="comment-dots"/>
-                <span class="text-gray-600 text-sm">리뷰작성</span>
-              </ion-button>
-            </router-link>
+            <ion-button :router-link="'/order/detail?id=' + order.id" slot="" color="dark">
+              <font-awesome-icon class="text-gray-600 ml-4 mr-1" icon="clipboard"/>
+              <span class="text-gray-600 text-sm">자세히</span>
+            </ion-button>
+            <ion-button v-if="order.stepLevel > 3" :href="'/review/add?relTypeCode=expert&relId=' + order.expertId" color="dark" slot="end">
+              <font-awesome-icon class="text-gray-600 mr-1" icon="comment-dots"/>
+              <span class="text-gray-600 text-sm">리뷰작성</span>
+            </ion-button>
           </ion-buttons>
           <ion-item class="" color="" lines="none">
             <ion-chip color="tertiary">
@@ -83,9 +79,9 @@
           <ion-label color="">
             {{order.extra__clientName}}
           </ion-label>
-          <ion-button v-if="globalState.loginedClient.id !== order.clientId" color="" slot="end" :href="'/order/detail?id=' + order.id">
-              <font-awesome-icon class="mr-2" icon="phone-alt"/>
-              {{order.extra__expertCellphoneNo}}
+          <ion-button v-if="globalState.loginedClient.id !== order.clientId" color="" slot="end">
+            <font-awesome-icon class="mr-2" icon="phone-alt"/>
+            {{order.extra__expertCellphoneNo}}
           </ion-button>
         </ion-item>
         <ion-item color="" lines="none">
@@ -97,7 +93,7 @@
           <ion-label color="">
             {{order.extra__expertName}}
           </ion-label>
-          <ion-button v-if="globalState.loginedClient.id == order.clientId" color="" slot="end" :href="'/order/detail?id=' + order.id">
+          <ion-button v-if="globalState.loginedClient.id == order.clientId" color="" slot="end">
             <font-awesome-icon class="mr-2" icon="phone-alt"/>
             {{order.extra__expertCellphoneNo}}
           </ion-button>
@@ -144,17 +140,18 @@
         현재 진행중인 의뢰가 없습니다.
       </div>
       <div class="px-4">
-        <router-link to="/order/add">
-          <ion-button class="btn-primary" color="" type="button" expand="block">
-            <font-awesome-icon class="mr-2" icon="edit"></font-awesome-icon>
-              새 의뢰 요청
-          </ion-button>
-        </router-link>
+        <ion-button class="btn-primary" color="" type="button" expand="block" router-link="/order/add">
+          <font-awesome-icon class="mr-2" icon="edit"></font-awesome-icon>
+            새 의뢰 요청
+        </ion-button>
       </div>
     </div>
     </ion-content>
     <div v-else class="py-2 px-4">
-      로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
+      <ion-buttons>
+        로그인 후 이용가능합니다.
+        <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
+      </ion-buttons>
     </div>
   </ion-custom-body>
 </ion-page>
@@ -188,7 +185,7 @@
 </style>
 
 <script lang="ts">
-import { IonCustomHeader, IonCustomBody, IonCustomLink, IonCustomPopver } from '@/components/';
+import { IonCustomHeader, IonCustomBody, IonCustomPopver } from '@/components/';
 import { 
   IonPage,
   IonSelect, 
@@ -232,7 +229,6 @@ export default defineComponent ({
     IonSearchbar, 
     IonCustomHeader,
     IonCustomBody,
-    IonCustomLink, 
     IonLabel, 
     //IonListHeader, 
     IonList, 

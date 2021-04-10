@@ -67,17 +67,23 @@
             <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
           </div>
           <div class="px-4">
-            <router-link to="/order/main">
-              <ion-button class="btn-cancel" color="" type="button" expand="block">
-                취소
-              </ion-button>
-            </router-link>
+            <ion-button router-link="/order/main" class="btn-cancel" color="" type="button" expand="block">
+              취소(내 의뢰 메뉴로 가기)
+            </ion-button>
+          </div>
+          <div class="px-4">
+            <ion-button router-link="/expert/list" class="btn-cancel2" color="" type="button" expand="block">
+              취소(지도사 현황으로 가기)
+            </ion-button>
           </div>
         </ion-list>
       </form>
     </ion-content>
     <div v-else class="py-2 px-4">
-        로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
+      <ion-buttons>
+         로그인 후 이용가능합니다.
+        <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
+      </ion-buttons>
     </div>
   </ion-custom-body>
 </ion-page>
@@ -90,10 +96,13 @@
 .btn-cancel{
   --background:var(--ion-color-medium-shade)
 }
+.btn-cancel2{
+  --background:var(--ion-color-medium-tint)
+}
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
+import { IonCustomBody, IonCustomHeader } from '@/components/';
 import { 
   IonPage,
   IonContent,
@@ -105,6 +114,7 @@ import {
   IonTextarea, 
   IonItem, 
   IonButton, 
+  IonButtons, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
@@ -129,7 +139,6 @@ export default defineComponent ({
   name: 'OrderAdd',
 
   components: { 
-    IonCustomLink, 
     IonSelect, 
     IonSelectOption, 
     IonList,
@@ -137,7 +146,8 @@ export default defineComponent ({
     IonInput,
     IonTextarea,
     IonItem, 
-    IonButton, 
+    IonButton,
+    IonButtons,  
     IonContent, 
     IonPage, 
     IonCustomBody, 

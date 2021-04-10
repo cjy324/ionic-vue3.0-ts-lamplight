@@ -11,7 +11,7 @@
 
         <div class="flex justify-end mr-2 mt-2 pb-1">
           <ion-buttons color="light">
-            <ion-button v-if="state.order.stepLevel < 4" :href="'/order/modify?id=' + state.order.id">
+            <ion-button v-if="state.order.stepLevel < 4" :router-link="'/order/modify?id=' + state.order.id">
               <font-awesome-icon class="text-lg mr-1" icon="edit" />
               <span class="text-gray-600 text-sm">수정</span>
             </ion-button>
@@ -101,16 +101,17 @@
         </div>
 
         <div class="px-2">
-          <router-link to="/order/list">
-            <ion-button class="" color="medium" type="button" expand="block">
-              리스트로 돌아가기
-            </ion-button>
-          </router-link>
+          <ion-button router-link="/order/list" class="" color="medium" type="button" expand="block">
+            리스트로 돌아가기
+          </ion-button>
         </div>
       </ion-list>
     </ion-content>
     <div v-else class="py-2 px-4">
-      로그인 후 이용가능합니다. <ion-custom-link to="/client/login">Log-In</ion-custom-link> 하러 가기
+      <ion-buttons>
+         로그인 후 이용가능합니다.
+        <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
+      </ion-buttons>
     </div>
   </ion-custom-body>
 </ion-page>
@@ -138,7 +139,7 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
+import { IonCustomBody, IonCustomHeader } from '@/components/';
 import { 
   IonPage, 
   //IonHeader,
@@ -151,7 +152,7 @@ import {
   IonItemDivider,
   IonLabel,
   IonText,
-  //IonButtons,
+  IonButtons,
   IonButton, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
@@ -167,7 +168,6 @@ export default defineComponent ({
   components: { 
     IonCustomBody, 
     IonCustomHeader, 
-    IonCustomLink,
     IonPage, 
     //IonHeader,
     //IonListHeader,
@@ -179,7 +179,7 @@ export default defineComponent ({
     IonItemDivider,
     IonLabel,
     IonText,
-    //IonButtons,  
+    IonButtons,  
     IonButton, 
   },
   
