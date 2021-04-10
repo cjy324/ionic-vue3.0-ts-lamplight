@@ -15,7 +15,7 @@
       <ion-searchbar class="ion-searchbar" show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
     </ion-item>
 
-    <div class="w-full border-t-4 border-b-2 text-center py-2">
+    <div class="w-full border-t-4 border-b-2 pl-3 py-2">
         Total: {{returnFilteredExperts.length}}
     </div>
 
@@ -72,7 +72,7 @@
       <ion-item lines="none">
       <div class="flex-col w-full">
         <div class="flex justify-between items-end h-8 w-full border-b">
-          <span class="text-sm">
+          <span class="text-sm text-gray-900">
             후기
           </span>
         </div>
@@ -96,7 +96,7 @@
             </div>
         </div>
         </template>
-        <div v-else>
+        <div v-else class="border-b border-t bg-gray-100 mb-1">
           <p class="text-gray-700 p-2 pb-4 text-sm">
               작성된 후기가 없습니다.
           </p>

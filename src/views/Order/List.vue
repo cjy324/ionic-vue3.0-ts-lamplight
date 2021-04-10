@@ -31,7 +31,7 @@
         <ion-searchbar class="ion-searchbar" show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
       </ion-item>
 
-      <div class="w-full border-t-4 border-b-4 text-center py-2">
+      <div class="w-full border-t-4 border-b-2 pl-3 py-2">
         Total: {{returnFilteredOrders.length}}
       </div>
       

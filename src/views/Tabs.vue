@@ -36,11 +36,11 @@
       </ion-tabs>
       <ion-fab vertical="bottom" horizontal="center">
         <ion-fab-button>
-          <font-awesome-icon class="text-lg h-7" icon="clipboard-check" />
+          <font-awesome-icon class="text-lg h-7 text-white" icon="clipboard-check" />
         </ion-fab-button>
         <ion-fab-list side="top">
           <ion-fab-button href="/order/list" color="light">
-            <font-awesome-icon class="text-lg" icon="clipboard-list" />
+            <font-awesome-icon class="text-lg text-gray-700" icon="clipboard-list" />
           </ion-fab-button>
           <ion-fab-button href="/order/add" color="light">
             <ion-icon :icon="createOutline" />
