@@ -24,19 +24,19 @@
 
     <div class="expertList_head">
       <div class="w-full flex justify-end">
-        <ion-buttons >
-            <ion-chip color="dark" slot="" :router-link="'/expert/profile?id=' + expert.id">
+        <ion-buttons>
+            <ion-button color="dark" slot="start" :router-link="'/expert/profile?id=' + expert.id">
               <font-awesome-icon class="text-gray-800 mr-1 text-xs" icon="user-check"/>
               <span class="text-gray-600 text-xs">프로필</span>
-            </ion-chip>
-            <ion-chip color="dark" slot="end" :href="'/order/add?expertId=' + expert.id + '&clientId=' + globalState.loginedClient.id">
-              <font-awesome-icon class="text-blue-600 mr-1 text-xs" icon="edit"/>
+            </ion-button>
+            <ion-button color="dark" :href="'/order/add?expertId=' + expert.id + '&clientId=' + globalState.loginedClient.id" >
+              <font-awesome-icon class="text-gray-800 mr-1 text-xs" icon="edit"/>
               <span class="text-gray-600 text-xs">의뢰</span>
-            </ion-chip>
-            <ion-chip color="dark" slot="end" :href="'/review/list?expertId=' + expert.id">
-              <font-awesome-icon class="text-red-800 mr-1 text-xs" icon="comment-dots"/>
+            </ion-button>
+            <ion-button color="dark" :href="'/review/list?expertId=' + expert.id">
+              <font-awesome-icon class="text-gray-800 mr-1 text-xs" icon="comment-dots"/>
               <span class="text-gray-600 text-xs">{{expert.extra__reviews.length}}</span>
-            </ion-chip>
+            </ion-button>  
         </ion-buttons>
       </div>
     </div>
@@ -102,9 +102,9 @@ import {
   IonList, 
   IonItem, 
   IonContent,
-  IonChip,
+  //IonChip,
  // IonItemDivider,
-  //IonButton,
+  IonButton,
   IonButtons,
 
 } from '@ionic/vue';
@@ -132,14 +132,14 @@ export default defineComponent ({
     IonCustomHeader,
     IonCustomBody, 
     IonLabel,
-    IonChip, 
+   // IonChip, 
   //  IonAvatar, 
   //  IonListHeader, 
     IonList, 
     IonItem, 
     IonContent,
   //  IonItemDivider,
-   // IonButton,
+    IonButton,
     IonButtons,
   },
   
