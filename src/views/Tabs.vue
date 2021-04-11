@@ -28,8 +28,8 @@
           </ion-tab-button>
 
           <!--설정-->
-          <ion-tab-button tab="Setting" :href="tabsState.hrefSetting">
-            <font-awesome-icon class="text-lg h-7" icon="cog" />
+          <ion-tab-button tab="Info" :href="tabsState.hrefInfo">
+            <font-awesome-icon class="text-lg h-7" icon="ellipsis-h" />
           </ion-tab-button>
         
         </ion-tab-bar>
@@ -101,7 +101,7 @@ export default defineComponent ({
       'hrefMember':'/Member',
       'hrefExpert':'/Expert',
       'hrefOrder':'/Order',
-      'hrefSetting':'/Setting',
+      'hrefInfo':'/Info',
     });
     /* ionic 리다이렉트 URL로의 다중클릭으로 인한 버그를 고치기 위한 코드 - 시작 */
     /* 버그가 해결되면 없애도 됩니다. */
@@ -118,8 +118,8 @@ export default defineComponent ({
     else if ( route.path.startsWith("/Order") ) {
       tabsState.hrefOrder = route.fullPath;
     }
-    else if ( route.path.startsWith("/Setting") ) {
-      tabsState.hrefSetting = route.fullPath;
+    else if ( route.path.startsWith("/Info") ) {
+      tabsState.hrefInfo = route.fullPath;
     }
     /* ionic 리다이렉트 URL로의 다중클릭으로 인한 버그를 고치기 위한 코드 - 끝 */
 

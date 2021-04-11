@@ -157,16 +157,16 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    path: '/setting/',
+    path: '/info/',
     component: Tabs,
     children: [
       {
         path: '',
-        redirect: '/setting/main'
+        redirect: '/info/main'
       },
       {
         path: 'main',
-        component: () => import('@/views/Setting/Main.vue')
+        component: () => import('@/views/Info/Main.vue')
       },
     ]
   }

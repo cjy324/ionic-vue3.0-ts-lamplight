@@ -1,15 +1,19 @@
 <template>
   <ion-page>
-    <ion-custom-header>설정 - 메인</ion-custom-header>
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">설정 - 메인</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-custom-body>
+    <ion-custom-header>버전정보</ion-custom-header> 
+      <ion-custom-body class="justify-center">
+        <div class="w-full text-center bg-gray-600 text-white">
+          <div class="h-32 flex-col items-center justify-center">
+            <div class="text-4xl mb-6">
+              LAMPLIGHT
+            </div>
+            <div class="">
+              ver 1.0.0
+            </div>
+          </div>
+        </div>
+        
       </ion-custom-body>
-    </ion-content>
   </ion-page>
 </template>
 
@@ -18,13 +22,20 @@
 
 <script lang="ts">
 import { IonCustomBody, IonCustomHeader } from '@/components/';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import { 
+  IonPage, 
+} from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { defineComponent } from 'vue'
 
 export default defineComponent ({
-  name: 'Main',
-  components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonCustomBody, IonCustomHeader },
+  name: 'Info',
+  components: { 
+    IonPage, 
+    IonCustomBody, 
+    IonCustomHeader,
+
+},
   setup() {
     const globalState = useGlobalState();
     /* 라우터 개념 정리 */
