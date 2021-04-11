@@ -104,6 +104,10 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
       return this.mainApi.review_detail(id)
     }
 
+    review_list(relTypeCode: string, relId: number){
+      return this.mainApi.review_list(relTypeCode, relId)
+    }
+
     review_doModify(id: number, body: string, clientId: number){
       return this.mainApi.review_doModify(id, body, clientId)
     }

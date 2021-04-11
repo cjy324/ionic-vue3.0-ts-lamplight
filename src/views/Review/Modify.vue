@@ -32,7 +32,7 @@
             <ion-button class="btn-success" type="submit" expand="block">수정 완료</ion-button>
           </div>
           <div class="px-4">
-            <ion-button href="/expert/list" class="btn-cancel" color="" type="button" expand="block">취소</ion-button>
+            <ion-button router-link="/review/list" class="btn-cancel" color="" type="button" expand="block">취소</ion-button>
           </div>
         </form>
         <div v-else class="py-2 px-4">

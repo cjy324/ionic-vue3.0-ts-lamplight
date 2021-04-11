@@ -36,7 +36,7 @@
             <ion-button color="dark" :href="'/review/list?expertId=' + expert.id">
               <font-awesome-icon class="text-gray-800 mr-1 text-xs" icon="comment-dots"/>
               <span class="text-gray-600 text-xs">{{expert.extra__reviews.length}}</span>
-            </ion-button>  
+            </ion-button>
         </ion-buttons>
       </div>
     </div>

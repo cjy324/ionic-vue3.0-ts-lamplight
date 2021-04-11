@@ -143,6 +143,10 @@ const routes: Array<RouteRecordRaw> = [
         redirect: '/review/list'
       },
       {
+        path: 'list',
+        component: () => import('@/views/Review/List.vue')
+      },
+      {
         path: 'add',
         component: () => import('@/views/Review/Add.vue')
       },

@@ -746,8 +746,8 @@ export class MainApi extends HttpClient {
     return this.get<MainApi__review_doDelete__ResponseBody>(`/usr/review/doDelete?relTypeCode=${relTypeCode}&relId=${relId}&id=${id}&clientId=${clientId}`);
   }
 
-  public review_list(relTypeCode: string) {
-    return this.get<MainApi__review_list__ResponseBody>(`/usr/review/list?relTypeCode=${relTypeCode}`);
+  public review_list(relTypeCode: string, relId: number) {
+    return this.get<MainApi__review_list__ResponseBody>(`/usr/review/list?relTypeCode=${relTypeCode}&relId=${relId}`);
   }
 
   public review_detail(id: number) {
