@@ -38,28 +38,29 @@
       <template v-bind:key="order.id" v-for="order in returnFilteredOrders">
       <div class="orderList">
       <!--진행단계-->
-        <div class="orderList_head flex justify-between items-center h-20 border-b-2">
+        <div class="orderList_head flex justify-between items-center h-12 border-b-2 border-t-4 bg-gray-600 mb-2 rounded-t-lg">
           <ion-buttons >
             <ion-button :router-link="'/order/detail?id=' + order.id" slot="" color="dark">
-              <font-awesome-icon class="text-gray-600 ml-4 mr-1" icon="clipboard"/>
-              <span class="text-gray-600 text-sm">자세히</span>
+              <font-awesome-icon class="text-white text-xs ml-4 mr-1" icon="clipboard"/>
+              <span class="text-white text-xs">상세보기</span>
             </ion-button>
             <ion-button v-if="order.stepLevel > 3" :href="'/review/add?relTypeCode=expert&relId=' + order.expertId" color="dark" slot="end">
-              <font-awesome-icon class="text-gray-600 mr-1" icon="comment-dots"/>
-              <span class="text-gray-600 text-sm">리뷰작성</span>
+              <font-awesome-icon class="text-white text-xs mr-1" icon="comment-dots"/>
+              <span class="text-white text-xs">후기작성</span>
             </ion-button>
           </ion-buttons>
-          <ion-item class="" color="" lines="none">
-            <ion-chip color="tertiary">
-              <font-awesome-icon class="text-lg mr-2" icon="caret-right"/>
-              <ion-label color="">
+          <div class="">
+            <ion-chip class="bg-gray-200" :router-link="'/order/detail?id=' + order.id">
+              <font-awesome-icon class="text-xl text-gray-700" icon="caret-right"/>
+              <font-awesome-icon class="text-xl mr-1 text-gray-700" icon="caret-right"/>
+              <ion-label class="text-gray-700">
                 {{returnToString(order.stepLevel)}}
               </ion-label>
             </ion-chip>
-          </ion-item>
+          </div>
         </div>
 
-        <div class="orderList_body">
+        <div class="orderList_body mb-2">
         <ion-item color="" lines="none">
           <ion-chip color="dark">
             <ion-label color="">
@@ -70,7 +71,7 @@
             {{order.deceasedName}}
           </ion-label>
         </ion-item>
-        <ion-item color="" lines="none">
+        <ion-item v-if="globalState.memberType == 'expert'" color="" lines="none">
           <ion-chip color="dark">
             <ion-label color="">
               의뢰인
@@ -79,12 +80,12 @@
           <ion-label color="">
             {{order.extra__clientName}}
           </ion-label>
-          <ion-button v-if="globalState.loginedClient.id !== order.clientId" color="" slot="end">
+          <ion-button color="" slot="end">
             <font-awesome-icon class="mr-2" icon="phone-alt"/>
             {{order.extra__expertCellphoneNo}}
           </ion-button>
         </ion-item>
-        <ion-item color="" lines="none">
+        <ion-item v-if="globalState.memberType == 'client'" color="" lines="none">
           <ion-chip color="dark">
             <ion-label color="">
               지도사
@@ -93,7 +94,7 @@
           <ion-label color="">
             {{order.extra__expertName}}
           </ion-label>
-          <ion-button v-if="globalState.loginedClient.id == order.clientId" color="" slot="end">
+          <ion-button color="" slot="end">
             <font-awesome-icon class="mr-2" icon="phone-alt"/>
             {{order.extra__expertCellphoneNo}}
           </ion-button>
@@ -118,10 +119,9 @@
             {{order.startDate}}/{{order.endDate}}
           </ion-label>
         </ion-item>
-
         </div>
         
-          <div class="w-full px-10 pb-4 mb-2 mt-4 border-b-8" v-if="globalState.loginedClient.id == order.clientId">
+          <div class="w-full px-10 pb-4 mb-2 mt-4 border-b-8" v-if="globalState.loginedClient.id == order.clientId && order.stepLevel == 4">
             <ion-button v-if="globalState.memberType == 'client'" :class="returnColorByLevel(order.stepLevel)" slot="end" expand="block" @click="changeStepLevel(order.id, order.stepLevel)">
               {{returnToString(order.stepLevel)}}
             </ion-button>
@@ -283,7 +283,7 @@ export default defineComponent ({
     function returnToString(stepLevel: any) {
       let stepLevelToStr = ''; 
       if(stepLevel == 1){
-        stepLevelToStr = '의뢰요청';
+        stepLevelToStr = '의뢰요청중';
       }
       if(stepLevel == 2){
         stepLevelToStr = '의뢰검토(장례준비중)';
@@ -292,7 +292,7 @@ export default defineComponent ({
         stepLevelToStr = '장례진행중';
       }
       if(stepLevel == 4){
-        stepLevelToStr = '장례종료(종료확인요청)';
+        stepLevelToStr = '장례종료(확인요청)';
       }
       if(stepLevel == 5){
         stepLevelToStr = '종료확인(최종종료)';
