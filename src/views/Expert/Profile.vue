@@ -7,7 +7,7 @@
 
             <ion-list>
               
-              <ion-item-divider class="mt-2">
+              <ion-item-divider class="pt-4">
                 <img slot="start" class="h-32 rounded-full mr-4 mb-4" :src="mainService.getExpertThumbImgUrl(state.expert.id)">
               </ion-item-divider>
         
@@ -23,7 +23,7 @@
 
               <ion-item>
                 <ion-label color="medium">e-mail</ion-label>
-                <ion-label slot="end" color="dark">{{state.expert.email}}</ion-label>
+                <ion-text slot="end" color="dark">{{state.expert.email}}</ion-text>
               </ion-item>
 
               <ion-item>
@@ -69,7 +69,8 @@ import {
   IonList,
   IonItem,
   IonItemDivider,
-  IonLabel,  
+  IonLabel,
+  IonText,  
   IonButton,
   //actionSheetController,
 } from '@ionic/vue';
@@ -95,7 +96,8 @@ export default defineComponent ({
     IonList,
     IonItem,
     IonItemDivider,
-    IonLabel,  
+    IonLabel,
+    IonText,    
     IonButton,
   },
   

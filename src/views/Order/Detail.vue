@@ -10,14 +10,14 @@
         </ion-item-divider>
 
         <div class="flex justify-end mr-2 mt-2 pb-1">
-          <ion-buttons color="light">
-            <ion-button v-if="state.order.stepLevel < 4" :router-link="'/order/modify?id=' + state.order.id">
-              <font-awesome-icon class="text-lg mr-1" icon="edit" />
-              <span class="text-gray-600 text-sm">수정</span>
+          <ion-buttons>
+            <ion-button v-if="state.order.stepLevel < 4" :router-link="'/order/modify?id=' + state.order.id" color="dark">
+              <font-awesome-icon class="text-sm mr-1" icon="edit" />
+              <span class="text-gray-600 text-xs">수정</span>
             </ion-button>
-            <ion-button v-if="state.order.stepLevel < 3" @click="deleteOrder(globalState.loginedClient.id)">
-              <font-awesome-icon class="text-lg mr-1" icon="ban" />
-              <span class="text-gray-600 text-sm">취소</span>
+            <ion-button v-if="state.order.stepLevel < 3" @click="deleteOrder(globalState.loginedClient.id)" color="dark">
+              <font-awesome-icon class="text-sm mr-1" icon="ban" />
+              <span class="text-gray-600 text-xm">의뢰취소</span>
             </ion-button>
           </ion-buttons>
         </div>

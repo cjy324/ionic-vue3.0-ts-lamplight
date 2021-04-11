@@ -7,15 +7,13 @@
           
           <div class="flex justify-end mr-4 mt-2">
             <ion-buttons>
-              <router-link :to="'/client/modify?id=' + globalState.loginedClient.id">
-                <ion-button>
-                  <font-awesome-icon class="text-lg h-7" icon="user-cog" />
-                </ion-button>
-              </router-link>
+              <ion-button :router-link="'/client/modify?id=' + globalState.loginedClient.id" color="medium">
+                <font-awesome-icon class="text-lg h-7" icon="user-cog" />
+              </ion-button>
             </ion-buttons>
           </div>  
 
-          <ion-item-divider class="mt-2">
+          <ion-item-divider class="pt-4">
             <img slot="start" class="h-32 rounded-full mr-4 mb-4" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
           </ion-item-divider>
               
