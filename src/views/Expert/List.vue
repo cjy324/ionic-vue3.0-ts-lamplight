@@ -20,46 +20,50 @@
     </div>
 
     <template v-bind:key="expert.id" v-for="expert in returnFilteredExperts">
-    <div class="expertList border-t-2 border-b-8">
+    <div class="expertList border-t border-b">
 
-    <div class="expertList_head border-b mb-3">
+    <div class="expertList_head">
       <div class="w-full flex justify-end">
         <ion-buttons >
-            <ion-button color="dark" slot="" :router-link="'/expert/profile?id=' + expert.id">
-              <font-awesome-icon class="text-gray-600 mr-1 text-sm" icon="user-check"/>
-              <span class="text-gray-600 text-sm">프로필</span>
-            </ion-button>
-            <ion-button color="dark" slot="end" :href="'/order/add?expertId=' + expert.id + '&clientId=' + globalState.loginedClient.id">
-              <font-awesome-icon class="text-gray-600 mr-1 text-sm" icon="edit"/>
-              <span class="text-gray-600 text-sm">의뢰</span>
-            </ion-button>
+            <ion-chip color="dark" slot="" :router-link="'/expert/profile?id=' + expert.id">
+              <font-awesome-icon class="text-gray-800 mr-1 text-xs" icon="user-check"/>
+              <span class="text-gray-600 text-xs">프로필</span>
+            </ion-chip>
+            <ion-chip color="dark" slot="end" :href="'/order/add?expertId=' + expert.id + '&clientId=' + globalState.loginedClient.id">
+              <font-awesome-icon class="text-blue-600 mr-1 text-xs" icon="edit"/>
+              <span class="text-gray-600 text-xs">의뢰</span>
+            </ion-chip>
+            <ion-chip color="dark" slot="end" :href="'/review/list?expertId=' + expert.id">
+              <font-awesome-icon class="text-red-800 mr-1 text-xs" icon="comment-dots"/>
+              <span class="text-gray-600 text-xs">{{expert.extra__reviews.length}}</span>
+            </ion-chip>
         </ion-buttons>
       </div>
     </div>
 
-    <div class="expertList_body ">
+    <div class="expertList_body mb-3">
       <!--정보-->
       <ion-item lines="none">
         <div class="w-36">
           <img class="h-20 rounded-full" :src="mainService.getExpertThumbImgUrl(expert.id)">
         </div>
-        <div class="flex-col w-full">
-          <span class="ml-5 font-bold text-gray-700 border-b-2">
+        <div class="flex-col w-full mb-1">
+          <span class="ml-5 font-bold text-gray-900 border-b-2">
             {{expert.name}}님
           </span>
-          <div class="flex ml-2">
-            <ion-chip color="primary">
-              {{expert.region}}
-            </ion-chip>
-            <ion-chip color="">
-              {{expert.career}}
-            </ion-chip>
+          <div class="flex ml-5 text-xs  pt-2">
+            <span class="mr-3">
+              지역: {{expert.region}}
+            </span>
+            <span>
+              경력: {{expert.career}}
+            </span>
           </div>
         </div>
         <!--평점--> 
         <div class="w-32">
           <div class="flex justify-center items-center w-full text-center">
-            <div class="border border-gray-500 rounded-full h-14 w-14 flex justify-center items-center mr-4 mt-2">
+            <div class="border border-gray-800 mb-2 rounded-sm h-14 w-14 flex justify-center items-center mr-4 mt-2">
               <div class="text-sm text-gray-500">
                 <span class="">평점</span>
                 {{ expert.extra__ratingPoint.toFixed(1) }}/5
@@ -68,42 +72,7 @@
           </div>
         </div>
       </ion-item>  
-      <!--Review-->
-      <ion-item lines="none">
-      <div class="flex-col w-full">
-        <div class="flex justify-between items-end h-8 w-full border-b">
-          <span class="text-sm text-gray-900">
-            후기
-          </span>
-        </div>
-        <template v-if="expert.extra__reviews.length !== 0">
-        <div class="border-b border-t bg-gray-100 mb-1" v-bind:key="review.id" v-for="review in expert.extra__reviews.slice(0, 3)">
-            <p class="text-gray-700 p-2 pb-0 text-sm">
-              {{review.body}}
-            </p>
-            <span class="text-gray-500 p-2 text-xs ">
-              {{review.updateDate}} / {{review.extra__clientName}}
-            </span>
-            <div v-if="globalState.loginedClient.id === review.clientId" class="w-full flex justify-end">
-              <ion-buttons>
-                <ion-button slot="" :href="'/review/modify?relTypeCode=expert&relId=' + expert.id + '&id=' + review.id">
-                  <span class="text-xs">수정</span>
-                </ion-button>
-                <ion-button color="" slot="end" @click="doDeleteReview(expert.id, review.id, globalState.loginedClient.id)">
-                  <span class="text-xs text-red-900">삭제</span>
-                </ion-button>
-              </ion-buttons>
-            </div>
-        </div>
-        </template>
-        <div v-else class="border-b border-t bg-gray-100 mb-1">
-          <p class="text-gray-700 p-2 pb-4 text-sm">
-              작성된 후기가 없습니다.
-          </p>
-        </div>
-      </div>
-
-      </ion-item>
+      
 
     </div>
     </div> 
@@ -135,7 +104,7 @@ import {
   IonContent,
   IonChip,
  // IonItemDivider,
-  IonButton,
+  //IonButton,
   IonButtons,
 
 } from '@ionic/vue';
@@ -170,7 +139,7 @@ export default defineComponent ({
     IonItem, 
     IonContent,
   //  IonItemDivider,
-    IonButton,
+   // IonButton,
     IonButtons,
   },
   
