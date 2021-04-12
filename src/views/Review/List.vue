@@ -44,7 +44,7 @@
     </div> 
   </ion-list>
   <div class="px-4">
-    <ion-button href="/expert/list" color="medium" type="button" expand="block">
+    <ion-button router-link="/expert/list" color="medium" type="button" expand="block">
       리스트로 돌아가기
      </ion-button>
   </div>

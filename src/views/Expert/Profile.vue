@@ -39,12 +39,12 @@
 
             </ion-list>
             <div class="px-4">
-              <ion-button href="/order/list" class="" color="primary" type="button" expand="block">
+              <ion-button router-link="/order/list" class="" color="primary" type="button" expand="block">
                 내 의뢰 리스트로
               </ion-button>
             </div>
             <div class="px-4">
-              <ion-button href="/expert/list" class="" color="secondary" type="button" expand="block">
+              <ion-button router-link="/expert/list" class="" color="secondary" type="button" expand="block">
                 지도사 현황으로
               </ion-button>
             </div>

@@ -9,7 +9,7 @@
         </ion-buttons>
         <ion-title>{{ pageTitle }}</ion-title>
       <ion-buttons slot="primary" v-if="globalState.isLogined">
-        <ion-button :href="'/'+ globalState.memberType + '/myPage'" class="mr-2">
+        <ion-button :router-link="'/'+ globalState.memberType + '/myPage'" class="mr-2">
           <img v-if="globalState.memberType == 'client'" class="rounded-full" :src="mainService.getClientThumbImgUrlForHeader(globalState.loginedClient.id)" alt="">
           <!-- loginedExpert 생성 후 아래 주석 풀 것 -->
           <!-- <img v-if="globalState.memberType == 'expert'" class="rounded-full" :src="mainService.getExpertThumbImgUrlForHeader(globalState.loginedExpert.id)" alt=""> -->
@@ -19,10 +19,10 @@
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="primary" v-else>
-        <ion-button href="/member/main" class="mr-3 font-bold text-md" color="primary">
+        <ion-button router-link="/member/main" class="mr-3 font-bold text-md" color="primary">
           Log-In
         </ion-button>
-        <ion-button href="/member/signupMain" class="mr-2 font-bold text-md" color="dark">
+        <ion-button router-link="/member/signupMain" class="mr-2 font-bold text-md" color="dark">
           Sign-Up
         </ion-button>
       </ion-buttons>
@@ -54,6 +54,7 @@ import {
   IonButtons,
 } from "@ionic/vue";
 import { defineComponent } from 'vue'
+import router from '@/router';
 
 export default defineComponent ({
   name: 'IonBaseLayout',
@@ -77,7 +78,7 @@ export default defineComponent ({
       globalState.setLogouted();
       //window.location.reload();
       util.showAlert('로그아웃 되셨습니다.');
-      window.location.replace('/home/main')
+      router.replace('/home/main')
 
     };
     return {

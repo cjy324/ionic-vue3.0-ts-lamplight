@@ -50,11 +50,9 @@
             <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
           </div>
           <div class="px-4">
-            <router-link :to="'/client/myPage?id=' + globalState.loginedClient.id">
-              <ion-button class="btn-cancel" color="" type="button" expand="block">
-                취소
-              </ion-button>
-            </router-link>
+            <ion-button class="btn-cancel" :router-link="'/client/myPage?id=' + globalState.loginedClient.id" color="" type="button" expand="block">
+              취소
+            </ion-button>
           </div>
           </form>
         </ion-list>

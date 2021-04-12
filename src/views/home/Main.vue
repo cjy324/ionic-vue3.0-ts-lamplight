@@ -23,10 +23,10 @@
         </div>
 
         <div class="w-full px-3">
-          <ion-button v-if="globalState.isLogined && globalState.memberType == 'client'" color="dark" fill="outline" expand="block" href="/client/myPage">
+          <ion-button v-if="globalState.isLogined && globalState.memberType == 'client'" color="dark" fill="outline" expand="block" router-link="/client/myPage">
             MyPage
           </ion-button>
-          <ion-button v-else color="" fill="outline" expand="block" href="/client/login">
+          <ion-button v-else color="" fill="outline" expand="block" router-link="/client/login">
             Log-In
           </ion-button>
         </div>
@@ -45,11 +45,11 @@
 
         <div class="w-full px-3">
           
-          <ion-button v-if="globalState.isLogined && globalState.memberType == 'expert'" color="dark" fill="outline" expand="block" href="/expert/myPage">
+          <ion-button v-if="globalState.isLogined && globalState.memberType == 'expert'" color="dark" fill="outline" expand="block" router-link="/expert/myPage">
             MyPage
           </ion-button>
           
-          <ion-button v-else color="" fill="outline" expand="block" href="/expert/login">
+          <ion-button v-else color="" fill="outline" expand="block" router-link="/expert/login">
             Log-In
           </ion-button>
           
@@ -85,7 +85,7 @@
         </div>
 
         <div class="w-full px-3">
-          <ion-button color="tertiary" fill="outline" expand="block" href="/order/list">
+          <ion-button color="tertiary" fill="outline" expand="block" router-link="/order/list">
             List
           </ion-button>
         </div>
@@ -103,7 +103,7 @@
         </div>
 
         <div class="w-full px-3">
-          <ion-button color="tertiary" fill="outline" expand="block" href="/expert/list">
+          <ion-button color="tertiary" fill="outline" expand="block" router-link="/expert/list">
             List
           </ion-button>
         </div>

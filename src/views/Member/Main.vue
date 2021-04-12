@@ -8,13 +8,13 @@
         </div>
         <div class="mb-2">
           <div class="px-4 mb-2">
-            <ion-button class="btn-primary" size="" color="" type="button" expand="block" href="/client/login">
+            <ion-button class="btn-primary" size="" color="" type="button" expand="block" router-link="/client/login">
               <font-awesome-icon class="mr-2" icon="user"></font-awesome-icon>
               의뢰인 Log-In
             </ion-button>
           </div>
           <div class="px-4">
-            <ion-button class="btn-secondary" size="" color="" type="button" expand="block" href="/expert/login">
+            <ion-button class="btn-secondary" size="" color="" type="button" expand="block" router-link="/expert/login">
               <font-awesome-icon class="mr-2" icon="user-tie"></font-awesome-icon>
               지도사 Log-In
             </ion-button>
@@ -23,16 +23,12 @@
         <div class="w-full py-2 px-8 text-sm">
             아직 Lamplight의 회원이 아니라면?
             <div class="mt-2">
-              <ion-buttons>
-                <span class="font-semibold">'의뢰인'</span>으로 
-                <ion-button class="underline" href="/client/join" color="primary">Sign-Up</ion-button>
-              </ion-buttons>
+              <span class="font-semibold">'의뢰인'</span>으로 
+              <ion-custom-link to="/client/join">Sign-Up</ion-custom-link >
             </div>
             <div class="">
-              <ion-buttons>
-                <span class="font-semibold">'지도사'</span>로 
-                <ion-button class="underline" href="/expert/join" color="primary">Sign-Up</ion-button>
-              </ion-buttons>
+              <span class="font-semibold">'지도사'</span>로 
+              <ion-custom-link to="/expert/join">Sign-Up</ion-custom-link >
             </div>
         </div>
       </ion-custom-body>
@@ -50,10 +46,9 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody } from '@/components/';
+import { IonCustomBody, IonCustomLink } from '@/components/';
 import { 
   IonButton,
-  IonButtons,
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { defineComponent } from 'vue'
@@ -63,8 +58,8 @@ export default defineComponent ({
 
   components: { 
     IonButton,
-    IonButtons, 
-    IonCustomBody, 
+    IonCustomBody,
+    IonCustomLink, 
   },
 
   setup() {

@@ -30,14 +30,12 @@
             <ion-button type="submit" expand="block">작성 완료</ion-button>
           </div>
           <div class="px-4">
-            <ion-button class="btn-cancel" href="/order/list" color="" type="button" expand="block">취소</ion-button>
+            <ion-button class="btn-cancel" router-link="/order/list" color="" type="button" expand="block">취소</ion-button>
           </div>
         </form>
         <div v-else class="py-2 px-4">
-          <ion-buttons>
-            로그인 후 이용가능합니다.
-            <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
-          </ion-buttons>
+          로그인 후 이용가능합니다.
+          <ion-custom-link to="/member/main">Log-In</ion-custom-link>하러가기
         </div>
       </ion-custom-body>
   </ion-base-layout>
@@ -50,7 +48,7 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody } from '@/components/';
+import { IonCustomBody, IonCustomLink } from '@/components/';
 import { 
   IonSelect, 
   IonSelectOption, 
@@ -58,7 +56,6 @@ import {
   IonTextarea, 
   IonItem, 
   IonButton,
-  IonButtons, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
@@ -83,8 +80,8 @@ export default defineComponent ({
     IonTextarea,
     IonItem, 
     IonButton,
-    IonButtons,  
-    IonCustomBody, 
+    IonCustomBody,
+    IonCustomLink 
   },
 
   setup() {
@@ -151,7 +148,7 @@ export default defineComponent ({
           }
           //const newReviewId = axRes.data.body.id;
 
-          window.location.replace('/order/list');
+          router.replace('/order/list');
       }
 
       const startAddReview = () =>{

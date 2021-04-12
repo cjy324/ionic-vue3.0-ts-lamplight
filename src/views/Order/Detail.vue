@@ -49,7 +49,7 @@
           <ion-label color="medium">담당지도사</ion-label>
           <ion-label slot="end" color="dark">{{state.order.extra__expertName}}</ion-label>
           <ion-buttons>
-            <ion-button color="" :href="'/expert/profile?id=' + state.order.expertId">  
+            <ion-button color="" :router-link="'/expert/profile?id=' + state.order.expertId">  
               <span class="">프로필</span>
             </ion-button>          
           </ion-buttons>
@@ -105,12 +105,10 @@
 
     </ion-list>
     <ion-custom-body v-else class="justify-center" >
-        <div class="py-2 px-4">
-          <ion-buttons>
-            로그인 후 이용가능합니다.
-            <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
-          </ion-buttons>
-        </div>
+      <div class="py-2 px-4">
+        로그인 후 이용가능합니다.
+        <ion-custom-link to="/member/main">Log-In</ion-custom-link>하러가기
+      </div>
     </ion-custom-body>
   </ion-base-layout>
 </template>
@@ -137,7 +135,7 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody } from '@/components/';
+import { IonCustomBody, IonCustomLink } from '@/components/';
 import { 
   IonList,
   IonItem,
@@ -158,7 +156,8 @@ export default defineComponent ({
   name: 'MyOrder',
 
   components: { 
-    IonCustomBody, 
+    IonCustomBody,
+    IonCustomLink, 
     IonList,
     IonItem,
     IonItemDivider,
@@ -216,7 +215,7 @@ export default defineComponent ({
     function returnToString(stepLevel: any) {
       let stepLevelToStr = ''; 
       if(stepLevel == 1){
-        stepLevelToStr = '의뢰요청';
+        stepLevelToStr = '의뢰요청중';
       }
       if(stepLevel == 2){
         stepLevelToStr = '의뢰검토(장례준비중)';

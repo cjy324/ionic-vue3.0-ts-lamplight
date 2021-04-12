@@ -26,11 +26,11 @@
               <font-awesome-icon class="text-gray-800 mr-1 text-xs" icon="user-check"/>
               <span class="text-gray-600 text-xs">프로필</span>
             </ion-button>
-            <ion-button color="dark" :href="'/order/add?expertId=' + expert.id + '&clientId=' + globalState.loginedClient.id" >
+            <ion-button color="dark" :router-link="'/order/add?expertId=' + expert.id + '&clientId=' + globalState.loginedClient.id" >
               <font-awesome-icon class="text-gray-800 mr-1 text-xs" icon="edit"/>
               <span class="text-gray-600 text-xs">의뢰</span>
             </ion-button>
-            <ion-button color="dark" :href="'/review/list?expertId=' + expert.id">
+            <ion-button color="dark" :router-link="'/review/list?expertId=' + expert.id">
               <font-awesome-icon class="text-gray-800 mr-1 text-xs" icon="comment-dots"/>
               <span class="text-gray-600 text-xs">{{expert.extra__reviews.length}}</span>
             </ion-button>

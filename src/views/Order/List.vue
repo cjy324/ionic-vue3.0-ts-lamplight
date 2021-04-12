@@ -41,7 +41,7 @@
               <font-awesome-icon class="text-white text-xs ml-4 mr-1" icon="clipboard"/>
               <span class="text-white text-xs">상세보기</span>
             </ion-button>
-            <ion-button v-if="order.stepLevel > 3" :href="'/review/add?relTypeCode=expert&relId=' + order.expertId" color="dark" slot="end">
+            <ion-button v-if="order.stepLevel > 3" :router-link="'/review/add?relTypeCode=expert&relId=' + order.expertId" color="dark" slot="end">
               <font-awesome-icon class="text-white text-xs mr-1" icon="comment-dots"/>
               <span class="text-white text-xs">후기작성</span>
             </ion-button>
@@ -90,7 +90,7 @@
           </ion-chip>
           <ion-buttons>
             <span class="">{{order.extra__expertName}}</span>
-            <ion-button color="primary" :href="'/expert/profile?id=' + order.expertId">  
+            <ion-button color="primary" :router-link="'/expert/profile?id=' + order.expertId">  
               <font-awesome-icon class="text-gray-800 ml-1 text-sm" icon="user-check"/>
             </ion-button>          
           </ion-buttons>
@@ -149,10 +149,8 @@
     </ion-custom-body>
   <ion-custom-body v-else class="justify-center">
     <div class="py-2 px-4">
-      <ion-buttons>
-        로그인 후 이용가능합니다.
-        <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
-      </ion-buttons>
+      로그인 후 이용가능합니다.
+      <ion-custom-link to="/member/main">Log-In</ion-custom-link>하러가기
     </div>
   </ion-custom-body>
 </ion-base-layout>
@@ -186,7 +184,7 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomPopver } from '@/components/';
+import { IonCustomBody, IonCustomLink, IonCustomPopver } from '@/components/';
 import { 
   IonSelect, 
   IonSelectOption, 
@@ -221,6 +219,7 @@ export default defineComponent ({
     IonSelectOption,
     IonSearchbar, 
     IonCustomBody,
+    IonCustomLink,
     IonLabel, 
     IonList, 
     IonItem, 

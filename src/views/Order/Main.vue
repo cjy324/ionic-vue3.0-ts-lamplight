@@ -21,10 +21,10 @@
           </div>
         </div>
         <div v-else class="py-2 px-4 w-full text-center">
-          <ion-buttons>
+          <div class="py-2 px-4">
             로그인 후 이용가능합니다.
-            <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
-          </ion-buttons>
+            <ion-custom-link to="/member/main">Log-In</ion-custom-link>하러가기
+          </div>
         </div>
       </ion-custom-body>
   </ion-base-layout>
@@ -40,10 +40,9 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody } from '@/components/';
+import { IonCustomBody, IonCustomLink } from '@/components/';
 import { 
-  IonButton,
-  IonButtons, 
+  IonButton, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { defineComponent } from 'vue'
@@ -53,8 +52,8 @@ export default defineComponent ({
 
   components: { 
     IonButton,
-    IonButtons, 
-    IonCustomBody, 
+    IonCustomBody,
+    IonCustomLink, 
   },
 
   setup() {

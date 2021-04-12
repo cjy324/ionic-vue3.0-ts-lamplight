@@ -8,35 +8,27 @@
         </div>
         <div class="mb-2">
           <div class="px-4 mb-2">
-            <router-link to="/client/join">
-              <ion-button class="btn-primary" size="" color="" type="button" expand="block">
-                <font-awesome-icon class="mr-2" icon="user"></font-awesome-icon>
-                의뢰인 Sign-Up
-              </ion-button>
-            </router-link>
+            <ion-button class="btn-primary" size="" color="" type="button" expand="block" router-link="/client/join">
+              <font-awesome-icon class="mr-2" icon="user"></font-awesome-icon>
+              의뢰인 Sign-Up
+            </ion-button>
           </div>
           <div class="px-4">
-            <router-link to="/expert/join">
-              <ion-button class="btn-secondary" size="" color="" type="button" expand="block">
-                <font-awesome-icon class="mr-2" icon="user-tie"></font-awesome-icon>
-                지도사 Sign-Up
-              </ion-button>
-            </router-link>
+            <ion-button class="btn-secondary" size="" color="" type="button" expand="block" router-link="/expert/join">
+              <font-awesome-icon class="mr-2" icon="user-tie"></font-awesome-icon>
+              지도사 Sign-Up
+            </ion-button>
           </div>
         </div>
         <div class="w-full py-2 px-8 text-sm">
             이미 Lamplight의 회원이라면?
             <div class="mt-2">
-              <ion-buttons>
-                <span class="font-semibold">'의뢰인'</span>으로 
-                <ion-button class="underline" href="/client/login" color="primary">Log-In</ion-button>
-              </ion-buttons>
+              <span class="font-semibold">'의뢰인'</span>으로 
+              <ion-custom-link to="/client/login">Log-In</ion-custom-link >
             </div>
             <div class="">
-              <ion-buttons>
-                <span class="font-semibold">'지도사'</span>로 
-                <ion-button class="underline" href="/expert/login" color="primary">Log-In</ion-button>
-              </ion-buttons>
+              <span class="font-semibold">'지도사'</span>로 
+              <ion-custom-link to="/expert/login">Log-In</ion-custom-link >
             </div>
         </div>
       </ion-custom-body>
@@ -54,10 +46,9 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody } from '@/components/';
+import { IonCustomBody, IonCustomLink } from '@/components/';
 import { 
   IonButton,
-  IonButtons,
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { defineComponent } from 'vue'
@@ -67,8 +58,8 @@ export default defineComponent ({
 
   components: { 
     IonButton,
-    IonButtons, 
-    IonCustomBody, 
+    IonCustomBody,
+    IonCustomLink, 
   },
 
   setup() {
