@@ -1,14 +1,15 @@
 <template>
-<ion-page>
-<ion-custom-header>후기</ion-custom-header>
-<ion-custom-body class="justify-center">
-<ion-content :fullscreen="true">
-      
+  <ion-base-layout pageTitle="후기">
+
   <ion-list class="mb-12">
     <ion-list-header>
       <img class="rounded-full h-12 mr-2 mt-2 mb-2" :src="mainService.getExpertThumbImgUrl(state.expert.id)" alt="">
       <span class="text-lg mr-1 text-black">{{state.expert.name}}</span><span>님 후기</span>
     </ion-list-header>
+
+    <div class="w-full border-b-2 pl-3 py-2 text-gray-600">
+      Total: {{state.reviews.length}}
+    </div>
 
     <div class="reviewList border-t border-b">
       <ion-item lines="none">
@@ -47,9 +48,7 @@
       리스트로 돌아가기
      </ion-button>
   </div>
-</ion-content>
-</ion-custom-body>
-</ion-page>
+</ion-base-layout>
 </template>
 
 <style>
@@ -59,20 +58,11 @@
 </style>
 
 <script lang="ts">
-import { IonCustomHeader, IonCustomBody } from '@/components/';
+
 import { 
-  IonPage,
- // IonSelect, 
-  //IonSelectOption, 
-  //IonSearchbar, 
-  //IonLabel, 
-  //IonAvatar, 
   IonListHeader, 
   IonList, 
   IonItem, 
-  IonContent,
-  //IonChip,
- // IonItemDivider,
   IonButton,
   IonButtons,
 
@@ -88,20 +78,9 @@ export default defineComponent ({
   name: 'ReviewList',
   
   components: {
-    IonPage, 
-    //IonSelect, 
-    //IonSelectOption, 
-    //IonSearchbar, 
-    IonCustomHeader,
-    IonCustomBody, 
-    //IonLabel,
-   // IonChip, 
-  //  IonAvatar, 
     IonListHeader, 
     IonList, 
     IonItem, 
-    IonContent,
-  //  IonItemDivider,
     IonButton,
     IonButtons,
   },

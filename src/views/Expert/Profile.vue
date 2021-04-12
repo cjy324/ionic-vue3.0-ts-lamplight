@@ -1,9 +1,5 @@
 <template>
-  <ion-page>
-    <ion-custom-header>프로필</ion-custom-header>
-    
-      <ion-custom-body class="justify-center">
-        <ion-content :fullscreen="true">
+  <ion-base-layout pageTitle="프로필" >
 
             <ion-list>
               
@@ -43,29 +39,25 @@
 
             </ion-list>
             <div class="px-4">
-              <ion-button router-link="/expert/list" color="medium" type="button" expand="block">
-                리스트로 돌아가기
+              <ion-button href="/order/list" class="" color="primary" type="button" expand="block">
+                내 의뢰 리스트로
+              </ion-button>
+            </div>
+            <div class="px-4">
+              <ion-button href="/expert/list" class="" color="secondary" type="button" expand="block">
+                지도사 현황으로
               </ion-button>
             </div>
 
-        </ion-content>
-      </ion-custom-body>
-    
-  </ion-page>
+  </ion-base-layout>
 </template>
 
 <style>
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader } from '@/components/';
+
 import { 
-  IonPage, 
-  //IonHeader,
-  //IonListHeader,
-  //IonToolbar, 
-  //IonTitle, 
-  IonContent,
   IonList,
   IonItem,
   IonItemDivider,
@@ -85,14 +77,6 @@ export default defineComponent ({
   name: 'Profile',
 
   components: { 
-    IonCustomBody, 
-    IonCustomHeader, 
-    IonPage, 
-    //IonHeader,
-    //IonListHeader,
-    //IonToolbar, 
-    //IonTitle, 
-    IonContent,
     IonList,
     IonItem,
     IonItemDivider,

@@ -1,8 +1,5 @@
 <template>
-<ion-page>
-<ion-custom-header>지도사 현황</ion-custom-header>
-<ion-custom-body class="justify-center">
-<ion-content :fullscreen="true">
+  <ion-base-layout pageTitle="지도사 현황" >
   <ion-list class="mb-12">
     <ion-item>
       <ion-label>키워드 타입</ion-label>
@@ -15,8 +12,8 @@
       <ion-searchbar class="ion-searchbar" show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
     </ion-item>
 
-    <div class="w-full border-t-4 border-b-2 pl-3 py-2">
-        Total: {{returnFilteredExperts.length}}
+    <div class="w-full border-t-4 border-b-2 pl-3 py-2 text-gray-600">
+      Total: {{returnFilteredExperts.length}}
     </div>
 
     <template v-bind:key="expert.id" v-for="expert in returnFilteredExperts">
@@ -78,9 +75,7 @@
     </div> 
     </template>
   </ion-list>
-</ion-content>
-</ion-custom-body>
-</ion-page>
+  </ion-base-layout>
 </template>
 
 <style>
@@ -90,18 +85,14 @@
 </style>
 
 <script lang="ts">
-import { IonCustomHeader, IonCustomBody } from '@/components/';
+import {  } from '@/components/';
 import { 
-  IonPage,
   IonSelect, 
   IonSelectOption, 
   IonSearchbar, 
   IonLabel, 
-  //IonAvatar, 
- // IonListHeader, 
   IonList, 
   IonItem, 
-  IonContent,
   //IonChip,
  // IonItemDivider,
   IonButton,
@@ -125,19 +116,15 @@ export default defineComponent ({
   name: 'ExpertList',
   
   components: {
-    IonPage, 
     IonSelect, 
     IonSelectOption, 
     IonSearchbar, 
-    IonCustomHeader,
-    IonCustomBody, 
     IonLabel,
    // IonChip, 
   //  IonAvatar, 
   //  IonListHeader, 
     IonList, 
     IonItem, 
-    IonContent,
   //  IonItemDivider,
     IonButton,
     IonButtons,
@@ -206,7 +193,7 @@ export default defineComponent ({
 
     // onMounted 바로 실행하는 것이 아닌 모든 것이 준비되었을때 실행됨
     onMounted(() => {
-      //alert("3");
+      //util.showAlert("3");
       loadExperts();
      // loadReviews(relTypeCode);
     });

@@ -1,11 +1,9 @@
 <template>
-<ion-page>
-  <ion-custom-header>정보 수정</ion-custom-header>
-  <ion-custom-body class="justify-center mt-8">
-    <ion-content v-if="globalState.isLogined" :fullscreen="true" >
-      <form @submit.prevent="checkAndModify" class="mb-24">
-        <div >
-          <ion-item-divider>
+  <ion-base-layout pageTitle="정보 수정" >
+      
+        <ion-list v-if="globalState.isLogined">
+          <form @submit.prevent="checkAndModify" >
+          <ion-item-divider class="pt-4">
             <img slot="start" class="h-32 rounded-full" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
           </ion-item-divider>
           
@@ -13,51 +11,42 @@
             <ion-label position="stacked">프로필 이미지</ion-label>
             <input class="mt-3" ref="profileImgElRef" type="file">
           </ion-item>
-        </div>
-        <div>
+
           <ion-item>
             <ion-label position="stacked">아이디(변경불가)</ion-label>
             <ion-input readonly>{{state.client.loginId}}</ion-input>
           </ion-item>
-        </div>
-        <div>
+
           <ion-item>
             <ion-label position="stacked">비밀번호</ion-label>
             <ion-input v-model="modifyFormState.loginPw" minlength="8" type="password" placeholder="비밀번호를 입력해주세요."></ion-input>
           </ion-item>
-        </div>
-        <div>
+
           <ion-item>
             <ion-label position="stacked">비밀번호 확인</ion-label>
             <ion-input v-model="modifyFormState.loginPwConfirm" minlength="8" type="password" placeholder="비밀번호 확인을 해주세요."></ion-input>
           </ion-item>
-        </div>
-        <div>
+
           <ion-item>
             <ion-label position="stacked">이름</ion-label>
             <ion-input v-model="modifyFormState.name" minlength="2" :placeholder="state.client.name"></ion-input>
           </ion-item>
-        </div>
-        <div>
+
           <ion-item>
             <ion-label position="stacked">연락처</ion-label>
             <ion-input v-model="modifyFormState.cellphoneNo" type="tel" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" :placeholder="state.client.cellphoneNo"></ion-input>
           </ion-item>
-        </div>
-        <div>
+
           <ion-item>
             <ion-label position="stacked">이메일</ion-label>
             <ion-input v-model="modifyFormState.email" type="email" :placeholder="state.client.email"></ion-input>
           </ion-item>
-        </div>
-        <div>
+
           <ion-item>
             <ion-label position="stacked">지역</ion-label>
             <ion-input v-model="modifyFormState.region" :placeholder="state.client.region"></ion-input>
           </ion-item>
-        </div>
-        <ion-list>
-          <div class="mb-2 px-4">
+          <div class="pt-4 mb-2 px-4">
             <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
           </div>
           <div class="px-4">
@@ -67,14 +56,12 @@
               </ion-button>
             </router-link>
           </div>
+          </form>
         </ion-list>
-      </form>
-    </ion-content>
     <div v-else class="py-2 px-4">
       로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
     </div>
-  </ion-custom-body>
-  </ion-page>
+  </ion-base-layout>
 </template>
 
 <style>
@@ -88,14 +75,10 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader, IonCustomLink } from '@/components/';
+import { IonCustomLink } from '@/components/';
 import { 
-  IonPage, 
-  //IonHeader, 
-  //IonToolbar, 
-  //IonTitle,
+
   IonList,
-  IonContent,
   IonLabel, 
   IonInput,
   IonItemDivider, 
@@ -128,9 +111,7 @@ export default defineComponent ({
   name: 'Modify',
 
   components: { 
-    //IonHeader, 
-    //IonToolbar, 
-    //IonTitle,
+
     IonLabel, 
     IonInput,
     IonList,
@@ -138,10 +119,6 @@ export default defineComponent ({
     IonItem, 
     IonButton,
     //IonButtons,  
-    IonContent, 
-    IonPage, 
-    IonCustomBody, 
-    IonCustomHeader,
     IonCustomLink, 
   },
 
@@ -174,7 +151,7 @@ export default defineComponent ({
       // let loginId = modifyFormState.loginId.trim();
       
       // if ( modifyFormState.loginId.trim().length == 0 ) {
-      //   // alert('아이디를 입력해주세요.');
+      //   // util.showAlert('아이디를 입력해주세요.');
       //   // return;
       //   loginId = state.client.loginId;
       // }
@@ -183,7 +160,7 @@ export default defineComponent ({
       const loginPw = modifyFormState.loginPw.trim();
       
       if ( loginPw.length == 0 ) {
-        alert('비밀번호를 입력해주세요.');
+        util.showAlert('비밀번호를 입력해주세요.');
         return;
       }
       
@@ -191,7 +168,7 @@ export default defineComponent ({
       const loginPwConfirm = modifyFormState.loginPwConfirm.trim();
       
       if ( loginPw != loginPwConfirm ) {
-        alert('비밀번호가 일치하지 않습니다.');
+        util.showAlert('비밀번호가 일치하지 않습니다.');
         return;
       }
 
@@ -199,7 +176,7 @@ export default defineComponent ({
       let name = modifyFormState.name.trim();
 
       if ( name.length == 0 ) {
-        // alert('이름을 입력해주세요.');
+        // util.showAlert('이름을 입력해주세요.');
         // return;
         name = state.client.name;
       }
@@ -208,7 +185,7 @@ export default defineComponent ({
       let cellphoneNo = modifyFormState.cellphoneNo.trim();
       
       if ( cellphoneNo.length == 0 ) {
-        // alert('연락처를 입력해주세요.');
+        // util.showAlert('연락처를 입력해주세요.');
         // return;
         cellphoneNo = state.client.cellphoneNo;
       }
@@ -217,7 +194,7 @@ export default defineComponent ({
       let email = modifyFormState.email.trim();
       
       if ( email.length == 0 ) {
-        // alert('이메일을 입력해주세요.');
+        // util.showAlert('이메일을 입력해주세요.');
         // return;
         email = state.client.email;
       }
@@ -226,7 +203,7 @@ export default defineComponent ({
       let region = modifyFormState.region.trim();
       
       if ( region.length == 0 ) {
-        // alert('지역을 입력해주세요.');
+        // util.showAlert('지역을 입력해주세요.');
         // return;
         region = state.client.region;
       }
@@ -239,7 +216,6 @@ export default defineComponent ({
         // 없으면 true
         if(profileImgElRef.value?.files == undefined || profileImgElRef.value?.files == null){
           onSuccess("");  //파일이 없으면 다음 과정 생략하고 onSuccess() 즉시 실행
-          alert("파일 업로드 안됨")
           return;
         }
         const axRes = await mainService.common_genFile_doUpload(profileImgElRef.value?.files[0])

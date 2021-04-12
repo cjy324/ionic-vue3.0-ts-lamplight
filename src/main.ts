@@ -95,10 +95,12 @@ library.add(
 import { createGlobalState, globalStateSymbol } from "@/stores"
 import { createMainApi, mainApiSymbol } from "@/apis"
 import { createMainService, mainServiceSymbol } from "@/services"
+import { IonBaseLayout } from '@/components/'
 
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
+  .component('ion-base-layout', IonBaseLayout)
   .component('font-awesome-icon', FontAwesomeIcon) //FontAwesome component 추가
   .provide(globalStateSymbol, createGlobalState())//provide(A, B) : B를 A라는 이름으로 등록하는 함수
   .provide(mainApiSymbol, createMainApi())

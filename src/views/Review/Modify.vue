@@ -1,7 +1,5 @@
 <template>
-  <ion-page>
-    <ion-custom-header>후기 수정</ion-custom-header>
-    <ion-content :fullscreen="true">
+  <ion-base-layout pageTitle="후기 수정">
       <ion-custom-body class="justify-center">
         <div class="logo-box text-center flex justify-center items-center mb-3">
             <div class="w-32 text-2xl font-bold border-b">
@@ -42,8 +40,7 @@
           </ion-buttons>
         </div>
       </ion-custom-body>
-    </ion-content>
-  </ion-page>
+  </ion-base-layout>
 </template>
 
 <style>
@@ -56,17 +53,11 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader } from '@/components/';
+import { IonCustomBody } from '@/components/';
 import { 
-  IonPage, 
-  //IonHeader, 
-  //IonToolbar, 
-  //IonTitle, 
-  IonContent,
   IonSelect, 
   IonSelectOption, 
   IonLabel, 
-  //IonInput,
   IonTextarea, 
   IonItem, 
   IonButton, 
@@ -90,21 +81,14 @@ export default defineComponent ({
   name: 'ReviewModify',
 
   components: { 
-    //IonHeader, 
-    //IonToolbar,
-    //IonTitle,
     IonSelect, 
     IonSelectOption, 
     IonLabel, 
-    //IonInput,
     IonTextarea,
     IonItem, 
     IonButton,
     IonButtons,  
-    IonContent, 
-    IonPage, 
     IonCustomBody, 
-    IonCustomHeader 
   },
 
   setup() {

@@ -1,6 +1,5 @@
 <template>
-  <ion-page>
-    <ion-custom-header>버전정보</ion-custom-header> 
+  <ion-base-layout pageTitle="버전정보">
       <ion-custom-body class="justify-center">
         <div class="w-full text-center bg-gray-600 text-white">
           <div class="h-32 flex-col items-center justify-center">
@@ -12,18 +11,17 @@
             </div>
           </div>
         </div>
-        
       </ion-custom-body>
-  </ion-page>
+  </ion-base-layout>
 </template>
 
 <style>
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader } from '@/components/';
+import { IonCustomBody } from '@/components/';
 import { 
-  IonPage, 
+
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { defineComponent } from 'vue'
@@ -31,9 +29,7 @@ import { defineComponent } from 'vue'
 export default defineComponent ({
   name: 'Info',
   components: { 
-    IonPage, 
     IonCustomBody, 
-    IonCustomHeader,
 
 },
   setup() {

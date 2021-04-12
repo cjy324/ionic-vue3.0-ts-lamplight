@@ -1,22 +1,18 @@
 <template>
-  <ion-page>
-    <ion-custom-header>의뢰 수정</ion-custom-header>
-      <ion-custom-body class="justify-center">
-        <ion-content v-if="globalState.isLogined" :fullscreen="true">
-        <form @submit.prevent="checkAndModifyOrder" class="mb-24">
-          <div>
+  <ion-base-layout pageTitle="의뢰 수정">
+      <ion-list v-if="globalState.isLogined">
+        <form @submit.prevent="checkAndModifyOrder">
+
             <ion-item>
               <ion-label position="stacked">고인 이름</ion-label>
               <ion-input v-model="orderModifyFormState.deceasedName" type="text" :placeholder="state.order.deceasedName"></ion-input>
             </ion-item>
-          </div>
-          <div>
+
             <ion-item>
               <ion-label position="stacked">상주 이름</ion-label>
               <ion-input v-model="orderModifyFormState.bereavedName" type="text" :placeholder="state.order.bereavedName"></ion-input>
             </ion-item>
-          </div>
-          <div>
+
             <ion-item>
               <ion-label position="floating">지역</ion-label>
               <ion-select v-model="orderModifyFormState.region" :placeholder="state.order.region">
@@ -26,14 +22,12 @@
                 <ion-select-option value="부산광역시">부산</ion-select-option>
               </ion-select>
             </ion-item>
-          </div>
-          <div>
+
             <ion-item>
               <ion-label position="stacked">장례식장</ion-label>
               <ion-input v-model="orderModifyFormState.funeralHome" type="text" :placeholder="state.order.funeralHome"></ion-input>
             </ion-item>
-          </div>
-          <div>
+
             <ion-item>
               <ion-label position="stacked">종교</ion-label>
               <ion-select v-model="orderModifyFormState.religion" :placeholder="state.order.religion">
@@ -43,25 +37,22 @@
                 <ion-select-option value="기타">기타</ion-select-option>
               </ion-select>
             </ion-item>
-          </div>
-          <div>
+
             <ion-item>
               <ion-label position="stacked">시작일</ion-label>
               <ion-input v-model="orderModifyFormState.startDate" type="date" :placeholder="state.order.startDate"></ion-input>
             </ion-item>
-          </div>
-          <div>
+
             <ion-item>
               <ion-label position="stacked">종료일</ion-label>
               <ion-input v-model="orderModifyFormState.endDate" type="date" :placeholder="state.order.endDate"></ion-input>
             </ion-item>
-          </div>
-          <div>
+
             <ion-item>
               <ion-label position="stacked">추가 요청 사항</ion-label>
               <ion-textarea v-model="orderModifyFormState.body" :placeholder="state.order.body"></ion-textarea>
             </ion-item>
-          </div>
+
           <div class="mt-2 mb-2 px-4">
             <ion-button class="btn-success" type="submit" expand="block">수정 완료</ion-button>
           </div>
@@ -71,15 +62,16 @@
             </ion-button>
           </div>
         </form>
-    </ion-content>
-    <div v-else class="py-2 px-4">
-      <ion-buttons>
-         로그인 후 이용가능합니다.
-        <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
-      </ion-buttons>
-    </div>
+    </ion-list>
+    <ion-custom-body v-else class="justify-center">
+      <div class="py-2 px-4">
+        <ion-buttons>
+          로그인 후 이용가능합니다.
+          <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
+        </ion-buttons>
+      </div>
     </ion-custom-body>
-  </ion-page>
+  </ion-base-layout>
 </template>
 
 <style>
@@ -92,10 +84,8 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader } from '@/components/';
+import { IonCustomBody } from '@/components/';
 import { 
-  IonPage,
-  IonContent,
   IonSelect, 
   IonSelectOption, 
   IonLabel, 
@@ -129,7 +119,6 @@ export default defineComponent ({
   name: 'OrderModify',
 
   components: { 
-    IonPage,
     IonSelect, 
     IonSelectOption, 
     IonLabel, 
@@ -138,9 +127,7 @@ export default defineComponent ({
     IonItem, 
     IonButton,
     IonButtons, 
-    IonContent, 
-    IonCustomBody, 
-    IonCustomHeader 
+    IonCustomBody,  
   },
 
   setup() {

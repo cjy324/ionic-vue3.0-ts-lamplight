@@ -1,22 +1,17 @@
 <template>
-<ion-page>
-  <ion-custom-header>의뢰요청</ion-custom-header>
-  <ion-custom-body class="justify-center">
-    <ion-content v-if="globalState.isLogined" :fullscreen="true">
-      <form @submit.prevent="checkAndAddOrder" class="mb-24">
-        <div>
+  <ion-base-layout pageTitle="의뢰요청">
+    <ion-list v-if="globalState.isLogined">
+      <form @submit.prevent="checkAndAddOrder" >
           <ion-item>
             <ion-label position="floating">고인 이름</ion-label>
             <ion-input v-model="orderAddFormState.deceasedName" type="text" placeholder="고인의 이름을 입력해주세요."></ion-input>
           </ion-item>
-        </div>
-        <div>
+
           <ion-item>
             <ion-label position="floating">상주 이름</ion-label>
             <ion-input v-model="orderAddFormState.bereavedName" type="text" placeholder="상주의 이름을 입력해주세요."></ion-input>
           </ion-item>
-        </div>
-        <div>
+
           <ion-item>
             <ion-label position="floating">지역</ion-label>
             <ion-select v-model="orderAddFormState.region">
@@ -26,14 +21,12 @@
               <ion-select-option value="부산광역시">부산</ion-select-option>
             </ion-select>
           </ion-item>
-        </div>
-        <div>
+
           <ion-item>
             <ion-label position="floating">장례식장</ion-label>
             <ion-input v-model="orderAddFormState.funeralHome" type="text" placeholder="장례식장을 입력해주세요.(미정이면 '미정'입력)"></ion-input>
           </ion-item>
-        </div>
-        <div>
+
           <ion-item>
             <ion-label position="floating">종교</ion-label>
             <ion-select v-model="orderAddFormState.religion">
@@ -43,27 +36,23 @@
               <ion-select-option value="기타">기타</ion-select-option>
             </ion-select>
           </ion-item>
-        </div>
-        <div>
+
           <ion-item>
             <ion-label position="stacked">시작일</ion-label>
             <ion-input v-model="orderAddFormState.startDate" type="date"></ion-input>
           </ion-item>
-        </div>
-        <div>
+
           <ion-item>
             <ion-label position="stacked">종료일</ion-label>
             <ion-input v-model="orderAddFormState.endDate" type="date"></ion-input>
           </ion-item>
-        </div>
-        <div>
+
           <ion-item>
             <ion-label position="stacked">추가 요청 사항</ion-label>
             <ion-textarea v-model="orderAddFormState.body" placeholder="추가 요청 사항을 입력해주세요."></ion-textarea>
           </ion-item>
-        </div>
-        <ion-list>
-          <div class="mb-2 px-4">
+
+          <div class="pt-2 mb-2 px-4">
             <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
           </div>
           <div class="px-4">
@@ -76,17 +65,17 @@
               취소(지도사 현황으로 가기)
             </ion-button>
           </div>
-        </ion-list>
-      </form>
-    </ion-content>
-    <div v-else class="py-2 px-4">
+        </form>
+      </ion-list>
+    <ion-custom-body v-else class="justify-center">
+    <div class="py-2 px-4">
       <ion-buttons>
          로그인 후 이용가능합니다.
         <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
       </ion-buttons>
     </div>
-  </ion-custom-body>
-</ion-page>
+    </ion-custom-body>
+  </ion-base-layout>
 </template>
 
 <style>
@@ -102,10 +91,8 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader } from '@/components/';
+import { IonCustomBody } from '@/components/';
 import { 
-  IonPage,
-  IonContent,
   IonSelect, 
   IonSelectOption, 
   IonLabel,
@@ -148,10 +135,9 @@ export default defineComponent ({
     IonItem, 
     IonButton,
     IonButtons,  
-    IonContent, 
-    IonPage, 
+
     IonCustomBody, 
-    IonCustomHeader 
+
   },
 
   setup() {
@@ -172,14 +158,14 @@ export default defineComponent ({
       const deceasedName = orderAddFormState.deceasedName.trim();
       
       if ( deceasedName.length == 0 ) {
-        alert('고인의 이름을 입력해주세요.');
+        util.showAlert('고인의 이름을 입력해주세요.');
         return;
       }
       // 상주 이름 체크
       const bereavedName = orderAddFormState.bereavedName.trim();
       
       if ( bereavedName.length == 0 ) {
-        alert('상주의 이름를 입력해주세요.');
+        util.showAlert('상주의 이름를 입력해주세요.');
         return;
       }
 
@@ -187,7 +173,7 @@ export default defineComponent ({
       const funeralHome = orderAddFormState.funeralHome.trim();
       
       if ( funeralHome.length == 0 ) {
-        alert('장례식장을 입력해주세요.');
+        util.showAlert('장례식장을 입력해주세요.');
         return;
       }
 
@@ -195,7 +181,7 @@ export default defineComponent ({
       const region = orderAddFormState.region.trim();
       
       if ( region.length == 0 ) {
-        alert('지역을 입력해주세요.');
+        util.showAlert('지역을 입력해주세요.');
         return;
       }
       
@@ -203,7 +189,7 @@ export default defineComponent ({
       // const head = parseInt(orderAddFormState.head);
       
       // if ( head == 0 ) {
-      //   alert('예상 조문인원을 입력해주세요.');
+      //   util.showAlert('예상 조문인원을 입력해주세요.');
       //   return;
       // }
 
@@ -211,7 +197,7 @@ export default defineComponent ({
       const religion = orderAddFormState.religion.trim();
 
       if ( religion.length == 0 ) {
-        alert('종교를 입력해주세요.');
+        util.showAlert('종교를 입력해주세요.');
         return;
       }
       
@@ -219,7 +205,7 @@ export default defineComponent ({
       const startDate = orderAddFormState.startDate.trim();
       
       if ( startDate.length == 0 ) {
-        alert('장례 시작일을 입력해주세요.');
+        util.showAlert('장례 시작일을 입력해주세요.');
         return;
       }
 
@@ -227,7 +213,7 @@ export default defineComponent ({
       const endDate = orderAddFormState.endDate.trim();
       
       if ( endDate.length == 0 ) {
-        alert('장례 종료일을 입력해주세요.');
+        util.showAlert('장례 종료일을 입력해주세요.');
         return;
       }
 

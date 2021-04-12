@@ -1,7 +1,5 @@
 <template>
-  <ion-page>
-    <ion-custom-header>로그인</ion-custom-header>
-    <ion-content :fullscreen="true">
+  <ion-base-layout pageTitle="로그인">
       <ion-custom-body class="justify-center">
         <div class="logo-box text-center flex justify-center items-center mb-3">
             <div class="w-32 text-2xl font-bold border-b">
@@ -22,16 +20,17 @@
           <div class="py-2 px-4">
             <ion-button type="submit" expand="block">로그인</ion-button>
           </div>
-          <div class="pt-2 px-4">
-            아직 회원이 아니신가요? <ion-custom-link to="/client/join">Sign-Up</ion-custom-link>
+          <div class="pt-2 px-4 text-sm">
+            <ion-buttons>
+            아직 회원이 아니신가요? <ion-button class="underline" color="primary" href="/member/signupMain">Sign-Up</ion-button>
+            </ion-buttons>
           </div>
-          <div class="px-4 text-md">
+          <div class="px-4 text-sm">
             ID/PW를 잊어버리셨다면? <ion-custom-link to="/client/findLoginId">ID찾기</ion-custom-link> / <ion-custom-link to="/client/findLoginPw">PW찾기</ion-custom-link>
           </div>
         </form>
       </ion-custom-body>
-    </ion-content>
-  </ion-page>
+  </ion-base-layout>
 </template>
 
 <style>
@@ -40,17 +39,13 @@
 </style>
 
 <script lang="ts">
-import { IonCustomHeader, IonCustomBody, IonCustomLink} from '@/components/';
+import { IonCustomBody, IonCustomLink} from '@/components/';
 import { 
-  IonPage, 
-  //IonHeader, 
-  //IonToolbar, 
-  //IonTitle, 
-  IonContent, 
   IonLabel, 
   IonInput, 
   IonItem, 
-  IonButton 
+  IonButton,
+  IonButtons, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { reactive, onMounted, defineComponent } from 'vue';
@@ -69,16 +64,11 @@ const useLoginFormState = () => {
 export default defineComponent ({
   name: 'Login',
   components: { 
-    //IonHeader, 
-    //IonToolbar, 
-    //IonTitle, 
     IonLabel, 
     IonInput, 
     IonItem, 
-    IonButton, 
-    IonContent, 
-    IonPage, 
-    IonCustomHeader, 
+    IonButton,
+    IonButtons, 
     IonCustomBody, 
     IonCustomLink 
 },
@@ -121,16 +111,16 @@ export default defineComponent ({
       const loginedClient = axiosResponse.data.body.client;
       globalState.setLoginedClient(authKey, memberType, memberId, loginedClient);
       
-      router.replace('/');
+      window.location.replace('/order/main');
     }
 
     function checkAndLogin() {
       if ( loginFormState.loginId.trim().length == 0 ) {
-        alert('아이디를 입력해주세요.');
+        util.showAlert('아이디를 입력해주세요.');
         return;
       }
       if ( loginFormState.loginPw.trim().length == 0 ) {
-        alert('비밀번호를 입력해주세요.');
+        util.showAlert('비밀번호를 입력해주세요.');
         return;
       }
       login(loginFormState.loginId, loginFormState.loginPw);

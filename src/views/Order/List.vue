@@ -1,10 +1,7 @@
 <template>
-<ion-page>
-<ion-custom-header>의뢰 현황</ion-custom-header>
-
-  <ion-custom-body class="justify-center">
-    <ion-content v-if="globalState.isLogined" :fullscreen="true">
-    <ion-list v-if="state.orders.length !== 0" class="mb-12">
+  <ion-base-layout pageTitle="의뢰 현황">
+  <ion-custom-body v-if="globalState.isLogined" class="justify-center">
+    <ion-list v-if="state.orders.length !== 0">
       <ion-item >
         <ion-label>진행단계</ion-label>
         <ion-select v-model="searchState.selectStepLevel">
@@ -31,7 +28,7 @@
         <ion-searchbar class="ion-searchbar" show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
       </ion-item>
 
-      <div class="w-full border-t-4 border-b-2 pl-3 py-2">
+      <div class="w-full border-t-4 border-b-2 pl-3 py-2 text-gray-600">
         Total: {{returnFilteredOrders.length}}
       </div>
       
@@ -39,7 +36,7 @@
       <div class="orderList">
       <!--진행단계-->
         <div class="orderList_head flex justify-between items-center h-12 border-b-2 border-t-4 bg-gray-600 mb-2 rounded-t-lg">
-          <ion-buttons >
+          <ion-buttons>
             <ion-button :router-link="'/order/detail?id=' + order.id" slot="" color="dark">
               <font-awesome-icon class="text-white text-xs ml-4 mr-1" icon="clipboard"/>
               <span class="text-white text-xs">상세보기</span>
@@ -62,7 +59,7 @@
 
         <div class="orderList_body mb-2">
         <ion-item color="" lines="none">
-          <ion-chip color="dark">
+          <ion-chip color="dark" class="mr-3">
             <ion-label color="">
               고인명
             </ion-label>
@@ -72,7 +69,7 @@
           </ion-label>
         </ion-item>
         <ion-item v-if="globalState.memberType == 'expert'" color="" lines="none">
-          <ion-chip color="dark">
+          <ion-chip color="dark" class="mr-3">
             <ion-label color="">
               의뢰인
             </ion-label>
@@ -86,21 +83,24 @@
           </ion-button>
         </ion-item>
         <ion-item v-if="globalState.memberType == 'client'" color="" lines="none">
-          <ion-chip color="dark">
+          <ion-chip color="dark" class="mr-3">
             <ion-label color="">
               지도사
             </ion-label>
           </ion-chip>
-          <ion-label color="">
-            {{order.extra__expertName}}
-          </ion-label>
-          <ion-button color="" slot="end">
-            <font-awesome-icon class="mr-2" icon="phone-alt"/>
+          <ion-buttons>
+            <span class="">{{order.extra__expertName}}</span>
+            <ion-button color="primary" :href="'/expert/profile?id=' + order.expertId">  
+              <font-awesome-icon class="text-gray-800 ml-1 text-sm" icon="user-check"/>
+            </ion-button>          
+          </ion-buttons>
+          <ion-button color="primary" slot="end">
+            <font-awesome-icon class="mr-1" icon="phone-alt"/>
             {{order.extra__expertCellphoneNo}}
           </ion-button>
         </ion-item>
         <ion-item color="" lines="none">
-          <ion-chip color="dark">
+          <ion-chip color="dark" class="mr-3">
             <ion-label color="">
               지역
             </ion-label>
@@ -110,7 +110,7 @@
           </ion-label>
         </ion-item>
         <ion-item color="" lines="none">
-          <ion-chip color="dark">
+          <ion-chip color="dark" class="mr-3">
             <ion-label color="">
               장례 시작일/종료일
             </ion-label>
@@ -146,15 +146,16 @@
         </ion-button>
       </div>
     </div>
-    </ion-content>
-    <div v-else class="py-2 px-4">
+    </ion-custom-body>
+  <ion-custom-body v-else class="justify-center">
+    <div class="py-2 px-4">
       <ion-buttons>
         로그인 후 이용가능합니다.
         <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
       </ion-buttons>
     </div>
   </ion-custom-body>
-</ion-page>
+</ion-base-layout>
 </template>
 
 <style>
@@ -185,21 +186,14 @@
 </style>
 
 <script lang="ts">
-import { IonCustomHeader, IonCustomBody, IonCustomPopver } from '@/components/';
+import { IonCustomBody, IonCustomPopver } from '@/components/';
 import { 
-  IonPage,
   IonSelect, 
   IonSelectOption, 
   IonSearchbar, 
   IonLabel, 
-  //IonListHeader, 
   IonList, 
   IonItem, 
-  IonContent,
-  //IonItemDivider,
-  //IonCol,
-  //IonRow,
-  //IonGrid,
   IonButton,
   IonButtons,
   IonChip,
@@ -223,18 +217,13 @@ export default defineComponent ({
   name: 'OrderList',
   
   components: {
-    IonPage, 
     IonSelect, 
     IonSelectOption,
     IonSearchbar, 
-    IonCustomHeader,
     IonCustomBody,
     IonLabel, 
-    //IonListHeader, 
     IonList, 
     IonItem, 
-    IonContent,
-    //IonItemDivider,
     IonButton,
     IonButtons,
     IonChip,
@@ -359,7 +348,7 @@ export default defineComponent ({
     //   }
     //   mainService.review_doDelete(id)
     //   .then(axiosResponse => {
-    //       alert(axiosResponse.data.msg);
+    //       util.showAlert(axiosResponse.data.msg);
     //       if ( axiosResponse.data.fail ) {
     //         return;
     //       }
@@ -403,7 +392,7 @@ export default defineComponent ({
 
     // onMounted 바로 실행하는 것이 아닌 모든 것이 준비되었을때 실행됨
     onMounted(() => {
-      //alert("3");
+      //util.showAlert("3");
       loadOrders(loginedMemberId, loginedMemberType);
      // loadReviews(relTypeCode);
     });

@@ -1,15 +1,13 @@
 <template>
-  <ion-page>
-    <ion-custom-header>PW 찾기</ion-custom-header>
-    <ion-content :fullscreen="true">
+  <ion-base-layout pageTitle="PW찾기">
       <ion-custom-body class="justify-center">
         <div class="logo-box text-center flex justify-center items-center mb-3">
             <div class="w-32 text-2xl border-b">
               PW 찾기
             </div>
         </div>
-        <form @submit.prevent="checkAndFindLoginId" class="mx-3">
-          <div class="bg-white pb-3 pt-2 rounded-lg">
+        <form @submit.prevent="checkAndFindLoginId" class="mx-4">
+          <div class="bg-white pb-3 pt-2 rounded-xl px-4 mx-2">
             <ion-item class="f_item">
               <ion-label position="floating">ID</ion-label>
               <ion-input v-model="findLoginPwFormState.loginId" maxlength="20" placeholder="이름을 입력해주세요."></ion-input>
@@ -24,8 +22,7 @@
           </div>
         </form>
       </ion-custom-body>
-    </ion-content>
-  </ion-page>
+  </ion-base-layout>
 </template>
 
 <style>
@@ -34,13 +31,8 @@
 </style>
 
 <script lang="ts">
-import { IonCustomHeader, IonCustomBody} from '@/components/';
+import { IonCustomBody} from '@/components/';
 import { 
-  IonPage, 
-  //IonHeader, 
-  //IonToolbar, 
-  //IonTitle, 
-  IonContent, 
   IonLabel, 
   IonInput, 
   IonItem, 
@@ -61,18 +53,12 @@ const useFindLoginPwFormState = () => {
 }
 
 export default defineComponent ({
-  name: 'FindLoginId',
+  name: 'FindLoginPw',
   components: { 
-    //IonHeader, 
-    //IonToolbar, 
-    //IonTitle, 
     IonLabel, 
     IonInput, 
     IonItem, 
     IonButton, 
-    IonContent, 
-    IonPage, 
-    IonCustomHeader, 
     IonCustomBody, 
 
 },

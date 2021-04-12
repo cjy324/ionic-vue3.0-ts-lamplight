@@ -1,6 +1,5 @@
 <template>
-  <ion-page>
-  <ion-custom-header>홈</ion-custom-header>
+  <ion-base-layout pageTitle="홈">
   <div class="w-full text-center bg-gray-600 text-white">
     <div class="h-32 flex items-center justify-center">
       <div class="text-4xl">
@@ -111,7 +110,7 @@
       </ion-card-content>
     </ion-card>
   </ion-custom-grid-body>
-  </ion-page>
+  </ion-base-layout>
 </template>
 
 <style>
@@ -122,16 +121,11 @@
 </style>
 
 <script lang="ts">
-import { IonCustomHeader, IonCustomGridBody } from '@/components/';
+import { IonCustomGridBody  } from '@/components/';
 import { 
-  //IonContent,
-  IonPage,
   IonButton,
   IonCard, 
   IonCardContent, 
-  //IonCardSubtitle,
-  //IonCardTitle,  
-  //IonItem, 
 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores';
@@ -141,16 +135,11 @@ export default defineComponent ({
   name: 'Main',
   
   components: { 
-    IonPage,
-    //IonContent, 
-    IonCustomHeader,
     IonCustomGridBody,
     IonButton,
     IonCard, 
-    IonCardContent, 
-    //IonCardSubtitle, 
-    //IonCardTitle, 
-    //IonItem, 
+    IonCardContent,
+
   },
   
   setup() {

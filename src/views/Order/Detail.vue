@@ -1,9 +1,6 @@
 <template>
-<ion-page>
-  <ion-custom-header>의뢰 정보</ion-custom-header>
-  <ion-custom-body class="justify-center">
-    <ion-content v-if="globalState.isLogined" :fullscreen="true">
-      <ion-list class="mb-24">
+  <ion-base-layout pageTitle="의뢰 정보">
+    <ion-list v-if="globalState.isLogined">
         
         <ion-item-divider :class="returnColorByLevel(state.order.stepLevel)">
           <ion-label color="light">진행 현황 : {{returnToString(state.order.stepLevel)}}</ion-label>
@@ -32,9 +29,30 @@
           <ion-label slot="end" color="dark">{{state.order.bereavedName}}</ion-label>
         </ion-item>
 
-        <ion-item v-if="globalState.loginedClient.id == state.order.clientId">
-            <ion-label color="medium">담당지도사</ion-label>
-            <ion-label slot="end" color="dark">{{state.order.extra__expertName}}</ion-label>
+        <ion-item>
+          <ion-label color="medium">의뢰인</ion-label>
+          <ion-label slot="end" color="dark">{{state.order.extra__clientName}}</ion-label>
+        </ion-item>
+
+        <!-- 지도사생성 후 주석 풀 것
+        <ion-item v-if="globalState.loginedExpert.id == state.order.expertId">
+          <ion-label slot="" color="medium">연락처</ion-label>
+          <ion-label slot="end" color="">
+            <ion-button color="" slot="end">
+              <font-awesome-icon class="mr-2" icon="phone-alt"/>
+              {{state.order.extra__clientCellphoneNo}}
+            </ion-button>
+          </ion-label>
+        </ion-item> -->
+
+        <ion-item>
+          <ion-label color="medium">담당지도사</ion-label>
+          <ion-label slot="end" color="dark">{{state.order.extra__expertName}}</ion-label>
+          <ion-buttons>
+            <ion-button color="" :href="'/expert/profile?id=' + state.order.expertId">  
+              <span class="">프로필</span>
+            </ion-button>          
+          </ion-buttons>
         </ion-item>
 
         <ion-item v-if="globalState.loginedClient.id == state.order.clientId">
@@ -46,21 +64,6 @@
             </ion-button>
           </ion-label>
         </ion-item>
-
-        <!-- <ion-item v-if="globalState.loginedExoert.id == state.order.expertId">
-            <ion-label color="medium">의뢰인</ion-label>
-            <ion-label slot="end" color="dark">{{state.order.extra__clientName}}</ion-label>
-        </ion-item>
-
-        <ion-item v-if="globalState.loginedExoert.id == state.order.expertId">
-          <ion-label slot="" color="medium">연락처</ion-label>
-          <ion-label slot="end" color="">
-            <ion-button color="" slot="end">
-              <font-awesome-icon class="mr-2" icon="phone-alt"/>
-              {{state.order.extra__clientCellphoneNo}}
-            </ion-button>
-          </ion-label>
-        </ion-item> -->
 
         <ion-item>
           <ion-label color="medium">장례식장</ion-label>
@@ -100,21 +103,16 @@
           </ion-button>
         </div>
 
-        <div class="px-2">
-          <ion-button router-link="/order/list" class="" color="medium" type="button" expand="block">
-            리스트로 돌아가기
-          </ion-button>
+    </ion-list>
+    <ion-custom-body v-else class="justify-center" >
+        <div class="py-2 px-4">
+          <ion-buttons>
+            로그인 후 이용가능합니다.
+            <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
+          </ion-buttons>
         </div>
-      </ion-list>
-    </ion-content>
-    <div v-else class="py-2 px-4">
-      <ion-buttons>
-         로그인 후 이용가능합니다.
-        <ion-button color="primary" class="underline" href="/member/main">Log-In</ion-button>하러가기
-      </ion-buttons>
-    </div>
-  </ion-custom-body>
-</ion-page>
+    </ion-custom-body>
+  </ion-base-layout>
 </template>
 
 <style>
@@ -139,14 +137,8 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomHeader } from '@/components/';
+import { IonCustomBody } from '@/components/';
 import { 
-  IonPage, 
-  //IonHeader,
-  //IonListHeader,
-  //IonToolbar, 
-  //IonTitle, 
-  IonContent,
   IonList,
   IonItem,
   IonItemDivider,
@@ -167,13 +159,6 @@ export default defineComponent ({
 
   components: { 
     IonCustomBody, 
-    IonCustomHeader, 
-    IonPage, 
-    //IonHeader,
-    //IonListHeader,
-    //IonToolbar, 
-    //IonTitle, 
-    IonContent,
     IonList,
     IonItem,
     IonItemDivider,
