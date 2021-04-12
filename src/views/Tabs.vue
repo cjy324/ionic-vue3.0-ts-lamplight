@@ -1,5 +1,5 @@
 <template>
-  <ion-app>
+  <ion-page>
     <ion-content>
       <ion-tabs class="ion-tabs">
         <ion-tab-bar slot="bottom" class="">
@@ -49,7 +49,7 @@
         </ion-fab-list>
       </ion-fab>
     </ion-content>
-  </ion-app>
+  </ion-page>
 </template>
 
 <style>
@@ -62,6 +62,7 @@ ion-fab{
 
 <script lang="ts">
 import { 
+  IonPage,
   IonContent,
   IonTabBar, 
   IonTabButton,
@@ -70,7 +71,7 @@ import {
   IonFabList,
   IonIcon,
   IonTabs,
-  IonApp, 
+  //IonApp, 
 } from '@ionic/vue';
 import {
   createOutline
@@ -83,6 +84,7 @@ import { useRoute } from 'vue-router';
 export default defineComponent ({
   name: 'Tabs',
   components: {
+    IonPage,
     IonContent, 
     IonTabs, 
     IonTabBar, 
@@ -91,7 +93,7 @@ export default defineComponent ({
     IonFab,
     IonFabList,
     IonIcon,
-    IonApp,
+    //IonApp,
   },
   setup() {
     const globalState = useGlobalState();

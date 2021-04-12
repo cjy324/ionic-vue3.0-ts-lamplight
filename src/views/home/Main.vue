@@ -115,7 +115,7 @@
 
 <style>
 .container{
-  grid-template-rows: repeat(2, 30%);
+  grid-template-rows: repeat(2, 180px);
 }
 
 </style>
