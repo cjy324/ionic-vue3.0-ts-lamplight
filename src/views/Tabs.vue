@@ -23,7 +23,15 @@
           </ion-tab-button> -->
 
           <!--리스트-->  
-          <ion-tab-button tab="Expert" href="/Expert">
+          <ion-tab-button tab="Expert" @click="setOpen(true)" href="/Expert">
+            <ion-loading
+              :is-open="isOpenRef"
+              message="로딩중..."
+              :duration="timeout"
+              @onDidDismiss="setOpen(false)"
+              spinner="dots"
+            >
+            </ion-loading>
             <font-awesome-icon class="text-lg h-7" icon="users" />
           </ion-tab-button>
 
@@ -40,7 +48,15 @@
           <font-awesome-icon class="text-lg h-7 text-white" icon="clipboard-check" />
         </ion-fab-button>
         <ion-fab-list side="top">
-          <ion-fab-button router-link="/order/list" color="light">
+          <ion-fab-button router-link="/order/list" @click="setOpen(true)" color="light">
+            <ion-loading
+              :is-open="isOpenRef"
+              message="로딩중..."
+              :duration="timeout"
+              @onDidDismiss="setOpen(false)"
+              spinner="dots"
+            >
+            </ion-loading>
             <font-awesome-icon class="text-lg text-gray-700" icon="clipboard-list" />
           </ion-fab-button>
           <ion-fab-button router-link="/order/add" color="light">
@@ -61,7 +77,8 @@ ion-fab{
 </style>
 
 <script lang="ts">
-import { 
+import {
+  IonLoading, 
   IonPage,
   IonContent,
   IonTabBar, 
@@ -77,14 +94,18 @@ import {
   createOutline
 } from 'ionicons/icons';
 import { useGlobalState } from '@/stores';
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 //21.04.12 Tabs버그 해결로 삭제
 //import { useRoute } from 'vue-router';
 
 
 export default defineComponent ({
   name: 'Tabs',
+  props: {
+    timeout: { type: Number, default: 1000 },
+  },
   components: {
+    IonLoading,
     IonPage,
     IonContent, 
     IonTabs, 
@@ -98,6 +119,9 @@ export default defineComponent ({
   },
   setup() {
     const globalState = useGlobalState();
+
+    const isOpenRef = ref(false);
+    const setOpen = (state: boolean) => isOpenRef.value = state;
 
     //21.04.12 Tabs버그 해결로 삭제
     // const tabsState = reactive({
@@ -132,6 +156,8 @@ export default defineComponent ({
       //tabsState,
       createOutline,
       //route
+      isOpenRef, 
+      setOpen,
     }
   }
 })

@@ -14,7 +14,7 @@
             </ion-button>
             <ion-button v-if="state.order.stepLevel < 3" @click="deleteOrder(globalState.loginedClient.id)" color="dark">
               <font-awesome-icon class="text-sm mr-1" icon="ban" />
-              <span class="text-gray-600 text-xm">의뢰취소</span>
+              <span class="text-gray-600 text-xs">의뢰취소</span>
             </ion-button>
           </ion-buttons>
         </div>
