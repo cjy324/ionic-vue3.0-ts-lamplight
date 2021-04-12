@@ -102,6 +102,10 @@ const routes: Array<RouteRecordRaw> = [
         path: 'login',
         component: () => import('@/views/Expert/Login.vue')
       },
+      {
+        path: 'myPage',
+        component: () => import('@/views/Expert/MyPage.vue')
+      },
     ]
   },
   {

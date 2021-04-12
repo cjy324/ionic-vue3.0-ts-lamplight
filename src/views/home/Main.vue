@@ -1,133 +1,87 @@
 <template>
   <ion-base-layout pageTitle="홈">
-  <div class="w-full text-center bg-gray-600 text-white">
-    <div class="h-32 flex items-center justify-center">
-      <div class="text-4xl">
-        LAMPLIGHT
+    <ion-custom-body class="home">
+      <div class="home_head w-full text-center bg-gray-600 text-white mt-12">
+        <div class="h-32 flex items-center justify-center">
+          <div class="text-4xl">
+            LAMPLIGHT
+          </div>
+        </div>
+        <div>
+          원하는 서비스를 선택하세요.
+        </div>
       </div>
-    </div>
-    <div>
-      원하는 서비스를 선택하세요.
-    </div>
-  </div>
-
-  <ion-custom-grid-body class="container grid-cols-2 grid-rows-2">
-    <ion-card class="rounded-2xl">
-      <ion-card-content>
-        <div class="w-full text-center mt-2">
-          <font-awesome-icon class="text-5xl text-gray-700" icon="user" />
+    
+      <div class="home_body w-full h-80 flex flex-col items-center justify-center">
+        
+        <div class="home_body_cell flex flex-col items-center justify-center rounded-lg w-11/12 h-4/6">
+          <div v-if="globalState.isLogined == false" class="mb-2 w-full px-14">
+            <ion-button expand="block" color="light" router-link="/member/main">
+              <ion-icon :icon="enterOutline" />
+              <span class="ml-2">로그인</span>
+            </ion-button>
+          </div>
+          <div v-if="globalState.isLogined == false" class="mb-2 w-full px-14">
+            <ion-button expand="block" color="light" router-link="/member/signupMain">
+              <ion-icon :icon="personAddOutline" />
+              <span class="ml-2">회원가입</span>
+            </ion-button>
+          </div>
+          <div v-if="globalState.memberType == 'client'" class="mb-2 w-full px-14">
+            <ion-button expand="block" color="light" router-link="/order/add">
+              <ion-icon :icon="addCircleOutline" /> 
+              <span class="ml-2">새 의뢰 요청</span>
+            </ion-button>
+          </div>
+          <div v-if="globalState.memberType == 'expert'" class="mb-2 w-full px-14">
+            <ion-button expand="block" color="light" router-link="/order/list">
+              <ion-icon :icon="addCircleOutline" /> 
+              <span class="ml-2">의뢰 요청 현황</span>
+            </ion-button>
+          </div>
+          <div v-if="globalState.isLogined" class="mb-2 w-full px-14">
+            <ion-button expand="block" color="light" router-link="/order/list">
+              <ion-icon :icon="albumsOutline" />
+              <span class="ml-2">내 의뢰 관리</span>
+            </ion-button>
+          </div>
+          <div class="mb-2 w-full px-14">
+            <ion-button expand="block" color="light" router-link="/expert/list">
+              <ion-icon :icon="peopleOutline" />
+              <span class="ml-2">지도사 현황</span>
+            </ion-button>
+          </div>
+          <div v-if="globalState.isLogined" class="mb-2 w-full px-14">
+            <ion-button expand="block" color="light" :router-link="'/' + globalState.memberType + '/myPage'">
+              <ion-icon :icon="personCircleOutline" />
+              <span class="ml-2">내 정보 관리</span>
+            </ion-button>
+          </div>
         </div>
 
-        <div class="w-full text-center text-md border-b-2 mt-4">
-          <span>의뢰인</span>
-        </div>
-
-        <div class="w-full px-3">
-          <ion-button v-if="globalState.isLogined && globalState.memberType == 'client'" color="dark" fill="outline" expand="block" router-link="/client/myPage">
-            MyPage
-          </ion-button>
-          <ion-button v-else color="" fill="outline" expand="block" router-link="/client/login">
-            Log-In
-          </ion-button>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card class="rounded-2xl">
-      <ion-card-content>
-        <div class="w-full text-center mt-2">
-          <font-awesome-icon class="text-5xl text-gray-700" icon="user-tie" />
-        </div>
-
-        <div class="w-full text-center text-md border-b-2 mt-4">
-          <span>지도사</span>
-        </div>
-
-        <div class="w-full px-3">
-          
-          <ion-button v-if="globalState.isLogined && globalState.memberType == 'expert'" color="dark" fill="outline" expand="block" router-link="/expert/myPage">
-            MyPage
-          </ion-button>
-          
-          <ion-button v-else color="" fill="outline" expand="block" router-link="/expert/login">
-            Log-In
-          </ion-button>
-          
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card class="rounded-2xl">
-      <ion-card-content>
-        <div class="w-full text-center mt-2">
-          <font-awesome-icon class="text-5xl text-gray-700" icon="user-friends" />
-        </div>
-
-        <div class="w-full text-center text-md border-b-2 mt-4">
-          <span>도우미</span>
-        </div>
-
-        <div class="w-full px-3">
-          <ion-button disabled v-if="globalState.isLogined && globalState.memberType == 'assistant'" color="dark" fill="outline" expand="block" @click="logout">Log-Out</ion-button>
-          <ion-button disabled v-else color="medium" fill="outline" expand="block" >준비중</ion-button>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card v-if="globalState.isLogined" class="rounded-2xl">
-      <ion-card-content>
-        <div class="w-full text-center mt-2">
-          <font-awesome-icon class="text-5xl text-gray-700" icon="clipboard" />
-        </div>
-
-        <div class="w-full text-center text-md border-b-2 mt-4">
-          <span>의뢰</span>
-        </div>
-
-        <div class="w-full px-3">
-          <ion-button color="tertiary" fill="outline" expand="block" router-link="/order/list">
-            List
-          </ion-button>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card v-else class="rounded-2xl">
-      <ion-card-content>
-        <div class="w-full text-center mt-2">
-          <font-awesome-icon class="text-5xl text-gray-700" icon="users" />
-        </div>
-
-        <div class="w-full text-center text-md border-b-2 mt-4">
-          <span>지도사 현황</span>
-        </div>
-
-        <div class="w-full px-3">
-          <ion-button color="tertiary" fill="outline" expand="block" router-link="/expert/list">
-            List
-          </ion-button>
-        </div>
-      </ion-card-content>
-    </ion-card>
-  </ion-custom-grid-body>
+      </div>    
+    </ion-custom-body>
   </ion-base-layout>
 </template>
 
 <style>
-.container{
-  grid-template-rows: repeat(2, 180px);
-}
-
 </style>
 
 <script lang="ts">
-import { IonCustomGridBody  } from '@/components/';
+import { IonCustomBody  } from '@/components/';
 import { 
   IonButton,
-  IonCard, 
-  IonCardContent, 
+  IonIcon,
 
 } from '@ionic/vue';
+import {
+  addCircleOutline,
+  albumsOutline,
+  peopleOutline,
+  personCircleOutline,
+  enterOutline,
+  personAddOutline,
+} from 'ionicons/icons';
 import { useGlobalState } from '@/stores';
 import { defineComponent } from 'vue';
 
@@ -135,10 +89,9 @@ export default defineComponent ({
   name: 'Main',
   
   components: { 
-    IonCustomGridBody,
+    IonCustomBody,
     IonButton,
-    IonCard, 
-    IonCardContent,
+    IonIcon,
 
   },
   
@@ -152,7 +105,13 @@ export default defineComponent ({
 
     return {
       globalState,
-      logout
+      logout,
+      addCircleOutline,
+      albumsOutline,
+      peopleOutline,
+      personCircleOutline,
+      enterOutline,
+      personAddOutline,
     }
   }
 })

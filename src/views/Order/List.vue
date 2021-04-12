@@ -376,7 +376,7 @@ export default defineComponent ({
 
     if(globalState.loginedClient.id != null){
         loginedMemberId = globalState.loginedClient.id
-        loginedMemberType = 'client'
+        loginedMemberType = globalState.memberType
     }
 
     // onMounted 바로 실행하는 것이 아닌 모든 것이 준비되었을때 실행됨

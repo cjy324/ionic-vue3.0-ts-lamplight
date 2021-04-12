@@ -44,8 +44,14 @@
       </ion-tabs>
       <!--의뢰 fab버튼-->
       <ion-fab vertical="bottom" horizontal="center">
+        
+        <!-- 뱃지아이콘
+        <div v-if="globalState.loginedClient.id > 0">
+          <ion-badge class="badge" color="danger">{{}}</ion-badge>
+        </div> -->
+        
         <ion-fab-button>
-          <font-awesome-icon class="text-lg h-7 text-white" icon="clipboard-check" />
+          <font-awesome-icon class="text-lg h-7 text-white" icon="clipboard-check" />          
         </ion-fab-button>
         <ion-fab-list side="top">
           <ion-fab-button router-link="/order/list" @click="setOpen(true)" color="light">
@@ -73,6 +79,15 @@ ion-fab{
   position: absolute;
   bottom:5px;
 }
+ion-fab > div{
+  position: relative;
+}
+.badge{
+  position: absolute;
+  right: 0%;
+  z-index: 500;
+}
+
 
 </style>
 
@@ -88,16 +103,18 @@ import {
   IonFabList,
   IonIcon,
   IonTabs,
-  //IonApp, 
+  //IonBadge, 
 } from '@ionic/vue';
 import {
   createOutline
 } from 'ionicons/icons';
 import { useGlobalState } from '@/stores';
+//import { useMainService } from '@/services';
+//import { Order } from '@/types';
 import { defineComponent, ref } from 'vue';
+//import * as util from '@/utils';
 //21.04.12 Tabs버그 해결로 삭제
 //import { useRoute } from 'vue-router';
-
 
 export default defineComponent ({
   name: 'Tabs',
@@ -115,11 +132,13 @@ export default defineComponent ({
     IonFab,
     IonFabList,
     IonIcon,
-    //IonApp,
+    //IonBadge,
   },
   setup() {
     const globalState = useGlobalState();
+    //const mainService = useMainService();
 
+    //로딩 관련
     const isOpenRef = ref(false);
     const setOpen = (state: boolean) => isOpenRef.value = state;
 
@@ -153,8 +172,9 @@ export default defineComponent ({
 
     return {
       globalState,
-      //tabsState,
       createOutline,
+      //mainService,
+      //tabsState,
       //route
       isOpenRef, 
       setOpen,
