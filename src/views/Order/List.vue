@@ -77,9 +77,9 @@
           <ion-label color="">
             {{order.extra__clientName}}
           </ion-label>
-          <ion-button color="" slot="end">
+          <ion-button color="" slot="end" @click="callNumber(order.extra__clientCellphoneNo)">
             <font-awesome-icon class="mr-2" icon="phone-alt"/>
-            {{order.extra__expertCellphoneNo}}
+            {{order.extra__clientCellphoneNo}}
           </ion-button>
         </ion-item>
         <ion-item v-if="globalState.memberType == 'client'" color="" lines="none">
@@ -94,7 +94,7 @@
               <font-awesome-icon class="text-gray-800 ml-1 text-sm" icon="user-check"/>
             </ion-button>          
           </ion-buttons>
-          <ion-button color="primary" slot="end">
+          <ion-button color="primary" slot="end" @click="callNumber(order.extra__expertCellphoneNo)">
             <font-awesome-icon class="mr-1" icon="phone-alt"/>
             {{order.extra__expertCellphoneNo}}
           </ion-button>
@@ -184,7 +184,7 @@
 </style>
 
 <script lang="ts">
-import { IonCustomBody, IonCustomLink, IonCustomPopver } from '@/components/';
+import { IonCustomBody, IonCustomLink } from '@/components/';
 import { 
   IonSelect, 
   IonSelectOption, 
@@ -195,13 +195,13 @@ import {
   IonButton,
   IonButtons,
   IonChip,
-  popoverController,
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { reactive, computed, onMounted, defineComponent } from 'vue';
 import * as util from '@/utils';
 import { Order } from '@/types';
+import { CallNumber } from "@ionic-native/call-number";
 
 const useSearchState = () => {
   return reactive({
@@ -236,16 +236,6 @@ export default defineComponent ({
     const state = reactive({
       orders: [] as Order[],
     });
-
-    async function openPopover(ev: Event) {
-      const popover = await popoverController
-        .create({
-          component: IonCustomPopver,
-          event: ev,
-          translucent: true
-        })
-      return popover.present();
-    }
 
     function returnColorByLevel(stepLevel: any) {
       let stepLevelToStr = ''; 
@@ -397,6 +387,26 @@ export default defineComponent ({
     });
 
 
+    //Native 전화연결
+    function doCallNumber(cellphoneNo: string){
+      CallNumber.callNumber(cellphoneNo,true)
+        .then((res) => console.log("전화 연결", res))
+        .catch((err) => console.log("전화 연결 실패", err));
+    }
+
+    async function callNumber(cellphoneNo: string){
+      const msg = '전화 연결하시겠습니까?'
+
+      util.showAlertConfirm(msg).then(confirm => {
+        if (confirm == false) {
+          return
+        } else {
+          doCallNumber(cellphoneNo)
+        }
+      })
+    }
+
+
     return {
       globalState,
       mainService,
@@ -408,8 +418,7 @@ export default defineComponent ({
       returnColorByLevel,
       returnToString,
       changeStepLevel,
-      openPopover,
-      //onClickInput,
+      callNumber,
     }
   }
 })

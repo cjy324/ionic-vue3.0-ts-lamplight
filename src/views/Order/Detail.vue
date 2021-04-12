@@ -38,7 +38,7 @@
         <ion-item v-if="globalState.loginedExpert.id == state.order.expertId">
           <ion-label slot="" color="medium">연락처</ion-label>
           <ion-label slot="end" color="">
-            <ion-button color="" slot="end">
+            <ion-button color="" slot="end" @click="callNumber(state.order.extra__clientCellphoneNo)">
               <font-awesome-icon class="mr-2" icon="phone-alt"/>
               {{state.order.extra__clientCellphoneNo}}
             </ion-button>
@@ -58,7 +58,7 @@
         <ion-item v-if="globalState.loginedClient.id == state.order.clientId">
           <ion-label slot="" color="medium">연락처</ion-label>
           <ion-label slot="end" color="">
-            <ion-button color="" slot="end">
+            <ion-button color="" slot="end" @click="callNumber(state.order.extra__expertCellphoneNo)">
               <font-awesome-icon class="mr-2" icon="phone-alt"/>
               {{state.order.extra__expertCellphoneNo}}
             </ion-button>
@@ -151,6 +151,7 @@ import { reactive, onMounted, defineComponent } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import * as util from '@/utils';
 import { Order } from '@/types';
+import { CallNumber } from "@ionic-native/call-number";
 
 export default defineComponent ({
   name: 'MyOrder',
@@ -278,13 +279,32 @@ export default defineComponent ({
       })
     }
 
+    function doCallNumber(cellphoneNo: string){
+      CallNumber.callNumber(cellphoneNo,true)
+        .then((res) => console.log("전화 연결", res))
+        .catch((err) => console.log("전화 연결 실패", err));
+    }
+
+    async function callNumber(cellphoneNo: string){
+      const msg = '전화 연결하시겠습니까?'
+
+      util.showAlertConfirm(msg).then(confirm => {
+        if (confirm == false) {
+          return
+        } else {
+          doCallNumber(cellphoneNo)
+        }
+      })
+    }
+
     return {
       globalState,
       state,
       returnColorByLevel,
       returnToString,
       changeStepLevel,
-      deleteOrder
+      deleteOrder,
+      callNumber
     }
   }
 })

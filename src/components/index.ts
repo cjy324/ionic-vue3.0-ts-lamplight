@@ -8,7 +8,6 @@ import IonBaseLayout from './IonBaseLayout.vue';
 import IonCustomHeader from './IonBaseLayout.vue';
 import IonCustomBody from './IonCustomBody.vue';
 import IonCustomLink from './IonCustomLink.vue';
-import IonCustomPopver from './IonCustomPopver.vue';
 import IonCustomGridBody from './IonCustomGridBody.vue';
 
 export {
@@ -16,6 +15,5 @@ export {
   IonCustomHeader,
   IonCustomBody,
   IonCustomLink,
-  IonCustomPopver,
   IonCustomGridBody,
 }; 

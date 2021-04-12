@@ -9,6 +9,7 @@
             <div class="">
               ver 1.0.0
             </div>
+            <ion-button @click="callNumber">전화 테스트</ion-button>
           </div>
         </div>
       </ion-custom-body>
@@ -21,15 +22,17 @@
 <script lang="ts">
 import { IonCustomBody } from '@/components/';
 import { 
-
+IonButton 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { defineComponent } from 'vue'
+import { CallNumber } from "@ionic-native/call-number";
 
 export default defineComponent ({
   name: 'Info',
   components: { 
-    IonCustomBody, 
+    IonCustomBody,
+    IonButton 
 
 },
   setup() {
@@ -49,8 +52,16 @@ export default defineComponent ({
     //axios 객체도 간단하게 불러올 수 있다.
 
 
+    function callNumber(){
+      CallNumber.callNumber("2025551212",true)
+        .then((res) => console.log("Launched dialer!", res))
+        .catch((err) => console.log("Error launching dialer", err));
+    }
+
+
     return {
-      globalState
+      globalState,
+      callNumber
     }
   }
 })
