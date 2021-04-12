@@ -54,7 +54,7 @@
           <font-awesome-icon class="text-lg h-7 text-white" icon="clipboard-check" />          
         </ion-fab-button>
         <ion-fab-list side="top">
-          <ion-fab-button router-link="/order/list" @click="setOpen(true)" color="light">
+          <ion-fab-button href="/order/list" @click="setOpen(true)" color="light">
             <ion-loading
               :is-open="isOpenRef"
               message="로딩중..."
@@ -65,7 +65,7 @@
             </ion-loading>
             <font-awesome-icon class="text-lg text-gray-700" icon="clipboard-list" />
           </ion-fab-button>
-          <ion-fab-button router-link="/order/add" color="light">
+          <ion-fab-button href="/order/add" color="light">
             <ion-icon :icon="createOutline" />
           </ion-fab-button>
         </ion-fab-list>
