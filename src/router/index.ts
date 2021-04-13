@@ -138,6 +138,10 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Order/Add.vue')
       },
       {
+        path: 'allList',
+        component: () => import('@/views/Order/AllList.vue')
+      },
+      {
         path: 'list',
         component: () => import('@/views/Order/List.vue')
       },
@@ -149,18 +153,6 @@ const routes: Array<RouteRecordRaw> = [
         path: 'modify',
         component: () => import('@/views/Order/Modify.vue')
       },
-
-      
-      //통합
-      {
-        path: 'accept',
-        component: () => import('@/views/Order/Accept.vue')
-      },
-      //내용만 추가
-      {
-        path: 'mySchedule',
-        component: () => import('@/views/Order/MySchedule.vue')
-      },    
     ]
   },
   {

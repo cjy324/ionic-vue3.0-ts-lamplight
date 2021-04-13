@@ -127,11 +127,11 @@
             </ion-button>
           </div>
 
-          <!-- <div class="w-full px-4" v-if="globalState.loginedExpert.id == order.expertId">
+          <div class="w-full px-4" v-if="globalState.loginedExpert.id == order.expertId">
             <ion-button v-if="globalState.memberType == 'expert'" :color="returnColorByLevel(order.stepLevel+1)" expand="block" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
               {{returnToString(order.stepLevel+1)}}
             </ion-button>
-          </div> -->
+          </div>
       </div>
     </template>
     </ion-list>

@@ -34,8 +34,8 @@
             </ion-button>
           </div>
           <div v-if="globalState.memberType == 'expert'" class="mb-2 w-full px-14">
-            <ion-button expand="block" color="light" router-link="/order/list">
-              <ion-icon :icon="addCircleOutline" /> 
+            <ion-button expand="block" color="light" router-link="/order/allList">
+              <ion-icon :icon="searchCircleOutline" /> 
               <span class="ml-2">의뢰 요청 현황</span>
             </ion-button>
           </div>
@@ -81,6 +81,7 @@ import {
   personCircleOutline,
   enterOutline,
   personAddOutline,
+  searchCircleOutline,
 } from 'ionicons/icons';
 import { useGlobalState } from '@/stores';
 import { defineComponent } from 'vue';
@@ -112,6 +113,7 @@ export default defineComponent ({
       personCircleOutline,
       enterOutline,
       personAddOutline,
+      searchCircleOutline,
     }
   }
 })
