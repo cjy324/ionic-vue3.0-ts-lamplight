@@ -1,6 +1,9 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { inject } from 'vue';
 import { Client, Order, Expert, Assistant, Review, Funeral, Rating } from '@/types'
+import { getGlobalState } from '@/stores'
+
+const globalState = getGlobalState();
 
 // API 원형
 abstract class HttpClient {
@@ -240,6 +243,20 @@ export interface MainApi__expert_authKey__ResponseBody extends Base__ResponseBod
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 /* eslint-disable @typescript-eslint/camelcase */
+export interface MainApi__expert_findLoginId__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    loginId: string;
+  };
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+export interface MainApi__expert_findLoginPw__ResponseBody extends Base__ResponseBodyType1 {
+  body: {};
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
 // /usr/member/authKey 의 응답 타입
 export interface MainApi__assistant_authKey__ResponseBody extends Base__ResponseBodyType1 {
   body: {
@@ -363,6 +380,22 @@ export interface MainApi__order_delete__ResponseBody extends Base__ResponseBodyT
     id: number;
   };
 }
+
+
+//통합
+export interface MainApi__order_accept__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+
+export interface MainApi__order_reject__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    id: number;
+  };
+}
+
+
 /* eslint-disable @typescript-eslint/class-name-casing */
 /* eslint-disable @typescript-eslint/camelcase */
 // /usr/review/doAdd 의 응답 타입
@@ -469,7 +502,7 @@ export class MainApi extends HttpClient {
       localStorage.removeItem("loginedExpertName");
       localStorage.removeItem("loginedExpertProfileImgUrl");
 
-      location.replace('/client/login');
+      location.replace('/member/main');
     }
 
     return axiosResponse;
@@ -479,6 +512,11 @@ export class MainApi extends HttpClient {
   public order_list(memberId: number, memberType: string) {
     return this.get<MainApi__order_list__ResponseBody>(`/usr/order/list?memberId=${memberId}&memberType=${memberType}`);
   }
+
+  //통합
+  // public expertOrder_list(memberId: number, memberType: string) {
+  //   return this.get<MainApi__order_list__ResponseBody>(`/usr/order/expertOrderList?memberId=${memberId}&memberType=${memberType}`);
+  // }
 
   public funeral_list() {
     return this.get<MainApi__funeral_list__ResponseBody>(`/usr/funeral/list`);
@@ -550,7 +588,16 @@ export class MainApi extends HttpClient {
   public order_delete(id: number) {
     return this.get<MainApi__order_delete__ResponseBody>(`/usr/order/doDelete?id=${id}`);
   }
+  
 
+  //통합
+  public order_accept(orderId: number, expertId: number){
+    return this.get<MainApi__order_accept__ResponseBody>(`/usr/order/accept?orderId=${orderId}&expertId=${expertId}`);     
+  } 
+
+  public order_reject(orderId: number, expertId: number){
+    return this.get<MainApi__order_accept__ResponseBody>(`/usr/order/reject?orderId=${orderId}&expertId=${expertId}`);
+  } 
 
   
   /* Member 관련 */
@@ -603,9 +650,10 @@ export class MainApi extends HttpClient {
     );
   }
 
+  //통합
   public common_genFile_doUpload(profileImg: File) {
     const formData = new FormData();
-    formData.append("file__client__0__common__attachment__1", profileImg);
+    formData.append("file__" + globalState.memberType +"__0__common__attachment__1", profileImg);
     return this.post<MainApi__common_genFile_doUpload__ResponseBody>(
       `/common/genFile/doUpload`, formData
     );
@@ -643,6 +691,26 @@ export class MainApi extends HttpClient {
       `/usr/expert/authKey`, {
         loginId,
         loginPw,
+      }
+    );
+  }
+
+  //통합
+  public expert_findLoginId(name: string, email: string) {
+    return this.postByForm<MainApi__expert_findLoginId__ResponseBody>(
+      `/usr/expert/doFindLoginId`, {
+        name,
+        email,
+      }
+    );
+  }
+
+  //통합
+  public expert_findLoginPw(loginId: string, email: string) {
+    return this.postByForm<MainApi__expert_findLoginPw__ResponseBody>(
+      `/usr/expert/doFindLoginPw`, {
+        loginId,
+        email,
       }
     );
   }
@@ -693,18 +761,15 @@ export class MainApi extends HttpClient {
   }
 
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
-  public expert_doModify(id: number, loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, acknowledgment_step: string, region: string, license: string, career: string, genFileIdsStr: string) {
+  public expert_doModify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr: string) {
     return this.postByForm<MainApi__expert_doModify__ResponseBody>(
       `/usr/expert/doModify`, {
         id,
-        loginId,
         loginPw,
         name,
         cellphoneNo,
         email,
-        acknowledgment_step,
         region,
-        license,
         career,
         genFileIdsStr
       }

@@ -51,6 +51,21 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
       return this.mainApi.client_doModify(id, loginPw, name, cellphoneNo, email, region, genFileIdsStr);
     }
 
+    //통합(완)
+    /* eslint-disable @typescript-eslint/camelcase */
+    expert_authKey(loginId: string, loginPw: string) {
+      return this.mainApi.expert_authKey(loginId, loginPw);
+    }
+    
+    //통합(완)
+    expert_findLoginId(name: string, email: string){
+      return this.mainApi.expert_findLoginId(name, email)
+    }
+
+    expert_findLoginPw(loginId: string, email: string){
+      return this.mainApi.expert_findLoginPw(loginId, email)
+    }
+
     /* eslint-disable @typescript-eslint/camelcase */
     expert_list() {
       return this.mainApi.expert_list();
@@ -59,6 +74,11 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     expert_detail(id: number){
       return this.mainApi.expert_detail(id);
     }
+
+    expert_doModify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr: string){
+      return this.mainApi.expert_doModify(id, loginPw, name, cellphoneNo, email, region, career, genFileIdsStr);
+    }
+    
 
     order_list(memberId: number, memberType: string){
       return this.mainApi.order_list(memberId, memberType);
@@ -83,6 +103,20 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     order_changeStepLevel(id: number, stepLevel: number){
       return this.mainApi.order_changeStepLevel(id, stepLevel)
     }
+
+
+    //통합
+    order_accept(orderId: number, expertId: number) {
+      return this.mainApi.order_accept(orderId, expertId);
+    }
+
+    order_reject(orderId: number, expertId: number) {
+      return this.mainApi.order_reject(orderId, expertId);
+    }
+
+
+
+
 
     rating_doAdd(relTypeCode: string, relId: number, point: number, clientId: number){
       return this.mainApi.rating_doAdd(relTypeCode, relId, point, clientId)
@@ -130,6 +164,13 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     getClientThumbImgUrl(id: number, width: number = 500, height: number = 500) {
 
       const originUrl = 'http://localhost:8090/common/genFile/file/client/' + id + '/common/attachment/1';
+      const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
+      return url;
+    }
+
+    getExpertThumbImgUrlForHeader(id: number, width: number = 40, height: number = 40) {
+
+      const originUrl = 'http://localhost:8090/common/genFile/file/expert/' + id + '/common/attachment/1';
       const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return url;
     }

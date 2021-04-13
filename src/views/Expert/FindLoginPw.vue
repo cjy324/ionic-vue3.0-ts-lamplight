@@ -72,14 +72,14 @@ export default defineComponent ({
     
     async function findLoginPw(loginId: string, email: string) {
       
-      const axRes = await mainService.client_findLoginPw(loginId, email)
+      const axRes = await mainService.expert_findLoginPw(loginId, email)
 
       util.showAlert(axRes.data.msg);
       if ( axRes.data.fail ) {
         return;
       }
 
-      router.replace('/client/login')
+      router.replace('/expert/login')
     }
 
     function checkAndFindLoginId() {

@@ -106,6 +106,19 @@ const routes: Array<RouteRecordRaw> = [
         path: 'myPage',
         component: () => import('@/views/Expert/MyPage.vue')
       },
+      //통합
+      {
+        path: 'findLoginId',
+        component: () => import('@/views/Expert/FindLoginId.vue')
+      },
+      {
+        path: 'findLoginPw',
+        component: () => import('@/views/Expert/FindLoginPw.vue')
+      },
+      {
+        path: 'modify',
+        component: () => import('@/views/Expert/Modify.vue')
+      },
     ]
   },
   {
@@ -136,6 +149,18 @@ const routes: Array<RouteRecordRaw> = [
         path: 'modify',
         component: () => import('@/views/Order/Modify.vue')
       },
+
+      
+      //통합
+      {
+        path: 'accept',
+        component: () => import('@/views/Order/Accept.vue')
+      },
+      //내용만 추가
+      {
+        path: 'mySchedule',
+        component: () => import('@/views/Order/MySchedule.vue')
+      },    
     ]
   },
   {

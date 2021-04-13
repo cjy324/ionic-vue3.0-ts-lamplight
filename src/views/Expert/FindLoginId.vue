@@ -74,7 +74,7 @@ export default defineComponent ({
     
     async function findLoginId(name: string, email: string) {
       
-      const axRes = await mainService.client_findLoginId(name, email)
+      const axRes = await mainService.expert_findLoginId(name, email)
 
       util.showAlert(axRes.data.msg);
       if ( axRes.data.fail ) {
@@ -83,7 +83,7 @@ export default defineComponent ({
 
       const loginId = axRes.data.body.loginId;
 
-      router.replace('/client/login?loginId=' + loginId)
+      router.replace('/expert/login?loginId=' + loginId)
     }
 
     function checkAndFindLoginId() {

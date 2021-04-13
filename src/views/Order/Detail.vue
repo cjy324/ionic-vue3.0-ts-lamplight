@@ -103,6 +103,16 @@
           </ion-button>
         </div>
 
+        <!-- 수락
+        <div class="justify-around flex h-full">
+          <div class="items-center flex">
+            <form v-on:submit.prevent="acceptOrder">
+              <ion-button type="submit">수락</ion-button>
+            </form>
+              <ion-button>거절</ion-button>
+          </div>
+        </div> -->
+
     </ion-list>
     <ion-custom-body v-else class="justify-center" >
       <div class="py-2 px-4">
@@ -295,6 +305,18 @@ export default defineComponent ({
           doCallNumber(cellphoneNo)
         }
       })
+    }
+
+
+
+    //수락
+    async function accept(orderId: number, expertId: number){
+      const axRes = await mainService.order_accept(orderId, expertId)
+      util.showAlert(axRes.data.msg);                    
+      if ( axRes.data.fail ) {
+        return;
+      }
+      router.replace('accept?id=' + orderId);        
     }
 
     return {

@@ -12,7 +12,7 @@
         <ion-button :router-link="'/'+ globalState.memberType + '/myPage'" class="mr-2">
           <img v-if="globalState.memberType == 'client'" class="rounded-full" :src="mainService.getClientThumbImgUrlForHeader(globalState.loginedClient.id)" alt="">
           <!-- loginedExpert 생성 후 아래 주석 풀 것 -->
-          <!-- <img v-if="globalState.memberType == 'expert'" class="rounded-full" :src="mainService.getExpertThumbImgUrlForHeader(globalState.loginedExpert.id)" alt=""> -->
+          <img v-if="globalState.memberType == 'expert'" class="rounded-full" :src="mainService.getExpertThumbImgUrlForHeader(globalState.loginedExpert.id)" alt="">
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="primary" v-else>

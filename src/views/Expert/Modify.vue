@@ -4,7 +4,7 @@
         <ion-list v-if="globalState.isLogined">
           <form @submit.prevent="checkAndModify" >
           <ion-item-divider class="pt-4">
-            <img slot="start" class="h-32 rounded-full" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
+            <img slot="start" class="h-32 rounded-full" :src="mainService.getExpertThumbImgUrl(globalState.loginedExpert.id)">
           </ion-item-divider>
           
           <ion-item>
@@ -14,7 +14,7 @@
 
           <ion-item>
             <ion-label position="stacked">아이디(변경불가)</ion-label>
-            <ion-input readonly>{{state.client.loginId}}</ion-input>
+            <ion-input readonly>{{state.expert.loginId}}</ion-input>
           </ion-item>
 
           <ion-item>
@@ -29,35 +29,41 @@
 
           <ion-item>
             <ion-label position="stacked">이름</ion-label>
-            <ion-input v-model="modifyFormState.name" minlength="2" :placeholder="state.client.name"></ion-input>
+            <ion-input v-model="modifyFormState.name" minlength="2" :placeholder="state.expert.name"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">연락처</ion-label>
-            <ion-input v-model="modifyFormState.cellphoneNo" type="tel" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" :placeholder="state.client.cellphoneNo"></ion-input>
+            <ion-input v-model="modifyFormState.cellphoneNo" type="tel" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" :placeholder="state.expert.cellphoneNo"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">이메일</ion-label>
-            <ion-input v-model="modifyFormState.email" type="email" :placeholder="state.client.email"></ion-input>
+            <ion-input v-model="modifyFormState.email" type="email" :placeholder="state.expert.email"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">지역</ion-label>
-            <ion-input v-model="modifyFormState.region" :placeholder="state.client.region"></ion-input>
+            <ion-input v-model="modifyFormState.region" :placeholder="state.expert.region"></ion-input>
           </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">경력</ion-label>
+            <input class="mt-3" v-model="modifyFormState.career" type="text"  :placeholder="state.expert.career">
+          </ion-item>
+
           <div class="pt-4 mb-2 px-4">
             <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
           </div>
           <div class="px-4">
-            <ion-button class="btn-cancel" :router-link="'/client/myPage?id=' + globalState.loginedClient.id" color="" type="button" expand="block">
+            <ion-button class="btn-cancel" :router-link="'/expert/myPage?id=' + globalState.loginedExpert.id" color="" type="button" expand="block">
               취소
             </ion-button>
           </div>
           </form>
         </ion-list>
     <div v-else class="py-2 px-4">
-      로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
+      로그인 후 이용가능합니다. <ion-custom-link to="/expert/login">로그인</ion-custom-link> 하러 가기
     </div>
   </ion-base-layout>
 </template>
@@ -89,7 +95,7 @@ import { useMainService } from '@/services';
 import { useRouter } from 'vue-router';
 import * as util from '@/utils';
 import { reactive, onMounted, ref, defineComponent } from 'vue';
-import { Client } from '@/types';
+import { Expert } from '@/types';
 
 
 const useModifyFormState = () => {
@@ -102,6 +108,7 @@ const useModifyFormState = () => {
     cellphoneNo: '',
     email: '',
     region: '',
+    career: '',
   })
 }
 
@@ -129,17 +136,17 @@ export default defineComponent ({
     const profileImgElRef = ref<HTMLInputElement>();
 
     const state = reactive({
-      client: {} as Client
+      expert: {} as Expert
     });
 
-    const id = globalState.loginedClient.id;
+    const id = globalState.loginedExpert.id;
 
-    async function loadClient(id: number) {
-      const axRes = await mainService.client_detail(id)
-      state.client = axRes.data.body.client;
+    async function loadExpert(id: number) {
+      const axRes = await mainService.expert_detail(id)
+      state.expert = axRes.data.body.expert;
     }
     onMounted(() => {
-      loadClient(id);
+      loadExpert(id);
     });
 
 
@@ -151,7 +158,7 @@ export default defineComponent ({
       // if ( modifyFormState.loginId.trim().length == 0 ) {
       //   // util.showAlert('아이디를 입력해주세요.');
       //   // return;
-      //   loginId = state.client.loginId;
+      //   loginId = state.expert.loginId;
       // }
 
       // 비번 체크
@@ -176,7 +183,7 @@ export default defineComponent ({
       if ( name.length == 0 ) {
         // util.showAlert('이름을 입력해주세요.');
         // return;
-        name = state.client.name;
+        name = state.expert.name;
       }
       
       // 전화번호 체크
@@ -185,7 +192,7 @@ export default defineComponent ({
       if ( cellphoneNo.length == 0 ) {
         // util.showAlert('연락처를 입력해주세요.');
         // return;
-        cellphoneNo = state.client.cellphoneNo;
+        cellphoneNo = state.expert.cellphoneNo;
       }
 
       // 이메일 체크
@@ -194,7 +201,7 @@ export default defineComponent ({
       if ( email.length == 0 ) {
         // util.showAlert('이메일을 입력해주세요.');
         // return;
-        email = state.client.email;
+        email = state.expert.email;
       }
 
       // 시/도 주소 체크
@@ -203,7 +210,16 @@ export default defineComponent ({
       if ( region.length == 0 ) {
         // util.showAlert('지역을 입력해주세요.');
         // return;
-        region = state.client.region;
+        region = state.expert.region;
+      }
+
+      // 경력 체크
+      let career = modifyFormState.career.trim();
+      
+      if ( career.length == 0 ) {
+        // util.showAlert('지역을 입력해주세요.');
+        // return;
+        career = state.expert.career;
       }
 
       async function startFileUpload(onSuccess: Function){
@@ -227,8 +243,8 @@ export default defineComponent ({
         }
       }
 
-      async function modify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string) {
-        const axRes = await  mainService.client_doModify(id, loginPw, name, cellphoneNo, email, region, genFileIdsStr);
+      async function modify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr: string) {
+        const axRes = await  mainService.expert_doModify(id, loginPw, name, cellphoneNo, email, region, career, genFileIdsStr);
   
           util.showAlert(axRes.data.msg);
         
@@ -236,11 +252,11 @@ export default defineComponent ({
             return;
           }
 
-          router.replace('/client/myPage?id=' + id)
+          router.replace('/expert/myPage?id=' + id)
       }
 
       const startModify = (genFileIdsStr: string) =>{
-          modify(id, loginPw, name, cellphoneNo, email, region,  genFileIdsStr);
+          modify(id, loginPw, name, cellphoneNo, email, region, career, genFileIdsStr);
       }
 
       const msg = '해당 내용으로 수정하시겠습니까?'

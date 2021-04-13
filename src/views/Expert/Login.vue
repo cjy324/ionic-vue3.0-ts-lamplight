@@ -24,7 +24,7 @@
             아직 회원이 아니신가요? <ion-custom-link to="/member/signupMain">Sign-Up</ion-custom-link>
           </div>
           <div class="px-4 text-sm">
-            ID/PW를 잊어버리셨다면? <ion-custom-link to="/client/findLoginId">ID찾기</ion-custom-link> / <ion-custom-link to="/client/findLoginPw">PW찾기</ion-custom-link>
+            ID/PW를 잊어버리셨다면? <ion-custom-link to="/expert/findLoginId">ID찾기</ion-custom-link> / <ion-custom-link to="/expert/findLoginPw">PW찾기</ion-custom-link>
           </div>
         </form>
       </ion-custom-body>
@@ -95,17 +95,17 @@ export default defineComponent ({
     
     async function login(loginId: string, loginPw: string) {
       
-      const axiosResponse = await mainService.client_authKey(loginId, loginPw)
+      const axiosResponse = await mainService.expert_authKey(loginId, loginPw)
 
       util.showAlert(axiosResponse.data.msg);
       if ( axiosResponse.data.fail ) {
         return;
       }
       const authKey = axiosResponse.data.body.authKey;
-      const memberType = 'client' as string;
-      const memberId = axiosResponse.data.body.client.id;
-      const loginedClient = axiosResponse.data.body.client;
-      globalState.setLoginedClient(authKey, memberType, memberId, loginedClient);
+      const memberType = 'expert' as string;
+      const memberId = axiosResponse.data.body.expert.id;
+      const loginedExpert = axiosResponse.data.body.expert;
+      globalState.setLoginedExpert(authKey, memberType, memberId, loginedExpert);
       
       router.replace('/order/main');
     }

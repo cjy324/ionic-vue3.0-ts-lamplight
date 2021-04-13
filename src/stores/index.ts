@@ -1,7 +1,7 @@
 import { GlobalState } from '@/types'
 import { reactive } from "@vue/reactivity"
 import { inject, computed } from "vue"
-import { Client } from "@/types";
+import { Client, Expert } from "@/types";
 
 //Symbol()
 //'심볼(symbol)'은 유일한 식별자(unique identifier)를 만들고 싶을 때 사용합니다.
@@ -51,10 +51,30 @@ export const createGlobalState = () => {
         name:"",
         region:"",
       },
+
+      //loginedExpert 추가
+      loginedExpert: {
+        id:0,
+        regDate:"",
+        updateDate:"",
+        cellphoneNo:"",
+        email:"",
+        /* eslint-disable @typescript-eslint/camelcase */
+        extra__thumbImg:"",
+        acknowledgment_step:0,
+        loginId:"",
+        name:"",
+        region:"",
+        license:"",
+        career:"",
+      },
+
+      
       authKey: "",
       memberType: "",
       memberId: 0,
-      isLogined: computed(() => globalState.loginedClient.id != 0),
+
+      isLogined: computed(() => globalState.loginedClient.id != 0 || globalState.loginedExpert.id != 0),
 
       setLoginedClient: function(authKey: string, memberType: string, memberId: number, client: Client) {
         localStorage.setItem("authKey", authKey);
@@ -67,6 +87,19 @@ export const createGlobalState = () => {
         globalState.memberType = memberType;
         globalState.memberId = memberId;
         globalState.loginedClient = client;
+      },
+
+      setLoginedExpert: function(authKey: string, memberType: string, memberId: number, expert: Expert) {
+        localStorage.setItem("authKey", authKey);
+        localStorage.setItem("memberType", memberType);
+        localStorage.setItem("memberId", String(memberId));
+
+        localStorage.setItem("loginedExpertJsonStr", JSON.stringify(expert));
+
+        globalState.authKey = authKey;
+        globalState.memberType = memberType;
+        globalState.memberId = memberId;
+        globalState.loginedExpert = expert;
       },
 
       setLogouted: function() {
@@ -84,11 +117,25 @@ export const createGlobalState = () => {
         globalState.loginedClient.name = "";
         globalState.loginedClient.region = "";
 
+        globalState.loginedExpert.id = 0;
+        globalState.loginedExpert.regDate = "";
+        globalState.loginedExpert.updateDate = "";
+        globalState.loginedExpert.cellphoneNo = "";
+        globalState.loginedExpert.email = "";
+        globalState.loginedExpert.extra__thumbImg = "";
+        globalState.loginedExpert.loginId = "";
+        globalState.loginedExpert.name = "";
+        globalState.loginedExpert.region = "";
+        globalState.loginedExpert.license = "";
+        globalState.loginedExpert.career = "";
+        globalState.loginedExpert.acknowledgment_step = 0;
+
 
         localStorage.removeItem("authKey");
         localStorage.removeItem("memberType");
         localStorage.removeItem("memberId");
         localStorage.removeItem("loginedClientJsonStr");
+        localStorage.removeItem("loginedExpertJsonStr");
       }
     });
     const loadLoginInfoFromLocalStorage = () => {
@@ -96,11 +143,18 @@ export const createGlobalState = () => {
       const memberType = localStorage.getItem("memberType");
       const memberId = localStorage.getItem("memberId");
       const loginedClientJsonStr = localStorage.getItem("loginedClientJsonStr");
+      const loginedExpertJsonStr = localStorage.getItem("loginedExpertJsonStr");
 
       if ( !!authKey && !!memberType && !!loginedClientJsonStr ) {
         const loginedClient: Client = JSON.parse(loginedClientJsonStr);
 
         globalState.setLoginedClient(authKey, memberType, memberId, loginedClient);
+      }
+
+      if ( !!authKey && !!memberType && !!loginedExpertJsonStr ) {
+        const loginedExpert: Expert = JSON.parse(loginedExpertJsonStr);
+
+        globalState.setLoginedExpert(authKey, memberType, memberId, loginedExpert);
       }
     }
 

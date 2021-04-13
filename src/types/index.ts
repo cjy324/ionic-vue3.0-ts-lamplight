@@ -14,6 +14,8 @@ export interface GlobalState {
   memberId: number;
   isLogined: boolean;
   setLoginedClient(authKey: string, memberType: string, memberId: number, client: Client): void;
+  //통합
+  setLoginedExpert(authKey: string, memberType: string, memberId: number, expert: Expert): void;
   setLogouted(): void;
 }
 
