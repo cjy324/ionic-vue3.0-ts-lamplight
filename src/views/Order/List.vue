@@ -1,5 +1,5 @@
 <template>
-  <ion-base-layout pageTitle="의뢰 현황">
+  <ion-base-layout pageTitle="내 의뢰 현황">
   <ion-custom-body v-if="globalState.isLogined" class="justify-center">
     <ion-list v-if="state.orders.length !== 0">
       <ion-item >
