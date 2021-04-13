@@ -1,33 +1,33 @@
 <template>
   <ion-base-layout pageTitle="로그인">
-      <ion-custom-body class="justify-center">
-        <div class="logo-box text-center flex justify-center items-center mb-3">
-            <div class="w-32 text-2xl font-bold border-b">
-              Log-In
-            </div>
+    <ion-custom-body class="justify-center">
+      <div class="logo-box text-center flex justify-center items-center mb-3">
+        <div class="w-32 text-2xl font-bold border-b">
+          Log-In
         </div>
-        <form @submit.prevent="checkAndLogin" class="mx-4">
-          <div class="bg-white pb-3 pt-2 rounded-xl px-4 mx-2">
-            <ion-item class="f_item">
-              <ion-label position="floating">ID</ion-label>
-              <ion-input v-model="loginFormState.loginId" maxlength="20" placeholder="ID를 입력해주세요."></ion-input>
-            </ion-item>
-            <ion-item class="s_item">
-              <ion-label position="floating">PW</ion-label>
-              <ion-input v-model="loginFormState.loginPw" maxlength="20" type="password" placeholder="PW를 입력해주세요."></ion-input>
-            </ion-item>
-          </div>
-          <div class="py-2 px-4">
-            <ion-button type="submit" expand="block">로그인</ion-button>
-          </div>
-          <div class="pt-2 px-4 text-sm">
-            아직 회원이 아니신가요? <ion-custom-link to="/member/signupMain">Sign-Up</ion-custom-link>
-          </div>
-          <div class="px-4 text-sm">
-            ID/PW를 잊어버리셨다면? <ion-custom-link to="/expert/findLoginId">ID찾기</ion-custom-link> / <ion-custom-link to="/expert/findLoginPw">PW찾기</ion-custom-link>
-          </div>
-        </form>
-      </ion-custom-body>
+      </div>
+      <form @submit.prevent="checkAndLogin" class="mx-4">
+        <div class="bg-white pb-3 pt-2 rounded-xl px-4 mx-2">
+          <ion-item class="f_item">
+            <ion-label position="floating">ID</ion-label>
+            <ion-input v-model="loginFormState.loginId" maxlength="20" placeholder="ID를 입력해주세요."></ion-input>
+          </ion-item>
+          <ion-item class="s_item">
+            <ion-label position="floating">PW</ion-label>
+            <ion-input v-model="loginFormState.loginPw" maxlength="20" type="password" placeholder="PW를 입력해주세요."></ion-input>
+          </ion-item>
+        </div>
+        <div class="py-2 px-4">
+          <ion-button type="submit" expand="block">로그인</ion-button>
+        </div>
+        <div class="pt-2 px-4 text-sm">
+          아직 회원이 아니신가요? <ion-custom-link to="/member/signupMain">회원가입</ion-custom-link>
+        </div>
+        <div class="px-4 text-sm">
+          ID/PW를 잊어버리셨다면? <ion-custom-link to="/expert/findLoginId">ID찾기</ion-custom-link> / <ion-custom-link to="/expert/findLoginPw">PW찾기</ion-custom-link>
+        </div>
+      </form>
+    </ion-custom-body>
   </ion-base-layout>
 </template>
 
@@ -46,7 +46,6 @@ import {
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { reactive, onMounted, defineComponent } from 'vue';
-//import { useMainApi } from '@/apis';  //mainService를 통해 mainAPI를 가져오는 방식으로 변경
 import { useMainService } from '@/services';
 import { useRoute, useRouter } from 'vue-router';
 import * as util from '@/utils';
@@ -67,15 +66,13 @@ export default defineComponent ({
     IonButton,
     IonCustomBody, 
     IonCustomLink 
-},
-  
+  },
   
   setup() {
     const globalState = useGlobalState();
     const loginFormState = useLoginFormState();
     const router = useRouter();
     const route = useRoute();
-    //const mainApi = useMainApi();  //mainService를 통해 mainAPI를 가져오는 방식으로 변경
     const mainService = useMainService();
 
     onMounted(() => {
@@ -87,11 +84,6 @@ export default defineComponent ({
 
       }
     })
-
-    //await??
-    //비동기식 로직을 동기식으로 바꿔주는 함수?
-    //await을 쓰기 위해선 await이 달린 함수를 감싸고 있는 부모 함수에 async를 붙여줘야 함
-    //기존 then()방식과 과정상 큰 차이는 없지만 아직 then의 개념은 익숙치 않아 await 방식으로 변경
     
     async function login(loginId: string, loginPw: string) {
       

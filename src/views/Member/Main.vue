@@ -10,25 +10,25 @@
           <div class="px-4 mb-2">
             <ion-button class="btn-primary" size="" color="" type="button" expand="block" router-link="/client/login">
               <font-awesome-icon class="mr-2" icon="user"></font-awesome-icon>
-              의뢰인 Log-In
+              의뢰인 로그인
             </ion-button>
           </div>
           <div class="px-4">
             <ion-button class="btn-secondary" size="" color="" type="button" expand="block" router-link="/expert/login">
               <font-awesome-icon class="mr-2" icon="user-tie"></font-awesome-icon>
-              지도사 Log-In
+              지도사 로그인
             </ion-button>
           </div>
         </div>
         <div class="w-full py-2 px-8 text-sm">
-            아직 Lamplight의 회원이 아니라면?
+            아직 회원이 아니라면?
             <div class="mt-2">
               <span class="font-semibold">'의뢰인'</span>으로 
-              <ion-custom-link to="/client/join">Sign-Up</ion-custom-link >
+              <ion-custom-link to="/client/join">회원가입</ion-custom-link >
             </div>
             <div class="">
               <span class="font-semibold">'지도사'</span>로 
-              <ion-custom-link to="/expert/join">Sign-Up</ion-custom-link >
+              <ion-custom-link to="/expert/join">회원가입</ion-custom-link >
             </div>
         </div>
       </ion-custom-body>

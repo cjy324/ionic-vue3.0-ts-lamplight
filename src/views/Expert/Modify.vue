@@ -1,67 +1,71 @@
 <template>
-  <ion-base-layout pageTitle="정보 수정" >
-      
-        <ion-list v-if="globalState.isLogined">
-          <form @submit.prevent="checkAndModify" >
-          <ion-item-divider class="pt-4">
-            <img slot="start" class="h-32 rounded-full" :src="mainService.getExpertThumbImgUrl(globalState.loginedExpert.id)">
-          </ion-item-divider>
+  <ion-base-layout pageTitle="내 정보 수정" >    
+    <ion-list v-if="globalState.isLogined">
+      <form @submit.prevent="checkAndModify" >
+        <ion-item-divider class="pt-4">
+          <img slot="start" class="h-32 rounded-full" :src="mainService.getExpertThumbImgUrl(globalState.loginedExpert.id)">
+        </ion-item-divider>
           
-          <ion-item>
-            <ion-label position="stacked">프로필 이미지</ion-label>
-            <input class="mt-3" ref="profileImgElRef" type="file">
-          </ion-item>
+        <ion-item>
+          <ion-label position="stacked">프로필 이미지</ion-label>
+          <input class="mt-3" ref="profileImgElRef" type="file">
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">아이디(변경불가)</ion-label>
-            <ion-input readonly>{{state.expert.loginId}}</ion-input>
-          </ion-item>
+        <ion-item>
+          <ion-label position="stacked">아이디(변경불가)</ion-label>
+          <ion-input readonly>{{state.expert.loginId}}</ion-input>
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">비밀번호</ion-label>
-            <ion-input v-model="modifyFormState.loginPw" minlength="8" type="password" placeholder="비밀번호를 입력해주세요."></ion-input>
-          </ion-item>
+        <ion-item>
+          <ion-label position="stacked">비밀번호</ion-label>
+          <ion-input v-model="modifyFormState.loginPw" minlength="8" type="password" placeholder="비밀번호를 입력해주세요."></ion-input>
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">비밀번호 확인</ion-label>
-            <ion-input v-model="modifyFormState.loginPwConfirm" minlength="8" type="password" placeholder="비밀번호 확인을 해주세요."></ion-input>
-          </ion-item>
+        <ion-item>
+          <ion-label position="stacked">비밀번호 확인</ion-label>
+          <ion-input v-model="modifyFormState.loginPwConfirm" minlength="8" type="password" placeholder="비밀번호 확인을 해주세요."></ion-input>
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">이름</ion-label>
-            <ion-input v-model="modifyFormState.name" minlength="2" :placeholder="state.expert.name"></ion-input>
-          </ion-item>
+        <ion-item>
+          <ion-label position="stacked">이름</ion-label>
+          <ion-input v-model="modifyFormState.name" minlength="2" :placeholder="state.expert.name"></ion-input>
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">연락처</ion-label>
-            <ion-input v-model="modifyFormState.cellphoneNo" type="tel" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" :placeholder="state.expert.cellphoneNo"></ion-input>
-          </ion-item>
+        <ion-item>
+          <ion-label position="stacked">연락처</ion-label>
+          <ion-input v-model="modifyFormState.cellphoneNo" type="tel" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" :placeholder="state.expert.cellphoneNo"></ion-input>
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">이메일</ion-label>
-            <ion-input v-model="modifyFormState.email" type="email" :placeholder="state.expert.email"></ion-input>
-          </ion-item>
+        <ion-item>
+          <ion-label position="stacked">이메일</ion-label>
+          <ion-input v-model="modifyFormState.email" type="email" :placeholder="state.expert.email"></ion-input>
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">지역</ion-label>
-            <ion-input v-model="modifyFormState.region" :placeholder="state.expert.region"></ion-input>
-          </ion-item>
+        <ion-item>
+          <ion-label position="stacked">지역</ion-label>
+          <ion-input v-model="modifyFormState.region" :placeholder="state.expert.region"></ion-input>
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">경력</ion-label>
-            <input class="mt-3" v-model="modifyFormState.career" type="text"  :placeholder="state.expert.career">
-          </ion-item>
+        <ion-item>
+          <ion-label position="stacked">자격증</ion-label>
+          <ion-input readonly>{{state.expert.license}}</ion-input>
+        </ion-item>
 
-          <div class="pt-4 mb-2 px-4">
-            <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
-          </div>
-          <div class="px-4">
-            <ion-button class="btn-cancel" :router-link="'/expert/myPage?id=' + globalState.loginedExpert.id" color="" type="button" expand="block">
-              취소
-            </ion-button>
-          </div>
-          </form>
-        </ion-list>
+        <ion-item>
+          <ion-label position="stacked">경력</ion-label>
+          <input class="mt-3" v-model="modifyFormState.career" type="text"  :placeholder="state.expert.career">
+        </ion-item>
+
+        <div class="pt-4 mb-2 px-4">
+          <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
+        </div>
+        <div class="px-4">
+          <ion-button class="btn-cancel" :router-link="'/expert/myPage?id=' + globalState.loginedExpert.id" color="" type="button" expand="block">
+            취소
+          </ion-button>
+        </div>
+      </form>
+    </ion-list>
     <div v-else class="py-2 px-4">
       로그인 후 이용가능합니다. <ion-custom-link to="/expert/login">로그인</ion-custom-link> 하러 가기
     </div>
@@ -100,8 +104,6 @@ import { Expert } from '@/types';
 
 const useModifyFormState = () => {
   return reactive({
-    //profileImg: [] as File[],
-    //loginId: '',
     loginPw: '',
     loginPwConfirm: '',
     name: '',
@@ -151,15 +153,6 @@ export default defineComponent ({
 
 
     function checkAndModify() {
-
-      // 아이디 체크
-      // let loginId = modifyFormState.loginId.trim();
-      
-      // if ( modifyFormState.loginId.trim().length == 0 ) {
-      //   // util.showAlert('아이디를 입력해주세요.');
-      //   // return;
-      //   loginId = state.expert.loginId;
-      // }
 
       // 비번 체크
       const loginPw = modifyFormState.loginPw.trim();
@@ -252,7 +245,7 @@ export default defineComponent ({
             return;
           }
 
-          router.replace('/expert/myPage?id=' + id)
+          window.location.replace('/expert/myPage?id=' + id)
       }
 
       const startModify = (genFileIdsStr: string) =>{

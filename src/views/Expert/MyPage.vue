@@ -1,8 +1,6 @@
 <template>
   <ion-base-layout pageTitle="내 정보">
-
     <ion-list v-if="globalState.isLogined" class="mb-14">
-
       <div class="flex justify-end mr-4 mt-2">
         <ion-buttons>
           <ion-button :router-link="'/expert/modify?id=' + globalState.loginedExpert.id" color="medium">
@@ -12,15 +10,12 @@
       </div>
 
       <ion-item-divider class="pt-4">
-        <img
-            slot="start"
-            class="h-32 rounded-full mr-4 mb-4"
-            :src="mainService.getExpertThumbImgUrl(globalState.loginedExpert.id)">
+        <img slot="start" class="h-32 rounded-full mr-4 mb-4" :src="mainService.getExpertThumbImgUrl(globalState.loginedExpert.id)">
       </ion-item-divider>
 
       <ion-item color="light">
-          <ion-label color="medium">회원유형</ion-label>
-          <ion-label slot="end" color="dark">지도사</ion-label>
+        <ion-label color="medium">회원유형</ion-label>
+        <ion-label slot="end" color="dark">지도사</ion-label>
       </ion-item>
 
       <ion-item>

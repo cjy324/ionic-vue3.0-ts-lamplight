@@ -39,6 +39,7 @@ export const createGlobalState = () => {
   //만약, Singleton에 globalState가 없으면 다시 생성
   if( Singleton.globalState == null){
     const globalState: any = reactive({
+      // 의뢰인
       loginedClient: {
         id:0,
         regDate:"",
@@ -52,7 +53,7 @@ export const createGlobalState = () => {
         region:"",
       },
 
-      //loginedExpert 추가
+      // 지도사
       loginedExpert: {
         id:0,
         regDate:"",
@@ -69,7 +70,6 @@ export const createGlobalState = () => {
         career:"",
       },
 
-      
       authKey: "",
       memberType: "",
       memberId: 0,
@@ -103,10 +103,12 @@ export const createGlobalState = () => {
       },
 
       setLogouted: function() {
+        // member 공통
         globalState.authKey = "";
         globalState.memberType = "";
         globalState.memberId = 0;
 
+        // 의뢰인
         globalState.loginedClient.id = 0;
         globalState.loginedClient.regDate = "";
         globalState.loginedClient.updateDate = "";
@@ -117,6 +119,7 @@ export const createGlobalState = () => {
         globalState.loginedClient.name = "";
         globalState.loginedClient.region = "";
 
+        // 지도사
         globalState.loginedExpert.id = 0;
         globalState.loginedExpert.regDate = "";
         globalState.loginedExpert.updateDate = "";

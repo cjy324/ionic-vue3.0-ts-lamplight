@@ -513,11 +513,6 @@ export class MainApi extends HttpClient {
     return this.get<MainApi__order_list__ResponseBody>(`/usr/order/list?memberId=${memberId}&memberType=${memberType}`);
   }
 
-  //통합
-  // public expertOrder_list(memberId: number, memberType: string) {
-  //   return this.get<MainApi__order_list__ResponseBody>(`/usr/order/expertOrderList?memberId=${memberId}&memberType=${memberType}`);
-  // }
-
   public funeral_list() {
     return this.get<MainApi__funeral_list__ResponseBody>(`/usr/funeral/list`);
   }

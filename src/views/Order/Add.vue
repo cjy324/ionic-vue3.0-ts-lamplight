@@ -2,76 +2,76 @@
   <ion-base-layout pageTitle="의뢰요청">
     <ion-list v-if="globalState.isLogined">
       <form @submit.prevent="checkAndAddOrder" >
-          <ion-item>
-            <ion-label position="floating">고인 이름</ion-label>
-            <ion-input v-model="orderAddFormState.deceasedName" type="text" placeholder="고인의 이름을 입력해주세요."></ion-input>
-          </ion-item>
+        <ion-item>
+          <ion-label position="floating">고인 이름</ion-label>
+          <ion-input v-model="orderAddFormState.deceasedName" type="text" placeholder="고인의 이름을 입력해주세요."></ion-input>
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">상주 이름</ion-label>
-            <ion-input v-model="orderAddFormState.bereavedName" type="text" placeholder="상주의 이름을 입력해주세요."></ion-input>
-          </ion-item>
+        <ion-item>
+          <ion-label position="floating">상주 이름</ion-label>
+          <ion-input v-model="orderAddFormState.bereavedName" type="text" placeholder="상주의 이름을 입력해주세요."></ion-input>
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">지역</ion-label>
-            <ion-select v-model="orderAddFormState.region">
-              <ion-select-option value="서울특별시">서울</ion-select-option>
-              <ion-select-option value="대전광역시">대전</ion-select-option>
-              <ion-select-option value="인천광역시">인천</ion-select-option>
-              <ion-select-option value="부산광역시">부산</ion-select-option>
-            </ion-select>
-          </ion-item>
+        <ion-item>
+          <ion-label position="floating">지역</ion-label>
+          <ion-select v-model="orderAddFormState.region">
+            <ion-select-option value="서울특별시">서울</ion-select-option>
+            <ion-select-option value="대전광역시">대전</ion-select-option>
+            <ion-select-option value="인천광역시">인천</ion-select-option>
+            <ion-select-option value="부산광역시">부산</ion-select-option>
+          </ion-select>
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">장례식장</ion-label>
-            <ion-input v-model="orderAddFormState.funeralHome" type="text" placeholder="장례식장을 입력해주세요.(미정이면 '미정'입력)"></ion-input>
-          </ion-item>
+        <ion-item>
+          <ion-label position="floating">장례식장</ion-label>
+          <ion-input v-model="orderAddFormState.funeralHome" type="text" placeholder="장례식장을 입력해주세요.(미정이면 '미정'입력)"></ion-input>
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">종교</ion-label>
-            <ion-select v-model="orderAddFormState.religion">
-              <ion-select-option value="기독교">기독교</ion-select-option>
-              <ion-select-option value="천주교">천주교</ion-select-option>
-              <ion-select-option value="불교">불교</ion-select-option>
-              <ion-select-option value="기타">기타</ion-select-option>
-            </ion-select>
-          </ion-item>
+        <ion-item>
+          <ion-label position="floating">종교</ion-label>
+          <ion-select v-model="orderAddFormState.religion">
+            <ion-select-option value="기독교">기독교</ion-select-option>
+            <ion-select-option value="천주교">천주교</ion-select-option>
+            <ion-select-option value="불교">불교</ion-select-option>
+            <ion-select-option value="기타">기타</ion-select-option>
+          </ion-select>
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">시작일</ion-label>
-            <ion-input v-model="orderAddFormState.startDate" type="date"></ion-input>
-          </ion-item>
+        <ion-item>
+          <ion-label position="stacked">시작일</ion-label>
+          <ion-input v-model="orderAddFormState.startDate" type="date"></ion-input>
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">종료일</ion-label>
-            <ion-input v-model="orderAddFormState.endDate" type="date"></ion-input>
-          </ion-item>
+        <ion-item>
+          <ion-label position="stacked">종료일</ion-label>
+          <ion-input v-model="orderAddFormState.endDate" type="date"></ion-input>
+        </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">추가 요청 사항</ion-label>
-            <ion-textarea v-model="orderAddFormState.body" placeholder="추가 요청 사항을 입력해주세요."></ion-textarea>
-          </ion-item>
+        <ion-item>
+          <ion-label position="stacked">추가 요청 사항</ion-label>
+          <ion-textarea v-model="orderAddFormState.body" placeholder="추가 요청 사항을 입력해주세요."></ion-textarea>
+        </ion-item>
 
-          <div class="pt-2 mb-2 px-4">
-            <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
-          </div>
-          <div class="px-4">
-            <ion-button router-link="/order/main" class="btn-cancel" color="" type="button" expand="block">
-              취소(내 의뢰 메뉴로 가기)
-            </ion-button>
-          </div>
-          <div class="px-4">
-            <ion-button router-link="/expert/list" class="btn-cancel2" color="" type="button" expand="block">
-              취소(지도사 현황으로 가기)
-            </ion-button>
-          </div>
-        </form>
-      </ion-list>
+        <div class="pt-2 mb-2 px-4">
+          <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
+        </div>
+        <div class="px-4">
+          <ion-button router-link="/order/main" class="btn-cancel" color="" type="button" expand="block">
+            취소('내 의뢰 관리'로 가기)
+          </ion-button>
+        </div>
+        <div class="px-4">
+          <ion-button router-link="/expert/list" class="btn-cancel2" color="" type="button" expand="block">
+            취소('지도사 현황'으로 가기)
+          </ion-button>
+        </div>
+      </form>
+    </ion-list>
     <ion-custom-body v-else class="justify-center">
-    <div class="py-2 px-4">
-      로그인 후 이용가능합니다.
-      <ion-custom-link to="/member/main">Log-In</ion-custom-link>하러가기
-    </div>
+      <div class="py-2 px-4">
+        로그인 후 이용가능합니다.
+        <ion-custom-link to="/member/main">로그인</ion-custom-link>하러가기
+      </div>
     </ion-custom-body>
   </ion-base-layout>
 </template>

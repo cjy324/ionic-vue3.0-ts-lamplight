@@ -11,7 +11,7 @@
             </div>
             <div v-if="globalState.isLogined">
               <ion-button @click="logout" class="font-bold text-md" color="dark">
-                Log-Out
+                로그아웃
               </ion-button>
             </div>
           </div>

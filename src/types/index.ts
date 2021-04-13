@@ -1,10 +1,3 @@
-//service를 통해 mainAPI를 가져오는 방식으로 변경
-// export class MainService {
-//   getClientThumbImgUrl(client: Client) {
-//     return "https://i.pravatar.cc/45?img=13&k=" + client.id
-//   }
-// }
-
 export interface GlobalState {
   loginedClient: Client;
   loginedExpert: Expert;
@@ -14,7 +7,6 @@ export interface GlobalState {
   memberId: number;
   isLogined: boolean;
   setLoginedClient(authKey: string, memberType: string, memberId: number, client: Client): void;
-  //통합
   setLoginedExpert(authKey: string, memberType: string, memberId: number, expert: Expert): void;
   setLogouted(): void;
 }

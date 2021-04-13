@@ -1,5 +1,5 @@
 <template>
-  <ion-base-layout pageTitle="정보 수정" >
+  <ion-base-layout pageTitle="내 정보 수정" >
       
         <ion-list v-if="globalState.isLogined">
           <form @submit.prevent="checkAndModify" >
@@ -236,7 +236,7 @@ export default defineComponent ({
             return;
           }
 
-          router.replace('/client/myPage?id=' + id)
+          window.location.replace('/client/myPage?id=' + id)
       }
 
       const startModify = (genFileIdsStr: string) =>{

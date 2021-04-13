@@ -7,16 +7,36 @@
           </div>
         </div>
         <div v-if="globalState.isLogined">
-          <div class="px-4">
+          <div v-if="globalState.memberType == 'client'" class="px-4">
             <ion-button class="btn-primary" color="" type="button" expand="block" router-link="/order/add">
               <font-awesome-icon class="mr-2" icon="edit"></font-awesome-icon>
               새 의뢰 요청
             </ion-button>
           </div>
+          <div v-if="globalState.memberType == 'expert'" class="px-4">
+            <ion-button class="btn-primary" color="" type="button" expand="block" router-link="/order/allList" @click="setOpen(true)">
+              <ion-loading
+              :is-open="isOpenRef"
+              message="로딩중..."
+              :duration="timeout"
+              @onDidDismiss="setOpen(false)"
+              spinner="dots"
+              />
+              <ion-icon class="mr-1" :icon="searchCircleOutline" /> 
+              의뢰 요청 현황
+            </ion-button>
+          </div>
           <div class="px-4">
-            <ion-button class="btn-secondary" color="" type="button" expand="block" router-link="/order/list">
+            <ion-button class="btn-secondary" color="" type="button" expand="block" router-link="/order/list" @click="setOpen(true)">
+              <ion-loading
+              :is-open="isOpenRef"
+              message="로딩중..."
+              :duration="timeout"
+              @onDidDismiss="setOpen(false)"
+              spinner="dots"
+              />
               <font-awesome-icon class="mr-2" icon="clipboard-list"></font-awesome-icon>
-              내 의뢰 현황 보기
+              내 의뢰 관리
             </ion-button>
           </div>
         </div>
@@ -41,27 +61,42 @@
 
 <script lang="ts">
 import { IonCustomBody, IonCustomLink } from '@/components/';
-import { 
-  IonButton, 
+import {
+  IonLoading,  
+  IonButton,
+  IonIcon, 
 } from '@ionic/vue';
+import {
+  searchCircleOutline
+} from 'ionicons/icons'
 import { useGlobalState } from '@/stores'
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent ({
   name: 'OrderMain',
-
-  components: { 
+  props: {
+    timeout: { type: Number, default: 1000 },
+  },
+  components: {
+    IonLoading,  
     IonButton,
     IonCustomBody,
-    IonCustomLink, 
+    IonCustomLink,
+    IonIcon, 
   },
 
   setup() {
     const globalState = useGlobalState();
 
+    //로딩 관련
+    const isOpenRef = ref(false);
+    const setOpen = (state: boolean) => isOpenRef.value = state;
+
     return {
       globalState,
-      //confirmAlert,
+      searchCircleOutline,
+      isOpenRef, 
+      setOpen,
     }
   }
 })

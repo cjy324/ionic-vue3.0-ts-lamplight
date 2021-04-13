@@ -30,8 +30,7 @@
               :duration="timeout"
               @onDidDismiss="setOpen(false)"
               spinner="dots"
-            >
-            </ion-loading>
+            />
             <font-awesome-icon class="text-lg h-7" icon="users" />
           </ion-tab-button>
 
@@ -61,12 +60,21 @@
               :duration="timeout"
               @onDidDismiss="setOpen(false)"
               spinner="dots"
-            >
-            </ion-loading>
+            />
             <font-awesome-icon class="text-lg text-gray-700" icon="clipboard-list" />
           </ion-fab-button>
-          <ion-fab-button href="/order/add" color="light">
+          <ion-fab-button v-if="globalState.memberType == 'client'" href="/order/add" color="light">
             <ion-icon :icon="createOutline" />
+          </ion-fab-button>
+          <ion-fab-button v-if="globalState.memberType == 'expert'" @click="setOpen(true)" href="/order/allList" color="light">
+            <ion-loading
+              :is-open="isOpenRef"
+              message="로딩중..."
+              :duration="timeout"
+              @onDidDismiss="setOpen(false)"
+              spinner="dots"
+            />
+            <ion-icon :icon="searchCircleOutline" />
           </ion-fab-button>
         </ion-fab-list>
       </ion-fab>
@@ -106,7 +114,8 @@ import {
   //IonBadge, 
 } from '@ionic/vue';
 import {
-  createOutline
+  createOutline,
+  searchCircleOutline,
 } from 'ionicons/icons';
 import { useGlobalState } from '@/stores';
 //import { useMainService } from '@/services';
@@ -178,6 +187,7 @@ export default defineComponent ({
       //route
       isOpenRef, 
       setOpen,
+      searchCircleOutline,
     }
   }
 })

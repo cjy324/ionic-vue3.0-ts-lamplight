@@ -1,5 +1,5 @@
 <template>
-  <ion-base-layout pageTitle="가입">
+  <ion-base-layout pageTitle="회원가입">
     <ion-list>
       <form @submit.prevent="checkAndJoin" >
           <ion-item>

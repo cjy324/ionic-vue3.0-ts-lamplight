@@ -34,19 +34,40 @@
             </ion-button>
           </div>
           <div v-if="globalState.memberType == 'expert'" class="mb-2 w-full px-14">
-            <ion-button expand="block" color="light" router-link="/order/allList">
+            <ion-button expand="block" color="light" router-link="/order/allList" @click="setOpen(true)">
+              <ion-loading
+              :is-open="isOpenRef"
+              message="로딩중..."
+              :duration="timeout"
+              @onDidDismiss="setOpen(false)"
+              spinner="dots"
+              />
               <ion-icon :icon="searchCircleOutline" /> 
               <span class="ml-2">의뢰 요청 현황</span>
             </ion-button>
           </div>
           <div v-if="globalState.isLogined" class="mb-2 w-full px-14">
-            <ion-button expand="block" color="light" router-link="/order/list">
+            <ion-button expand="block" color="light" router-link="/order/list" @click="setOpen(true)">
+              <ion-loading
+              :is-open="isOpenRef"
+              message="로딩중..."
+              :duration="timeout"
+              @onDidDismiss="setOpen(false)"
+              spinner="dots"
+              />
               <ion-icon :icon="albumsOutline" />
               <span class="ml-2">내 의뢰 관리</span>
             </ion-button>
           </div>
           <div class="mb-2 w-full px-14">
-            <ion-button expand="block" color="light" router-link="/expert/list">
+            <ion-button expand="block" color="light" router-link="/expert/list" @click="setOpen(true)">
+              <ion-loading
+              :is-open="isOpenRef"
+              message="로딩중..."
+              :duration="timeout"
+              @onDidDismiss="setOpen(false)"
+              spinner="dots"
+              />
               <ion-icon :icon="peopleOutline" />
               <span class="ml-2">지도사 현황</span>
             </ion-button>
@@ -69,7 +90,8 @@
 
 <script lang="ts">
 import { IonCustomBody  } from '@/components/';
-import { 
+import {
+  IonLoading, 
   IonButton,
   IonIcon,
 
@@ -84,13 +106,18 @@ import {
   searchCircleOutline,
 } from 'ionicons/icons';
 import { useGlobalState } from '@/stores';
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent ({
   name: 'Main',
   
+  props: {
+    timeout: { type: Number, default: 1000 },
+  },
+
   components: { 
     IonCustomBody,
+    IonLoading, 
     IonButton,
     IonIcon,
 
@@ -99,14 +126,12 @@ export default defineComponent ({
   setup() {
     const globalState = useGlobalState();
 
-    const logout = () => {
-      globalState.setLogouted();
-      window.location.reload();
-    };
+    //로딩 관련
+    const isOpenRef = ref(false);
+    const setOpen = (state: boolean) => isOpenRef.value = state;
 
     return {
       globalState,
-      logout,
       addCircleOutline,
       albumsOutline,
       peopleOutline,
@@ -114,6 +139,9 @@ export default defineComponent ({
       enterOutline,
       personAddOutline,
       searchCircleOutline,
+      isOpenRef,
+      setOpen,
+
     }
   }
 })

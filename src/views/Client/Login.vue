@@ -21,7 +21,7 @@
             <ion-button type="submit" expand="block">로그인</ion-button>
           </div>
           <div class="pt-2 px-4 text-sm">
-            아직 회원이 아니신가요? <ion-custom-link to="/member/signupMain">Sign-Up</ion-custom-link>
+            아직 회원이 아니신가요? <ion-custom-link to="/member/signupMain">회원가입</ion-custom-link>
           </div>
           <div class="px-4 text-sm">
             ID/PW를 잊어버리셨다면? <ion-custom-link to="/client/findLoginId">ID찾기</ion-custom-link> / <ion-custom-link to="/client/findLoginPw">PW찾기</ion-custom-link>
