@@ -93,7 +93,7 @@
   --background:var(--ion-color-secondary-shade);
 }
 .step-fourth{
-  --background:var(--ion-color-medium-tint);
+  --background:var(--ion-color-dark-tint);
 }
 .step-fifth{
   --background:var(--ion-color-medium-shade);
