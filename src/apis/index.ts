@@ -119,7 +119,13 @@ export interface MainApi__common_genFile_doUpload__ResponseBody extends Base__Re
   };
 }
 
-
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
+export interface MainApi__order_requestListInExpertRegion__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    orders: Order[];
+  };
+}
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 /* eslint-disable @typescript-eslint/camelcase */
@@ -508,6 +514,9 @@ export class MainApi extends HttpClient {
     return axiosResponse;
   }
 
+  public order_requestListInExpertRegion(memberId: number) {
+    return this.get<MainApi__order_requestListInExpertRegion__ResponseBody>(`/usr/order/requestListInExpertRegion?memberId=${memberId}`);
+  }
 
   public order_list(memberId: number, memberType: string) {
     return this.get<MainApi__order_list__ResponseBody>(`/usr/order/list?memberId=${memberId}&memberType=${memberType}`);
@@ -645,10 +654,21 @@ export class MainApi extends HttpClient {
     );
   }
 
-  //통합
-  public common_genFile_doUpload(profileImg: File) {
+  public common_genFile_doUpload(file: File) {
     const formData = new FormData();
-    formData.append("file__" + globalState.memberType +"__0__common__attachment__1", profileImg);
+    formData.append("file__" + globalState.memberType +"__0__common__attachment__1", file);
+    return this.post<MainApi__common_genFile_doUpload__ResponseBody>(
+      `/common/genFile/doUpload`, formData
+    );
+  }
+
+  //멀티파일 업로드 테스트...
+  public common_genFile_doUpload_test(files: FileList) {
+    const formData = new FormData();
+    for(let i = 1; i <= files.length; i++){
+      formData.append("file__" + globalState.memberType +"__0__common__attachment__" + i, files[i]);
+      //alert(files.length);
+    }
     return this.post<MainApi__common_genFile_doUpload__ResponseBody>(
       `/common/genFile/doUpload`, formData
     );

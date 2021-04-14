@@ -240,16 +240,16 @@ export default defineComponent ({
         stepLevelToStr = '의뢰요청중';
       }
       if(stepLevel == 2){
-        stepLevelToStr = '장례준비중';
+        stepLevelToStr = '준비중';
       }
       if(stepLevel == 3){
-        stepLevelToStr = '장례진행중';
+        stepLevelToStr = '장례 진행중';
       }
       if(stepLevel == 4){
-        stepLevelToStr = '장례종료(확인요청중)';
+        stepLevelToStr = '장례 종료(확인요청중)';
       }
       if(stepLevel == 5){
-        stepLevelToStr = '종료확인(최종종료)';
+        stepLevelToStr = '종료 확인';
       }
       
       return stepLevelToStr;
@@ -328,7 +328,7 @@ export default defineComponent ({
       if ( axRes.data.fail ) {
         return;
       }
-      router.replace('detail?id=' + id);        
+      window.location.reload();
     }
 
     async function accept(id: number, expertId: number){
@@ -351,7 +351,7 @@ export default defineComponent ({
       if(axRes.data.fail){
         return
       }      
-      router.replace('mySchedule');
+      router.replace('/order/list');
     }
 
     async function reject(id: number){

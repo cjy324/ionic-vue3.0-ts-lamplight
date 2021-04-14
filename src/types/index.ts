@@ -76,6 +76,7 @@ export interface Expert extends Entity {
   region:string;
   license:string;
   career:string;
+  work:number;
   extra__thumbImg:string;
   extra__ratingPoint:number;
   extra__reviews:[];

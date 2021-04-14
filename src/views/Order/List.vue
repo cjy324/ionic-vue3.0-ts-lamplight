@@ -1,7 +1,7 @@
 <template>
   <ion-base-layout pageTitle="내 의뢰 관리">
-    <ion-custom-body v-if="globalState.isLogined" class="">
-      <ion-list v-if="state.orders.length !== 0">
+    <ion-custom-body v-if="state.orders.length !== 0" class="">
+      <ion-list v-if="globalState.isLogined">
         <ion-item >
           <ion-label>진행단계</ion-label>
           <ion-select v-model="searchState.selectStepLevel">
@@ -123,7 +123,7 @@
           <!--단계 버튼(의뢰인)-->
           <div class="w-full px-10 pb-4 mb-2 mt-4 border-b-8" v-if="globalState.loginedClient.id == order.clientId && order.stepLevel == 4">
             <ion-button v-if="globalState.memberType == 'client'" :class="returnColorByLevel(order.stepLevel)" slot="end" expand="block" @click="changeStepLevel(order.id, order.stepLevel)">
-              장례종료 확인
+              장례 종료 확인
             </ion-button>
           </div>
           <!--단계 버튼(지도사)-->
@@ -141,31 +141,31 @@
         </template>
       </ion-list>
       
-      <div v-else class="ifEmptyOeders">
-        <div class="py-2 px-4 w-full text-center">
-          현재 진행중인 의뢰가 없습니다.
-        </div>
-        <!-- 의뢰인 -->
-        <div v-if="globalState.memberType == 'client'" class="px-4">
-          <ion-button class="btn-primary" color="" type="button" expand="block" router-link="/order/add">
-            <font-awesome-icon class="mr-2" icon="edit"></font-awesome-icon>
-            새 의뢰 요청
-          </ion-button>
-        </div>
-        <!-- 지도사 -->
-        <div v-if="globalState.memberType == 'expert'" class="px-4">
-          <ion-button class="btn-primary" color="" type="button" expand="block" router-link="/order/allList">
-            <ion-icon class="mr-1" :icon="searchCircleOutline" /> 
-            의뢰 요청 현황
-          </ion-button>
+      <div v-else class="ifEmptyOeders my-auto mx-auto">
+        <div class="py-2 px-4">
+          로그인 후 이용가능합니다.
+          <ion-custom-link to="/member/main">Log-In</ion-custom-link>하러가기
         </div>
       </div>
     </ion-custom-body>
     
     <ion-custom-body v-else class="justify-center">
-      <div class="py-2 px-4">
-        로그인 후 이용가능합니다.
-        <ion-custom-link to="/member/main">Log-In</ion-custom-link>하러가기
+      <div class="py-2 px-4 w-full text-center">
+        현재 진행중인 의뢰가 없습니다.
+      </div>
+      <!-- 의뢰인 -->
+      <div v-if="globalState.memberType == 'client'" class="px-4">
+        <ion-button class="btn-primary" color="" type="button" expand="block" router-link="/order/add">
+          <font-awesome-icon class="mr-2" icon="edit"></font-awesome-icon>
+          새 의뢰 요청
+        </ion-button>
+      </div>
+      <!-- 지도사 -->
+      <div v-if="globalState.memberType == 'expert'" class="px-4">
+        <ion-button class="btn-primary" color="" type="button" expand="block" router-link="/order/allList">
+          <ion-icon class="mr-1" :icon="searchCircleOutline" /> 
+          의뢰 요청 현황
+        </ion-button>
       </div>
     </ion-custom-body>
 
@@ -285,18 +285,18 @@ export default defineComponent ({
         stepLevelToStr = '의뢰요청중';
       }
       if(stepLevel == 2){
-        stepLevelToStr = '장례준비중';
+        stepLevelToStr = '준비중';
       }
       if(stepLevel == 3){
-        stepLevelToStr = '장례진행중';
+        stepLevelToStr = '장례 진행중';
       }
       if(stepLevel == 4){
-        stepLevelToStr = '장례종료(확인요청중)';
+        stepLevelToStr = '장례 종료(확인요청중)';
       }
       if(stepLevel == 5){
-        stepLevelToStr = '종료확인(최종종료)';
+        stepLevelToStr = '장례 종료 확인';
       }
-      
+
       return stepLevelToStr;
     }
 
@@ -389,7 +389,7 @@ export default defineComponent ({
         loginedMemberType = globalState.memberType
     }
 
-    alert(loginedMemberId+loginedMemberType)
+    //alert(loginedMemberId+loginedMemberType)
     // onMounted 바로 실행하는 것이 아닌 모든 것이 준비되었을때 실행됨
     onMounted(() => {
       //util.showAlert("3");

@@ -67,16 +67,16 @@
         </div>
         </template>
       </ion-list>
-      <div v-else class="ifEmptyOeders">
-        <div class="py-2 px-4 w-full text-center">
-          현재 요청중인 의뢰가 없습니다.
+      <div v-else class="ifEmptyOeders my-auto mx-auto">
+        <div class="py-2 px-4">
+          로그인 후 이용가능합니다.
+          <ion-custom-link to="/member/main">로그인</ion-custom-link>하러가기
         </div>
       </div>
     </ion-custom-body>
     <ion-custom-body v-else class="justify-center">
-      <div class="py-2 px-4">
-        로그인 후 이용가능합니다.
-        <ion-custom-link to="/member/main">로그인</ion-custom-link>하러가기
+      <div class="py-2 px-4 w-full text-center">
+        현재 요청중인 의뢰가 없습니다.
       </div>
     </ion-custom-body>
   </ion-base-layout>
@@ -157,7 +157,7 @@ export default defineComponent ({
     const globalState = useGlobalState();
     const mainService = useMainService();
     const searchState = useSearchState();
-    const router = useRouter();
+    //const router = useRouter();
 
     const state = reactive({
       orders: [] as Order[],
@@ -182,10 +182,8 @@ export default defineComponent ({
       return filteredOrders
     })
 
-    //백엔드랑 맞춰봐야함!!!!!!!!!!!!!
-    //stepLevel 1인 의뢰만 들어오는 로직이랑 연계 필요!!!!
-    async function loadOrders(memberId: number, memberType: string){
-      const axRes = await mainService.order_list(memberId, memberType)
+    async function loadOrders(loginedMemberId: number){
+      const axRes = await mainService.order_requestListInExpertRegion(loginedMemberId)
       state.orders = axRes.data.body.orders;
     }
 
@@ -197,11 +195,11 @@ export default defineComponent ({
       if ( axRes.data.fail ) {
         return;
       }
-      router.replace('detail?id=' + id);        
+      window.location.replace('/order/detail?id=' + id);        
     }
 
     async function accept(id: number, expertId: number){
-      const msg = '해당 의뢰를 접수하시겠습니까?'
+      const msg = '해당 의뢰를 수락하시겠습니까?'
 
       util.showAlertConfirm(msg).then(confirm => {
         if (confirm == false) {
@@ -213,15 +211,13 @@ export default defineComponent ({
     }
 
     let loginedMemberId = 0;
-    let loginedMemberType = '';
 
-    if(globalState.loginedClient.id != null){
-        loginedMemberId = globalState.loginedClient.id
-        loginedMemberType = globalState.memberType
+    if(globalState.loginedExpert.id != null){
+        loginedMemberId = globalState.loginedExpert.id
     }
 
     onMounted(() => {
-      loadOrders(loginedMemberId, loginedMemberType);
+      loadOrders(loginedMemberId);
     });
 
 

@@ -23,9 +23,19 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
       return this.mainApi.client_doJoin(loginId, loginPw, name, cellphoneNo, email, region, genFileIdsStr);
     }
 
+    expert_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, license: string, career: string, genFileIdsStr: string){
+      return this.mainApi.expert_doJoin(loginId, loginPw, name, cellphoneNo, email, region, license, career, genFileIdsStr);
+    }
+
     /* eslint-disable @typescript-eslint/camelcase */
-    common_genFile_doUpload(profileImg: File) {
-      return this.mainApi.common_genFile_doUpload(profileImg);
+    common_genFile_doUpload(file: File) {
+      return this.mainApi.common_genFile_doUpload(file);
+    }
+
+
+    /* eslint-disable @typescript-eslint/camelcase */
+    common_genFile_doUpload_test(files: FileList) {
+      return this.mainApi.common_genFile_doUpload_test(files);
     }
   
     /* eslint-disable @typescript-eslint/camelcase */
@@ -79,6 +89,9 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
       return this.mainApi.expert_doModify(id, loginPw, name, cellphoneNo, email, region, career, genFileIdsStr);
     }
     
+    order_requestListInExpertRegion(loginedMemberId: number){
+      return this.mainApi.order_requestListInExpertRegion(loginedMemberId);
+    }
 
     order_list(memberId: number, memberType: string){
       return this.mainApi.order_list(memberId, memberType);
@@ -152,7 +165,6 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
 
 
     // //이미지를 리사이징해주는 유틸 적용
-    //사용하려면 작동을 시켜야 함..일단은 적용 보류(21.04.01)
     /* eslint-disable @typescript-eslint/no-inferrable-types */
     getClientThumbImgUrlForHeader(id: number, width: number = 40, height: number = 40) {
 
@@ -182,20 +194,6 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
       return url;
     }
 
-    // /* eslint-disable @typescript-eslint/no-inferrable-types */
-    // getArticleThumbImgUrl(id: number, width: number = 100, height: number = 100) {
-    //   const originUrl = 'http://localhost:8090/common/genFile/file/article/' + id + '/common/attachment/1';
-    //   const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=U.U&width=${width}&height=${height}&url=` + originUrl;
-    //   return url;
-    //  }
-  
-    // getClientThumbImgUrl(id: number) {
-    //   return "https://i.pravatar.cc/45?img=13&k=" + id
-    // }
-
-    // getArticleThumbImgUrl(id: number) {
-    //   return "https://i.pravatar.cc/45?img=13&k=" + id
-    // }
   }
   
   export const mainServiceSymbol = Symbol('globalState');
