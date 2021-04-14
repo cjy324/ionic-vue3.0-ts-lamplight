@@ -238,7 +238,10 @@ export default defineComponent ({
           onSuccess("");  //파일이 없으면 다음 과정 생략하고 onSuccess() 즉시 실행
           return;
         }
-        const axRes = await mainService.common_genFile_doUpload(profileImgElRef.value?.files[0])
+        
+        const memberType = 'client';
+
+        const axRes = await mainService.common_genFile_doUpload(profileImgElRef.value?.files[0], memberType, 1)
 
         if ( axRes.data.fail ) {
           util.showAlert(axRes.data.msg);
@@ -249,8 +252,8 @@ export default defineComponent ({
         }
       }
 
-      async function modify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string) {
-        const axRes = await  mainService.client_doModify(id, loginPw, name, cellphoneNo, email, region, genFileIdsStr);
+      async function modify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr1: string) {
+        const axRes = await  mainService.client_doModify(id, loginPw, name, cellphoneNo, email, region, genFileIdsStr1);
   
           util.showAlert(axRes.data.msg);
         

@@ -4,7 +4,7 @@
       <form @submit.prevent="checkAndJoin" >
           <ion-item>
             <ion-label position="stacked">프로필 이미지</ion-label>
-            <input class="mt-3" ref="imgElRef" type="file">
+            <input class="mt-3" ref="profileImgElRef" type="file">
           </ion-item>
 
           <ion-item>
@@ -61,13 +61,13 @@
           </ion-item>
 
           <ion-item>
-            <ion-label position="floating">자격증명</ion-label>
-            <ion-input v-model="joinFormState.license" minlength="2" placeholder="장례지도사"></ion-input>
+            <ion-label position="floating">자격증</ion-label>
+            <ion-input v-model="joinFormState.license" minlength="2" placeholder="ex) 장례지도사"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">지도사자격증 스캔본 첨부</ion-label>
-            <input class="mt-3" ref="imgElRef" type="file">
+            <input class="mt-3" ref="scanImgElRef" type="file">
           </ion-item>
           
           <ion-item>
@@ -141,12 +141,9 @@ export default defineComponent ({
     const router = useRouter();
     const mainService = useMainService();
 
-    const imgElRef = ref<HTMLInputElement>();
+    const profileImgElRef = ref<HTMLInputElement>();
+    const scanImgElRef = ref<HTMLInputElement>();
 
-    // function confirmAlert(){
-    //   const msg = '해당 내용으로 가입하시겠습니까?'
-    //   util.showAlertConfirm(msg)
-    // }
 
     function checkAndJoin() {
        // 아이디 체크
@@ -212,6 +209,12 @@ export default defineComponent ({
         return;
       }
 
+      // 증명서 첨부파일 체크
+      if(profileImgElRef.value?.files == undefined || profileImgElRef.value?.files == null){
+        util.showAlert("자격증 스캔파일을 첨부해주세요.");
+        return;
+      }
+
       // 경력 체크
       const career = joinFormState.career.trim();
       
@@ -220,31 +223,51 @@ export default defineComponent ({
         return;
       }
 
-      async function startFileUpload(onSuccess: Function){
-        // ! => 반전
-        // a = undefinded(or null) / !a = true / !!a = flase란 의미
-        // ? => 만약 imgElRef.value?까지가 null이면 여기까지만 실행하겠다라는 의미
-        // 즉, !!!imgElRef.value?.files의 의미는 해당 파일이 없는지 물어보는 것
-        // 없으면 true
-        if(imgElRef.value?.files == undefined || imgElRef.value?.files == null){
-          //onSuccess("");  //파일이 없으면 다음 과정 생략하고 onSuccess() 즉시 실행
-          alert('안들어옴')
+      async function startFileUpload1(onSuccess: Function){
+
+        if(profileImgElRef.value?.files == undefined || profileImgElRef.value?.files == null){
+          //2차 업로드 진행
+          onSuccess('')
           return;
         }
-        const axRes = await mainService.common_genFile_doUpload_test(imgElRef.value?.files)
+        
+        const memberType = 'expert';
+
+        const axRes = await mainService.common_genFile_doUpload(profileImgElRef.value?.files[0], memberType, 1)
 
         if ( axRes.data.fail ) {
           util.showAlert(axRes.data.msg);
           return;
         }
         else{
+          onSuccess(axRes.data.body.genFileIdsStr);
           return;
-          //onSuccess(axRes.data.body.genFileIdsStr);
         }
       }
 
-      async function join(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, license: string, career: string, genFileIdsStr: string) {
-        const axRes = await  mainService.expert_doJoin(loginId, loginPw, name, cellphoneNo, email, region, license, career, genFileIdsStr);
+      async function startFileUpload2(onSuccess: Function, genFileIdsStr1: string){
+
+        if(scanImgElRef.value?.files == undefined || scanImgElRef.value?.files == null){
+          onSuccess(genFileIdsStr1, '')
+          return;
+        }
+
+        const memberType = 'expert';
+
+        const axRes = await mainService.common_genFile_doUpload(scanImgElRef.value?.files[0], memberType, 2)
+
+        if ( axRes.data.fail ) {
+          util.showAlert(axRes.data.msg);
+          return;
+        }
+        else{
+          onSuccess(genFileIdsStr1, axRes.data.body.genFileIdsStr);
+          return;
+        }
+      }
+
+      async function join(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, license: string, career: string, genFileIdsStr1: string, genFileIdsStr2: string) {
+        const axRes = await  mainService.expert_doJoin(loginId, loginPw, name, cellphoneNo, email, region, license, career, genFileIdsStr1, genFileIdsStr2);
   
           util.showAlert(axRes.data.msg);
         
@@ -255,8 +278,12 @@ export default defineComponent ({
           router.replace('/expert/login?loginId=' + loginId)
       }
 
-      const startJoin = (genFileIdsStr: string) =>{
-          join(loginId, loginPw, name, cellphoneNo, email, region, license, career, genFileIdsStr);
+      const startJoin = (genFileIdsStr1: string, genFileIdsStr2: string) =>{
+          join(loginId, loginPw, name, cellphoneNo, email, region, license, career, genFileIdsStr1, genFileIdsStr2);
+      }
+
+       const startSecondUpload = (genFileIdsStr1: string) =>{
+          startFileUpload2(startJoin, genFileIdsStr1);
       }
 
       const msg = '해당 내용으로 가입하시겠습니까?'
@@ -264,7 +291,8 @@ export default defineComponent ({
         if (confirm == false) {
           return
         } else{
-          startFileUpload(startJoin);
+          //startFileUpload(startJoin);
+          startFileUpload1(startSecondUpload);
         }
       })
       
@@ -277,7 +305,8 @@ export default defineComponent ({
       //confirmAlert,
       joinFormState,
       checkAndJoin,
-      imgElRef,
+      profileImgElRef,
+      scanImgElRef,
       
     }
   }

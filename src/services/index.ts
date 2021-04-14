@@ -19,25 +19,19 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     //이를 무시하기 위해 아래와 같이 주석을 달아줌
 
     /* eslint-disable @typescript-eslint/camelcase */
-    client_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string){
-      return this.mainApi.client_doJoin(loginId, loginPw, name, cellphoneNo, email, region, genFileIdsStr);
+    client_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr1: string){
+      return this.mainApi.client_doJoin(loginId, loginPw, name, cellphoneNo, email, region, genFileIdsStr1);
     }
 
-    expert_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, license: string, career: string, genFileIdsStr: string){
-      return this.mainApi.expert_doJoin(loginId, loginPw, name, cellphoneNo, email, region, license, career, genFileIdsStr);
+    expert_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, license: string, career: string, genFileIdsStr1: string, genFileIdsStr2: string){
+      return this.mainApi.expert_doJoin(loginId, loginPw, name, cellphoneNo, email, region, license, career, genFileIdsStr1, genFileIdsStr2);
     }
 
     /* eslint-disable @typescript-eslint/camelcase */
-    common_genFile_doUpload(file: File) {
-      return this.mainApi.common_genFile_doUpload(file);
+    common_genFile_doUpload(file: File, memberType: string, no: number) {
+      return this.mainApi.common_genFile_doUpload(file, memberType, no);
     }
 
-
-    /* eslint-disable @typescript-eslint/camelcase */
-    common_genFile_doUpload_test(files: FileList) {
-      return this.mainApi.common_genFile_doUpload_test(files);
-    }
-  
     /* eslint-disable @typescript-eslint/camelcase */
     client_authKey(loginId: string, loginPw: string) {
       return this.mainApi.client_authKey(loginId, loginPw);
@@ -57,8 +51,8 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     }
 
     /* eslint-disable @typescript-eslint/camelcase */
-    client_doModify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string){
-      return this.mainApi.client_doModify(id, loginPw, name, cellphoneNo, email, region, genFileIdsStr);
+    client_doModify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr1: string){
+      return this.mainApi.client_doModify(id, loginPw, name, cellphoneNo, email, region, genFileIdsStr1);
     }
 
     //통합(완)
@@ -85,8 +79,8 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
       return this.mainApi.expert_detail(id);
     }
 
-    expert_doModify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr: string){
-      return this.mainApi.expert_doModify(id, loginPw, name, cellphoneNo, email, region, career, genFileIdsStr);
+    expert_doModify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr1: string){
+      return this.mainApi.expert_doModify(id, loginPw, name, cellphoneNo, email, region, career, genFileIdsStr1);
     }
     
     order_requestListInExpertRegion(loginedMemberId: number){
@@ -168,28 +162,28 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     /* eslint-disable @typescript-eslint/no-inferrable-types */
     getClientThumbImgUrlForHeader(id: number, width: number = 40, height: number = 40) {
 
-      const originUrl = 'http://localhost:8021/common/genFile/file/client/' + id + '/common/attachment/1';
+      const originUrl = 'http://localhost:8090/common/genFile/file/client/' + id + '/common/attachment/1';
       const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return url;
     }
 
     getClientThumbImgUrl(id: number, width: number = 500, height: number = 500) {
 
-      const originUrl = 'http://localhost:8021/common/genFile/file/client/' + id + '/common/attachment/1';
+      const originUrl = 'http://localhost:8090/common/genFile/file/client/' + id + '/common/attachment/1';
       const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return url;
     }
 
     getExpertThumbImgUrlForHeader(id: number, width: number = 40, height: number = 40) {
 
-      const originUrl = 'http://localhost:8021/common/genFile/file/expert/' + id + '/common/attachment/1';
+      const originUrl = 'http://localhost:8090/common/genFile/file/expert/' + id + '/common/attachment/1';
       const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return url;
     }
 
     getExpertThumbImgUrl(id: number, width: number = 500, height: number = 500) {
 
-      const originUrl = 'http://localhost:8021/common/genFile/file/expert/' + id + '/common/attachment/1';
+      const originUrl = 'http://localhost:8090/common/genFile/file/expert/' + id + '/common/attachment/1';
       const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return url;
     }

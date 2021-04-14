@@ -481,7 +481,7 @@ export class MainApi extends HttpClient {
   public constructor() {
     super(
       axios.create({
-        baseURL:'http://localhost:8021/',
+        baseURL:'http://localhost:8090/',
       })
     );
   }
@@ -607,7 +607,7 @@ export class MainApi extends HttpClient {
   /* Member 관련 */
 
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
-  public client_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string) {
+  public client_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr1: string) {
     return this.postByForm<MainApi__client_doJoin__ResponseBody>(
       `/usr/client/doJoin`, {
         loginId,
@@ -616,13 +616,13 @@ export class MainApi extends HttpClient {
         cellphoneNo,
         email,
         region,
-        genFileIdsStr
+        genFileIdsStr1
       }
     );
   }
 
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
-  public expert_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, license: string, career: string, genFileIdsStr: string) {
+  public expert_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, license: string, career: string, genFileIdsStr1: string, genFileIdsStr2: string) {
     return this.postByForm<MainApi__expert_doJoin__ResponseBody>(
       `/usr/expert/doJoin`, {
         loginId,
@@ -633,13 +633,14 @@ export class MainApi extends HttpClient {
         region,
         career,
         license,
-        genFileIdsStr
+        genFileIdsStr1,
+        genFileIdsStr2
       }
     );
   }
 
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
-  public assistant_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr: string) {
+  public assistant_doJoin(loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr1: string) {
     return this.postByForm<MainApi__assistant_doJoin__ResponseBody>(
       `/usr/assistant/doJoin`, {
         loginId,
@@ -649,26 +650,14 @@ export class MainApi extends HttpClient {
         email,
         region,
         career,
-        genFileIdsStr
+        genFileIdsStr1
       }
     );
   }
 
-  public common_genFile_doUpload(file: File) {
+  public common_genFile_doUpload(file: File, memberType: string, no: number) {
     const formData = new FormData();
-    formData.append("file__" + globalState.memberType +"__0__common__attachment__1", file);
-    return this.post<MainApi__common_genFile_doUpload__ResponseBody>(
-      `/common/genFile/doUpload`, formData
-    );
-  }
-
-  //멀티파일 업로드 테스트...
-  public common_genFile_doUpload_test(files: FileList) {
-    const formData = new FormData();
-    for(let i = 1; i <= files.length; i++){
-      formData.append("file__" + globalState.memberType +"__0__common__attachment__" + i, files[i]);
-      //alert(files.length);
-    }
+    formData.append("file__" + memberType +"__0__common__attachment__" + no, file);
     return this.post<MainApi__common_genFile_doUpload__ResponseBody>(
       `/common/genFile/doUpload`, formData
     );
@@ -760,7 +749,7 @@ export class MainApi extends HttpClient {
   }
 
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
-  public client_doModify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr: string) {
+  public client_doModify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr1: string) {
     return this.postByForm<MainApi__client_doModify__ResponseBody>(
       `/usr/client/doModify`, {
         id,
@@ -770,13 +759,13 @@ export class MainApi extends HttpClient {
         cellphoneNo,
         email,
         region,
-        genFileIdsStr
+        genFileIdsStr1
       }
     );
   }
 
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
-  public expert_doModify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr: string) {
+  public expert_doModify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr1: string) {
     return this.postByForm<MainApi__expert_doModify__ResponseBody>(
       `/usr/expert/doModify`, {
         id,
@@ -786,13 +775,13 @@ export class MainApi extends HttpClient {
         email,
         region,
         career,
-        genFileIdsStr
+        genFileIdsStr1
       }
     );
   }
 
   // postByForm: post 전송을 스프링이 이해할 수 있는 form형식으로 전송시켜주는 함수?
-  public assistant_doModify(id: number, loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr: string) {
+  public assistant_doModify(id: number, loginId: string, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, career: string, genFileIdsStr1: string) {
     return this.postByForm<MainApi__assistant_doModify__ResponseBody>(
       `/usr/client/doModify`, {
         id,
@@ -803,7 +792,7 @@ export class MainApi extends HttpClient {
         email,
         region,
         career,
-        genFileIdsStr
+        genFileIdsStr1
       }
     );
   }
