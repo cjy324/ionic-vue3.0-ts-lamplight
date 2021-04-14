@@ -3,8 +3,8 @@
       <ion-custom-body class="justify-center">
         <div class="w-full text-center bg-gray-600 text-white">
           <div class="h-32 flex-col items-center justify-center">
-            <div class="text-4xl mb-6">
-              LAMPLIGHT
+            <div class="info_head_logo text-6xl mb-6">
+              상장례
             </div>
             <div class="mb-8">
               ver 1.0.0
@@ -21,6 +21,9 @@
 </template>
 
 <style>
+.info_head_logo{
+  font-family: var(--title-font-family);
+}
 </style>
 
 <script lang="ts">

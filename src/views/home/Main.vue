@@ -3,11 +3,11 @@
     <ion-custom-body class="home">
       <div class="home_head w-full text-center bg-gray-600 text-white mt-12">
         <div class="h-32 flex items-center justify-center">
-          <div class="text-4xl">
-            LAMPLIGHT
+          <div class="home_head_logo text-6xl">
+            상장례
           </div>
         </div>
-        <div>
+        <div class="mt-6">
           원하는 서비스를 선택하세요.
         </div>
       </div>
@@ -86,6 +86,9 @@
 </template>
 
 <style>
+.home_head_logo{
+  font-family: var(--title-font-family);
+}
 </style>
 
 <script lang="ts">

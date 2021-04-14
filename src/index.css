@@ -22,11 +22,20 @@
   font-weight: 300;
   src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff') format('woff');
 }
+@font-face {
+  font-family: '116watermelon';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.0/116watermelon.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  }
 
 
 :root {
   --ion-font-family:"LotteMartDream";
   --ion-text-color: #666;
+  --title-font-family: "116watermelon", sans-serif;
+  --title-font-size: 10rem;
+  
 }
 
 html > body {
