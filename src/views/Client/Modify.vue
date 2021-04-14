@@ -3,7 +3,7 @@
       
         <ion-list v-if="globalState.isLogined">
           <form @submit.prevent="checkAndModify" >
-          <ion-item-divider class="pt-4">
+          <ion-item-divider class="pt-4 bg-white">
             <img slot="start" class="h-32 rounded-full" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
           </ion-item-divider>
           
@@ -44,12 +44,30 @@
 
           <ion-item>
             <ion-label position="stacked">지역</ion-label>
-            <ion-input v-model="modifyFormState.region" :placeholder="state.client.region"></ion-input>
+            <ion-select v-model="modifyFormState.region" :placeholder="state.client.region">>
+              <ion-select-option value="서울특별시">서울특별시</ion-select-option>
+              <ion-select-option value="부산광역시">부산광역시</ion-select-option>
+              <ion-select-option value="대구광역시">대구광역시</ion-select-option>
+              <ion-select-option value="인천광역시">인천광역시</ion-select-option>
+              <ion-select-option value="광주특별시">광주특별시</ion-select-option>
+              <ion-select-option value="대전광역시">대전광역시</ion-select-option>
+              <ion-select-option value="울산광역시">울산광역시</ion-select-option>
+              <ion-select-option value="세종특별자치시">세종특별자치시</ion-select-option>
+              <ion-select-option value="경기도">경기도</ion-select-option>
+              <ion-select-option value="강원도">강원도</ion-select-option>
+              <ion-select-option value="충청북도">충청북도</ion-select-option>
+              <ion-select-option value="충청남도">충청남도</ion-select-option>
+              <ion-select-option value="전라북도">전라북도</ion-select-option>
+              <ion-select-option value="전라남도">전라남도</ion-select-option>
+              <ion-select-option value="경상북도">경상북도</ion-select-option>
+              <ion-select-option value="경상남도">경상남도</ion-select-option>
+              <ion-select-option value="제주득별자치도">제주득별자치도</ion-select-option>
+            </ion-select>
           </ion-item>
           <div class="pt-4 mb-2 px-4">
             <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
           </div>
-          <div class="px-4">
+          <div class="px-4 mb-4">
             <ion-button class="btn-cancel" :router-link="'/client/myPage?id=' + globalState.loginedClient.id" color="" type="button" expand="block">
               취소
             </ion-button>
@@ -79,6 +97,8 @@ import {
   IonList,
   IonLabel, 
   IonInput,
+  IonSelect,
+  IonSelectOption,
   IonItemDivider, 
   IonItem, 
   IonButton,
@@ -112,6 +132,8 @@ export default defineComponent ({
 
     IonLabel, 
     IonInput,
+    IonSelect,
+    IonSelectOption,
     IonList,
     IonItemDivider,  
     IonItem, 
