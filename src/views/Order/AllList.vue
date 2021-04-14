@@ -212,7 +212,7 @@ export default defineComponent ({
 
     let loginedMemberId = 0;
 
-    if(globalState.loginedExpert.id != null){
+    if(globalState.loginedExpert.id != 0){
         loginedMemberId = globalState.loginedExpert.id
     }
 

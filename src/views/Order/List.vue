@@ -379,17 +379,16 @@ export default defineComponent ({
     let loginedMemberId = 0;
     let loginedMemberType = '';
 
-    if(globalState.loginedClient.id != null){
+    if(globalState.loginedClient.id != 0){
         loginedMemberId = globalState.loginedClient.id
         loginedMemberType = globalState.memberType
     }
 
-    if(globalState.loginedExpert.id != null){
+    if(globalState.loginedExpert.id != 0){
         loginedMemberId = globalState.loginedExpert.id
         loginedMemberType = globalState.memberType
     }
 
-    //alert(loginedMemberId+loginedMemberType)
     // onMounted 바로 실행하는 것이 아닌 모든 것이 준비되었을때 실행됨
     onMounted(() => {
       //util.showAlert("3");
