@@ -184,7 +184,7 @@ export default defineComponent ({
           }
           //const newReviewId = axRes.data.body.id;
 
-          router.replace("/expert/list");
+           window.location.replace("/review/list");
       }
 
       const startModifyReview = () =>{

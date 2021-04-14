@@ -246,7 +246,7 @@ export default defineComponent ({
           util.showAlert(axRes.data.msg);
           const newOrderId = axRes.data.body.id;
 
-          router.replace("detail?id=" + newOrderId);
+          window.location.replace("/order/detail?id=" + newOrderId);
       }
 
       const msg = '해당 내용으로 수정하시겠습니까?'

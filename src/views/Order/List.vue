@@ -82,7 +82,7 @@
                   {{order.extra__clientCellphoneNo}}
               </ion-button>
             </ion-item>
-            <ion-item v-if="globalState.memberType == 'client'" color="" lines="none">
+            <ion-item v-if="order.expertId > 0 && globalState.memberType == 'client'" color="" lines="none">
               <ion-chip color="dark" class="mr-3">
                 <ion-label color="">
                   지도사
@@ -128,7 +128,10 @@
           </div>
           <!--단계 버튼(지도사)-->
           <div class="w-full px-10 pb-4 mb-2 mt-4 border-b-8" v-if="globalState.loginedExpert.id == order.expertId">
-            <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel < 4" :class="returnColorByLevel(order.stepLevel+1)" expand="block" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
+            <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel == 1" class="step-second" expand="block" slot="end" @click="accept(order.id, globalState.loginedExpert.id)">
+              의뢰접수
+            </ion-button>
+            <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel < 4 && order.stepLevel > 1" :class="returnColorByLevel(order.stepLevel+1)" expand="block" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
               다음단계 진행
               (
               <font-awesome-icon class="text-xl ml-1 text-white" icon="caret-right"/>
@@ -376,6 +379,29 @@ export default defineComponent ({
       
     }
 
+    //접수(지도사)
+    async function doAccept(id: number, expertId: number){
+      const axRes = await mainService.order_accept(id, expertId)
+
+      util.showAlert(axRes.data.msg);                    
+      if ( axRes.data.fail ) {
+        return;
+      }
+      window.location.replace('/order/detail?id=' + id);        
+    }
+
+    async function accept(id: number, expertId: number){
+      const msg = '해당 의뢰를 수락하시겠습니까?'
+
+      util.showAlertConfirm(msg).then(confirm => {
+        if (confirm == false) {
+          return
+        } else {
+          doAccept(id, expertId)
+        }
+      })
+    }
+
     let loginedMemberId = 0;
     let loginedMemberType = '';
 
@@ -429,6 +455,7 @@ export default defineComponent ({
       changeStepLevel,
       callNumber,
       searchCircleOutline,
+      accept
     }
   }
 })

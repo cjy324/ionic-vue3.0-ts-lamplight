@@ -195,7 +195,7 @@ export default defineComponent ({
       if ( axRes.data.fail ) {
         return;
       }
-      window.location.replace('/order/detail?id=' + id);        
+      window.location.replace('/order/list');        
     }
 
     async function accept(id: number, expertId: number){

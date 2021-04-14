@@ -19,8 +19,8 @@
               <span class="text-gray-600 text-xs">수정</span>
             </ion-button>
             <ion-button v-if="globalState.memberType == 'client' && state.order.stepLevel < 3" @click="deleteOrder(globalState.loginedClient.id)" color="dark">
-              <font-awesome-icon class="text-sm mr-1" icon="ban" />
-              <span class="text-gray-600 text-xs">의뢰취소</span>
+              <font-awesome-icon class="text-sm mr-1 text-red-800" icon="ban" />
+              <span class="text-red-800 text-xs">의뢰취소</span>
             </ion-button>
           </ion-buttons>
         </div>
@@ -40,7 +40,7 @@
           <ion-label slot="end" color="dark">{{state.order.extra__clientName}}</ion-label>
         </ion-item>
 
-        <ion-item v-if="globalState.loginedExpert.id == state.order.expertId">
+        <ion-item v-if="state.order.expertId > 0 && globalState.loginedExpert.id == state.order.expertId">
           <ion-label slot="" color="medium">연락처</ion-label>
           <ion-label slot="end" color="">
             <ion-button color="" slot="end" @click="callNumber(state.order.extra__clientCellphoneNo)">
@@ -60,7 +60,7 @@
           </ion-buttons>
         </ion-item>
 
-        <ion-item v-if="globalState.loginedClient.id == state.order.clientId">
+        <ion-item v-if="state.order.expertId > 0 && globalState.loginedClient.id == state.order.clientId">
           <ion-label slot="" color="medium">연락처</ion-label>
           <ion-label slot="end" color="">
             <ion-button color="" slot="end" @click="callNumber(state.order.extra__expertCellphoneNo)">
@@ -285,7 +285,7 @@ export default defineComponent ({
       if(axRes.data.fail){
         return
       }
-      router.replace("list");
+      window.location.replace('/order/list');
     }
 
     async function deleteOrder(id: number){
@@ -351,7 +351,7 @@ export default defineComponent ({
       if(axRes.data.fail){
         return
       }      
-      router.replace('/order/list');
+      window.location.replace('/order/list');
     }
 
     async function reject(id: number){
