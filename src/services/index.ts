@@ -33,6 +33,11 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     }
 
     /* eslint-disable @typescript-eslint/camelcase */
+    common_genFile_doDelete(memberType: string, relId: number, no: number) {
+      return this.mainApi.common_genFile_doDelete(memberType, relId, no);
+    }
+
+    /* eslint-disable @typescript-eslint/camelcase */
     client_authKey(loginId: string, loginPw: string) {
       return this.mainApi.client_authKey(loginId, loginPw);
     }

@@ -121,6 +121,12 @@ export interface MainApi__common_genFile_doUpload__ResponseBody extends Base__Re
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 /* eslint-disable @typescript-eslint/camelcase */
+export interface MainApi__common_genFile_doDelete__ResponseBody extends Base__ResponseBodyType1 {
+  body: {};
+}
+
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/camelcase */
 export interface MainApi__order_requestListInExpertRegion__ResponseBody extends Base__ResponseBodyType1 {
   body: {
     orders: Order[];
@@ -660,6 +666,15 @@ export class MainApi extends HttpClient {
     formData.append("file__" + memberType +"__0__common__attachment__" + no, file);
     return this.post<MainApi__common_genFile_doUpload__ResponseBody>(
       `/common/genFile/doUpload`, formData
+    );
+  }
+
+  public common_genFile_doDelete(memberType: string, relId: number, no: number) {
+    const fileName = "deleteFile__" + memberType + "__" + relId + "__common__attachment__" + no;
+    return this.postByForm<MainApi__common_genFile_doDelete__ResponseBody>(
+      `/common/genFile/doDelete`, {
+        fileName
+      }
     );
   }
 

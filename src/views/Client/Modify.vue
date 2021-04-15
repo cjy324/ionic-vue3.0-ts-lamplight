@@ -239,7 +239,9 @@ export default defineComponent ({
           return;
         }
         
+        //기존 이미지 삭제
         const memberType = 'client';
+        await mainService.common_genFile_doDelete( memberType, id, 1);
 
         const axRes = await mainService.common_genFile_doUpload(profileImgElRef.value?.files[0], memberType, 1)
 
