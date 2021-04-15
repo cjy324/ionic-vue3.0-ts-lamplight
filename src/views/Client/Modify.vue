@@ -177,15 +177,6 @@ export default defineComponent ({
 
     function checkAndModify() {
 
-      // 아이디 체크
-      // let loginId = modifyFormState.loginId.trim();
-      
-      // if ( modifyFormState.loginId.trim().length == 0 ) {
-      //   // util.showAlert('아이디를 입력해주세요.');
-      //   // return;
-      //   loginId = state.client.loginId;
-      // }
-
       // 비번 체크
       const loginPw = modifyFormState.loginPw.trim();
       
@@ -244,7 +235,7 @@ export default defineComponent ({
         // ? => 만약 profileImgElRef.value?까지가 null이면 여기까지만 실행하겠다라는 의미
         // 즉, !!!profileImgElRef.value?.files의 의미는 해당 파일이 없는지 물어보는 것
         // 없으면 true
-        if(profileImgElRef.value?.files == undefined || profileImgElRef.value?.files == null){
+        if(profileImgElRef.value?.files == undefined || profileImgElRef.value?.files[0] == null){
           onSuccess("");  //파일이 없으면 다음 과정 생략하고 onSuccess() 즉시 실행
           return;
         }

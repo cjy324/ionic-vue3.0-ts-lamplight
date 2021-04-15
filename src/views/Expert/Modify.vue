@@ -2,7 +2,7 @@
   <ion-base-layout pageTitle="내 정보 수정" >    
     <ion-list v-if="globalState.isLogined">
       <form @submit.prevent="checkAndModify" >
-        <ion-item-divider class="pt-4">
+        <ion-item-divider class="pt-4 bg-white">
           <img slot="start" class="h-32 rounded-full" :src="mainService.getExpertThumbImgUrl(globalState.loginedExpert.id)" @error="this.onerror=null;replaceByDefault($event)">
         </ion-item-divider>
           
@@ -253,7 +253,7 @@ export default defineComponent ({
         // ? => 만약 profileImgElRef.value?까지가 null이면 여기까지만 실행하겠다라는 의미
         // 즉, !!!profileImgElRef.value?.files의 의미는 해당 파일이 없는지 물어보는 것
         // 없으면 true
-        if(profileImgElRef.value?.files == undefined || profileImgElRef.value?.files == null){
+        if(profileImgElRef.value?.files == undefined || profileImgElRef.value?.files[0] == null){
           onSuccess("");  //파일이 없으면 다음 과정 생략하고 onSuccess() 즉시 실행
           return;
         }

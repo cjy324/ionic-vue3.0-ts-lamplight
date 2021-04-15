@@ -210,7 +210,7 @@ export default defineComponent ({
       }
 
       // 증명서 첨부파일 체크
-      if(profileImgElRef.value?.files == undefined || profileImgElRef.value?.files == null){
+      if(scanImgElRef.value?.files == undefined || scanImgElRef.value?.files[0] == null){
         util.showAlert("자격증 스캔파일을 첨부해주세요.");
         return;
       }
@@ -225,7 +225,7 @@ export default defineComponent ({
 
       async function startFileUpload1(onSuccess: Function){
 
-        if(profileImgElRef.value?.files == undefined || profileImgElRef.value?.files == null){
+        if(profileImgElRef.value?.files == undefined || profileImgElRef.value?.files[0] == null){
           //2차 업로드 진행
           onSuccess('')
           return;
@@ -247,7 +247,7 @@ export default defineComponent ({
 
       async function startFileUpload2(onSuccess: Function, genFileIdsStr1: string){
 
-        if(scanImgElRef.value?.files == undefined || scanImgElRef.value?.files == null){
+        if(scanImgElRef.value?.files == undefined || scanImgElRef.value?.files[0] == null){
           onSuccess(genFileIdsStr1, '')
           return;
         }

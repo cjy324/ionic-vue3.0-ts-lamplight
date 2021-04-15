@@ -11,7 +11,7 @@
         </ion-buttons>
       </div>
 
-      <ion-item-divider class="pt-4">
+      <ion-item-divider class="pt-4 bg-white">
         <img
             slot="start"
             class="h-32 rounded-full mr-4 mb-4"
