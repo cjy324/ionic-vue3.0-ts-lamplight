@@ -166,32 +166,32 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
 
 
 
-    // //이미지를 리사이징해주는 유틸 적용
+    // //이미지를 리사이징해주는 유틸 적용(21.04.15 미적용)
     /* eslint-disable @typescript-eslint/no-inferrable-types */
     getClientThumbImgUrlForHeader(id: number, width: number = 40, height: number = 40) {
 
-      const originUrl = 'http://localhost:8090/common/genFile/file/client/' + id + '/common/attachment/1';
+      const originUrl = 'http://localhost:8021/common/genFile/file/client/' + id + '/common/attachment/1';
       //const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return originUrl;
     }
 
     getClientThumbImgUrl(id: number, width: number = 500, height: number = 500) {
 
-      const originUrl = 'http://localhost:8090/common/genFile/file/client/' + id + '/common/attachment/1';
+      const originUrl = 'http://localhost:8021/common/genFile/file/client/' + id + '/common/attachment/1';
       //const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return originUrl;
     }
 
     getExpertThumbImgUrlForHeader(id: number, width: number = 40, height: number = 40) {
 
-      const originUrl = 'http://localhost:8090/common/genFile/file/expert/' + id + '/common/attachment/1';
+      const originUrl = 'http://localhost:8021/common/genFile/file/expert/' + id + '/common/attachment/1';
       //const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return originUrl;
     }
 
     getExpertThumbImgUrl(id: number, width: number = 500, height: number = 500) {
 
-      const originUrl = 'http://localhost:8090/common/genFile/file/expert/' + id + '/common/attachment/1';
+      const originUrl = 'http://localhost:8021/common/genFile/file/expert/' + id + '/common/attachment/1';
       //const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return originUrl;
     }

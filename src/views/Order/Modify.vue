@@ -103,7 +103,8 @@ import {
   IonInput,
   IonTextarea, 
   IonItem, 
-  IonButton, 
+  IonButton,
+  IonList, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
@@ -137,7 +138,8 @@ export default defineComponent ({
     IonItem, 
     IonButton,
     IonCustomBody,
-    IonCustomLink,  
+    IonCustomLink,
+    IonList,   
   },
 
   setup() {

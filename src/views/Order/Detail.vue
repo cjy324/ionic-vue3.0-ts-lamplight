@@ -18,7 +18,7 @@
               <font-awesome-icon class="text-sm mr-1" icon="edit" />
               <span class="text-gray-600 text-xs">수정</span>
             </ion-button>
-            <ion-button v-if="globalState.memberType == 'client' && state.order.stepLevel < 3" @click="deleteOrder(globalState.loginedClient.id)" color="dark">
+            <ion-button v-if="globalState.loginedClient.id == state.order.clientId && globalState.memberType == 'client' && state.order.stepLevel < 3" @click="deleteOrder(state.order.id)" color="dark">
               <font-awesome-icon class="text-sm mr-1 text-red-800" icon="ban" />
               <span class="text-red-800 text-xs">의뢰취소</span>
             </ion-button>
@@ -114,7 +114,7 @@
           </ion-button>
           <!-- 수락 -->
           <ion-button v-if="state.order.stepLevel == 1" :class="returnColorByLevel(state.order.stepLevel+1) + ' mt-2'" @click="accept(state.order.id, globalState.loginedExpert.id)" expand="block">
-            의뢰 수락
+            의뢰 접수
           </ion-button>
           <!-- 포기 -->
           <ion-button v-if="state.order.stepLevel == 2" class="btn-cancel2 mt-2" @click="reject(state.order.id)" expand="block">
