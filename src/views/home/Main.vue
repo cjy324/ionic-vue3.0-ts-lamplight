@@ -3,8 +3,8 @@
     <ion-custom-body class="home">
       <div class="home_head w-full text-center bg-gray-600 text-white mt-12">
         <div class="h-32 flex items-center justify-center">
-          <div class="home_head_logo text-6xl">
-            상장례
+          <div class="home_head_logo">
+            <img class="w-48" src="@/images/logo.png" alt="">
           </div>
         </div>
         <div class="mt-6">
