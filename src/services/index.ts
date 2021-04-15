@@ -127,9 +127,6 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     }
 
 
-
-
-
     rating_doAdd(relTypeCode: string, relId: number, point: number, clientId: number){
       return this.mainApi.rating_doAdd(relTypeCode, relId, point, clientId)
     }
@@ -161,6 +158,12 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     review_doDelete(relTypeCode: string, relId: number, id: number, clientId: number) {
       return this.mainApi.review_doDelete(relTypeCode, relId, id, clientId);
     }
+
+    // 회원탈퇴
+    member_secession(id: number, memberType: string){
+      return this.mainApi.member_secession(id, memberType);
+    }
+
 
 
     // //이미지를 리사이징해주는 유틸 적용

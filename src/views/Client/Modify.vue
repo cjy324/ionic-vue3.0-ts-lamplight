@@ -73,6 +73,11 @@
             </ion-button>
           </div>
           </form>
+          <div class="px-4 mb-4">
+            <ion-button @click="checkSecession" class="btn-cancel" color="dark" type="button" expand="block">
+             회원탈퇴
+            </ion-button>
+          </div>
         </ion-list>
     <div v-else class="py-2 px-4">
       로그인 후 이용가능합니다. <ion-custom-link to="/client/login">로그인</ion-custom-link> 하러 가기
@@ -286,6 +291,50 @@ export default defineComponent ({
  
     }
 
+     //회원탈퇴
+    async function doSecession(id: number, memberType: string){
+     
+      const axRes = await mainService.member_secession(id, memberType);
+
+      const name = axRes.data.body.name;
+
+      //기존 이미지 삭제
+      await mainService.common_genFile_doDelete( memberType, id, 1);
+      
+      util.showAlert(name + '님 회원탈퇴 처리되었습니다.');
+      
+      globalState.setLogouted();
+
+      window.location.replace('/home/main');
+    }
+
+    function checkSecession(){      
+
+      const loginPw = modifyFormState.loginPw.trim();
+      
+      if ( loginPw.length == 0 ) {
+        util.showAlert('비밀번호를 입력해주세요.');
+        return;
+      }
+      
+      // 비번확인 체크
+      const loginPwConfirm = modifyFormState.loginPwConfirm.trim();
+      
+      if ( loginPw != loginPwConfirm ) {
+        util.showAlert('비밀번호가 일치하지 않습니다.');
+        return;
+      }
+      
+       const memberType = globalState.memberType;
+
+      util.showAlertConfirm('정말 탈퇴 하시겠습니까?').then(confirm => {
+        if (confirm == false) {
+          return
+        } else{
+          doSecession(id, memberType);
+        }
+      })
+    }
   
     return {
       globalState,
@@ -296,6 +345,7 @@ export default defineComponent ({
       //confirmAlert,
       modifyFormState,
       checkAndModify,
+      checkSecession,
       
     }
   }
