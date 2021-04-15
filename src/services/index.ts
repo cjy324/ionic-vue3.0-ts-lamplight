@@ -164,6 +164,11 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
       return this.mainApi.member_secession(id, memberType);
     }
 
+    //뱃지
+    event_getEventTotalCount(memberType: string, memberId: number){
+      return this.mainApi.event_getEventTotalCount(memberType, memberId);
+    }
+
 
 
     // //이미지를 리사이징해주는 유틸 적용(21.04.15 미적용)

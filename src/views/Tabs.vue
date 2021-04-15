@@ -44,10 +44,10 @@
       <!--의뢰 fab버튼-->
       <ion-fab vertical="bottom" horizontal="center">
         
-        <!-- 뱃지아이콘
-        <div v-if="globalState.loginedClient.id > 0">
-          <ion-badge class="badge" color="danger">{{}}</ion-badge>
-        </div> -->
+        <!-- 뱃지아이콘 -->
+        <div v-if="globalState.isLogined">
+          <ion-badge v-if="state.totalCount > 0" class="badge" color="danger">{{state.totalCount}}</ion-badge>
+        </div>
         
         <ion-fab-button>
           <font-awesome-icon class="text-lg h-7 text-white" icon="clipboard-check" />          
@@ -111,16 +111,16 @@ import {
   IonFabList,
   IonIcon,
   IonTabs,
-  //IonBadge, 
+  IonBadge, 
 } from '@ionic/vue';
 import {
   createOutline,
   searchCircleOutline,
 } from 'ionicons/icons';
 import { useGlobalState } from '@/stores';
-//import { useMainService } from '@/services';
+import { useMainService } from '@/services';
 //import { Order } from '@/types';
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, reactive, onMounted } from 'vue';
 //import * as util from '@/utils';
 //21.04.12 Tabs버그 해결로 삭제
 //import { useRoute } from 'vue-router';
@@ -141,15 +141,37 @@ export default defineComponent ({
     IonFab,
     IonFabList,
     IonIcon,
-    //IonBadge,
+    IonBadge,
   },
   setup() {
     const globalState = useGlobalState();
-    //const mainService = useMainService();
+    const mainService = useMainService();
 
     //로딩 관련
     const isOpenRef = ref(false);
     const setOpen = (state: boolean) => isOpenRef.value = state;
+
+
+
+    //뱃지 관련
+    const state = reactive({
+      totalCount: 0,
+    });
+
+    const memberType = globalState.memberType;
+    const memberId = globalState.memberId;
+
+    async function getEventTotalCount(memberType: string, memberId: number){
+      const axRes = await mainService.event_getEventTotalCount(memberType, memberId)
+      state.totalCount = axRes.data.body.totalCount
+    }
+
+    onMounted(() => {
+      if(globalState.isLogined){
+        getEventTotalCount(memberType, memberId);
+      }
+      
+    });
 
     //21.04.12 Tabs버그 해결로 삭제
     // const tabsState = reactive({
@@ -188,6 +210,7 @@ export default defineComponent ({
       isOpenRef, 
       setOpen,
       searchCircleOutline,
+      state
     }
   }
 })

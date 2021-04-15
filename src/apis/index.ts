@@ -482,9 +482,15 @@ export interface MainApi__rating_doModify__ResponseBody extends Base__ResponseBo
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 /* eslint-disable @typescript-eslint/camelcase */
-export interface MainApi__string__ResponseBody extends Base__ResponseBodyType1 {
+export interface MainApi__member_secession__ResponseBody extends Base__ResponseBodyType1 {
   body: {
     name: string;
+  };
+}
+
+export interface MainApi__event_getEventTotalCount__ResponseBody extends Base__ResponseBodyType1 {
+  body: {
+    totalCount: number;
   };
 }
 
@@ -891,7 +897,12 @@ export class MainApi extends HttpClient {
 
   //회원탈퇴
   public member_secession(id: number, memberType: string) {
-    return this.get<MainApi__string__ResponseBody>(`/usr/` + memberType + `/doDelete?id=${id}`);
+    return this.get<MainApi__member_secession__ResponseBody>(`/usr/` + memberType + `/doDelete?id=${id}`);
+  }
+
+  //뱃지
+  public event_getEventTotalCount(memberType: string, memberId: number) {
+    return this.get<MainApi__event_getEventTotalCount__ResponseBody>(`/usr/event/totalCount?memberType=${memberType}&memberId=${memberId}`);
   }
 
 }
