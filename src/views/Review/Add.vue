@@ -148,7 +148,7 @@ export default defineComponent ({
           }
           //const newReviewId = axRes.data.body.id;
 
-          window.location.replace('/review/list?expertId');
+          window.location.replace('/review/list?expertId='+ relId);
       }
 
       const startAddReview = () =>{

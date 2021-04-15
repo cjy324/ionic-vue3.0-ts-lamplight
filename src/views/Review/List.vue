@@ -43,9 +43,14 @@
         </ion-item>
       </div> 
     </ion-list>
-    <div class="px-4">
-      <ion-button href="/expert/list" color="medium" type="button" expand="block">
-        리스트로 돌아가기
+    <div v-if="globalState.memberType == 'client'" class="px-4 mb-2"> 
+      <ion-button href="/order/list" class="" color="primary" type="button" expand="block">
+        '<ion-icon class="mr-2" :icon="albumsOutline" />내 의뢰 관리'로
+      </ion-button>
+    </div>
+    <div class="px-4 mb-4">
+      <ion-button href="/expert/list" class="" color="secondary" type="button" expand="block">
+        '<ion-icon class="mr-2" :icon="peopleOutline" />지도사 현황'으로
       </ion-button>
     </div>
   </ion-base-layout>
@@ -65,8 +70,13 @@ import {
   IonItem, 
   IonButton,
   IonButtons,
+  IonIcon
 
 } from '@ionic/vue';
+import {
+  albumsOutline,
+  peopleOutline,
+} from 'ionicons/icons';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { reactive, onMounted, defineComponent } from 'vue';
@@ -83,6 +93,7 @@ export default defineComponent ({
     IonItem, 
     IonButton,
     IonButtons,
+    IonIcon
   },
   
   setup() {
@@ -155,6 +166,8 @@ export default defineComponent ({
       state,
       doDeleteReview,
       replaceByDefault,
+      albumsOutline,
+      peopleOutline,
     }
   }
 })

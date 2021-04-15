@@ -104,7 +104,7 @@
           </ion-button>
         </div>
         <div v-if="globalState.memberType == 'expert'" class="btns mt-2 px-2 w-full">
-          <ion-button v-if="state.order.stepLevel > 1" :class="returnColorByLevel(state.order.stepLevel+1)" @click="changeStepLevel(state.order.id, state.order.stepLevel)" expand="block">
+          <ion-button v-if="state.order.stepLevel > 1 && state.order.stepLevel < 4" :class="returnColorByLevel(state.order.stepLevel+1)" @click="changeStepLevel(state.order.id, state.order.stepLevel)" expand="block">
             다음 단계 진행 
             (
             <font-awesome-icon class="text-xl ml-1 text-white" icon="caret-right"/>
