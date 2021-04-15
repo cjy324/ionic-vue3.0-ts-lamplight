@@ -10,7 +10,7 @@
       </div>
 
       <ion-item-divider class="pt-4">
-        <img slot="start" class="h-32 rounded-full mr-4 mb-4" :src="mainService.getExpertThumbImgUrl(globalState.loginedExpert.id)">
+        <img slot="start" class="h-32 rounded-full mr-4 mb-4" :src="mainService.getExpertThumbImgUrl(globalState.loginedExpert.id)" @error="this.onerror=null;replaceByDefault($event)">
       </ion-item-divider>
 
       <ion-item color="light">
@@ -100,6 +100,10 @@ export default defineComponent ({
     const globalState = useGlobalState();
     const mainService = useMainService();
     
+    //기본이미지
+    function replaceByDefault(e: any) {
+      e.target.src = 'https://via.placeholder.com/500x500?text=NoImage'
+    }
     
     const state = reactive({
       expert: {} as Expert
@@ -125,6 +129,7 @@ export default defineComponent ({
       globalState,
       mainService,
       state,
+      replaceByDefault,
     }
   }
 })

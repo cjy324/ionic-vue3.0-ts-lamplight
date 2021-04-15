@@ -15,7 +15,7 @@
         <img
             slot="start"
             class="h-32 rounded-full mr-4 mb-4"
-            :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)">
+            :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)" @error="this.onerror=null;replaceByDefault($event)">
       </ion-item-divider>
 
       <ion-item color="light">
@@ -100,6 +100,11 @@ export default defineComponent ({
       client: {} as Client
     });
 
+    //기본이미지
+    function replaceByDefault(e: any) {
+      e.target.src = 'https://via.placeholder.com/500x500?text=NoImage'
+    }
+
     const id = globalState.loginedClient.id;
 
     async function loadClient(id: number) {
@@ -120,6 +125,7 @@ export default defineComponent ({
       globalState,
       mainService,
       state,
+      replaceByDefault,
     }
   }
 })

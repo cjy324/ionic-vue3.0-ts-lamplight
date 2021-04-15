@@ -11,9 +11,9 @@
         <ion-buttons slot="primary" v-if="globalState.isLogined">
           <ion-button :router-link="'/'+ globalState.memberType + '/myPage'" class="mr-2">
             <!-- 의뢰인 -->
-            <img v-if="globalState.memberType == 'client'" class="rounded-full" :src="mainService.getClientThumbImgUrlForHeader(globalState.loginedClient.id)" alt="">
+            <img v-if="globalState.memberType == 'client'" class="rounded-full w-12" :src="mainService.getClientThumbImgUrlForHeader(globalState.loginedClient.id)" @error="this.onerror=null;replaceByDefault($event)">
             <!-- 지도사 -->
-            <img v-if="globalState.memberType == 'expert'" class="rounded-full" :src="mainService.getExpertThumbImgUrlForHeader(globalState.loginedExpert.id)" alt="">
+            <img v-if="globalState.memberType == 'expert'" class="rounded-full w-12" :src="mainService.getExpertThumbImgUrlForHeader(globalState.loginedExpert.id)" @error="this.onerror=null;replaceByDefault($event)">
           </ion-button>
         </ion-buttons>
         <ion-buttons slot="primary" v-else>
@@ -72,9 +72,15 @@ export default defineComponent ({
     const mainService = useMainService();
     //const router = useRouter();
 
+    //기본이미지
+    function replaceByDefault(e: any) {
+      e.target.src = 'https://via.placeholder.com/500x500?text=NoImage'
+    }
+
     return {
       globalState,
       mainService,
+      replaceByDefault,
     }
   }
 })

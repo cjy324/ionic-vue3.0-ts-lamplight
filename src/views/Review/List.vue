@@ -3,7 +3,7 @@
 
     <ion-list class="mb-12">
       <ion-list-header>
-        <img class="rounded-full h-12 mr-2 mt-2 mb-2" :src="mainService.getExpertThumbImgUrl(state.expert.id)" alt="">
+        <img class="rounded-full h-12 mr-2 mt-2 mb-2" :src="mainService.getExpertThumbImgUrl(state.expert.id)" @error="this.onerror=null;replaceByDefault($event)">
         <span class="text-lg mr-1 text-black">{{state.expert.name}}</span><span>님 후기</span>
       </ion-list-header>
 
@@ -95,6 +95,11 @@ export default defineComponent ({
       reviews: [] as Review[],
     });
 
+    //기본이미지
+    function replaceByDefault(e: any) {
+      e.target.src = 'https://via.placeholder.com/500x500?text=NoImage'
+    }
+
     const relTypeCode = 'expert';
     let relId = 0
 
@@ -149,6 +154,7 @@ export default defineComponent ({
       mainService,
       state,
       doDeleteReview,
+      replaceByDefault,
     }
   }
 })

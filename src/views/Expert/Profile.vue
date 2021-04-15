@@ -2,7 +2,7 @@
   <ion-base-layout pageTitle="프로필" >
     <ion-list>          
       <ion-item-divider class="pt-4 bg-white">
-        <img slot="start" class="h-32 rounded-full mr-4 mb-4" :src="mainService.getExpertThumbImgUrl(state.expert.id)">
+        <img slot="start" class="h-32 rounded-full mr-4 mb-4" :src="mainService.getExpertThumbImgUrl(state.expert.id)" @error="this.onerror=null;replaceByDefault($event)">
       </ion-item-divider>
         
       <ion-item color="light">
@@ -97,6 +97,11 @@ export default defineComponent ({
       expert: {} as Expert
     });
 
+    //기본이미지
+    function replaceByDefault(e: any) {
+      e.target.src = 'https://via.placeholder.com/500x500?text=NoImage'
+    }
+
     let id = 0
     if ( route.query.id != null ) {
       id = util.toIntOrNull(route.query.id);
@@ -114,6 +119,7 @@ export default defineComponent ({
       globalState,
       mainService,
       state,
+      replaceByDefault,
       albumsOutline,
       peopleOutline,
     }

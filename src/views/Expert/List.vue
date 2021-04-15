@@ -43,7 +43,7 @@
           <!--정보-->
           <ion-item lines="none">
             <div class="w-36">
-              <img class="h-20 rounded-full" :src="mainService.getExpertThumbImgUrl(expert.id)">
+              <img class="h-20 rounded-full" :src="mainService.getExpertThumbImgUrl(expert.id)" @error="this.onerror=null;replaceByDefault($event)">
             </div>
             <div class="flex-col w-full mb-1">
               <span class="ml-5 font-bold text-gray-900 border-b-2">
@@ -140,6 +140,10 @@ export default defineComponent ({
       reviews: [] as Review[],
     });
 
+    function replaceByDefault(e: any) {
+      e.target.src = 'https://via.placeholder.com/500x500?text=NoImage'
+    }
+
     function onInput(event: any){
       searchState.searchKeyword = event.target.value;
       return searchState.searchKeyword;
@@ -207,6 +211,7 @@ export default defineComponent ({
       doDeleteReview,
       onInput,
       //onClickInput,
+      replaceByDefault
     }
   }
 })

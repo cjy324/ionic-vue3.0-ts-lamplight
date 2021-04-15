@@ -3,7 +3,7 @@
     <ion-list v-if="globalState.isLogined">
       <form @submit.prevent="checkAndModify" >
         <ion-item-divider class="pt-4">
-          <img slot="start" class="h-32 rounded-full" :src="mainService.getExpertThumbImgUrl(globalState.loginedExpert.id)">
+          <img slot="start" class="h-32 rounded-full" :src="mainService.getExpertThumbImgUrl(globalState.loginedExpert.id)" @error="this.onerror=null;replaceByDefault($event)">
         </ion-item-divider>
           
         <ion-item>
@@ -158,6 +158,11 @@ export default defineComponent ({
 
     const profileImgElRef = ref<HTMLInputElement>();
 
+    //기본이미지
+    function replaceByDefault(e: any) {
+      e.target.src = 'https://via.placeholder.com/500x500?text=NoImage'
+    }
+
     const state = reactive({
       expert: {} as Expert
     });
@@ -292,6 +297,7 @@ export default defineComponent ({
       globalState,
       mainService,
       state,
+      replaceByDefault,
       profileImgElRef,
       //confirmAlert,
       modifyFormState,
