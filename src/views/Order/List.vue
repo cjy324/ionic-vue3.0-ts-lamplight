@@ -1,16 +1,21 @@
 <template>
   <ion-base-layout pageTitle="내 의뢰 관리">
-    <ion-custom-body v-if="state.orders.length !== 0" class="">
+
+    <ion-refresher slot="fixed" @ionRefresh="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-custom-body v-if="state.orders.length !== 0" class="mb-8">
       <ion-list v-if="globalState.isLogined">
         <ion-item >
           <ion-label>진행단계</ion-label>
           <ion-select v-model="searchState.selectStepLevel">
             <ion-select-option value="0">전체</ion-select-option>
             <ion-select-option value="1">의뢰요청중</ion-select-option>
-            <ion-select-option value="2">장례준비중</ion-select-option>
-            <ion-select-option value="3">장례진행중</ion-select-option>
-            <ion-select-option value="4">장례종료(확인대기중)</ion-select-option>
-            <ion-select-option value="5">장례종료(최종종료)</ion-select-option>
+            <ion-select-option value="2">준비중</ion-select-option>
+            <ion-select-option value="3">장례 진행중</ion-select-option>
+            <ion-select-option value="4">장례 종료(확인요청)</ion-select-option>
+            <ion-select-option value="5">장례 종료</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item>
@@ -32,10 +37,10 @@
           Total: {{returnFilteredOrders.length}}
         </div>
       
-        <template v-bind:key="order.id" v-for="order in returnFilteredOrders">
+        <template v-bind:key="order.id" v-for="order in returnFilteredOrders.slice(0, state.limtNum)">
         <div class="orderList">
           <!--진행단계-->
-          <div class="orderList_head flex justify-between items-center h-12 border-b-2 border-t-4 bg-gray-800 mb-2 rounded-t-lg">
+          <div class="orderList_head flex justify-between items-center h-12 border-b-2 border-t-4 bg-gray-800 mb-2 rounded-t-xl">
             <ion-buttons>
               <ion-button :router-link="'/order/detail?id=' + order.id" slot="" color="dark">
                 <font-awesome-icon class="text-white text-xs ml-4 mr-1" icon="clipboard"/>
@@ -47,10 +52,25 @@
               </ion-button>
             </ion-buttons>
             <div class="">
-              <ion-chip class="bg-gray-200" :router-link="'/order/detail?id=' + order.id">
+              <!-- 의뢰 요청일 경우 -->
+              <ion-chip v-if="order.stepLevel == 1" class="bg-blue-600" :router-link="'/order/detail?id=' + order.id">
+                <font-awesome-icon class="text-xl text-white" icon="caret-right"/>
+                <font-awesome-icon class="text-xl mr-1 text-white" icon="caret-right"/>
+                <ion-label class="text-white">
+                  {{returnToString(order.stepLevel)}}
+                </ion-label>
+              </ion-chip>
+              <!-- 2,3,4 단계일 경우 -->
+              <ion-chip v-if="order.stepLevel > 1 && order.stepLevel < 5" class="bg-gray-200" :router-link="'/order/detail?id=' + order.id">
                 <font-awesome-icon class="text-xl text-gray-700" icon="caret-right"/>
                 <font-awesome-icon class="text-xl mr-1 text-gray-700" icon="caret-right"/>
                 <ion-label class="text-gray-700">
+                  {{returnToString(order.stepLevel)}}
+                </ion-label>
+              </ion-chip>
+              <!-- 종료된 장례일 경우 -->
+              <ion-chip v-if="order.stepLevel == 5" class="bg-black" :router-link="'/order/detail?id=' + order.id">
+                <ion-label class="text-white">
                   {{returnToString(order.stepLevel)}}
                 </ion-label>
               </ion-chip>
@@ -91,7 +111,7 @@
               <ion-buttons>
                 <span class="text-gray-900">{{order.extra__expertName}}</span>
                 <ion-button color="primary" :router-link="'/expert/profile?id=' + order.expertId">  
-                  <font-awesome-icon class="text-gray-800 ml-1 text-sm" icon="user-check"/>
+                  <font-awesome-icon class="text-gray-800 text-sm" icon="user-check"/>
                 </ion-button>          
               </ion-buttons>
               <ion-button color="primary" slot="end" @click="callNumber(order.extra__expertCellphoneNo)">
@@ -121,13 +141,13 @@
             </ion-item>
           </div>
           <!--단계 버튼(의뢰인)-->
-          <div class="w-full px-10 pb-4 mb-2 mt-4 border-b-8" v-if="globalState.loginedClient.id == order.clientId && order.stepLevel == 4">
+          <div class="w-full px-10 pb-4 mb-2 mt-4 border-gray-800 border-b-8 rounded-b-xl" v-if="globalState.loginedClient.id == order.clientId && order.stepLevel == 4">
             <ion-button v-if="globalState.memberType == 'client'" :class="returnColorByLevel(order.stepLevel)" slot="end" expand="block" @click="changeStepLevel(order.id, order.stepLevel)">
               장례 종료 확인
             </ion-button>
           </div>
           <!--단계 버튼(지도사)-->
-          <div class="w-full px-10 pb-4 mb-2 mt-4 border-b-8" v-if="globalState.loginedExpert.id == order.expertId">
+          <div class="w-full px-10 pb-4 mb-2 mt-4 border-gray-800 border-b-8 rounded-b-xl" v-if="globalState.loginedExpert.id == order.expertId">
             <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel == 1" class="step-second" expand="block" slot="end" @click="accept(order.id, globalState.loginedExpert.id)">
               의뢰접수
             </ion-button>
@@ -142,6 +162,9 @@
           </div>
         </div>
         </template>
+        <ion-button v-if="returnFilteredOrders.length > state.limtNum" @click="showMoreList" size="small" color="medium" expand="block">
+          더보기
+        </ion-button>
       </ion-list>
       
       <div v-else class="ifEmptyOeders my-auto mx-auto">
@@ -215,6 +238,8 @@ import {
   IonButtons,
   IonChip,
   IonIcon,
+  IonRefresher, 
+  IonRefresherContent,
 } from '@ionic/vue';
 import {
   searchCircleOutline
@@ -250,6 +275,8 @@ export default defineComponent ({
     IonButtons,
     IonChip,
     IonIcon,
+    IonRefresher, 
+    IonRefresherContent,
   },
   
   setup() {
@@ -259,6 +286,7 @@ export default defineComponent ({
 
     const state = reactive({
       orders: [] as Order[],
+      limtNum: 5,
     });
 
     function returnColorByLevel(stepLevel: any) {
@@ -294,10 +322,10 @@ export default defineComponent ({
         stepLevelToStr = '장례 진행중';
       }
       if(stepLevel == 4){
-        stepLevelToStr = '장례 종료(확인요청중)';
+        stepLevelToStr = '장례 종료(확인요청)';
       }
       if(stepLevel == 5){
-        stepLevelToStr = '장례 종료 확인';
+        stepLevelToStr = '장례 종료';
       }
 
       return stepLevelToStr;
@@ -443,6 +471,22 @@ export default defineComponent ({
     }
 
 
+    //더보기
+    function showMoreList(){
+      state.limtNum = state.limtNum + 5;
+    }
+
+    //리프레시
+    const doRefresh = (event: any) => {
+      console.log('Begin Refresh');
+
+      setTimeout(() => {
+        console.log('Refresh has ended');
+        event.target.complete();
+      }, 2000);
+    }
+
+
     return {
       globalState,
       mainService,
@@ -455,7 +499,9 @@ export default defineComponent ({
       changeStepLevel,
       callNumber,
       searchCircleOutline,
-      accept
+      accept,
+      showMoreList,
+      doRefresh,
     }
   }
 })

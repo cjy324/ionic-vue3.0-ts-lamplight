@@ -42,7 +42,7 @@
         </ion-tab-bar>
       </ion-tabs>
       <!--의뢰 fab버튼-->
-      <ion-fab vertical="bottom" horizontal="center" @click="resetEvent(state.memberType, state.memberId)">
+      <ion-fab vertical="bottom" horizontal="center">
         
         <!-- 뱃지아이콘
         <div v-if="globalState.isLogined && state.alertCheckStatus == 'no'">

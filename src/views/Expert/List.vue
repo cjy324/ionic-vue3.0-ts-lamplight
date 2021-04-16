@@ -1,5 +1,9 @@
 <template>
   <ion-base-layout pageTitle="지도사 현황" >
+    <ion-refresher slot="fixed" @ionRefresh="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
     <ion-list class="mb-12">
       <ion-item>
         <ion-label>키워드 타입</ion-label>
@@ -17,7 +21,7 @@
         Total: {{returnFilteredExperts.length}}
       </div>
 
-      <template v-bind:key="expert.id" v-for="expert in returnFilteredExperts">
+      <template v-bind:key="expert.id" v-for="expert in returnFilteredExperts.slice(0, state.limtNum)">
       <div class="expertList border-t border-b">
 
         <div class="expertList_head">
@@ -73,6 +77,9 @@
         </div>
       </div> 
       </template>
+      <ion-button v-if="returnFilteredExperts.length > state.limtNum" @click="showMoreList" size="small" color="medium" expand="block">
+        더보기
+      </ion-button>
     </ion-list>
   </ion-base-layout>
 </template>
@@ -96,6 +103,8 @@ import {
  // IonItemDivider,
   IonButton,
   IonButtons,
+  IonRefresher, 
+  IonRefresherContent,
 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
@@ -127,6 +136,8 @@ export default defineComponent ({
   //  IonItemDivider,
     IonButton,
     IonButtons,
+    IonRefresher, 
+    IonRefresherContent,
   },
   
   setup() {
@@ -138,6 +149,7 @@ export default defineComponent ({
       experts: [] as Expert[],
       //searchKeyword: '' as string,
       reviews: [] as Review[],
+      limtNum: 10,
     });
 
     function replaceByDefault(e: any) {
@@ -148,7 +160,6 @@ export default defineComponent ({
       searchState.searchKeyword = event.target.value;
       return searchState.searchKeyword;
     }
-
 
     const returnFilteredExperts = computed(() => {
 
@@ -202,6 +213,21 @@ export default defineComponent ({
     });
 
 
+    //더보기
+    function showMoreList(){
+      state.limtNum = state.limtNum + 10;
+    }
+
+    //리프레시
+    const doRefresh = (event: any) => {
+      console.log('Begin Refresh');
+
+      setTimeout(() => {
+        console.log('Refresh has ended');
+        event.target.complete();
+      }, 2000);
+    }
+
     return {
       globalState,
       mainService,
@@ -211,7 +237,9 @@ export default defineComponent ({
       doDeleteReview,
       onInput,
       //onClickInput,
-      replaceByDefault
+      replaceByDefault,
+      showMoreList,
+      doRefresh,
     }
   }
 })

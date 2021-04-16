@@ -11,9 +11,9 @@
         <ion-buttons slot="primary" v-if="globalState.isLogined">
           <ion-button :router-link="'/'+ globalState.memberType + '/myPage'" class="mr-2">
             <!-- 의뢰인 -->
-            <img v-if="globalState.memberType == 'client'" class="rounded-full w-12" :src="mainService.getClientThumbImgUrlForHeader(globalState.loginedClient.id)" @error="this.onerror=null;replaceByDefault($event)">
+            <img v-if="globalState.memberType == 'client'" class="profile_img rounded-full w-12" :src="mainService.getClientThumbImgUrlForHeader(globalState.loginedClient.id)" @error="this.onerror=null;replaceByDefault($event)">
             <!-- 지도사 -->
-            <img v-if="globalState.memberType == 'expert'" class="rounded-full w-12" :src="mainService.getExpertThumbImgUrlForHeader(globalState.loginedExpert.id)" @error="this.onerror=null;replaceByDefault($event)">
+            <img v-if="globalState.memberType == 'expert'" class="profile_img rounded-full w-12" :src="mainService.getExpertThumbImgUrlForHeader(globalState.loginedExpert.id)" @error="this.onerror=null;replaceByDefault($event)">
           </ion-button>
         </ion-buttons>
         <ion-buttons slot="primary" v-else>
@@ -36,6 +36,9 @@
 
   </ion-page>
 </template>
+
+<style>
+</style>
 
 <script lang="ts">
 

@@ -3,10 +3,25 @@
     <ion-list v-if="globalState.isLogined">
 
         <div class="w-full flex justify-start p-2 bg-gray-800">
-          <ion-chip class="bg-gray-200">
+          <!-- 의뢰 요청일 경우 -->
+          <ion-chip v-if="state.order.stepLevel == 1" class="bg-blue-600">
+            <font-awesome-icon class="text-xl text-white" icon="caret-right"/>
+            <font-awesome-icon class="text-xl mr-1 text-white" icon="caret-right"/>
+            <ion-label class="text-white">
+              {{returnToString(state.order.stepLevel)}}
+            </ion-label>
+          </ion-chip>
+          <!-- 2,3,4 단계일 경우 -->
+          <ion-chip v-if="state.order.stepLevel > 1 && state.order.stepLevel < 5" class="bg-gray-200">
             <font-awesome-icon class="text-xl text-gray-700" icon="caret-right"/>
             <font-awesome-icon class="text-xl mr-1 text-gray-700" icon="caret-right"/>
             <ion-label class="text-gray-700">
+              {{returnToString(state.order.stepLevel)}}
+            </ion-label>
+          </ion-chip>
+          <!-- 종료된 장례일 경우 -->
+          <ion-chip v-if="state.order.stepLevel == 5" class="bg-black">
+            <ion-label class="text-white">
               {{returnToString(state.order.stepLevel)}}
             </ion-label>
           </ion-chip>
@@ -54,7 +69,7 @@
           <ion-label color="medium">담당지도사</ion-label>
           <ion-label slot="end" color="dark">{{state.order.extra__expertName}}</ion-label>
           <ion-buttons v-if="globalState.memberType == 'client'">
-            <ion-button color="" :router-link="'/expert/profile?id=' + state.order.expertId">  
+            <ion-button color="primary" :router-link="'/expert/profile?id=' + state.order.expertId">  
               <span class="">프로필</span>
             </ion-button>          
           </ion-buttons>
@@ -168,7 +183,7 @@ import {
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { reactive, onMounted, defineComponent } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import * as util from '@/utils';
 import { Order } from '@/types';
 import { CallNumber } from "@ionic-native/call-number";
@@ -193,7 +208,7 @@ export default defineComponent ({
     const globalState = useGlobalState();
     const mainService = useMainService();
     const route = useRoute();
-    const router = useRouter();
+    //const router = useRouter();
     
     let id = 0;
 
@@ -246,10 +261,10 @@ export default defineComponent ({
         stepLevelToStr = '장례 진행중';
       }
       if(stepLevel == 4){
-        stepLevelToStr = '장례 종료(확인요청중)';
+        stepLevelToStr = '장례 종료(확인요청)';
       }
       if(stepLevel == 5){
-        stepLevelToStr = '종료 확인';
+        stepLevelToStr = '장례 종료';
       }
       
       return stepLevelToStr;

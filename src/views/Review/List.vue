@@ -1,6 +1,10 @@
 <template>
   <ion-base-layout pageTitle="후기">
 
+    <ion-refresher slot="fixed" @ionRefresh="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
     <ion-list class="mb-12">
       <ion-list-header>
         <img class="rounded-full h-12 mr-2 mt-2 mb-2" :src="mainService.getExpertThumbImgUrl(state.expert.id)" @error="this.onerror=null;replaceByDefault($event)">
@@ -15,8 +19,8 @@
         <ion-item lines="none">
         <div class="flex-col w-full">
           <template v-if="state.reviews.length !== 0">
-          <div class="border-b border-t bg-gray-100 rounded-xl mt-1 mb-1" v-bind:key="review.id" v-for="review in state.reviews">
-              <p class="text-gray-700 p-2 pb-0 text-sm">
+          <div class="border-b border-t bg-gray-100 rounded-xl mt-1 mb-1" v-bind:key="review.id" v-for="review in state.reviews.slice(0, state.limtNum)">
+              <p class="text-gray-700 p-2 pb-0 text-md">
                 {{review.body}}
               </p>
               <span class="text-gray-500 p-2 text-xs ">
@@ -41,7 +45,10 @@
           </div>
         </div>
         </ion-item>
-      </div> 
+      </div>
+      <ion-button v-if="state.reviews.length >= state.limtNum" @click="showMoreList" size="small" color="medium" expand="block">
+        더보기
+      </ion-button>
     </ion-list>
     <div v-if="globalState.memberType == 'client'" class="px-4 mb-2"> 
       <ion-button href="/order/list" class="" color="primary" type="button" expand="block">
@@ -70,7 +77,9 @@ import {
   IonItem, 
   IonButton,
   IonButtons,
-  IonIcon
+  IonIcon,
+  IonRefresher, 
+  IonRefresherContent,
 
 } from '@ionic/vue';
 import {
@@ -93,7 +102,9 @@ export default defineComponent ({
     IonItem, 
     IonButton,
     IonButtons,
-    IonIcon
+    IonIcon,
+    IonRefresher, 
+    IonRefresherContent,
   },
   
   setup() {
@@ -104,6 +115,7 @@ export default defineComponent ({
     const state = reactive({
       expert: {} as Expert,
       reviews: [] as Review[],
+      limtNum: 10,
     });
 
     //기본이미지
@@ -123,8 +135,6 @@ export default defineComponent ({
       state.expert = axRes.data.body.expert;
     }
     
-
-
     async function loadReviews(relTypeCode: string, relId: number){
       const axRes = await mainService.review_list(relTypeCode, relId)
       state.reviews = axRes.data.body.reviews;
@@ -159,6 +169,21 @@ export default defineComponent ({
       })
     }
 
+    //더보기
+    function showMoreList(){
+      state.limtNum = state.limtNum + 10;
+    }
+
+    //리프레시
+    const doRefresh = (event: any) => {
+      console.log('Begin Refresh');
+
+      setTimeout(() => {
+        console.log('Refresh has ended');
+        event.target.complete();
+      }, 2000);
+    }
+
 
     return {
       globalState,
@@ -168,6 +193,8 @@ export default defineComponent ({
       replaceByDefault,
       albumsOutline,
       peopleOutline,
+      showMoreList,
+      doRefresh,
     }
   }
 })

@@ -1,6 +1,11 @@
 <template >
   <ion-base-layout pageTitle="의뢰 요청 현황" >
-    <ion-custom-body v-if="state.orders.length !== 0" class="">
+
+    <ion-refresher slot="fixed" @ionRefresh="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-custom-body v-if="state.orders.length !== 0" class="mb-8">
       <ion-list v-if="globalState.isLogined">
         <ion-item>
           <ion-label>키워드 타입</ion-label>
@@ -18,7 +23,7 @@
           Total: {{returnFilteredOrders.length}}
         </div>
 
-        <template v-bind:key="order.id" v-for="order in returnFilteredOrders">
+        <template v-bind:key="order.id" v-for="order in returnFilteredOrders.slice(0, state.limtNum)">
         <div class="orderAllList border-t border-b">
         <!--진행단계-->
           <div class="orderAllList_head">
@@ -66,6 +71,9 @@
           </div>
         </div>
         </template>
+        <ion-button v-if="returnFilteredOrders.length > state.limtNum" @click="showMoreList" size="small" color="medium" expand="block">
+          더보기
+        </ion-button>
       </ion-list>
       <div v-else class="ifEmptyOeders my-auto mx-auto">
         <div class="py-2 px-4">
@@ -120,12 +128,14 @@ import {
   IonItem, 
   IonButton,
   IonButtons,
+  IonRefresher, 
+  IonRefresherContent,
   //IonChip,
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { reactive, computed, onMounted, defineComponent } from 'vue';
-import { useRouter } from 'vue-router';
+//import { useRouter } from 'vue-router';
 import * as util from '@/utils';
 import { Order } from '@/types';
 
@@ -150,6 +160,8 @@ export default defineComponent ({
     IonItem, 
     IonButton,
     IonButtons,
+    IonRefresher, 
+    IonRefresherContent,
     //IonChip,
   },
   
@@ -161,6 +173,7 @@ export default defineComponent ({
 
     const state = reactive({
       orders: [] as Order[],
+      limtNum: 10,
     });
 
     function onInput(event: any){
@@ -220,6 +233,21 @@ export default defineComponent ({
       loadOrders(loginedMemberId);
     });
 
+    //더보기
+    function showMoreList(){
+      state.limtNum = state.limtNum + 10;
+    }
+
+    //리프레시
+    const doRefresh = (event: any) => {
+      console.log('Begin Refresh');
+
+      setTimeout(() => {
+        console.log('Refresh has ended');
+        event.target.complete();
+      }, 2000);
+    }
+
 
     return {
       globalState,
@@ -229,6 +257,8 @@ export default defineComponent ({
       returnFilteredOrders,
       onInput,
       accept,
+      showMoreList,
+      doRefresh,
     }
   }
 })
