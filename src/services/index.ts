@@ -1,7 +1,6 @@
 //service를 통해 mainAPI를 가져오는 방식으로 변경
 //MVC패턴 같은 느낌
 //import { MainService } from "@/types";
-import { Client } from "@/types";
 import { inject } from "vue";
 import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 가져오는 방식으로 변경
 
@@ -169,34 +168,41 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
       return this.mainApi.event_getEventTotalCount(memberType, memberId);
     }
 
+    event_resetEvent(memberType: string, memberId: number){
+      return this.mainApi.event_resetEvent(memberType, memberId);
+    }
 
 
     // //이미지를 리사이징해주는 유틸 적용(21.04.15 미적용)
     /* eslint-disable @typescript-eslint/no-inferrable-types */
-    getClientThumbImgUrlForHeader(id: number, width: number = 40, height: number = 40) {
+    getClientThumbImgUrlForHeader(id: number) {
 
       const originUrl = 'http://localhost:8021/common/genFile/file/client/' + id + '/common/attachment/1';
+      //const originUrl = 'http://10.0.2.2:8021/common/genFile/file/client/' + id + '/common/attachment/1';
       //const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return originUrl;
     }
 
-    getClientThumbImgUrl(id: number, width: number = 500, height: number = 500) {
+    getClientThumbImgUrl(id: number) {
 
       const originUrl = 'http://localhost:8021/common/genFile/file/client/' + id + '/common/attachment/1';
+      //const originUrl = 'http://10.0.2.2:8021/common/genFile/file/client/' + id + '/common/attachment/1';
       //const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return originUrl;
     }
 
-    getExpertThumbImgUrlForHeader(id: number, width: number = 40, height: number = 40) {
+    getExpertThumbImgUrlForHeader(id: number) {
 
       const originUrl = 'http://localhost:8021/common/genFile/file/expert/' + id + '/common/attachment/1';
+      //const originUrl = 'http://10.0.2.2:8021/common/genFile/file/expert/' + id + '/common/attachment/1';
       //const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return originUrl;
     }
 
-    getExpertThumbImgUrl(id: number, width: number = 500, height: number = 500) {
+    getExpertThumbImgUrl(id: number) {
 
       const originUrl = 'http://localhost:8021/common/genFile/file/expert/' + id + '/common/attachment/1';
+      //const originUrl = 'http://10.0.2.2/common/genFile/file/expert/' + id + '/common/attachment/1';
       //const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return originUrl;
     }

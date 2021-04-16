@@ -42,18 +42,22 @@
         </ion-tab-bar>
       </ion-tabs>
       <!--의뢰 fab버튼-->
-      <ion-fab vertical="bottom" horizontal="center">
+      <ion-fab vertical="bottom" horizontal="center" @click="resetEvent(state.memberType, state.memberId)">
         
-        <!-- 뱃지아이콘 -->
-        <div v-if="globalState.isLogined">
-          <ion-badge v-if="state.totalCount > 0" class="badge" color="danger">{{state.totalCount}}</ion-badge>
-        </div>
+        <!-- 뱃지아이콘
+        <div v-if="globalState.isLogined && state.alertCheckStatus == 'no'">
+          <ion-badge v-if="state.totalCount > 0" class="badge_totalCount" color="danger">{{state.totalCount}}</ion-badge>
+        </div> -->
         
         <ion-fab-button>
-          <font-awesome-icon class="text-lg h-7 text-white" icon="clipboard-check" />          
+          <font-awesome-icon class="text-xl h-7 text-white" icon="clipboard-check" />          
         </ion-fab-button>
         <ion-fab-list side="top">
-          <ion-fab-button href="/order/list" @click="setOpen(true)" color="light">
+          <ion-fab-button class="fab_button" href="/order/list" @click="setOpen(true)" color="light">
+            <!-- 뱃지아이콘
+            <div>
+              <ion-badge v-if="state.allListCount > 0" class="badge_menuCount" color="danger">{{state.allListCount}}</ion-badge>
+            </div> -->
             <ion-loading
               :is-open="isOpenRef"
               message="로딩중..."
@@ -61,12 +65,16 @@
               @onDidDismiss="setOpen(false)"
               spinner="dots"
             />
-            <font-awesome-icon class="text-lg text-gray-700" icon="clipboard-list" />
+            <font-awesome-icon class="text-xl text-gray-700" icon="clipboard-list" />
           </ion-fab-button>
-          <ion-fab-button v-if="globalState.memberType == 'client'" href="/order/add" color="light">
-            <ion-icon :icon="createOutline" />
+          <ion-fab-button class="fab_button" v-if="globalState.memberType == 'client'" href="/order/add" color="light">
+            <ion-icon class="createOutline" :icon="createOutline" />
           </ion-fab-button>
-          <ion-fab-button v-if="globalState.memberType == 'expert'" @click="setOpen(true)" href="/order/allList" color="light">
+          <ion-fab-button class="fab_button" v-if="globalState.memberType == 'expert'" @click="setOpen(true)" href="/order/allList" color="light">
+            <!-- 뱃지아이콘
+            <div>
+              <ion-badge v-if="state.myListCount > 0" class="badge_menuCount" color="danger">{{state.myListCount}}</ion-badge>
+            </div> -->
             <ion-loading
               :is-open="isOpenRef"
               message="로딩중..."
@@ -74,7 +82,7 @@
               @onDidDismiss="setOpen(false)"
               spinner="dots"
             />
-            <ion-icon :icon="searchCircleOutline" />
+            <ion-icon class="searchCircleOutline" :icon="searchCircleOutline" />
           </ion-fab-button>
         </ion-fab-list>
       </ion-fab>
@@ -87,14 +95,36 @@ ion-fab{
   position: absolute;
   bottom:5px;
 }
+
+/* 뱃지관련
 ion-fab > div{
   position: relative;
 }
-.badge{
+.badge_totalCount{
   position: absolute;
   right: 0%;
   z-index: 500;
 }
+
+ion-fab-list > ion-fab-button{
+  height: 50px;
+  width: 50px;
+}
+
+.createOutline{
+
+}
+
+.searchCircleOutline{
+  font-size: 26px;
+}
+
+.badge_menuCount{
+  position: absolute;
+  right: 15%;
+  top: 10%;
+  z-index: 500;
+} */
 
 
 </style>
@@ -111,7 +141,7 @@ import {
   IonFabList,
   IonIcon,
   IonTabs,
-  IonBadge, 
+  //IonBadge, 
 } from '@ionic/vue';
 import {
   createOutline,
@@ -119,11 +149,7 @@ import {
 } from 'ionicons/icons';
 import { useGlobalState } from '@/stores';
 import { useMainService } from '@/services';
-//import { Order } from '@/types';
-import { defineComponent, ref, reactive, onMounted } from 'vue';
-//import * as util from '@/utils';
-//21.04.12 Tabs버그 해결로 삭제
-//import { useRoute } from 'vue-router';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent ({
   name: 'Tabs',
@@ -141,7 +167,7 @@ export default defineComponent ({
     IonFab,
     IonFabList,
     IonIcon,
-    IonBadge,
+    //IonBadge,
   },
   setup() {
     const globalState = useGlobalState();
@@ -153,53 +179,54 @@ export default defineComponent ({
 
 
 
-    //뱃지 관련
-    const state = reactive({
-      totalCount: 0,
-    });
-
-    const memberType = globalState.memberType;
-    const memberId = globalState.memberId;
-
-    async function getEventTotalCount(memberType: string, memberId: number){
-      const axRes = await mainService.event_getEventTotalCount(memberType, memberId)
-      state.totalCount = axRes.data.body.totalCount
-    }
-
-    onMounted(() => {
-      if(globalState.isLogined){
-        getEventTotalCount(memberType, memberId);
-      }
-      
-    });
-
-    //21.04.12 Tabs버그 해결로 삭제
-    // const tabsState = reactive({
-    //   'hrefHome':'/Home',
-    //   'hrefMember':'/Member',
-    //   'hrefExpert':'/Expert',
-    //   'hrefOrder':'/Order',
-    //   'hrefInfo':'/Info',
+    // //뱃지 관련(21.04.16 보류)
+    // const state = reactive({
+    //   totalCount: 0,
+    //   allListCount: 0,
+    //   myListCount: 0,
+    //   alertCheckStatus: 'no',
+    //   alertCheckStatus: 'no',
+    //   alertCheckStatus: 'no',
+    //   memberType: 'member',
+    //   memberId: 0,
     // });
-    // /* ionic 리다이렉트 URL로의 다중클릭으로 인한 버그를 고치기 위한 코드 - 시작 */
-    // /* 버그가 해결되면 없애도 됩니다. */
-    // const route = useRoute();
-    // if ( route.path.startsWith("/Home") ) {
-    //   tabsState.hrefHome = route.fullPath;
+
+    // if(globalState.isLogined){
+    //   state.memberType = globalState.memberType;
+    //   state.memberId = globalState.memberId;
     // }
-    // else if ( route.path.startsWith("/Member") ) {
-    //   tabsState.hrefMember = route.fullPath;
+
+    // async function getEventTotalCount(memberType: string, memberId: number){
+    //   const axRes = await mainService.event_getEventTotalCount(memberType, memberId)
+    //   state.totalCount = axRes.data.body.totalCount
     // }
-    // else if ( route.path.startsWith("/Expert") ) {
-    //   tabsState.hrefExpert = route.fullPath;
+
+    // async function getEventAllListCount(memberType: string, memberId: number){
+    //   const axRes = await mainService.event_getEventAllListCount(memberType, memberId)
+    //   state.allListCount = axRes.data.body.allListCount
     // }
-    // else if ( route.path.startsWith("/Order") ) {
-    //   tabsState.hrefOrder = route.fullPath;
+
+    // async function getEventMyListCount(memberType: string, memberId: number){
+    //   const axRes = await mainService.event_getEventMyListCount(memberType, memberId)
+    //   state.myListCount = axRes.data.body.myListCount
     // }
-    // else if ( route.path.startsWith("/Info") ) {
-    //   tabsState.hrefInfo = route.fullPath;
+
+
+    // onMounted(() => {
+    //   if(globalState.isLogined && state.alertCheckStatus == 'no'){
+    //     getEventTotalCount(state.memberType, state.memberId);
+    //   }
+    // });
+
+    // async function resetEvent(memberType: string, memberId: number){
+    //   if(memberType == 'member' || memberId == 0){
+    //     return
+    //   }
+    //   //alert(memberType + memberId)
+    //   await mainService.event_resetEvent(memberType, memberId)
+    //   state.alertCheckStatus = 'yes'
     // }
-    // /* ionic 리다이렉트 URL로의 다중클릭으로 인한 버그를 고치기 위한 코드 - 끝 */
+
 
     return {
       globalState,
@@ -210,7 +237,8 @@ export default defineComponent ({
       isOpenRef, 
       setOpen,
       searchCircleOutline,
-      state
+      // state,
+      // resetEvent
     }
   }
 })

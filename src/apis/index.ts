@@ -1,9 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { inject } from 'vue';
 import { Client, Order, Expert, Assistant, Review, Funeral, Rating } from '@/types'
-import { getGlobalState } from '@/stores'
-
-const globalState = getGlobalState();
 
 // API 원형
 abstract class HttpClient {
@@ -494,6 +491,10 @@ export interface MainApi__event_getEventTotalCount__ResponseBody extends Base__R
   };
 }
 
+export interface MainApi__event_resetEvent__ResponseBody extends Base__ResponseBodyType1 {
+  body: {};
+}
+
 
 // http://localhost:8021/usr/ 와의 통신장치
 // mainService에게 넘기기 위해 export 추가
@@ -502,6 +503,7 @@ export class MainApi extends HttpClient {
     super(
       axios.create({
         baseURL:'http://localhost:8021/',
+        //baseURL:'http://10.0.2.2/',  //안드로이드 테스트용 로컬호스트 경로
       })
     );
   }
@@ -903,6 +905,10 @@ export class MainApi extends HttpClient {
   //뱃지
   public event_getEventTotalCount(memberType: string, memberId: number) {
     return this.get<MainApi__event_getEventTotalCount__ResponseBody>(`/usr/event/totalCount?memberType=${memberType}&memberId=${memberId}`);
+  }
+
+  public event_resetEvent(memberType: string, memberId: number) {
+    return this.get<MainApi__event_resetEvent__ResponseBody>(`/usr/event/resetEvent?memberType=${memberType}&memberId=${memberId}`);
   }
 
 }

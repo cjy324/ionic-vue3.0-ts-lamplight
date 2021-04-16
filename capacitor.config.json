@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "ionic-vue3.0-ts-lamplight",
+  "appName": "상장례",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "dist",
