@@ -44,20 +44,25 @@
       <!--의뢰 fab버튼-->
       <ion-fab vertical="bottom" horizontal="center">
         
-        <!-- 뱃지아이콘
-        <div v-if="globalState.isLogined && state.alertCheckStatus == 'no'">
-          <ion-badge v-if="state.totalCount > 0" class="badge_totalCount" color="danger">{{state.totalCount}}</ion-badge>
-        </div> -->
-        
+        <!-- 뱃지아이콘 -->
+        <div v-if="globalState.isLogined">
+          <ion-badge v-if="totalCount > 0" class="badge_totalCount" color="danger">
+            {{totalCount}}
+          </ion-badge>
+        </div>
+        <!-- @click="resetEvent(state.memberType, state.memberId)" -->
         <ion-fab-button>
           <font-awesome-icon class="text-xl h-7 text-white" icon="clipboard-check" />          
         </ion-fab-button>
         <ion-fab-list side="top">
-          <ion-fab-button class="fab_button" href="/order/list" @click="setOpen(true)" color="light">
-            <!-- 뱃지아이콘
+          <!-- 내 의뢰 현황 메뉴 -->
+          <ion-fab-button class="fab_button" href="/order/list" @click="setOpen(true), resetMyEvent(state.memberType, state.memberId)" color="light" >
+            <!-- 뱃지아이콘 -->
             <div>
-              <ion-badge v-if="state.allListCount > 0" class="badge_menuCount" color="danger">{{state.allListCount}}</ion-badge>
-            </div> -->
+              <ion-badge v-if="state.myListCount > 0" class="badge_menuCount" color="danger">
+                {{state.myListCount}}
+              </ion-badge>
+            </div>
             <ion-loading
               :is-open="isOpenRef"
               message="로딩중..."
@@ -67,14 +72,18 @@
             />
             <font-awesome-icon class="text-xl text-gray-700" icon="clipboard-list" />
           </ion-fab-button>
+           <!-- 새 의뢰 요청 추가 메뉴 -->
           <ion-fab-button class="fab_button" v-if="globalState.memberType == 'client'" href="/order/add" color="light">
             <ion-icon class="createOutline" :icon="createOutline" />
           </ion-fab-button>
-          <ion-fab-button class="fab_button" v-if="globalState.memberType == 'expert'" @click="setOpen(true)" href="/order/allList" color="light">
-            <!-- 뱃지아이콘
+          <!-- 지역 의뢰 요청 현황 메뉴 -->
+          <ion-fab-button class="fab_button" v-if="globalState.memberType == 'expert'" @click="setOpen(true), resetRegionEvent(state.memberType, state.memberId)" href="/order/allList" color="light">
+            <!-- 뱃지아이콘 -->
             <div>
-              <ion-badge v-if="state.myListCount > 0" class="badge_menuCount" color="danger">{{state.myListCount}}</ion-badge>
-            </div> -->
+              <ion-badge v-if="state.regionListCount > 0" class="badge_menuCount" color="danger">
+                {{state.regionListCount}}
+              </ion-badge>
+            </div>
             <ion-loading
               :is-open="isOpenRef"
               message="로딩중..."
@@ -96,7 +105,7 @@ ion-fab{
   bottom:5px;
 }
 
-/* 뱃지관련
+/* 뱃지관련 */
 ion-fab > div{
   position: relative;
 }
@@ -124,7 +133,7 @@ ion-fab-list > ion-fab-button{
   right: 15%;
   top: 10%;
   z-index: 500;
-} */
+}
 
 
 </style>
@@ -141,7 +150,7 @@ import {
   IonFabList,
   IonIcon,
   IonTabs,
-  //IonBadge, 
+  IonBadge, 
 } from '@ionic/vue';
 import {
   createOutline,
@@ -149,7 +158,7 @@ import {
 } from 'ionicons/icons';
 import { useGlobalState } from '@/stores';
 import { useMainService } from '@/services';
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, reactive, onMounted, computed } from 'vue';
 
 export default defineComponent ({
   name: 'Tabs',
@@ -167,7 +176,7 @@ export default defineComponent ({
     IonFab,
     IonFabList,
     IonIcon,
-    //IonBadge,
+    IonBadge,
   },
   setup() {
     const globalState = useGlobalState();
@@ -179,66 +188,71 @@ export default defineComponent ({
 
 
 
-    // //뱃지 관련(21.04.16 보류)
-    // const state = reactive({
-    //   totalCount: 0,
-    //   allListCount: 0,
-    //   myListCount: 0,
-    //   alertCheckStatus: 'no',
-    //   alertCheckStatus: 'no',
-    //   alertCheckStatus: 'no',
-    //   memberType: 'member',
-    //   memberId: 0,
-    // });
+    //뱃지 관련
+    const state = reactive({
+      regionListCount: 0,
+      myListCount: 0,
+      memberType: 'member',
+      memberId: 0,
+    });
 
-    // if(globalState.isLogined){
-    //   state.memberType = globalState.memberType;
-    //   state.memberId = globalState.memberId;
-    // }
+    if(globalState.isLogined){
+      state.memberType = globalState.memberType;
+      state.memberId = globalState.memberId;
+    }
 
-    // async function getEventTotalCount(memberType: string, memberId: number){
-    //   const axRes = await mainService.event_getEventTotalCount(memberType, memberId)
-    //   state.totalCount = axRes.data.body.totalCount
-    // }
+    //지역별 알림 뱃지 load
+    async function getEventRegionListCount(memberType: string, memberId: number){
+      const eventType = 'region'
+      const axRes = await mainService.event_getEventCount(memberType, memberId, eventType)
+      state.regionListCount = axRes.data.body.count
+    }
 
-    // async function getEventAllListCount(memberType: string, memberId: number){
-    //   const axRes = await mainService.event_getEventAllListCount(memberType, memberId)
-    //   state.allListCount = axRes.data.body.allListCount
-    // }
+    //내 의뢰 알림 뱃지 load
+    async function getEventMyListCount(memberType: string, memberId: number){
+      const eventType = 'my'
+      const axRes = await mainService.event_getEventCount(memberType, memberId, eventType)
+      state.myListCount = axRes.data.body.count
+    }
 
-    // async function getEventMyListCount(memberType: string, memberId: number){
-    //   const axRes = await mainService.event_getEventMyListCount(memberType, memberId)
-    //   state.myListCount = axRes.data.body.myListCount
-    // }
+    onMounted(() => {
+      if(globalState.isLogined){
+        getEventRegionListCount(state.memberType, state.memberId);
+        getEventMyListCount(state.memberType, state.memberId);
+      }
+    });
 
+    async function resetRegionEvent(memberType: string, memberId: number){
+      const eventType = 'region'
+      if(memberType == 'member' || memberId == 0){
+        return
+      }
+      await mainService.event_resetEvent(memberType, memberId, eventType)
+    }
 
-    // onMounted(() => {
-    //   if(globalState.isLogined && state.alertCheckStatus == 'no'){
-    //     getEventTotalCount(state.memberType, state.memberId);
-    //   }
-    // });
+    async function resetMyEvent(memberType: string, memberId: number){
+      const eventType = 'my'
+      if(memberType == 'member' || memberId == 0){
+        return
+      }
+      await mainService.event_resetEvent(memberType, memberId, eventType)
+    }
 
-    // async function resetEvent(memberType: string, memberId: number){
-    //   if(memberType == 'member' || memberId == 0){
-    //     return
-    //   }
-    //   //alert(memberType + memberId)
-    //   await mainService.event_resetEvent(memberType, memberId)
-    //   state.alertCheckStatus = 'yes'
-    // }
-
+    const totalCount = computed(() => {
+      return state.regionListCount + state.myListCount
+    })
 
     return {
       globalState,
       createOutline,
-      //mainService,
-      //tabsState,
-      //route
+      mainService,
       isOpenRef, 
       setOpen,
       searchCircleOutline,
-      // state,
-      // resetEvent
+      state,
+      resetRegionEvent,
+      resetMyEvent,
+      totalCount
     }
   }
 })

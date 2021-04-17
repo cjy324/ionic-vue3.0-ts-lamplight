@@ -485,9 +485,9 @@ export interface MainApi__member_secession__ResponseBody extends Base__ResponseB
   };
 }
 
-export interface MainApi__event_getEventTotalCount__ResponseBody extends Base__ResponseBodyType1 {
+export interface MainApi__event_getEventCount__ResponseBody extends Base__ResponseBodyType1 {
   body: {
-    totalCount: number;
+    count: number;
   };
 }
 
@@ -502,7 +502,7 @@ export class MainApi extends HttpClient {
   public constructor() {
     super(
       axios.create({
-        baseURL:'http://localhost:8021/',
+        baseURL:'http://192.168.0.4:8021/',
         //baseURL:'http://10.0.2.2/',  //안드로이드 테스트용 로컬호스트 경로
       })
     );
@@ -903,12 +903,12 @@ export class MainApi extends HttpClient {
   }
 
   //뱃지
-  public event_getEventTotalCount(memberType: string, memberId: number) {
-    return this.get<MainApi__event_getEventTotalCount__ResponseBody>(`/usr/event/totalCount?memberType=${memberType}&memberId=${memberId}`);
+  public event_getEventCount(memberType: string, memberId: number, eventType: string) {
+    return this.get<MainApi__event_getEventCount__ResponseBody>(`/usr/event/count?memberType=${memberType}&memberId=${memberId}&eventType=${eventType}`);
   }
 
-  public event_resetEvent(memberType: string, memberId: number) {
-    return this.get<MainApi__event_resetEvent__ResponseBody>(`/usr/event/resetEvent?memberType=${memberType}&memberId=${memberId}`);
+  public event_resetEvent(memberType: string, memberId: number, eventType: string) {
+    return this.get<MainApi__event_resetEvent__ResponseBody>(`/usr/event/resetEvent?memberType=${memberType}&memberId=${memberId}&eventType=${eventType}`);
   }
 
 }

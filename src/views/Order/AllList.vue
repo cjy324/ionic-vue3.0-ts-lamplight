@@ -24,12 +24,13 @@
         </div>
 
         <template v-bind:key="order.id" v-for="order in returnFilteredOrders.slice(0, state.limtNum)">
+          
         <div class="orderAllList border-t border-b">
-        <!--진행단계-->
           <div class="orderAllList_head">
             <div class="w-full flex justify-end">
               <ion-buttons>
                 <ion-button color="dark" slot="start" :router-link="'/order/detail?id=' + order.id">
+                {{order.id}}
                   <font-awesome-icon class="text-gray-800 mr-1 text-xs" icon="clipboard"/>
                   <span class="text-gray-600 text-xs">상세보기</span>
                 </ion-button>

@@ -131,8 +131,12 @@
           <ion-button v-if="state.order.stepLevel == 1" :class="returnColorByLevel(state.order.stepLevel+1) + ' mt-2'" @click="accept(state.order.id, globalState.loginedExpert.id)" expand="block">
             의뢰 접수
           </ion-button>
+          <!-- 거절 -->
+          <ion-button v-if="state.order.stepLevel == 1" class="btn-cancel2 mt-2" @click="reject(state.order.id, globalState.loginedExpert.id)" expand="block">
+            의뢰 거절
+          </ion-button>
           <!-- 포기 -->
-          <ion-button v-if="state.order.stepLevel == 2" class="btn-cancel2 mt-2" @click="reject(state.order.id)" expand="block">
+          <ion-button v-if="state.order.stepLevel == 2" class="btn-cancel2 mt-2" @click="reject(state.order.id, globalState.loginedExpert.id)" expand="block">
             의뢰 포기
           </ion-button>
         </div>
@@ -358,9 +362,9 @@ export default defineComponent ({
       })
     }
 
-    //포기(지도사)
-    async function doReject(id: number) {
-      const axRes = await mainService.order_reject(id, globalState.loginedClient.id)
+    //거절/포기(지도사)
+    async function doReject(id: number, expertId: number) {
+      const axRes = await mainService.order_reject(id, expertId)
       
       util.showAlert(axRes.data.msg)
       if(axRes.data.fail){
@@ -369,14 +373,14 @@ export default defineComponent ({
       window.location.replace('/order/list');
     }
 
-    async function reject(id: number){
+    async function reject(id: number, expertId: number){
       const msg = '해당 의뢰를 포기하시겠습니까?'
 
       util.showAlertConfirm(msg).then(confirm => {
         if (confirm == false) {
           return
         } else {
-          doReject(id)
+          doReject(id, expertId)
         }
       })
     }

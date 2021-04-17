@@ -151,6 +151,10 @@
             <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel == 1" class="step-second" expand="block" slot="end" @click="accept(order.id, globalState.loginedExpert.id)">
               의뢰접수
             </ion-button>
+            <!-- 거절 -->
+            <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel == 1" class="btn-cancel2 mt-2" @click="reject(order.id, globalState.loginedExpert.id)" expand="block">
+              의뢰 거절
+            </ion-button>
             <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel < 4 && order.stepLevel > 1" :class="returnColorByLevel(order.stepLevel+1)" expand="block" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
               다음단계 진행
               (
@@ -199,6 +203,9 @@
 </template>
 
 <style>
+.btn-cancel2{
+  --background:var(--ion-color-danger-shade)
+}
 .step-first{
   --background:var(--ion-color-primary-tint);
 }
@@ -430,6 +437,29 @@ export default defineComponent ({
       })
     }
 
+    //거절/포기(지도사)
+    async function doReject(id: number, expertId: number) {
+      const axRes = await mainService.order_reject(id, expertId)
+      
+      util.showAlert(axRes.data.msg)
+      if(axRes.data.fail){
+        return
+      }      
+      window.location.replace('/order/list');
+    }
+
+    async function reject(id: number, expertId: number){
+      const msg = '해당 의뢰를 거절하시겠습니까?'
+
+      util.showAlertConfirm(msg).then(confirm => {
+        if (confirm == false) {
+          return
+        } else {
+          doReject(id, expertId)
+        }
+      })
+    }
+
     let loginedMemberId = 0;
     let loginedMemberType = '';
 
@@ -500,6 +530,7 @@ export default defineComponent ({
       callNumber,
       searchCircleOutline,
       accept,
+      reject,
       showMoreList,
       doRefresh,
     }

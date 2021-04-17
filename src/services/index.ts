@@ -164,12 +164,12 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     }
 
     //뱃지
-    event_getEventTotalCount(memberType: string, memberId: number){
-      return this.mainApi.event_getEventTotalCount(memberType, memberId);
+    event_getEventCount(memberType: string, memberId: number, eventType: string){
+      return this.mainApi.event_getEventCount(memberType, memberId, eventType);
     }
-
-    event_resetEvent(memberType: string, memberId: number){
-      return this.mainApi.event_resetEvent(memberType, memberId);
+  
+    event_resetEvent(memberType: string, memberId: number, eventType: string){
+      return this.mainApi.event_resetEvent(memberType, memberId, eventType);
     }
 
 
@@ -177,7 +177,7 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
     /* eslint-disable @typescript-eslint/no-inferrable-types */
     getClientThumbImgUrlForHeader(id: number) {
 
-      const originUrl = 'http://localhost:8021/common/genFile/file/client/' + id + '/common/attachment/1';
+      const originUrl = 'http://192.168.0.4:8021/common/genFile/file/client/' + id + '/common/attachment/1';
       //const originUrl = 'http://10.0.2.2:8021/common/genFile/file/client/' + id + '/common/attachment/1';
       //const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return originUrl;
@@ -185,7 +185,7 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
 
     getClientThumbImgUrl(id: number) {
 
-      const originUrl = 'http://localhost:8021/common/genFile/file/client/' + id + '/common/attachment/1';
+      const originUrl = 'http://192.168.0.4:8021/common/genFile/file/client/' + id + '/common/attachment/1';
       //const originUrl = 'http://10.0.2.2:8021/common/genFile/file/client/' + id + '/common/attachment/1';
       //const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return originUrl;
@@ -193,7 +193,7 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
 
     getExpertThumbImgUrlForHeader(id: number) {
 
-      const originUrl = 'http://localhost:8021/common/genFile/file/expert/' + id + '/common/attachment/1';
+      const originUrl = 'http://192.168.0.4:8021/common/genFile/file/expert/' + id + '/common/attachment/1';
       //const originUrl = 'http://10.0.2.2:8021/common/genFile/file/expert/' + id + '/common/attachment/1';
       //const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return originUrl;
@@ -201,7 +201,7 @@ import { getMainApi, MainApi } from "@/apis";  //service를 통해 mainAPI를 �
 
     getExpertThumbImgUrl(id: number) {
 
-      const originUrl = 'http://localhost:8021/common/genFile/file/expert/' + id + '/common/attachment/1';
+      const originUrl = 'http://192.168.0.4:8021/common/genFile/file/expert/' + id + '/common/attachment/1';
       //const originUrl = 'http://10.0.2.2/common/genFile/file/expert/' + id + '/common/attachment/1';
       //const url = `http://localhost:8085/img?failWidth=${width}&failHeight=${height}&failText=NoImage&width=${width}&height=${height}&url=` + originUrl;
       return originUrl;
