@@ -42,8 +42,9 @@
           <!--진행단계-->
           <div class="orderList_head flex justify-between items-center h-12 border-b-2 border-t-4 bg-gray-800 mb-2 rounded-t-xl">
             <ion-buttons>
+              <span class="ml-3 text-xs">No. {{order.id}}</span>
               <ion-button :router-link="'/order/detail?id=' + order.id" slot="" color="dark">
-                <font-awesome-icon class="text-white text-xs ml-4 mr-1" icon="clipboard"/>
+                <font-awesome-icon class="text-white text-xs ml-1 mr-1" icon="clipboard"/>
                 <span class="text-white text-xs">상세보기</span>
               </ion-button>
               <ion-button v-if="order.stepLevel > 3 && globalState.memberType == 'client'" :router-link="'/review/add?relTypeCode=expert&relId=' + order.expertId" color="dark" slot="end">

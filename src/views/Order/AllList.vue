@@ -27,10 +27,11 @@
           
         <div class="orderAllList border-t border-b">
           <div class="orderAllList_head">
-            <div class="w-full flex justify-end">
+            <div class="w-full flex justify-between">
+                <span class="ml-3 pt-3 text-gray-800 text-xs">No. {{order.id}}</span>
+
               <ion-buttons>
                 <ion-button color="dark" slot="start" :router-link="'/order/detail?id=' + order.id">
-                {{order.id}}
                   <font-awesome-icon class="text-gray-800 mr-1 text-xs" icon="clipboard"/>
                   <span class="text-gray-600 text-xs">상세보기</span>
                 </ion-button>
@@ -40,7 +41,7 @@
 
           <div class="orderAllList_body mb-3">
             <ion-item lines="none">
-              <div class="flex-col w-full mb-1">
+              <div class="flex-col w-full">
                 <div class="ml-2 font-bold text-gray-900 border-b-2">
                   <span class="text-sm text-gray-400 ml-2">고인</span>
                   <span class="ml-2">{{order.deceasedName}}</span>
