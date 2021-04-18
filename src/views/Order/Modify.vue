@@ -67,10 +67,10 @@
             </ion-item>
 
           <div class="mt-2 mb-2 px-4">
-            <ion-button class="btn-success" type="submit" expand="block">수정 완료</ion-button>
+            <ion-button color="primary" type="submit" expand="block">수정 완료</ion-button>
           </div>
           <div class="px-4">
-            <ion-button class="btn-cancel" color="" type="button" expand="block" router-link="/order/list">
+            <ion-button color="primary" type="button" expand="block" router-link="/order/list">
               취소
             </ion-button>
           </div>
@@ -86,12 +86,6 @@
 </template>
 
 <style>
-.btn-success{
-  --background:var(--ion-color-success-shade)
-}
-.btn-cancel{
-  --background:var(--ion-color-medium-shade)
-}
 </style>
 
 <script lang="ts">

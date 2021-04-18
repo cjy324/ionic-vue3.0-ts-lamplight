@@ -66,16 +66,11 @@
         </ion-item>
 
         <div class="pt-2 mb-2 px-4">
-          <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
+          <ion-button color="primary" type="submit" size="default" expand="block">완료</ion-button>
         </div>
         <div class="px-4">
-          <ion-button router-link="/order/main" class="btn-cancel" color="" type="button" expand="block">
-            취소('내 의뢰 관리'로 가기)
-          </ion-button>
-        </div>
-        <div class="px-4">
-          <ion-button router-link="/expert/list" class="btn-cancel2" color="" type="button" expand="block">
-            취소('지도사 현황'으로 가기)
+          <ion-button @click="historyBack" color="light" type="button" expand="block">
+            취소
           </ion-button>
         </div>
       </form>
@@ -262,8 +257,13 @@ export default defineComponent ({
 
     }
 
+    function historyBack(){
+      router.go(-1)
+    }
+
     return {
       globalState,
+      historyBack,
       //confirmAlert,
       orderAddFormState,
       checkAndAddOrder,

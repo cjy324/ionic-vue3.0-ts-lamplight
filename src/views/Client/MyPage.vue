@@ -5,7 +5,7 @@
 
       <div class="flex justify-end mr-4 mt-2">
         <ion-buttons>
-          <ion-button :router-link="'/client/modify?id=' + globalState.loginedClient.id" color="medium">
+          <ion-button :router-link="'/client/modify?id=' + globalState.loginedClient.id" color="dark">
             <font-awesome-icon class="text-lg h-7" icon="user-cog"/>
           </ion-button>
         </ion-buttons>

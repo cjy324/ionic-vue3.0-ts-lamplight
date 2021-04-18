@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-header>
+    <!-- <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-back-button
@@ -10,9 +10,9 @@
         <ion-title class="text-md">{{ pageTitle }}</ion-title>
         <ion-buttons slot="primary" v-if="globalState.isLogined">
           <ion-button :router-link="'/'+ globalState.memberType + '/myPage'" class="mr-2">
-            <!-- 의뢰인 -->
+            의뢰인
             <img v-if="globalState.memberType == 'client'" class="profile_img rounded-full w-12" :src="mainService.getClientThumbImgUrlForHeader(globalState.loginedClient.id)" @error="this.onerror=null;replaceByDefault($event)">
-            <!-- 지도사 -->
+            지도사
             <img v-if="globalState.memberType == 'expert'" class="profile_img rounded-full w-12" :src="mainService.getExpertThumbImgUrlForHeader(globalState.loginedExpert.id)" @error="this.onerror=null;replaceByDefault($event)">
           </ion-button>
         </ion-buttons>
@@ -28,7 +28,7 @@
           <slot name="actions-end"></slot>
         </ion-buttons>
       </ion-toolbar>
-    </ion-header>
+    </ion-header> -->
 
     <ion-content :fullscreen="true">
       <slot />
@@ -47,13 +47,13 @@ import { useMainService } from '@/services'
 
 import {
   IonPage,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
+  //IonHeader,
+  //IonToolbar,
+  //IonTitle,
   IonContent,
-  IonBackButton,
-  IonButton,
-  IonButtons,
+  //IonBackButton,
+  //IonButton,
+  //IonButtons,
 } from "@ionic/vue";
 import { defineComponent } from 'vue'
 
@@ -62,13 +62,13 @@ export default defineComponent ({
   props: ["pageTitle", "pageDefaultBackLink"],
   components: {
     IonPage,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
+    //IonHeader,
+    //IonToolbar,
+    //IonTitle,
     IonContent,
-    IonBackButton,
-    IonButton,
-    IonButtons,
+    //IonBackButton,
+    //IonButton,
+    //IonButtons,
   },
   setup() {
     const globalState = useGlobalState();

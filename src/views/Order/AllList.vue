@@ -64,7 +64,7 @@
               <!--접수--> 
               <div class="w-32">
                 <div class="flex justify-center items-center w-full text-center">
-                  <ion-button class="step-second" expand="block" slot="end" @click="accept(order.id, globalState.loginedExpert.id)">
+                  <ion-button color="secondary" expand="block" slot="end" @click="accept(order.id, globalState.loginedExpert.id)">
                     의뢰접수
                   </ion-button>
                 </div>

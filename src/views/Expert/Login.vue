@@ -18,7 +18,7 @@
           </ion-item>
         </div>
         <div class="py-2 px-4">
-          <ion-button type="submit" expand="block">로그인</ion-button>
+          <ion-button type="submit" color="primary" expand="block">로그인</ion-button>
         </div>
         <div class="pt-2 px-4 text-sm">
           아직 회원이 아니신가요? <ion-custom-link to="/member/signupMain">회원가입</ion-custom-link>

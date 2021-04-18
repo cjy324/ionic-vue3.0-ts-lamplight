@@ -3,6 +3,11 @@
     <ion-list v-if="globalState.isLogined">
 
         <div class="w-full flex justify-start p-2 bg-gray-800">
+          <ion-buttons>
+            <ion-button color="" @click="historyBack">
+              <font-awesome-icon class="text-white text-lg" icon="arrow-left"/>
+            </ion-button>
+          </ion-buttons>
           <!-- 의뢰 요청일 경우 -->
           <ion-chip v-if="state.order.stepLevel == 1" class="bg-blue-600">
             <font-awesome-icon class="text-xl text-white" icon="caret-right"/>
@@ -40,9 +45,9 @@
           </ion-buttons>
         </div>
 
-        <ion-item color="light">
-          <ion-label color="medium">고인 이름</ion-label>
-          <ion-label slot="end" color="dark">{{state.order.deceasedName}}</ion-label>
+        <ion-item color="medium">
+          <ion-label color="">고인 이름</ion-label>
+          <ion-label slot="end" color="">{{state.order.deceasedName}}</ion-label>
         </ion-item>
               
         <ion-item>
@@ -58,7 +63,7 @@
         <ion-item v-if="state.order.expertId > 0 && globalState.loginedExpert.id == state.order.expertId">
           <ion-label slot="" color="medium">연락처</ion-label>
           <ion-label slot="end" color="">
-            <ion-button color="" slot="end" @click="callNumber(state.order.extra__clientCellphoneNo)">
+            <ion-button color="secondary" slot="end" @click="callNumber(state.order.extra__clientCellphoneNo)">
               <font-awesome-icon class="mr-2" icon="phone-alt"/>
               {{state.order.extra__clientCellphoneNo}}
             </ion-button>
@@ -69,7 +74,7 @@
           <ion-label color="medium">담당지도사</ion-label>
           <ion-label slot="end" color="dark">{{state.order.extra__expertName}}</ion-label>
           <ion-buttons v-if="globalState.memberType == 'client'">
-            <ion-button color="primary" :router-link="'/expert/profile?id=' + state.order.expertId">  
+            <ion-button color="secondary" :router-link="'/expert/profile?id=' + state.order.expertId">  
               <span class="">프로필</span>
             </ion-button>          
           </ion-buttons>
@@ -78,7 +83,7 @@
         <ion-item v-if="state.order.expertId > 0 && globalState.loginedClient.id == state.order.clientId">
           <ion-label slot="" color="medium">연락처</ion-label>
           <ion-label slot="end" color="">
-            <ion-button color="" slot="end" @click="callNumber(state.order.extra__expertCellphoneNo)">
+            <ion-button color="secondary" slot="end" @click="callNumber(state.order.extra__expertCellphoneNo)">
               <font-awesome-icon class="mr-2" icon="phone-alt"/>
               {{state.order.extra__expertCellphoneNo}}
             </ion-button>
@@ -114,12 +119,12 @@
 
 
         <div v-if="globalState.memberType == 'client' && state.order.stepLevel > 3" class="btns mt-2 px-2 w-full">
-          <ion-button :class="returnColorByLevel(state.order.stepLevel)" @click="changeStepLevel(state.order.id, state.order.stepLevel)" expand="block">
+          <ion-button color="primary" @click="changeStepLevel(state.order.id, state.order.stepLevel)" expand="block">
             {{returnToString(state.order.stepLevel)}}
           </ion-button>
         </div>
         <div v-if="globalState.memberType == 'expert'" class="btns mt-2 px-2 w-full">
-          <ion-button v-if="state.order.stepLevel > 1 && state.order.stepLevel < 4" :class="returnColorByLevel(state.order.stepLevel+1)" @click="changeStepLevel(state.order.id, state.order.stepLevel)" expand="block">
+          <ion-button v-if="state.order.stepLevel > 1 && state.order.stepLevel < 4" color="primary" @click="changeStepLevel(state.order.id, state.order.stepLevel)" expand="block">
             다음 단계 진행 
             (
             <font-awesome-icon class="text-xl ml-1 text-white" icon="caret-right"/>
@@ -128,15 +133,15 @@
             )
           </ion-button>
           <!-- 수락 -->
-          <ion-button v-if="state.order.stepLevel == 1" :class="returnColorByLevel(state.order.stepLevel+1) + ' mt-2'" @click="accept(state.order.id, globalState.loginedExpert.id)" expand="block">
+          <ion-button color="secondary" v-if="state.order.stepLevel == 1" class="mt-2" @click="accept(state.order.id, globalState.loginedExpert.id)" expand="block">
             의뢰 접수
           </ion-button>
           <!-- 거절 -->
-          <ion-button v-if="state.order.stepLevel == 1" class="btn-cancel2 mt-2" @click="reject(state.order.id, globalState.loginedExpert.id)" expand="block">
+          <ion-button color="light" v-if="state.order.stepLevel == 1 && state.order.expertId == globalState.loginedExpert.id" class="mt-2" @click="reject(state.order.id, globalState.loginedExpert.id)" expand="block">
             의뢰 거절
           </ion-button>
           <!-- 포기 -->
-          <ion-button v-if="state.order.stepLevel == 2" class="btn-cancel2 mt-2" @click="reject(state.order.id, globalState.loginedExpert.id)" expand="block">
+          <ion-button color="light" v-if="state.order.stepLevel == 2 && state.order.expertId == globalState.loginedExpert.id" class="mt-2" @click="reject(state.order.id, globalState.loginedExpert.id)" expand="block">
             의뢰 포기
           </ion-button>
         </div>
@@ -187,7 +192,7 @@ import {
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { reactive, onMounted, defineComponent } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import * as util from '@/utils';
 import { Order } from '@/types';
 import { CallNumber } from "@ionic-native/call-number";
@@ -212,7 +217,7 @@ export default defineComponent ({
     const globalState = useGlobalState();
     const mainService = useMainService();
     const route = useRoute();
-    //const router = useRouter();
+    const router = useRouter();
     
     let id = 0;
 
@@ -385,9 +390,14 @@ export default defineComponent ({
       })
     }
 
+    function historyBack(){
+      router.go(-1)
+    }
+
     return {
       globalState,
       state,
+      historyBack,
       returnColorByLevel,
       returnToString,
       changeStepLevel,

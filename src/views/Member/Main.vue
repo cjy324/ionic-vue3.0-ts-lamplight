@@ -8,13 +8,13 @@
         </div>
         <div class="mb-2">
           <div class="px-4 mb-2">
-            <ion-button class="btn-primary" size="" color="" type="button" expand="block" router-link="/client/login">
+            <ion-button size="" color="primary" type="button" expand="block" router-link="/client/login">
               <font-awesome-icon class="mr-2" icon="user"></font-awesome-icon>
               의뢰인 로그인
             </ion-button>
           </div>
           <div class="px-4">
-            <ion-button class="btn-secondary" size="" color="" type="button" expand="block" router-link="/expert/login">
+            <ion-button size="" color="medium" type="button" expand="block" router-link="/expert/login">
               <font-awesome-icon class="mr-2" icon="user-tie"></font-awesome-icon>
               지도사 로그인
             </ion-button>
@@ -36,13 +36,7 @@
       
 </template>
 
-<style scoped>
-.btn-primary{
-  --background:var(--ion-color-tertiary-shade)
-}
-.btn-secondary{
-  --background:var(--ion-color-secondary-shade)
-}
+<style>
 </style>
 
 <script lang="ts">

@@ -27,10 +27,10 @@
             </ion-item>
           </div>
           <div class="mb-2 mt-4 px-4">
-            <ion-button type="submit" expand="block">작성 완료</ion-button>
+            <ion-button color="primary" type="submit" expand="block">작성 완료</ion-button>
           </div>
           <div class="px-4">
-            <ion-button class="btn-cancel" router-link="/order/list" color="" type="button" expand="block">취소</ion-button>
+            <ion-button color="light" @click="historyBack" type="button" expand="block">취소</ion-button>
           </div>
         </form>
         <div v-else class="py-2 px-4">
@@ -42,9 +42,6 @@
 </template>
 
 <style>
-.btn-cancel{
-  --background:var(--ion-color-medium-shade)
-}
 </style>
 
 <script lang="ts">
@@ -167,8 +164,13 @@ export default defineComponent ({
 
     }
 
+    function historyBack(){
+      router.go(-1)
+    }
+
     return {
       globalState,
+      historyBack,
       //confirmAlert,
       reviewAddFormState,
       checkAndAddReview,

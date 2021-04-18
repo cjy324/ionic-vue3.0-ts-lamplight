@@ -8,13 +8,13 @@
         </div>
         <div v-if="globalState.isLogined">
           <div v-if="globalState.memberType == 'client'" class="px-4">
-            <ion-button class="btn-primary" color="" type="button" expand="block" router-link="/order/add">
+            <ion-button color="primary" type="button" expand="block" router-link="/order/add">
               <font-awesome-icon class="mr-2" icon="edit"></font-awesome-icon>
               새 의뢰 요청
             </ion-button>
           </div>
           <div v-if="globalState.memberType == 'expert'" class="px-4">
-            <ion-button class="btn-primary" color="" type="button" expand="block" router-link="/order/allList" @click="setOpen(true)">
+            <ion-button color="primary" type="button" expand="block" router-link="/order/allList" @click="setOpen(true)">
               <ion-loading
               :is-open="isOpenRef"
               message="로딩중..."
@@ -27,7 +27,7 @@
             </ion-button>
           </div>
           <div class="px-4">
-            <ion-button class="btn-secondary" color="" type="button" expand="block" router-link="/order/list" @click="setOpen(true)">
+            <ion-button color="medium" type="button" expand="block" router-link="/order/list" @click="setOpen(true)">
               <ion-loading
               :is-open="isOpenRef"
               message="로딩중..."
@@ -51,12 +51,6 @@
 </template>
 
 <style>
-.btn-primary{
-  --background:var(--ion-color-tertiary-shade)
-}
-.btn-secondary{
-  --background:var(--ion-color-secondary-shade)
-}
 </style>
 
 <script lang="ts">

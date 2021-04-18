@@ -1,7 +1,7 @@
 <template>
   <ion-base-layout pageTitle="홈">
     <ion-custom-body class="home h-full">
-      <div class="home_head w-full h-2/6 text-center bg-gray-600 text-white">
+      <div class="home_head w-full h-2/5 text-center bg-gray-600 text-white">
         <div class="h-full flex flex-col items-center justify-end">
           <div class="home_head_logo">
             <img class="w-48" src="@/images/logo.png" alt="">

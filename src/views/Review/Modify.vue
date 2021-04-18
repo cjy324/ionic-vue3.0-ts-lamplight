@@ -27,10 +27,10 @@
             </ion-item>
           </div>
           <div class="mb-2 mt-4 px-4">
-            <ion-button class="btn-success" type="submit" expand="block">수정 완료</ion-button>
+            <ion-button color="primary" type="submit" expand="block">수정 완료</ion-button>
           </div>
           <div class="px-4">
-            <ion-button router-link="/review/list" class="btn-cancel" color="" type="button" expand="block">취소</ion-button>
+            <ion-button @click="historyBack" color="light" type="button" expand="block">취소</ion-button>
           </div>
         </form>
         <div v-else class="py-2 px-4">
@@ -42,12 +42,7 @@
 </template>
 
 <style>
-.btn-success{
-  --background:var(--ion-color-success-shade)
-}
-.btn-cancel{
-  --background:var(--ion-color-medium-shade)
-}
+
 </style>
 
 <script lang="ts">
@@ -203,9 +198,14 @@ export default defineComponent ({
 
     }
 
+    function historyBack(){
+      router.go(-1)
+    }
+
     return {
       globalState,
       state,
+      historyBack,
       //confirmAlert,
       reviewModifyFormState,
       checkAndModifyReview,

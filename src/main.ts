@@ -56,7 +56,8 @@ import {
   faUserCheck,
   faUserFriends,
   faClipboard,
-  faEllipsisH,   
+  faEllipsisH,
+  faArrowLeft,   
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -89,6 +90,7 @@ library.add(
   faCaretRight,
   faUserCheck,
   faEllipsisH,
+  faArrowLeft,
 );
 
 // 전역상태 불러오기

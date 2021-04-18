@@ -98,7 +98,7 @@
               <ion-label color="">
                 <span class="text-gray-900">{{order.extra__clientName}}</span>
               </ion-label>
-              <ion-button color="" slot="end" @click="callNumber(order.extra__clientCellphoneNo)">
+              <ion-button color="secondary" slot="end" @click="callNumber(order.extra__clientCellphoneNo)">
                 <font-awesome-icon class="mr-2" icon="phone-alt"/>
                   {{order.extra__clientCellphoneNo}}
               </ion-button>
@@ -111,11 +111,11 @@
               </ion-chip>
               <ion-buttons>
                 <span class="text-gray-900">{{order.extra__expertName}}</span>
-                <ion-button color="primary" :router-link="'/expert/profile?id=' + order.expertId">  
+                <ion-button color="secondary" :router-link="'/expert/profile?id=' + order.expertId">  
                   <font-awesome-icon class="text-gray-800 text-sm" icon="user-check"/>
                 </ion-button>          
               </ion-buttons>
-              <ion-button color="primary" slot="end" @click="callNumber(order.extra__expertCellphoneNo)">
+              <ion-button color="secondary" slot="end" @click="callNumber(order.extra__expertCellphoneNo)">
                 <font-awesome-icon class="mr-1" icon="phone-alt"/>
                 {{order.extra__expertCellphoneNo}}
               </ion-button>
@@ -143,20 +143,20 @@
           </div>
           <!--단계 버튼(의뢰인)-->
           <div class="w-full px-10 pb-4 mb-2 mt-4 border-gray-800 border-b-8 rounded-b-xl" v-if="globalState.loginedClient.id == order.clientId && order.stepLevel == 4">
-            <ion-button v-if="globalState.memberType == 'client'" :class="returnColorByLevel(order.stepLevel)" slot="end" expand="block" @click="changeStepLevel(order.id, order.stepLevel)">
+            <ion-button v-if="globalState.memberType == 'client'" color="dark" slot="end" expand="block" @click="changeStepLevel(order.id, order.stepLevel)">
               장례 종료 확인
             </ion-button>
           </div>
           <!--단계 버튼(지도사)-->
           <div class="w-full px-10 pb-4 mb-2 mt-4 border-gray-800 border-b-8 rounded-b-xl" v-if="globalState.loginedExpert.id == order.expertId">
-            <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel == 1" class="step-second" expand="block" slot="end" @click="accept(order.id, globalState.loginedExpert.id)">
+            <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel == 1" color="secondary" expand="block" slot="end" @click="accept(order.id, globalState.loginedExpert.id)">
               의뢰접수
             </ion-button>
             <!-- 거절 -->
-            <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel == 1" class="btn-cancel2 mt-2" @click="reject(order.id, globalState.loginedExpert.id)" expand="block">
+            <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel == 1" color="light" class="mt-2" @click="reject(order.id, globalState.loginedExpert.id)" expand="block">
               의뢰 거절
             </ion-button>
-            <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel < 4 && order.stepLevel > 1" :class="returnColorByLevel(order.stepLevel+1)" expand="block" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
+            <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel < 4 && order.stepLevel > 1" color="primary" expand="block" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
               다음단계 진행
               (
               <font-awesome-icon class="text-xl ml-1 text-white" icon="caret-right"/>

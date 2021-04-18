@@ -2,15 +2,15 @@
   <ion-page>
     <ion-content>
       <ion-tabs class="ion-tabs">
-        <ion-tab-bar slot="bottom" class="">
+        <ion-tab-bar slot="bottom" class="" color="dark">
           <!--홈-->
           <ion-tab-button tab="Home" href="/Home">
-            <font-awesome-icon class="text-lg h-7" icon="home" />
+            <font-awesome-icon class="text-lg text-white h-7" icon="home" />
           </ion-tab-button>
 
           <!--회원-->
           <ion-tab-button tab="Member" href="/Member">
-            <font-awesome-icon class="text-lg h-7" icon="user-circle" />
+            <font-awesome-icon class="text-lg text-white h-7" icon="user-circle" />
           </ion-tab-button>
         
           <!--none-->
@@ -31,12 +31,12 @@
               @onDidDismiss="setOpen(false)"
               spinner="dots"
             />
-            <font-awesome-icon class="text-lg h-7" icon="users" />
+            <font-awesome-icon class="text-lg text-white h-7" icon="users" />
           </ion-tab-button>
 
           <!--설정-->
           <ion-tab-button tab="Info" href="/Info">
-            <font-awesome-icon class="text-lg h-7" icon="ellipsis-h" />
+            <font-awesome-icon class="text-lg text-white h-7" icon="ellipsis-h" />
           </ion-tab-button>
         
         </ion-tab-bar>
@@ -100,6 +100,9 @@
 </template>
 
 <style>
+ion-content{
+  position: relative;
+}
 ion-fab{
   position: absolute;
   bottom:5px;

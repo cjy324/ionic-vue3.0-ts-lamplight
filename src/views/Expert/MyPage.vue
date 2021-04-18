@@ -3,7 +3,7 @@
     <ion-list v-if="globalState.isLogined" class="mb-14">
       <div class="flex justify-end mr-4 mt-2">
         <ion-buttons>
-          <ion-button :router-link="'/expert/modify?id=' + globalState.loginedExpert.id" color="medium">
+          <ion-button :router-link="'/expert/modify?id=' + globalState.loginedExpert.id" color="dark">
             <font-awesome-icon class="text-lg h-7" icon="user-cog"/>
           </ion-button>
         </ion-buttons>

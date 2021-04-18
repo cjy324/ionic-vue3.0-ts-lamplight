@@ -13,7 +13,7 @@ import { defineComponent } from 'vue'
 export default defineComponent ({
   props: {
     color: {
-      default: "primary",
+      default: "secondary",
       type: String
     }
   },

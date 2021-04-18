@@ -75,10 +75,10 @@
         </ion-item>
 
         <div class="pt-4 mb-2 px-4">
-          <ion-button class="btn-success" type="submit" size="default" expand="block">완료</ion-button>
+          <ion-button color="primary" type="submit" size="default" expand="block">완료</ion-button>
         </div>
         <div class="px-4 mb-4">
-          <ion-button class="btn-cancel" :router-link="'/expert/myPage?id=' + globalState.loginedExpert.id" color="" type="button" expand="block">
+          <ion-button color="light" @click="historyBack" type="button" expand="block">
             취소
           </ion-button>
         </div>
@@ -346,11 +346,16 @@ export default defineComponent ({
       })
     }
 
+    function historyBack(){
+      router.go(-1)
+    }
+
   
     return {
       globalState,
       mainService,
       state,
+      historyBack,
       replaceByDefault,
       profileImgElRef,
       //confirmAlert,

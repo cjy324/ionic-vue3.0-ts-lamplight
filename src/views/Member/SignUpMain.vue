@@ -8,13 +8,13 @@
         </div>
         <div class="mb-2">
           <div class="px-4 mb-2">
-            <ion-button class="btn-primary" size="" color="" type="button" expand="block" router-link="/client/join">
+            <ion-button size="" color="primary" type="button" expand="block" router-link="/client/join">
               <font-awesome-icon class="mr-2" icon="user"></font-awesome-icon>
               의뢰인 회원가입
             </ion-button>
           </div>
           <div class="px-4">
-            <ion-button class="btn-secondary" size="" color="" type="button" expand="block" router-link="/expert/join">
+            <ion-button size="" color="medium" type="button" expand="block" router-link="/expert/join">
               <font-awesome-icon class="mr-2" icon="user-tie"></font-awesome-icon>
               지도사 회원가입
             </ion-button>

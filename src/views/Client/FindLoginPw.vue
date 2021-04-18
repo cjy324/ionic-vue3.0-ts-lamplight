@@ -18,7 +18,7 @@
             </ion-item>
           </div>
           <div class="py-2 px-4">
-            <ion-button type="submit" expand="block">찾기</ion-button>
+            <ion-button type="submit" color="primary" expand="block">찾기</ion-button>
           </div>
         </form>
       </ion-custom-body>

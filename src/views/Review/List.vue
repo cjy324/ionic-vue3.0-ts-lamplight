@@ -5,6 +5,12 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
+    <ion-buttons>
+      <ion-button color="" @click="historyBack">
+        <font-awesome-icon class="text-gray-600 text-lg" icon="arrow-left"/>
+      </ion-button>
+    </ion-buttons>
+
     <ion-list class="mb-12">
       <ion-list-header>
         <img class="rounded-full h-12 mr-2 mt-2 mb-2" :src="mainService.getExpertThumbImgUrl(state.expert.id)" @error="this.onerror=null;replaceByDefault($event)">
@@ -50,16 +56,6 @@
         더보기
       </ion-button>
     </ion-list>
-    <div v-if="globalState.memberType == 'client'" class="px-4 mb-2"> 
-      <ion-button href="/order/list" class="" color="primary" type="button" expand="block">
-        '<ion-icon class="mr-2" :icon="albumsOutline" />내 의뢰 관리'로
-      </ion-button>
-    </div>
-    <div class="px-4 mb-4">
-      <ion-button href="/expert/list" class="" color="secondary" type="button" expand="block">
-        '<ion-icon class="mr-2" :icon="peopleOutline" />지도사 현황'으로
-      </ion-button>
-    </div>
   </ion-base-layout>
 </template>
 
@@ -77,7 +73,7 @@ import {
   IonItem, 
   IonButton,
   IonButtons,
-  IonIcon,
+  //IonIcon,
   IonRefresher, 
   IonRefresherContent,
 
@@ -90,7 +86,7 @@ import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { reactive, onMounted, defineComponent } from 'vue';
 import { Expert, Review } from '@/types';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import * as util from '@/utils';
 
 export default defineComponent ({
@@ -102,7 +98,7 @@ export default defineComponent ({
     IonItem, 
     IonButton,
     IonButtons,
-    IonIcon,
+    //IonIcon,
     IonRefresher, 
     IonRefresherContent,
   },
@@ -111,6 +107,7 @@ export default defineComponent ({
     const globalState = useGlobalState();
     const mainService = useMainService();
     const route = useRoute();
+    const router = useRouter();useRouter
 
     const state = reactive({
       expert: {} as Expert,
@@ -184,11 +181,16 @@ export default defineComponent ({
       }, 2000);
     }
 
+    function historyBack(){
+      router.go(-1)
+    }
+
 
     return {
       globalState,
       mainService,
       state,
+      historyBack,
       doDeleteReview,
       replaceByDefault,
       albumsOutline,

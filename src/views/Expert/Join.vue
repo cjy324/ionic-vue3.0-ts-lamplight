@@ -1,6 +1,11 @@
 <template>
   <ion-base-layout pageTitle="회원가입">
     <ion-list>
+      <ion-buttons>
+        <ion-button color="" @click="historyBack">
+          <font-awesome-icon class="text-gray-600 text-lg" icon="arrow-left"/>
+        </ion-button>
+      </ion-buttons>
       <form @submit.prevent="checkAndJoin" >
           <ion-item>
             <ion-label position="stacked">프로필 이미지</ion-label>
@@ -79,7 +84,7 @@
           <ion-button color="primary" type="submit" expand="block">가입</ion-button>
         </div>
         <div class="px-4">
-          <ion-button color="medium" type="reset" expand="block">초기화</ion-button>
+          <ion-button color="light" type="reset" expand="block">초기화</ion-button>
         </div>
       </form>
     </ion-list>
@@ -97,6 +102,7 @@ import {
   IonItem,
   IonSelect,
   IonSelectOption,
+  IonButtons, 
   IonButton, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
@@ -130,7 +136,8 @@ export default defineComponent ({
     IonInput, 
     IonSelect,
     IonSelectOption,
-    IonItem, 
+    IonItem,
+    IonButtons,  
     IonButton, 
 
   },
@@ -298,10 +305,14 @@ export default defineComponent ({
       
     }
 
-    
+    function historyBack(){
+      router.go(-1)
+    }
 
+    
     return {
       globalState,
+      historyBack,
       //confirmAlert,
       joinFormState,
       checkAndJoin,
