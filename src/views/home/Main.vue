@@ -1,20 +1,19 @@
 <template>
   <ion-base-layout pageTitle="홈">
-    <ion-custom-body class="home">
-      <div class="home_head w-full text-center bg-gray-600 text-white mt-12">
-        <div class="h-32 flex items-center justify-center">
+    <ion-custom-body class="home h-full">
+      <div class="home_head w-full h-2/6 text-center bg-gray-600 text-white">
+        <div class="h-full flex flex-col items-center justify-end">
           <div class="home_head_logo">
             <img class="w-48" src="@/images/logo.png" alt="">
           </div>
         </div>
-        <div class="mt-6">
-          원하는 서비스를 선택하세요.
-        </div>
       </div>
     
-      <div class="home_body w-full h-80 flex flex-col items-center justify-center">
-        
+      <div class="home_body w-full h-3/4 flex flex-col items-center justify-center">
         <div class="home_body_cell flex flex-col items-center justify-center rounded-lg w-11/12 h-4/6">
+          <div class="mb-6">
+            원하는 서비스를 선택하세요.
+          </div>
           <div v-if="globalState.isLogined == false" class="mb-2 w-full px-14">
             <ion-button expand="block" color="light" router-link="/member/main">
               <ion-icon :icon="enterOutline" />
