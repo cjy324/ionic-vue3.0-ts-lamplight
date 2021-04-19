@@ -42,7 +42,7 @@
         </ion-tab-bar>
       </ion-tabs>
       <!--의뢰 fab버튼-->
-      <ion-fab vertical="bottom" horizontal="center">
+      <ion-fab class="ion-fabs md" vertical="bottom" horizontal="center">
         
         <!-- 뱃지아이콘 -->
         <div v-if="globalState.isLogined">
@@ -52,7 +52,7 @@
         </div>
         <!-- @click="resetEvent(state.memberType, state.memberId)" -->
         <ion-fab-button>
-          <font-awesome-icon class="text-xl h-7 text-white" icon="clipboard-check" />          
+          <font-awesome-icon class="text-xl h-7 text-white" icon="clipboard-check" />        
         </ion-fab-button>
         <ion-fab-list side="top">
           <!-- 내 의뢰 현황 메뉴 -->
@@ -103,9 +103,18 @@
 ion-content{
   position: relative;
 }
-ion-fab{
+.ion-fabs{
   position: absolute;
   bottom:5px;
+  
+}
+
+.ios ion-content{
+  position: relative;
+}
+
+.ios ion-fab{
+  bottom:3%;
 }
 
 /* 뱃지관련 */
