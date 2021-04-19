@@ -17,8 +17,17 @@
             <ion-input v-model="loginFormState.loginPw" maxlength="20" type="password" placeholder="PW를 입력해주세요."></ion-input>
           </ion-item>
         </div>
-        <div class="py-2 px-4">
-          <ion-button type="submit" color="primary" expand="block">로그인</ion-button>
+        <div class="pt-2 px-4">
+          <ion-button type="submit" color="light" expand="block">
+            <span class="font-semibold">
+              로그인
+            </span>
+          </ion-button>
+        </div>
+        <div class="px-4 mb-4">
+          <ion-button color="medium" @click="historyBack" type="button" expand="block">
+            취소
+          </ion-button>
         </div>
         <div class="pt-2 px-4 text-sm">
           아직 회원이 아니신가요? <ion-custom-link to="/member/signupMain">회원가입</ion-custom-link>
@@ -114,10 +123,15 @@ export default defineComponent ({
       login(loginFormState.loginId, loginFormState.loginPw);
     }
 
+    function historyBack(){
+      router.go(-1)
+    }
+
     return {
       globalState,
       loginFormState,
-      checkAndLogin
+      checkAndLogin,
+      historyBack
     }
   }
 })

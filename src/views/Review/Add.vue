@@ -26,11 +26,11 @@
               <ion-textarea class="h-12" v-model="reviewAddFormState.body" placeholder="후기를 입력해주세요."></ion-textarea>
             </ion-item>
           </div>
-          <div class="mb-2 mt-4 px-4">
-            <ion-button color="primary" type="submit" expand="block">작성 완료</ion-button>
+          <div class="mb-1 mt-4 px-4">
+            <ion-button color="light" type="submit" expand="block">작성 완료</ion-button>
           </div>
           <div class="px-4">
-            <ion-button color="light" @click="historyBack" type="button" expand="block">취소</ion-button>
+            <ion-button color="medium" @click="historyBack" type="button" expand="block">취소</ion-button>
           </div>
         </form>
         <div v-else class="py-2 px-4">

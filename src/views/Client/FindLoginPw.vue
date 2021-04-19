@@ -17,8 +17,13 @@
               <ion-input v-model="findLoginPwFormState.email" maxlength="20" type="email" placeholder="email을 입력해주세요."></ion-input>
             </ion-item>
           </div>
-          <div class="py-2 px-4">
-            <ion-button type="submit" color="primary" expand="block">찾기</ion-button>
+          <div class="pt-2 px-4">
+            <ion-button type="submit" color="light" expand="block">찾기</ion-button>
+          </div>
+          <div class=" px-4">
+            <ion-button color="medium" @click="historyBack" type="button" expand="block">
+              취소
+            </ion-button>
           </div>
         </form>
       </ion-custom-body>
@@ -94,10 +99,15 @@ export default defineComponent ({
       findLoginPw(findLoginPwFormState.loginId, findLoginPwFormState.email);
     }
 
+    function historyBack(){
+      router.go(-1)
+    }
+
     return {
       globalState,
       findLoginPwFormState,
-      checkAndFindLoginId
+      checkAndFindLoginId,
+      historyBack
     }
   }
 })

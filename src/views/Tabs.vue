@@ -46,7 +46,7 @@
           </ion-badge>
         </div>
         <!-- @click="resetEvent(state.memberType, state.memberId)" -->
-        <ion-fab-button>
+        <ion-fab-button color="primary" >
           <font-awesome-icon class="text-xl h-7 text-white" icon="clipboard-check" />        
         </ion-fab-button>
         <ion-fab-list side="top">

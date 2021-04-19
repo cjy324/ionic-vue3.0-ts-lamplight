@@ -8,13 +8,15 @@
         </div>
         <div v-if="globalState.isLogined">
           <div v-if="globalState.memberType == 'client'" class="px-4">
-            <ion-button color="primary" type="button" expand="block" router-link="/order/add">
+            <ion-button color="light" type="button" expand="block" router-link="/order/add">
               <font-awesome-icon class="mr-2" icon="edit"></font-awesome-icon>
-              새 의뢰 요청
+              <span class="font-semibold">
+                새 의뢰 요청
+              </span>
             </ion-button>
           </div>
           <div v-if="globalState.memberType == 'expert'" class="px-4">
-            <ion-button color="primary" type="button" expand="block" router-link="/order/allList" @click="setOpen(true)">
+            <ion-button color="light" type="button" expand="block" router-link="/order/allList" @click="setOpen(true)">
               <ion-loading
               :is-open="isOpenRef"
               message="로딩중..."
@@ -23,7 +25,9 @@
               spinner="dots"
               />
               <ion-icon class="mr-1" :icon="searchCircleOutline" /> 
-              의뢰 요청 현황
+              <span class="font-semibold">
+                의뢰 요청 현황
+              </span>
             </ion-button>
           </div>
           <div class="px-4">
@@ -36,7 +40,9 @@
               spinner="dots"
               />
               <font-awesome-icon class="mr-2" icon="clipboard-list"></font-awesome-icon>
-              내 의뢰 관리
+              <span class="font-semibold">
+                내 의뢰 관리
+              </span>
             </ion-button>
           </div>
         </div>

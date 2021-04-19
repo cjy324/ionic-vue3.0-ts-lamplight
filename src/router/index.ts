@@ -189,6 +189,14 @@ const routes: Array<RouteRecordRaw> = [
         path: 'main',
         component: () => import('@/views/Info/Main.vue')
       },
+      {
+        path: 'privacyPolicy',
+        component: () => import('@/views/Info/PrivacyPolicy.vue')
+      },
+      {
+        path: 'termsOfService',
+        component: () => import('@/views/Info/TermsOfService.vue')
+      },
     ]
   }
 ]

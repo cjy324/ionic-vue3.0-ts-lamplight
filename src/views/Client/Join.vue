@@ -3,7 +3,7 @@
     <ion-list>
       <ion-buttons>
         <ion-button color="" @click="historyBack">
-          <font-awesome-icon class="text-gray-600 text-lg" icon="arrow-left"/>
+          <font-awesome-icon class="text-gray-600 text-2xl mt-3" icon="arrow-left"/>
         </ion-button>
       </ion-buttons>
       <form @submit.prevent="checkAndJoin" >
@@ -66,10 +66,10 @@
           </ion-item>
 
         <div class="py-1 px-4">
-          <ion-button color="primary" type="submit" expand="block">가입</ion-button>
+          <ion-button color="light" type="submit" expand="block">가입</ion-button>
         </div>
         <div class="px-4">
-          <ion-button color="light" type="reset" expand="block">초기화</ion-button>
+          <ion-button color="medium" type="reset" expand="block">초기화</ion-button>
         </div>
       </form>
     </ion-list>

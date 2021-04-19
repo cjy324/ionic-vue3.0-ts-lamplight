@@ -3,7 +3,7 @@
     <ion-list>
       <ion-buttons>
         <ion-button color="" @click="historyBack">
-          <font-awesome-icon class="text-gray-600 text-lg" icon="arrow-left"/>
+          <font-awesome-icon class="text-gray-600 text-2xl mt-3" icon="arrow-left"/>
         </ion-button>
       </ion-buttons>
       <form @submit.prevent="checkAndJoin" >
