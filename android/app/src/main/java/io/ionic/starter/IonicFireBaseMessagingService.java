@@ -18,6 +18,9 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class IonicFireBaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
@@ -107,6 +110,14 @@ public class IonicFireBaseMessagingService extends FirebaseMessagingService {
     public void onNewToken(String s) {
         super.onNewToken(s);
         Log.e("NEW_TOKEN", s);
+
+        MainActivity.NetworkTask2 networkTask = new MainActivity.NetworkTask2();
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("deviceIdTitle", "디바이스 아이디 토큰");
+        params.put("deviceIdToken", s);
+
+        networkTask.execute(params);
 
         /* DB서버로 새토큰을 업데이트시킬수 있는 부분 */
     }
