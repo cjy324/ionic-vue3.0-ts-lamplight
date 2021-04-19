@@ -17,11 +17,6 @@
           <ion-tab-button disabled>
           </ion-tab-button>
 
-          <!-- 의뢰 -->
-          <!-- <ion-tab-button tab="Order" href="/Order">
-            <font-awesome-icon class="text-lg h-7" icon="clipboard-check" />
-          </ion-tab-button> -->
-
           <!--리스트-->  
           <ion-tab-button tab="Expert" @click="setOpen(true)" href="/Expert">
             <ion-loading
