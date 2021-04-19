@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "810636079182",
+    "project_id": "sangjangrye",
+    "storage_bucket": "sangjangrye.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810636079182:android:99e4b88ae3b52fe92b931f",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "810636079182-pcoqgqeos4hskn7ei9vrm13srsuen8bu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEVoxLbciJu__DDRtFRdJfJKfN764GmBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "810636079182-pcoqgqeos4hskn7ei9vrm13srsuen8bu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
