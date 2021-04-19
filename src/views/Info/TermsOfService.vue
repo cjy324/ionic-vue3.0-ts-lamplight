@@ -1,10 +1,10 @@
 <template>
   <ion-base-layout pageTitle="이용 약관">
       <ion-custom-body class="justify-center items-center">
-        <div class="self-start">
+        <div class="self-start mb-3">
           <ion-buttons>
             <ion-button color="" @click="historyBack">
-              <font-awesome-icon class="text-white text-lg" icon="arrow-left"/>
+              <font-awesome-icon class="text-white text-2xl mt-3" icon="arrow-left"/>
             </ion-button>
           </ion-buttons>
         </div>

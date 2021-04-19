@@ -50,7 +50,7 @@
               <img class="h-20 rounded-full" :src="mainService.getExpertThumbImgUrl(expert.id)" @error="this.onerror=null;replaceByDefault($event)">
             </div>
             <div class="flex-col w-full mb-1">
-              <span class="ml-5 font-bold text-gray-900 border-b-2">
+              <span class="ml-5 font-bold text-black border-b-2">
                 {{expert.name}}님
               </span>
               <div class="flex ml-5 text-xs  pt-2">

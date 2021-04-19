@@ -66,10 +66,10 @@
         </ion-item>
 
         <div class="pt-2 mb-2 px-4">
-          <ion-button color="primary" type="submit" size="default" expand="block">완료</ion-button>
+          <ion-button color="light" type="submit" size="default" expand="block">작성 완료</ion-button>
         </div>
         <div class="px-4">
-          <ion-button @click="historyBack" color="light" type="button" expand="block">
+          <ion-button @click="historyBack" color="medium" type="button" expand="block">
             취소
           </ion-button>
         </div>

@@ -11,25 +11,25 @@
     
       <div class="home_body w-full h-3/4 flex flex-col items-center justify-center">
         <div class="home_body_cell flex flex-col items-center justify-center rounded-lg w-11/12 h-4/6">
-          <div class="mb-6">
+          <div class="mb-6 font-semibold">
             원하는 서비스를 선택하세요.
           </div>
           <div v-if="globalState.isLogined == false" class="mb-2 w-full px-14">
             <ion-button expand="block" color="light" router-link="/member/main">
               <ion-icon :icon="enterOutline" />
-              <span class="ml-2">로그인</span>
+              <span class="ml-2 font-semibold">로그인</span>
             </ion-button>
           </div>
           <div v-if="globalState.isLogined == false" class="mb-2 w-full px-14">
             <ion-button expand="block" color="light" router-link="/member/signupMain">
               <ion-icon :icon="personAddOutline" />
-              <span class="ml-2">회원가입</span>
+              <span class="ml-2 font-semibold">회원가입</span>
             </ion-button>
           </div>
           <div v-if="globalState.memberType == 'client'" class="mb-2 w-full px-14">
             <ion-button expand="block" color="light" router-link="/order/add">
               <ion-icon :icon="addCircleOutline" /> 
-              <span class="ml-2">새 의뢰 요청</span>
+              <span class="ml-2 font-semibold">새 의뢰 요청</span>
             </ion-button>
           </div>
           <div v-if="globalState.memberType == 'expert'" class="mb-2 w-full px-14">
@@ -42,7 +42,7 @@
               spinner="dots"
               />
               <ion-icon :icon="searchCircleOutline" /> 
-              <span class="ml-2">의뢰 요청 현황</span>
+              <span class="ml-2 font-semibold">의뢰 요청 현황</span>
             </ion-button>
           </div>
           <div v-if="globalState.isLogined" class="mb-2 w-full px-14">
@@ -55,7 +55,7 @@
               spinner="dots"
               />
               <ion-icon :icon="albumsOutline" />
-              <span class="ml-2">내 의뢰 관리</span>
+              <span class="ml-2 font-semibold">내 의뢰 관리</span>
             </ion-button>
           </div>
           <div class="mb-2 w-full px-14">
@@ -68,13 +68,13 @@
               spinner="dots"
               />
               <ion-icon :icon="peopleOutline" />
-              <span class="ml-2">지도사 현황</span>
+              <span class="ml-2 font-semibold">지도사 현황</span>
             </ion-button>
           </div>
           <div v-if="globalState.isLogined" class="mb-2 w-full px-14">
             <ion-button expand="block" color="light" :router-link="'/' + globalState.memberType + '/myPage'">
               <ion-icon :icon="personCircleOutline" />
-              <span class="ml-2">내 정보 관리</span>
+              <span class="ml-2 font-semibold">내 정보 관리</span>
             </ion-button>
           </div>
         </div>

@@ -18,33 +18,33 @@
             :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)" @error="this.onerror=null;replaceByDefault($event)">
       </ion-item-divider>
 
-      <ion-item color="light">
-          <ion-label color="medium">회원유형</ion-label>
+      <ion-item color="medium">
+          <ion-label color="">회원유형</ion-label>
           <ion-label slot="end" color="dark">의뢰인</ion-label>
       </ion-item>
 
       <ion-item>
-        <ion-label color="medium">아이디</ion-label>
+        <ion-label color="">아이디</ion-label>
         <ion-label slot="end" color="dark">{{state.client.loginId}}</ion-label>
       </ion-item>
 
       <ion-item>
-        <ion-label color="medium">이름</ion-label>
+        <ion-label color="">이름</ion-label>
         <ion-label slot="end" color="dark">{{state.client.name}}</ion-label>
       </ion-item>
 
       <ion-item>
-        <ion-label color="medium">연락처</ion-label>
+        <ion-label color="">연락처</ion-label>
         <ion-label slot="end" color="dark">{{state.client.cellphoneNo}}</ion-label>
       </ion-item>
 
       <ion-item>
-        <ion-label color="medium">e-mail</ion-label>
+        <ion-label color="">e-mail</ion-label>
         <ion-label slot="end" color="dark">{{state.client.email}}</ion-label>
       </ion-item>
 
       <ion-item>
-        <ion-label color="medium">지역</ion-label>
+        <ion-label color="">지역</ion-label>
         <ion-label slot="end" color="dark">{{state.client.region}}</ion-label>
       </ion-item>
 

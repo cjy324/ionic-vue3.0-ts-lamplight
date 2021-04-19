@@ -65,7 +65,8 @@
               <div class="w-32">
                 <div class="flex justify-center items-center w-full text-center">
                   <ion-button color="secondary" expand="block" slot="end" @click="accept(order.id, globalState.loginedExpert.id)">
-                    의뢰접수
+                    <ion-icon class="mr-1" :icon="checkmarkOutline" />
+                    의뢰 접수
                   </ion-button>
                 </div>
               </div>
@@ -132,8 +133,12 @@ import {
   IonButtons,
   IonRefresher, 
   IonRefresherContent,
+  IonIcon,
   //IonChip,
 } from '@ionic/vue';
+import {
+  checkmarkOutline,
+} from 'ionicons/icons';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { reactive, computed, onMounted, defineComponent } from 'vue';
@@ -162,6 +167,7 @@ export default defineComponent ({
     IonItem, 
     IonButton,
     IonButtons,
+    IonIcon,
     IonRefresher, 
     IonRefresherContent,
     //IonChip,
@@ -261,6 +267,7 @@ export default defineComponent ({
       accept,
       showMoreList,
       doRefresh,
+      checkmarkOutline,
     }
   }
 })

@@ -26,11 +26,11 @@
               <ion-textarea class="h-12" v-model="reviewModifyFormState.body" :placeholder="state.review.body"></ion-textarea>
             </ion-item>
           </div>
-          <div class="mb-2 mt-4 px-4">
-            <ion-button color="primary" type="submit" expand="block">수정 완료</ion-button>
+          <div class="mb-1 mt-4 px-4">
+            <ion-button color="light" type="submit" expand="block">수정 완료</ion-button>
           </div>
           <div class="px-4">
-            <ion-button @click="historyBack" color="light" type="button" expand="block">취소</ion-button>
+            <ion-button @click="historyBack" color="medium" type="button" expand="block">취소</ion-button>
           </div>
         </form>
         <div v-else class="py-2 px-4">

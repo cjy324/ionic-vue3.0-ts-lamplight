@@ -38,7 +38,7 @@
         </div>
       
         <template v-bind:key="order.id" v-for="order in returnFilteredOrders.slice(0, state.limtNum)">
-        <div class="orderList">
+        <div class="orderList pb-2">
           <div class="orderList_head flex justify-between items-center h-12 border-b-2 border-t-4 bg-gray-600 mb-2 rounded-t-xl">
             <div>
               <ion-buttons>
@@ -80,9 +80,9 @@
               <div class="flex-col w-full">
                 <div class="ml-2 font-bold text-gray-900 border-b-2">
                   <span class="text-sm text-gray-400 ml-2">고인</span>
-                  <span class="ml-2">{{order.deceasedName}}</span>
+                  <span class="ml-2 text-black">{{order.deceasedName}}</span>
                 </div>
-                <div class="flex flex-col ml-3 text-sm pt-2">
+                <div class="flex flex-col ml-3 text-xs pt-2">
                   <span v-if="globalState.memberType == 'expert'" class="">
                     의뢰인: {{order.extra__clientName}}님
                   </span>
@@ -90,9 +90,9 @@
                     <span class="mr-2">
                       지도사: {{order.extra__expertName}}님
                     </span>
-                    <ion-button color="secondary" :router-link="'/expert/profile?id=' + order.expertId">  
-                      프로필
-                    </ion-button> 
+                    <router-link class="ml-2 text-black" :to="'/expert/profile?id=' + order.expertId">  
+                      <font-awesome-icon class="" icon="user-check"/>
+                    </router-link> 
                   </div>
                   <span>
                     장례식장: {{order.funeralHome}}
@@ -145,17 +145,19 @@
           <!--단계 버튼(지도사)-->
           <div class="w-full px-10 pb-1 pt-2 border-gray-600 border-b-8 rounded-b-xl" v-if="globalState.loginedExpert.id == order.expertId">
             <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel == 1" color="secondary" expand="block" slot="end" @click="accept(order.id, globalState.loginedExpert.id)">
-              의뢰접수
+              <ion-icon class="mr-1" :icon="checkmarkOutline" /> 
+              의뢰 접수
             </ion-button>
             <!-- 거절 -->
-            <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel == 1" color="light" class="mt-2" @click="reject(order.id, globalState.loginedExpert.id)" expand="block">
+            <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel == 1" color="medium" class="mt-1" @click="reject(order.id, globalState.loginedExpert.id)" expand="block">
+              <ion-icon class="mr-1" :icon="refreshOutline" /> 
               의뢰 거절
             </ion-button>
-            <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel < 4 && order.stepLevel > 1" color="primary" expand="block" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
+            <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel < 4 && order.stepLevel > 1" color="light" expand="block" slot="end" @click="changeStepLevel(order.id, order.stepLevel)">
               다음단계 진행
               (
-              <font-awesome-icon class="text-xl ml-1 text-white" icon="caret-right"/>
-              <font-awesome-icon class="text-xl mr-1 text-white" icon="caret-right"/>
+              <font-awesome-icon class="text-xl ml-1 text-black" icon="caret-right"/>
+              <font-awesome-icon class="text-xl mr-1 text-black" icon="caret-right"/>
               {{returnToString(order.stepLevel+1)}}
               )
             </ion-button>
@@ -183,14 +185,18 @@
       <div v-if="globalState.memberType == 'client'" class="px-4">
         <ion-button class="btn-primary" color="" type="button" expand="block" router-link="/order/add">
           <font-awesome-icon class="mr-2" icon="edit"></font-awesome-icon>
-          새 의뢰 요청
+          <span class="font-semibold">
+            새 의뢰 요청
+          </span>
         </ion-button>
       </div>
       <!-- 지도사 -->
       <div v-if="globalState.memberType == 'expert'" class="px-4">
         <ion-button class="btn-primary" color="" type="button" expand="block" router-link="/order/allList">
           <ion-icon class="mr-1" :icon="searchCircleOutline" /> 
-          의뢰 요청 현황
+          <span class="font-semibold">
+            의뢰 요청 현황
+          </span>
         </ion-button>
       </div>
     </ion-custom-body>
@@ -245,7 +251,9 @@ import {
   IonRefresherContent,
 } from '@ionic/vue';
 import {
-  searchCircleOutline
+  searchCircleOutline,
+  checkmarkOutline,
+  refreshOutline,
 } from 'ionicons/icons'
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
@@ -525,6 +533,8 @@ export default defineComponent ({
       changeStepLevel,
       callNumber,
       searchCircleOutline,
+      checkmarkOutline,
+      refreshOutline,
       accept,
       reject,
       showMoreList,

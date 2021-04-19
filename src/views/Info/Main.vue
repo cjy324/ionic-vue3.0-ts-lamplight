@@ -15,10 +15,10 @@
               </ion-button>
             </div>
             <div class="mt-12 text-center">
-              <router-link to="privacyPolicy" class="block underline text-md">
+              <router-link to="/info/privacyPolicy" class="block text-md">
                 개인정보처리방침
               </router-link>
-              <router-link to="termsOfService" class="block underline text-md">
+              <router-link to="/info/termsOfService" class="mt-2 block text-md">
                 이용 약관
               </router-link>
             </div>
