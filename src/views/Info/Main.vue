@@ -1,8 +1,8 @@
 <template>
   <ion-base-layout pageTitle="정보">
-      <ion-custom-body class="justify-center">
-        <div class="w-full text-center bg-gray-600 text-white">
-          <div class="h-32 flex flex-col items-center justify-center">
+      <ion-custom-body class="justify-center h-full">
+        <div class="w-full h-full bg-gray-600 text-white">
+          <div class="h-full flex flex-col items-center justify-center">
             <div class="info_head_logo">
               <img class="w-48" src="@/images/logo.png" alt="">
             </div>
@@ -13,6 +13,14 @@
               <ion-button @click="logout" class="font-bold text-md" color="dark">
                 로그아웃
               </ion-button>
+            </div>
+            <div class="mt-12 text-center">
+              <router-link to="privacyPolicy" class="block underline text-md">
+                개인정보처리방침
+              </router-link>
+              <router-link to="termsOfService" class="block underline text-md">
+                이용 약관
+              </router-link>
             </div>
           </div>
         </div>
