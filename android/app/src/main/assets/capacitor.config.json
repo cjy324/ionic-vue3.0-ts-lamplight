@@ -1,0 +1,19 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "ionic-vue3.0-ts-lamplight",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {},
+  "server": {
+    "url": "http://192.168.0.20:8100",
+    "cleartext": true,
+    "originalUrl": "http://192.168.0.20:8100",
+    "originalCleartext": true
+  }
+}
