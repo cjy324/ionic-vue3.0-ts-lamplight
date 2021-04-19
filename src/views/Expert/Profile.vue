@@ -2,7 +2,7 @@
   <ion-base-layout pageTitle="프로필" >
     <ion-buttons>
       <ion-button color="" @click="historyBack">
-        <font-awesome-icon class="text-gray-600 text-lg" icon="arrow-left"/>
+        <font-awesome-icon class="text-gray-600 text-2xl mt-3" icon="arrow-left"/>
       </ion-button>
     </ion-buttons>
     <ion-list>          
@@ -10,33 +10,33 @@
         <img slot="start" class="h-32 rounded-full mr-4 mb-4" :src="mainService.getExpertThumbImgUrl(state.expert.id)" @error="this.onerror=null;replaceByDefault($event)">
       </ion-item-divider>
         
-      <ion-item color="light">
-        <ion-label color="medium">회원유형</ion-label>
-        <ion-label slot="end" color="dark">지도사</ion-label>
+      <ion-item color="medium">
+        <ion-label color="">회원유형</ion-label>
+        <ion-label slot="end" color="dark">장례지도사</ion-label>
       </ion-item>
 
       <ion-item>
-        <ion-label color="medium">이름</ion-label>
+        <ion-label color="">이름</ion-label>
         <ion-label slot="end" color="dark">{{state.expert.name}}</ion-label>
       </ion-item>
 
       <ion-item>
-        <ion-label color="medium">e-mail</ion-label>
+        <ion-label color="">e-mail</ion-label>
         <ion-text slot="end" color="dark">{{state.expert.email}}</ion-text>
       </ion-item>
 
       <ion-item>
-        <ion-label color="medium">지역</ion-label>
+        <ion-label color="">지역</ion-label>
         <ion-label slot="end" color="dark">{{state.expert.region}}</ion-label>
       </ion-item>
 
       <ion-item>
-        <ion-label color="medium">자격증</ion-label>
+        <ion-label color="">자격증</ion-label>
         <ion-label slot="end" color="dark">{{state.expert.license}}</ion-label>
       </ion-item>
 
       <ion-item>
-        <ion-label color="medium">경력</ion-label>
+        <ion-label color="">경력</ion-label>
         <ion-label slot="end" color="dark">{{state.expert.career}}</ion-label>
       </ion-item>
 

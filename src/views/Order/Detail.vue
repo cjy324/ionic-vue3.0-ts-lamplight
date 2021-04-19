@@ -2,37 +2,15 @@
   <ion-base-layout pageTitle="의뢰 정보">
     <ion-list v-if="globalState.isLogined">
 
-        <div class="w-full flex justify-start p-2 bg-gray-800">
+        <div class="flex justify-between mr-2 pb-1">
+          <div>
           <ion-buttons>
             <ion-button color="" @click="historyBack">
-              <font-awesome-icon class="text-white text-lg" icon="arrow-left"/>
+              <font-awesome-icon class="text-gray-600 text-lg" icon="arrow-left"/>
             </ion-button>
           </ion-buttons>
-          <!-- 의뢰 요청일 경우 -->
-          <ion-chip v-if="state.order.stepLevel == 1" class="bg-blue-600">
-            <font-awesome-icon class="text-xl text-white" icon="caret-right"/>
-            <font-awesome-icon class="text-xl mr-1 text-white" icon="caret-right"/>
-            <ion-label class="text-white">
-              {{returnToString(state.order.stepLevel)}}
-            </ion-label>
-          </ion-chip>
-          <!-- 2,3,4 단계일 경우 -->
-          <ion-chip v-if="state.order.stepLevel > 1 && state.order.stepLevel < 5" class="bg-gray-200">
-            <font-awesome-icon class="text-xl text-gray-700" icon="caret-right"/>
-            <font-awesome-icon class="text-xl mr-1 text-gray-700" icon="caret-right"/>
-            <ion-label class="text-gray-700">
-              {{returnToString(state.order.stepLevel)}}
-            </ion-label>
-          </ion-chip>
-          <!-- 종료된 장례일 경우 -->
-          <ion-chip v-if="state.order.stepLevel == 5" class="bg-black">
-            <ion-label class="text-white">
-              {{returnToString(state.order.stepLevel)}}
-            </ion-label>
-          </ion-chip>
-        </div>
-
-        <div class="flex justify-end mr-2 pb-1">
+          </div>
+          <div>
           <ion-buttons>
             <ion-button v-if="globalState.memberType == 'client' && state.order.stepLevel < 4" :router-link="'/order/modify?id=' + state.order.id" color="dark">
               <font-awesome-icon class="text-sm mr-1" icon="edit" />
@@ -43,9 +21,25 @@
               <span class="text-red-800 text-xs">의뢰취소</span>
             </ion-button>
           </ion-buttons>
+          </div>
         </div>
+        <!-- 의뢰 요청중인 경우 -->
+        <ion-item v-if="state.order.stepLevel == 1" color="secondary">
+          <ion-label color="">진행 단계</ion-label>
+          <ion-label slot="end" color="">{{returnToString(state.order.stepLevel)}}</ion-label>
+        </ion-item>
+        <!-- 2,3,4인 경우 -->
+        <ion-item v-if="state.order.stepLevel > 1 || state.order.stepLevel < 5" color="medium">
+          <ion-label color="">진행 단계</ion-label>
+          <ion-label slot="end" color="">{{returnToString(state.order.stepLevel)}}</ion-label>
+        </ion-item>
+        <!-- 종료된 장례인 경우 -->
+        <ion-item v-if="state.order.stepLeve == 5" color="dark">
+          <ion-label color="">진행 단계</ion-label>
+          <ion-label slot="end" color="">{{returnToString(state.order.stepLevel)}}</ion-label>
+        </ion-item>
 
-        <ion-item color="medium">
+        <ion-item color="light">
           <ion-label color="">고인 이름</ion-label>
           <ion-label slot="end" color="">{{state.order.deceasedName}}</ion-label>
         </ion-item>
@@ -187,7 +181,7 @@ import {
   IonText,
   IonButtons,
   IonButton,
-  IonChip, 
+  //IonChip, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
@@ -210,7 +204,7 @@ export default defineComponent ({
     IonText,
     IonButtons,  
     IonButton,
-    IonChip, 
+    //IonChip, 
   },
   
   setup() {

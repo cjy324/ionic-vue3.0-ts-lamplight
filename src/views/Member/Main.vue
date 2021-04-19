@@ -14,7 +14,7 @@
             </ion-button>
           </div>
           <div class="px-4">
-            <ion-button size="" color="medium" type="button" expand="block" router-link="/expert/login">
+            <ion-button size="" color="light" type="button" expand="block" router-link="/expert/login">
               <font-awesome-icon class="mr-2" icon="user-tie"></font-awesome-icon>
               지도사 로그인
             </ion-button>

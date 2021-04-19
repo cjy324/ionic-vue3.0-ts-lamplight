@@ -5,8 +5,8 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
-    <ion-custom-body v-if="state.orders.length !== 0" class="mb-8">
-      <ion-list v-if="globalState.isLogined">
+    <ion-custom-body v-if="state.orders.length !== 0" class="">
+      <ion-list v-if="globalState.isLogined" >
         <ion-item >
           <ion-label>진행단계</ion-label>
           <ion-select v-model="searchState.selectStepLevel">
@@ -39,116 +39,111 @@
       
         <template v-bind:key="order.id" v-for="order in returnFilteredOrders.slice(0, state.limtNum)">
         <div class="orderList">
-          <!--진행단계-->
-          <div class="orderList_head flex justify-between items-center h-12 border-b-2 border-t-4 bg-gray-800 mb-2 rounded-t-xl">
-            <ion-buttons>
-              <span class="ml-3 text-xs">No. {{order.id}}</span>
-              <ion-button :router-link="'/order/detail?id=' + order.id" slot="" color="dark">
-                <font-awesome-icon class="text-white text-xs ml-1 mr-1" icon="clipboard"/>
-                <span class="text-white text-xs">상세보기</span>
-              </ion-button>
-              <ion-button v-if="order.stepLevel > 3 && globalState.memberType == 'client'" :router-link="'/review/add?relTypeCode=expert&relId=' + order.expertId" color="dark" slot="end">
-                <font-awesome-icon class="text-white text-xs mr-1" icon="comment-dots"/>
-                <span class="text-white text-xs">후기작성</span>
-              </ion-button>
-            </ion-buttons>
-            <div class="">
-              <!-- 의뢰 요청일 경우 -->
-              <ion-chip v-if="order.stepLevel == 1" class="bg-blue-600" :router-link="'/order/detail?id=' + order.id">
-                <font-awesome-icon class="text-xl text-white" icon="caret-right"/>
-                <font-awesome-icon class="text-xl mr-1 text-white" icon="caret-right"/>
-                <ion-label class="text-white">
-                  {{returnToString(order.stepLevel)}}
-                </ion-label>
-              </ion-chip>
-              <!-- 2,3,4 단계일 경우 -->
-              <ion-chip v-if="order.stepLevel > 1 && order.stepLevel < 5" class="bg-gray-200" :router-link="'/order/detail?id=' + order.id">
-                <font-awesome-icon class="text-xl text-gray-700" icon="caret-right"/>
-                <font-awesome-icon class="text-xl mr-1 text-gray-700" icon="caret-right"/>
-                <ion-label class="text-gray-700">
-                  {{returnToString(order.stepLevel)}}
-                </ion-label>
-              </ion-chip>
+          <div class="orderList_head flex justify-between items-center h-12 border-b-2 border-t-4 bg-gray-600 mb-2 rounded-t-xl">
+            <div>
+              <ion-buttons>
+                <span class="ml-3 text-xs">No. {{order.id}}</span>
+                <ion-button :router-link="'/order/detail?id=' + order.id" slot="" color="dark">
+                  <font-awesome-icon class="text-white text-xs ml-1 mr-1" icon="clipboard"/>
+                  <span class="text-white text-xs">상세보기</span>
+                </ion-button>
+                <ion-button v-if="order.stepLevel > 3 && globalState.memberType == 'client'" :router-link="'/review/add?relTypeCode=expert&relId=' + order.expertId" color="dark" slot="end">
+                  <font-awesome-icon class="text-white text-xs mr-1" icon="comment-dots"/>
+                  <span class="text-white text-xs">후기작성</span>
+                </ion-button>
+              </ion-buttons>
+            </div>
+            <div>
+              <!-- 1,2,3,4 단계일 경우 -->
+              <ion-buttons>
+                <ion-button v-if="order.stepLevel < 5" color="secondary" :router-link="'/order/detail?id=' + order.id">
+                  <font-awesome-icon class="text-sm text-white" icon="caret-right"/>
+                  <font-awesome-icon class="text-sm mr-1 text-white" icon="caret-right"/>
+                  <span class="text-sm text-white pr-2">
+                    {{returnToString(order.stepLevel)}}
+                  </span>
+                </ion-button>
+              </ion-buttons>
               <!-- 종료된 장례일 경우 -->
-              <ion-chip v-if="order.stepLevel == 5" class="bg-black" :router-link="'/order/detail?id=' + order.id">
-                <ion-label class="text-white">
-                  {{returnToString(order.stepLevel)}}
-                </ion-label>
-              </ion-chip>
+              <ion-buttons>
+                <ion-button v-if="order.stepLevel == 5" color="secondary" :router-link="'/order/detail?id=' + order.id">
+                  <span class="text-sm text-white pr-2">
+                    {{returnToString(order.stepLevel)}}
+                  </span>
+                </ion-button>
+              </ion-buttons>
             </div>
           </div>
           <!--정보-->
-          <div class="orderList_body mb-2 border-b">
+          <div class="orderList_body">
             <ion-item color="" lines="none">
-              <ion-chip color="dark" class="mr-3">
-                <ion-label color="">
-                  고인
-                </ion-label>
-              </ion-chip>
-              <ion-label color=""> 
-                <span class="text-gray-900">{{order.deceasedName}}</span>
-              </ion-label>
-            </ion-item>
-            <ion-item v-if="globalState.memberType == 'expert'" color="" lines="none">
-              <ion-chip color="dark" class="mr-3">
-                <ion-label color="">
-                  의뢰인
-                </ion-label>
-              </ion-chip>
-              <ion-label color="">
-                <span class="text-gray-900">{{order.extra__clientName}}</span>
-              </ion-label>
-              <ion-button color="secondary" slot="end" @click="callNumber(order.extra__clientCellphoneNo)">
-                <font-awesome-icon class="mr-2" icon="phone-alt"/>
-                  {{order.extra__clientCellphoneNo}}
-              </ion-button>
-            </ion-item>
-            <ion-item v-if="order.expertId > 0 && globalState.memberType == 'client'" color="" lines="none">
-              <ion-chip color="dark" class="mr-3">
-                <ion-label color="">
-                  지도사
-                </ion-label>
-              </ion-chip>
-              <ion-buttons>
-                <span class="text-gray-900">{{order.extra__expertName}}</span>
-                <ion-button color="secondary" :router-link="'/expert/profile?id=' + order.expertId">  
-                  <font-awesome-icon class="text-gray-800 text-sm" icon="user-check"/>
-                </ion-button>          
-              </ion-buttons>
-              <ion-button color="secondary" slot="end" @click="callNumber(order.extra__expertCellphoneNo)">
-                <font-awesome-icon class="mr-1" icon="phone-alt"/>
-                {{order.extra__expertCellphoneNo}}
-              </ion-button>
-            </ion-item>
-            <ion-item color="" lines="none">
-              <ion-chip color="dark" class="mr-3">
-                <ion-label color="">
-                  지역
-                </ion-label>
-              </ion-chip>
-              <ion-label slot="" color="">
-                <span class="text-gray-900">{{order.region}}</span>
-              </ion-label>
-            </ion-item>
-            <ion-item color="" lines="none">
-              <ion-chip color="dark" class="mr-3">
-                <ion-label color="">
-                  장례 시작일/종료일
-                </ion-label>
-              </ion-chip>
-              <ion-label slot="" color="">
-                <span class="text-gray-900">{{order.startDate}}/{{order.endDate}}</span>
-              </ion-label>
+              <div class="flex-col w-full">
+                <div class="ml-2 font-bold text-gray-900 border-b-2">
+                  <span class="text-sm text-gray-400 ml-2">고인</span>
+                  <span class="ml-2">{{order.deceasedName}}</span>
+                </div>
+                <div class="flex flex-col ml-3 text-sm pt-2">
+                  <span v-if="globalState.memberType == 'expert'" class="">
+                    의뢰인: {{order.extra__clientName}}님
+                  </span>
+                  <div v-if="order.expertId > 0 && globalState.memberType == 'client'" class="flex items-center">
+                    <span class="mr-2">
+                      지도사: {{order.extra__expertName}}님
+                    </span>
+                    <ion-button color="secondary" :router-link="'/expert/profile?id=' + order.expertId">  
+                      프로필
+                    </ion-button> 
+                  </div>
+                  <span>
+                    장례식장: {{order.funeralHome}}
+                  </span>
+                  <span>
+                    지역: {{order.region}}
+                  </span>
+                  <span class="">
+                    시작일: {{order.startDate}}
+                  </span>
+                  <span class="">
+                    종료일: {{order.endDate}}
+                  </span>
+                </div>
+              </div>
+              <div v-if="globalState.memberType == 'expert'" class="w-32">
+                <div class="flex justify-center items-center w-full text-center">
+                  <div class="mb-2 w-full flex flex-col justify-center items-center mt-2">
+                    <span class="text-sm text-gray-900">
+                      <font-awesome-icon class="" icon="phone-alt"/>
+                      전화걸기
+                    </span>
+                    <ion-button color="secondary" slot="end" @click="callNumber(order.extra__clientCellphoneNo)">
+                      {{order.extra__clientCellphoneNo}}
+                    </ion-button>
+                  </div>
+                </div>
+              </div>
+              <div v-if="order.expertId > 0 && globalState.memberType == 'client'" class="w-32">
+                <div class="flex justify-center items-center w-full text-center">
+                  <div class="mb-2 w-full flex flex-col justify-center items-center mt-2">
+                    <span class="text-sm text-gray-900">
+                      <font-awesome-icon class="" icon="phone-alt"/>
+                      전화걸기
+                    </span>
+                    <ion-button color="secondary" slot="end" @click="callNumber(order.extra__clientCellphoneNo)">
+                      {{order.extra__clientCellphoneNo}}
+                    </ion-button>
+                  </div>
+                </div>
+              </div> 
             </ion-item>
           </div>
           <!--단계 버튼(의뢰인)-->
-          <div class="w-full px-10 pb-4 mb-2 mt-4 border-gray-800 border-b-8 rounded-b-xl" v-if="globalState.loginedClient.id == order.clientId && order.stepLevel == 4">
+          <div class="w-full px-10 pb-1 pt-2 border-gray-600 border-b-8 rounded-b-xl" v-if="globalState.loginedClient.id == order.clientId && order.stepLevel == 4">
             <ion-button v-if="globalState.memberType == 'client'" color="dark" slot="end" expand="block" @click="changeStepLevel(order.id, order.stepLevel)">
               장례 종료 확인
             </ion-button>
           </div>
           <!--단계 버튼(지도사)-->
-          <div class="w-full px-10 pb-4 mb-2 mt-4 border-gray-800 border-b-8 rounded-b-xl" v-if="globalState.loginedExpert.id == order.expertId">
+          <div class="w-full px-10 pb-1 pt-2 border-gray-600 border-b-8 rounded-b-xl" v-if="globalState.loginedExpert.id == order.expertId">
             <ion-button v-if="globalState.memberType == 'expert' && order.stepLevel == 1" color="secondary" expand="block" slot="end" @click="accept(order.id, globalState.loginedExpert.id)">
               의뢰접수
             </ion-button>
@@ -244,7 +239,7 @@ import {
   IonItem, 
   IonButton,
   IonButtons,
-  IonChip,
+  //IonChip,
   IonIcon,
   IonRefresher, 
   IonRefresherContent,
@@ -281,7 +276,7 @@ export default defineComponent ({
     IonItem, 
     IonButton,
     IonButtons,
-    IonChip,
+    //IonChip,
     IonIcon,
     IonRefresher, 
     IonRefresherContent,
