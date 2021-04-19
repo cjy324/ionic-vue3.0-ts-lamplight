@@ -18,96 +18,96 @@ export interface Entity {
 }
 
 export interface Order extends Entity {
-	religion:string;
-	startDate:string;
-	endDate:string;
-	deceasedName:string;
-  bereavedName:string;
-  funeralHome:string;
-  region:string;
-	body:string;
-	expertId:number;
-	clientId:number;
-  stepLevel:number;
-  extra__clientName:string;
-  extra__expertName:string;
-  extra__clientCellphoneNo:string;
-	extra__expertCellphoneNo:string;
+	religion: string;
+	startDate: string;
+	endDate: string;
+	deceasedName: string;
+  bereavedName: string;
+  funeralHome: string;
+  region: string;
+	body: string;
+	expertId: number;
+	clientId: number;
+  stepLevel: number;
+  extra__clientName: string;
+  extra__expertName: string;
+  extra__clientCellphoneNo: string;
+	extra__expertCellphoneNo: string;
 }
 
 export interface Funeral extends Entity {
-	religion:string;
-	startDate:string;
-	endDate:string;
-	deceasedName:string;
-  bereavedName:string;
-  funeralHome:string;
-  region:string;
-	body:string;
-	expertId:number;
-	clientId:number;
-  stepLevel:number;
-  extra__clientName:string;
-  extra__expertName:string;
-  extra__assistants:[];
+	religion: string;
+	startDate: string;
+	endDate: string;
+	deceasedName: string;
+  bereavedName: string;
+  funeralHome: string;
+  region: string;
+	body: string;
+	expertId: number;
+	clientId: number;
+  stepLevel: number;
+  extra__clientName: string;
+  extra__expertName: string;
+  extra__assistants: [];
 }
 
 
 export interface Client extends Entity {  
-	loginId:string;
-  loginPw:string;
-  authKey:string;
-  name:string;
-  cellphoneNo:string;
-  email:string;
-  region:string;
-  extra__thumbImg:string;
+	loginId: string;
+  loginPw: string;
+  authKey: string;
+  name: string;
+  cellphoneNo: string;
+  email: string;
+  region: string;
+  extra__thumbImg: string;
 }
 
 
 export interface Expert extends Entity {
-  loginId:string;
-  loginPw:string;
-  authKey:string;
-  acknowledgment_step:string;
-  name:string;
-  cellphoneNo:string;
-  email:string;
-  region:string;
-  license:string;
-  career:string;
-  work:number;
-  extra__thumbImg:string;
-  extra__ratingPoint:number;
-  extra__reviews:[];
+  loginId: string;
+  loginPw: string;
+  authKey: string;
+  acknowledgment_step: string;
+  name: string;
+  cellphoneNo: string;
+  email: string;
+  region: string;
+  license: string;
+  career: string;
+  work: number;
+  extra__thumbImg: string;
+  extra__ratingPoint: number;
+  extra__reviews: [];
 }
 
 export interface Assistant extends Entity {
-  loginId:string;
-  loginPw:string;
-  authKey:string;
-  name:string;
-  cellphoneNo:string;
-  email:string;
-  region:string;
-  career:string;
-  extra__thumbImg:string;
-  extra__ratingPoint:number;
-  extra__relFuneralId:number;
+  loginId: string;
+  loginPw: string;
+  authKey: string;
+  name: string;
+  cellphoneNo: string;
+  email: string;
+  region: string;
+  career: string;
+  extra__thumbImg: string;
+  extra__ratingPoint: number;
+  extra__relFuneralId: number;
   
 }
 
 export interface Review extends Entity{
-  relId:number;
-  relTypeCode:string;
-  body:string;
-  clientId:number;
+  relId: number;
+  relTypeCode: string;
+  body: string;
+  clientId: number;
 }
 
 export interface Rating extends Entity{
-  relId:number;
-  relTypeCode:string;
-  point:number;
-  clientId:number;
-  extra__clientName:string;
+  relId: number;
+  relTypeCode: string;
+  point: number;
+  clientId: number;
+  extra__clientName: string;
 }

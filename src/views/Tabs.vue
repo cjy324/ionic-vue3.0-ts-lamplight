@@ -123,10 +123,6 @@ ion-fab-list > ion-fab-button{
   width: 50px;
 }
 
-.createOutline{
-
-}
-
 .searchCircleOutline{
   font-size: 26px;
 }
@@ -244,6 +240,7 @@ export default defineComponent ({
     const totalCount = computed(() => {
       return state.regionListCount + state.myListCount
     })
+
 
     return {
       globalState,

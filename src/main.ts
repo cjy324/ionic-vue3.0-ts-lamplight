@@ -20,6 +20,9 @@ import '@ionic/vue/css/text-transformation.css';
 import '@ionic/vue/css/flex-utils.css';
 import '@ionic/vue/css/display.css';
 
+/* PWA */
+import './registerServiceWorker';
+
 /* Theme variables */
 import './theme/variables.css';
 /* tailwind css 불러오기 */
