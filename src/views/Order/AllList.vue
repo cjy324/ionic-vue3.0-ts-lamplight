@@ -5,7 +5,7 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
-    <ion-custom-body v-if="state.orders.length !== 0" class="mb-8">
+    <ion-custom-body v-if="state.orders.length !== 0" class="mb-8 light-back dark-back">
       <ion-list v-if="globalState.isLogined">
         <ion-item>
           <ion-label>키워드 타입</ion-label>
@@ -19,21 +19,21 @@
           <ion-searchbar class="ion-searchbar" show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
         </ion-item>
 
-        <div class="w-full border-t-4 border-b-2 pl-3 py-2 text-gray-600">
+        <div class="dark dark-b w-full border-t-4 border-b-4 pl-3 py-2 text-gray-600">
           Total: {{returnFilteredOrders.length}}
         </div>
 
         <template v-bind:key="order.id" v-for="order in returnFilteredOrders.slice(0, state.limtNum)">
           
-        <div class="orderAllList border-t border-b">
+        <div class="orderAllList border-b">
           <div class="orderAllList_head">
             <div class="w-full flex justify-between">
-                <span class="ml-3 pt-3 text-gray-800 text-xs">No. {{order.id}}</span>
+                <span class="dark ml-3 pt-3 text-gray-800 text-xs">No. {{order.id}}</span>
 
               <ion-buttons>
                 <ion-button color="dark" slot="start" :router-link="'/order/detail?id=' + order.id">
-                  <font-awesome-icon class="text-gray-800 mr-1 text-xs" icon="clipboard"/>
-                  <span class="text-gray-600 text-xs">상세보기</span>
+                  <font-awesome-icon class=" mr-1 text-xs" icon="clipboard"/>
+                  <span class=" text-xs">상세보기</span>
                 </ion-button>
               </ion-buttons>
             </div>
@@ -44,7 +44,7 @@
               <div class="flex-col w-full">
                 <div class="ml-2 font-bold text-gray-900 border-b-2">
                   <span class="text-sm text-gray-400 ml-2">고인</span>
-                  <span class="ml-2">{{order.deceasedName}}</span>
+                  <span class="dark ml-2">{{order.deceasedName}}</span>
                 </div>
                 <div class="flex flex-col ml-3 text-xs pt-2">
                   <span class="">
@@ -116,6 +116,28 @@
 .itemTitle{
   --padding-end:10px;
   --border-radius:0px 5px 20px 0px;
+}
+@media (prefers-color-scheme: light) {
+    .light {
+        color: black;
+    }
+    .light-b{
+      border-color: black;
+    }
+    .light-back{
+      background-color: white;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    .dark {
+        color: white;
+    }
+    .dark-b{
+      border-color: rgb(212, 212, 212);
+    }
+    .dark-back{
+      background-color: black;
+    }
 }
 
 </style>

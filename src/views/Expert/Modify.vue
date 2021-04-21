@@ -9,7 +9,7 @@
 
     <ion-list v-if="globalState.isLogined">
       <form @submit.prevent="checkAndModify" >
-        <ion-item-divider class="pt-4">
+        <ion-item-divider class="dark-back bg-white pt-4">
           <img slot="start" class="h-32 w-32 rounded-full" :src="mainService.getExpertThumbImgUrl(globalState.loginedExpert.id)" @error="this.onerror=null;replaceByDefault($event)">
         </ion-item-divider>
           
@@ -91,7 +91,7 @@
         </div>
       </form>
       <div class="px-4 mb-4">
-        <ion-button @click="checkSecession" class="btn-cancel" color="dark" type="button" expand="block">
+        <ion-button @click="checkSecession" class="btn-cancel" color="warning" type="button" expand="block">
           회원탈퇴
         </ion-button>
       </div>
@@ -109,6 +109,17 @@
 }
 .btn-cancel{
   --background:var(--ion-color-medium-shade)
+}
+@media (prefers-color-scheme: dark) {
+    .dark {
+        color: white;
+    }
+    .dark-b{
+      border-color: white;
+    }
+    .dark-back{
+      background-color: black;
+    }
 }
 
 </style>

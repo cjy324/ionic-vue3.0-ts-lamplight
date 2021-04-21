@@ -5,7 +5,7 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
-    <ion-custom-body v-if="state.orders.length !== 0" class="">
+    <ion-custom-body v-if="state.orders.length !== 0" class="light-back dark-back">
       <ion-list v-if="globalState.isLogined" >
         <ion-item >
           <ion-label>진행단계</ion-label>
@@ -33,13 +33,13 @@
           <ion-searchbar class="ion-searchbar" show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
         </ion-item>
 
-        <div class="w-full border-t-4 border-b-2 pl-3 py-2 text-gray-600">
+        <div class="dark dark-b w-full border-t-4 border-b-4 pl-3 py-2 text-gray-600 mb-2">
           Total: {{returnFilteredOrders.length}}
         </div>
       
         <template v-bind:key="order.id" v-for="order in returnFilteredOrders.slice(0, state.limtNum)">
-        <div class="orderList pb-2">
-          <div class="orderList_head flex justify-between items-center h-12 border-b-2 border-t-4 bg-gray-600 mb-2 rounded-t-xl">
+        <div class="orderList pb-2 mb-2">
+          <div class="orderList_head flex justify-between items-center h-12 border-b-2 bg-gray-600 mb-2 rounded-t-xl">
             <div>
               <ion-buttons>
                 <span class="ml-3 text-xs">No. {{order.id}}</span>
@@ -80,7 +80,7 @@
               <div class="flex-col w-full">
                 <div class="ml-2 font-bold text-gray-900 border-b-2">
                   <span class="text-sm text-gray-400 ml-2">고인</span>
-                  <span class="ml-2 text-black">{{order.deceasedName}}</span>
+                  <span class="dark ml-2 text-black">{{order.deceasedName}}</span>
                 </div>
                 <div class="flex flex-col ml-3 text-xs pt-2">
                   <span v-if="globalState.memberType == 'expert'" class="">
@@ -90,7 +90,7 @@
                     <span class="mr-2">
                       지도사: {{order.extra__expertName}}님
                     </span>
-                    <router-link class="ml-2 text-black" :to="'/expert/profile?id=' + order.expertId">  
+                    <router-link class="dark ml-2 text-black" :to="'/expert/profile?id=' + order.expertId">  
                       <font-awesome-icon class="" icon="user-check"/>
                     </router-link> 
                   </div>
@@ -111,7 +111,7 @@
               <div v-if="globalState.memberType == 'expert'" class="w-32">
                 <div class="flex justify-center items-center w-full text-center">
                   <div class="mb-2 w-full flex flex-col justify-center items-center mt-2">
-                    <span class="text-sm text-gray-900">
+                    <span class="dark text-sm text-gray-900">
                       <font-awesome-icon class="" icon="phone-alt"/>
                       전화걸기
                     </span>
@@ -124,7 +124,7 @@
               <div v-if="order.expertId > 0 && globalState.memberType == 'client'" class="w-32">
                 <div class="flex justify-center items-center w-full text-center">
                   <div class="mb-2 w-full flex flex-col justify-center items-center mt-2">
-                    <span class="text-sm text-gray-900">
+                    <span class="dark text-sm text-gray-900">
                       <font-awesome-icon class="" icon="phone-alt"/>
                       전화걸기
                     </span>
@@ -230,6 +230,28 @@
 .itemTitle{
   --padding-end:10px;
   --border-radius:0px 5px 20px 0px;
+}
+@media (prefers-color-scheme: light) {
+    .light {
+        color: black;
+    }
+    .light-b{
+      border-color: black;
+    }
+    .light-back{
+      background-color: white;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    .dark {
+        color: white;
+    }
+    .dark-b{
+      border-color: rgb(212, 212, 212);
+    }
+    .dark-back{
+      background-color: black;
+    }
 }
 
 </style>

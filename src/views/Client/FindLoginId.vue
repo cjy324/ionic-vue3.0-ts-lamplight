@@ -7,12 +7,12 @@
             </div>
         </div>
         <form @submit.prevent="checkAndFindLoginId" class="mx-4">
-          <div class="bg-white pb-3 pt-2 rounded-xl px-4 mx-2">
-            <ion-item class="f_item">
+          <div class="inputOutLine pb-3 pt-2 rounded-xl px-4 mx-2">
+            <ion-item color="light" class="f_item">
               <ion-label position="floating">이름</ion-label>
               <ion-input v-model="findLoginIdFormState.name" maxlength="20" placeholder="이름을 입력해주세요."></ion-input>
             </ion-item>
-            <ion-item class="s_item">
+            <ion-item color="light" class="s_item">
               <ion-label position="floating">이메일</ion-label>
               <ion-input v-model="findLoginIdFormState.email" maxlength="20" type="email" placeholder="email을 입력해주세요."></ion-input>
             </ion-item>
@@ -31,8 +31,9 @@
 </template>
 
 <style>
-
-
+.inputOutLine{
+  background-color: #f4f5f8;
+}
 </style>
 
 <script lang="ts">

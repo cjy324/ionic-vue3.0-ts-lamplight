@@ -2,8 +2,8 @@
   <ion-base-layout pageTitle="회원가입">
     <ion-list>
       <ion-buttons>
-        <ion-button color="" @click="historyBack">
-          <font-awesome-icon class="text-gray-600 text-2xl mt-3" icon="arrow-left"/>
+        <ion-button color="dark" @click="historyBack">
+          <font-awesome-icon class="text-2xl mt-3" icon="arrow-left"/>
         </ion-button>
       </ion-buttons>
       <form @submit.prevent="checkAndJoin" >

@@ -4,19 +4,19 @@
 
         <div class="flex justify-between mr-2 pb-1">
           <div class="">
-          <ion-buttons>
-            <ion-button color="" @click="historyBack">
-              <font-awesome-icon class="text-gray-600 text-2xl mt-3 mb-3" icon="arrow-left"/>
-            </ion-button>
-          </ion-buttons>
+            <ion-buttons>
+              <ion-button color="dark" @click="historyBack">
+                <font-awesome-icon class="text-2xl mt-3 mb-3" icon="arrow-left"/>
+              </ion-button>
+            </ion-buttons>
           </div>
           <div class="">
           <ion-buttons>
             <ion-button v-if="globalState.memberType == 'client' && state.order.stepLevel < 4" :router-link="'/order/modify?id=' + state.order.id" color="dark">
               <font-awesome-icon class="text-sm mr-1" icon="edit" />
-              <span class="text-gray-600 text-xs">수정</span>
+              <span class="text-xs">수정</span>
             </ion-button>
-            <ion-button v-if="globalState.loginedClient.id == state.order.clientId && globalState.memberType == 'client' && state.order.stepLevel < 3" @click="deleteOrder(state.order.id)" color="dark">
+            <ion-button v-if="globalState.loginedClient.id == state.order.clientId && globalState.memberType == 'client' && state.order.stepLevel < 3" @click="deleteOrder(state.order.id)" color="">
               <font-awesome-icon class="text-sm mr-1 text-red-800" icon="ban" />
               <span class="text-red-800 text-xs">의뢰취소</span>
             </ion-button>
@@ -34,14 +34,14 @@
           <ion-label slot="end" color="">{{returnToString(state.order.stepLevel)}}</ion-label>
         </ion-item>
         <!-- 종료된 장례인 경우 -->
-        <ion-item v-if="state.order.stepLeve == 5" color="dark">
+        <ion-item v-if="state.order.stepLeve == 5" color="warning">
           <ion-label color="">진행 단계</ion-label>
           <ion-label slot="end" color="">{{returnToString(state.order.stepLevel)}}</ion-label>
         </ion-item>
 
-        <ion-item color="light">
-          <ion-label color="">고인 이름</ion-label>
-          <ion-label slot="end" color="">{{state.order.deceasedName}}</ion-label>
+        <ion-item>
+          <ion-label color="medium">고인 이름</ion-label>
+          <ion-label slot="end" color="dark">{{state.order.deceasedName}}</ion-label>
         </ion-item>
               
         <ion-item>
@@ -107,7 +107,7 @@
         <ion-item lines="none">
           <ion-label color="medium">추가 요청 사항</ion-label>
         </ion-item>
-        <ion-item-divider>
+        <ion-item-divider class="dark-back">
           <ion-text slot="start" color="dark">{{state.order.body}}</ion-text>
         </ion-item-divider>
 
@@ -172,6 +172,7 @@
 .step-fifth{
   --background:var(--ion-color-medium-shade);
 }
+
 </style>
 
 <script lang="ts">

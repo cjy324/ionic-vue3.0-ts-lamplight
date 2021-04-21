@@ -1,10 +1,13 @@
 <template>
   <ion-base-layout pageTitle="홈">
     <ion-custom-body class="home h-full">
-      <div class="home_head w-full h-2/5 text-center bg-gray-600 text-white">
+      <div class="home_head dark_back w-full h-2/5 text-center bg-gray-600 text-white">
         <div class="h-full flex flex-col items-center justify-end">
-          <div class="home_head_logo">
+          <div class="home_head_logo light_logo">
             <img class="w-48" src="@/images/logo.png" alt="">
+          </div>
+          <div class="home_head_logo dark_logo text-7xl">
+            상장례
           </div>
         </div>
       </div>
@@ -87,6 +90,32 @@
 <style>
 .home_head_logo{
   font-family: var(--title-font-family);
+}
+
+@media (prefers-color-scheme: light) {
+    .dark_logo{
+      display: none;
+    }
+    .light_logo{
+      display: block;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    .dark {
+        color: white;
+    }
+    .dark_b{
+      border-color: rgb(212, 212, 212);
+    }
+    .dark_back{
+      background-color: black;
+    }
+    .dark_logo{
+      display: block;
+    }
+    .light_logo{
+      display: none;
+    }
 }
 </style>
 

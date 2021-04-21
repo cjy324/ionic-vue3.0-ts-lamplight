@@ -1,16 +1,19 @@
 <template>
   <ion-base-layout pageTitle="정보">
       <ion-custom-body class="justify-center h-full">
-        <div class="w-full h-full bg-gray-600 text-white">
+        <div class="dark_back w-full h-full bg-gray-600 text-white">
           <div class="h-full flex flex-col items-center justify-center">
-            <div class="info_head_logo">
+            <div class="info_head_logo light_logo">
               <img class="w-48" src="@/images/logo.png" alt="">
+            </div>
+            <div class="info_head_logo dark_logo text-7xl mb-6">
+              상장례
             </div>
             <div class="mb-8">
               ver 1.0.0
             </div>
             <div v-if="globalState.isLogined">
-              <ion-button @click="logout" class="font-bold text-md" color="dark">
+              <ion-button @click="logout" class="font-bold text-md" color="warning">
                 로그아웃
               </ion-button>
             </div>
@@ -29,6 +32,34 @@
 </template>
 
 <style>
+.info_head_logo{
+  font-family: var(--title-font-family);
+}
+@media (prefers-color-scheme: light) {
+    .dark_logo{
+      display: none;
+    }
+    .light_logo{
+      display: block;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    .dark {
+        color: white;
+    }
+    .dark_b{
+      border-color: rgb(212, 212, 212);
+    }
+    .dark_back{
+      background-color: black;
+    }
+    .dark_logo{
+      display: block;
+    }
+    .light_logo{
+      display: none;
+    }
+}
 </style>
 
 <script lang="ts">

@@ -2,7 +2,7 @@
   <ion-page>
     <ion-content>
       <ion-tabs class="ion-tabs">
-        <ion-tab-bar slot="bottom" class="" color="dark">
+        <ion-tab-bar slot="bottom" color="warning">
           <!--홈-->
           <ion-tab-button tab="Home" href="/Home">
             <font-awesome-icon class="text-lg text-white h-7" icon="home" />

@@ -6,9 +6,9 @@
               REVIEW
             </div>
         </div>
-        <form v-if="globalState.isLogined" @submit.prevent="checkAndAddReview">
-          <div>
-            <ion-item>
+        <form v-if="globalState.isLogined" @submit.prevent="checkAndAddReview" class="mx-4">
+          <div class="inputOutLine pb-3 pt-3 rounded-xl px-4 mx-2">
+            <ion-item color="light">
               <ion-label position="floating">평점</ion-label>
               <ion-select v-model="reviewAddFormState.point" interface="action-sheet">
                 <ion-select-option value="5">5점</ion-select-option>
@@ -18,10 +18,7 @@
                 <ion-select-option value="1">1점</ion-select-option>
               </ion-select>
             </ion-item>
-          </div>
-
-          <div>
-            <ion-item >
+            <ion-item color="light">
               <ion-label position="floating">후기</ion-label>
               <ion-textarea class="h-12" v-model="reviewAddFormState.body" placeholder="후기를 입력해주세요."></ion-textarea>
             </ion-item>
@@ -42,6 +39,10 @@
 </template>
 
 <style>
+.inputOutLine{
+  background-color: #f4f5f8;
+}
+
 </style>
 
 <script lang="ts">

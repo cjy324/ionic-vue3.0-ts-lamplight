@@ -1,12 +1,12 @@
 <template>
   <ion-base-layout pageTitle="프로필" >
     <ion-buttons>
-      <ion-button color="" @click="historyBack">
-        <font-awesome-icon class="text-gray-600 text-2xl mt-3" icon="arrow-left"/>
+      <ion-button color="dark" @click="historyBack">
+        <font-awesome-icon class=" text-2xl mt-3" icon="arrow-left"/>
       </ion-button>
     </ion-buttons>
     <ion-list>          
-      <ion-item-divider class="pt-4">
+      <ion-item-divider class="dark-back bg-white pt-4">
         <img slot="start" class="h-32 h-32 rounded-full mr-4 mb-4" :src="mainService.getExpertThumbImgUrl(state.expert.id)" @error="this.onerror=null;replaceByDefault($event)">
       </ion-item-divider>
         
@@ -45,6 +45,17 @@
 </template>
 
 <style>
+@media (prefers-color-scheme: dark) {
+    .dark {
+        color: white;
+    }
+    .dark-b{
+      border-color: white;
+    }
+    .dark-back{
+      background-color: black;
+    }
+}
 </style>
 
 <script lang="ts">

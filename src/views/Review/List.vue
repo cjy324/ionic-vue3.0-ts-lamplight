@@ -6,26 +6,26 @@
     </ion-refresher>
 
     <ion-buttons>
-      <ion-button color="" @click="historyBack">
-        <font-awesome-icon class="text-gray-600 text-2xl mt-3" icon="arrow-left"/>
+      <ion-button color="dark" @click="historyBack">
+        <font-awesome-icon class="text-2xl mt-3" icon="arrow-left"/>
       </ion-button>
     </ion-buttons>
 
     <ion-list class="mb-12">
       <ion-list-header>
         <img class="rounded-full h-16 w-16 mr-2 mt-2 mb-2" :src="mainService.getExpertThumbImgUrl(state.expert.id)" @error="this.onerror=null;replaceByDefault($event)">
-        <span class="text-lg mr-1 text-black">{{state.expert.name}}</span><span>님 후기</span>
+        <span class="dark text-lg mr-1 text-black">{{state.expert.name}}</span><span>님 후기</span>
       </ion-list-header>
 
-      <div class="w-full border-b-2 pl-3 py-2 text-gray-600">
+      <div class="dark dark-b w-full border-b-2 pl-3 py-2 mb-2 text-gray-600">
         Total: {{state.reviews.length}}
       </div>
 
-      <div class="reviewList border-t border-b">
+      <div class="reviewList">
         <ion-item lines="none">
         <div class="flex-col w-full">
           <template v-if="state.reviews.length !== 0">
-          <div class="border-b border-t bg-gray-100 rounded-xl mt-1 mb-1" v-bind:key="review.id" v-for="review in state.reviews.slice(0, state.limtNum)">
+          <div class=" bg-gray-100 rounded-xl mt-2 mb-1 p-2" v-bind:key="review.id" v-for="review in state.reviews.slice(0, state.limtNum)">
               <p class="text-gray-700 p-2 pb-0 text-md">
                 {{review.body}}
               </p>
@@ -62,6 +62,17 @@
 <style>
 .ion-searchbar{
   --border-radius:10px 10px 10px 10px;
+}
+@media (prefers-color-scheme: dark) {
+    .dark {
+        color: white;
+    }
+    .dark-b{
+      border-color: rgb(212, 212, 212);
+    }
+    .dark-back{
+      background-color: black;
+    }
 }
 </style>
 

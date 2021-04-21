@@ -11,7 +11,7 @@
         </ion-buttons>
       </div>
 
-      <ion-item-divider class="pt-4">
+      <ion-item-divider class="pt-4 dark-back bg-white">
         <img
             slot="start"
             class="h-32 w-32 rounded-full mr-4 mb-4"
@@ -59,6 +59,17 @@
 </template>
 
 <style>
+@media (prefers-color-scheme: dark) {
+    .dark {
+        color: white;
+    }
+    .dark-b{
+      border-color: white;
+    }
+    .dark-back{
+      background-color: black;
+    }
+}
 </style>
 
 <script lang="ts">

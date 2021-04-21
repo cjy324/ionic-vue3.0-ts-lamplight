@@ -7,12 +7,12 @@
         </div>
       </div>
       <form @submit.prevent="checkAndLogin" class="mx-4">
-        <div class="bg-white pb-3 pt-2 rounded-xl px-4 mx-2">
-          <ion-item class="f_item">
+        <div class="loginInput pb-3 pt-2 rounded-xl px-4 mx-2">
+          <ion-item color="light" class="f_item">
             <ion-label position="floating">ID</ion-label>
             <ion-input v-model="loginFormState.loginId" maxlength="20" placeholder="ID를 입력해주세요."></ion-input>
           </ion-item>
-          <ion-item class="s_item">
+          <ion-item color="light" class="s_item">
             <ion-label position="floating">PW</ion-label>
             <ion-input v-model="loginFormState.loginPw" maxlength="20" type="password" placeholder="PW를 입력해주세요."></ion-input>
           </ion-item>
@@ -41,6 +41,9 @@
 </template>
 
 <style>
+.loginInput{
+  background-color: #f4f5f8;
+}
 
 
 </style>
