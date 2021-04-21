@@ -285,6 +285,7 @@ import {
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
 import { reactive, computed, onMounted, defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
 import * as util from '@/utils';
 import { Order } from '@/types';
 import { CallNumber } from "@ionic-native/call-number";
@@ -321,6 +322,7 @@ export default defineComponent ({
     const globalState = useGlobalState();
     const mainService = useMainService();
     const searchState = useSearchState();
+    const router = useRouter();
 
     const state = reactive({
       orders: [] as Order[],
@@ -542,6 +544,7 @@ export default defineComponent ({
       console.log('Begin Refresh');
 
       setTimeout(() => {
+        router.replace('list')
         console.log('Refresh has ended');
         event.target.complete();
       }, 2000);

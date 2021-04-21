@@ -127,6 +127,7 @@ import { useMainService } from '@/services';
 import { reactive, computed, onMounted, defineComponent } from 'vue';
 import { Expert, Review } from '@/types';
 import * as util from '@/utils';
+import router from '@/router';
 
 const useSearchState = () => {
   return reactive({
@@ -238,6 +239,7 @@ export default defineComponent ({
       console.log('Begin Refresh');
 
       setTimeout(() => {
+        router.replace('list')
         console.log('Refresh has ended');
         event.target.complete();
       }, 2000);
