@@ -34,7 +34,7 @@
 
           <ion-item>
             <ion-label position="floating">연락처</ion-label>
-            <ion-input v-model="joinFormState.cellphoneNo" type="tel" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required placeholder="010-0000-0000"></ion-input>
+            <ion-input v-model="joinFormState.cellphoneNo" type="text" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required placeholder="010-0000-0000"></ion-input>
           </ion-item>
 
           <ion-item>
