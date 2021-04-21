@@ -3,6 +3,11 @@
 
     <ion-list v-if="globalState.isLogined" class="mb-14">
 
+      <div class="page_title dark text-gray-400 pl-3 pt-3">
+        <span class="font-bold text-sm">
+          > 내 정보
+        </span>
+      </div>
       <div class="flex justify-end mr-4 mt-2">
         <ion-buttons>
           <ion-button :router-link="'/client/modify?id=' + globalState.loginedClient.id" color="dark">

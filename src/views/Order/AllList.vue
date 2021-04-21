@@ -7,6 +7,11 @@
 
     <ion-custom-body v-if="state.orders.length !== 0" class="mb-8 light-back dark-back">
       <ion-list v-if="globalState.isLogined">
+        <div class="page_title dark text-gray-400 pl-3 pt-3">
+          <span class="font-bold text-sm">
+            > 의뢰 요청 현황
+          </span>
+        </div>
         <ion-item>
           <ion-label>키워드 타입</ion-label>
           <ion-select v-model="searchState.searchKeywordType">

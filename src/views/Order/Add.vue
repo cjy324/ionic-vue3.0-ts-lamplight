@@ -1,6 +1,11 @@
 <template>
-  <ion-base-layout pageTitle="의뢰요청">
+  <ion-base-layout pageTitle="의뢰 요청">
     <ion-list v-if="globalState.isLogined">
+      <div class="page_title dark text-gray-600 pl-3 pt-3">
+        <span class="font-bold text-sm">
+          > 의뢰 요청
+        </span>
+      </div>
       <form @submit.prevent="checkAndAddOrder" >
         <ion-item>
           <ion-label position="floating">고인 이름</ion-label>

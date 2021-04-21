@@ -6,6 +6,11 @@
     </ion-refresher>
 
     <ion-custom-body v-if="state.orders.length !== 0" class="light-back dark-back">
+      <div class="page_title dark text-gray-400 pl-3 pt-3">
+        <span class="font-bold text-sm">
+          > 내 의뢰 관리
+        </span>
+      </div>
       <ion-list v-if="globalState.isLogined" >
         <ion-item >
           <ion-label>진행단계</ion-label>
@@ -183,7 +188,7 @@
       </div>
       <!-- 의뢰인 -->
       <div v-if="globalState.memberType == 'client'" class="px-4">
-        <ion-button class="btn-primary" color="" type="button" expand="block" router-link="/order/add">
+        <ion-button color="light" type="button" expand="block" router-link="/order/add">
           <font-awesome-icon class="mr-2" icon="edit"></font-awesome-icon>
           <span class="font-semibold">
             새 의뢰 요청
@@ -192,7 +197,7 @@
       </div>
       <!-- 지도사 -->
       <div v-if="globalState.memberType == 'expert'" class="px-4">
-        <ion-button class="btn-primary" color="" type="button" expand="block" router-link="/order/allList">
+        <ion-button color="light" type="button" expand="block" router-link="/order/allList">
           <ion-icon class="mr-1" :icon="searchCircleOutline" /> 
           <span class="font-semibold">
             의뢰 요청 현황

@@ -2,7 +2,7 @@
   <ion-base-layout pageTitle="의뢰 정보">
     <ion-list v-if="globalState.isLogined">
 
-        <div class="flex justify-between mr-2 pb-1">
+        <div class="flex justify-between mr-2 pb-1 pt-1">
           <div class="">
             <ion-buttons>
               <ion-button color="dark" @click="historyBack">
@@ -107,7 +107,7 @@
         <ion-item lines="none">
           <ion-label color="medium">추가 요청 사항</ion-label>
         </ion-item>
-        <ion-item-divider class="dark-back">
+        <ion-item-divider class="dark-back bg-white">
           <ion-text slot="start" color="dark">{{state.order.body}}</ion-text>
         </ion-item-divider>
 

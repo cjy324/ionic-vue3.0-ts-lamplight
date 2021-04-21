@@ -5,6 +5,11 @@
     </ion-refresher>
 
     <ion-list class="mb-12">
+      <div class="page_title dark text-gray-400 pl-3 pt-3">
+        <span class="font-bold text-sm">
+          > 지도사 현황
+        </span>
+      </div>
       <ion-item>
         <ion-label>키워드 타입</ion-label>
         <ion-select v-model="searchState.searchKeywordType">
@@ -106,7 +111,8 @@ import {
   IonSelectOption, 
   IonSearchbar, 
   IonLabel, 
-  IonList, 
+  IonList,
+  //IonListHeader, 
   IonItem, 
   //IonChip,
  // IonItemDivider,
@@ -139,7 +145,7 @@ export default defineComponent ({
     IonLabel,
    // IonChip, 
   //  IonAvatar, 
-  //  IonListHeader, 
+    //IonListHeader, 
     IonList, 
     IonItem, 
   //  IonItemDivider,
