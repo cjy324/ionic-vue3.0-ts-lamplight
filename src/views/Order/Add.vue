@@ -73,7 +73,7 @@
         <div class="pt-2 mb-2 px-4">
           <ion-button color="light" type="submit" size="default" expand="block">작성 완료</ion-button>
         </div>
-        <div class="px-4">
+        <div class="px-4 mb-4">
           <ion-button @click="historyBack" color="medium" type="button" expand="block">
             취소
           </ion-button>

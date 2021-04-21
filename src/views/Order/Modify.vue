@@ -69,7 +69,7 @@
           <div class="mt-2 mb-2 px-4">
             <ion-button color="light" type="submit" expand="block">수정 완료</ion-button>
           </div>
-          <div class="px-4">
+          <div class="px-4 mb-4">
             <ion-button color="medium" type="button" expand="block" router-link="/order/list">
               취소
             </ion-button>
