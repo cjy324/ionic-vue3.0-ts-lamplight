@@ -17,7 +17,7 @@
         <ion-searchbar class="ion-searchbar" show-cancel-button="focus" animated inputmode="search" enterkeyhint="enter" placeholder="검색어를 입력해주세요." :value="searchState.searchKeyword" @keyup.enter="onInput($event)"></ion-searchbar>
       </ion-item>
 
-      <div class="w-full border-t-4 border-b-2 pl-3 py-2 text-gray-600">
+      <div class="light w-full border-t-4 border-b-2 pl-3 py-2 text-gray-600">
         Total: {{returnFilteredExperts.length}}
       </div>
 
@@ -47,7 +47,7 @@
           <!--정보-->
           <ion-item lines="none">
             <div class="w-36">
-              <img class="h-20 rounded-full" :src="mainService.getExpertThumbImgUrl(expert.id)" @error="this.onerror=null;replaceByDefault($event)">
+              <img class="h-20 w-20 rounded-full" :src="mainService.getExpertThumbImgUrl(expert.id)" @error="this.onerror=null;replaceByDefault($event)">
             </div>
             <div class="flex-col w-full mb-1">
               <span class="ml-5 font-bold text-black border-b-2">
@@ -87,6 +87,18 @@
 <style>
 .ion-searchbar{
   --border-radius:10px 10px 10px 10px;
+}
+@media (prefers-color-scheme: light) {
+    .light {
+        background-color: black;
+        color: red;
+    }
+}
+@media (prefers-color-scheme: light) {
+    .light {
+        background-color: black;
+        color: red;
+    }
 }
 </style>
 

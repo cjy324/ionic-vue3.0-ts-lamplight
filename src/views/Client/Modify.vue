@@ -1,10 +1,16 @@
 <template>
   <ion-base-layout pageTitle="내 정보 수정" >
+
+        <ion-buttons>
+          <ion-button color="dark" @click="historyBack">
+            <font-awesome-icon class="text-2xl mt-3" icon="arrow-left"/>
+          </ion-button>
+        </ion-buttons>
       
         <ion-list v-if="globalState.isLogined">
           <form @submit.prevent="checkAndModify" >
-          <ion-item-divider class="pt-4 bg-white">
-            <img slot="start" class="h-32 rounded-full" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)" @error="this.onerror=null;replaceByDefault($event)">
+          <ion-item-divider color="" class="pt-4">
+            <img slot="start" class="h-32 w-32 rounded-full" :src="mainService.getClientThumbImgUrl(globalState.loginedClient.id)" @error="this.onerror=null;replaceByDefault($event)">
           </ion-item-divider>
           
           <ion-item>
@@ -107,7 +113,7 @@ import {
   IonItemDivider, 
   IonItem, 
   IonButton,
-  //IonButtons, 
+  IonButtons, 
 } from '@ionic/vue';
 import { useGlobalState } from '@/stores'
 import { useMainService } from '@/services';
@@ -143,7 +149,7 @@ export default defineComponent ({
     IonItemDivider,  
     IonItem, 
     IonButton,
-    //IonButtons,  
+    IonButtons,  
     IonCustomLink, 
   },
 

@@ -13,7 +13,7 @@
 
     <ion-list class="mb-12">
       <ion-list-header>
-        <img class="rounded-full h-12 mr-2 mt-2 mb-2" :src="mainService.getExpertThumbImgUrl(state.expert.id)" @error="this.onerror=null;replaceByDefault($event)">
+        <img class="rounded-full h-16 w-16 mr-2 mt-2 mb-2" :src="mainService.getExpertThumbImgUrl(state.expert.id)" @error="this.onerror=null;replaceByDefault($event)">
         <span class="text-lg mr-1 text-black">{{state.expert.name}}</span><span>님 후기</span>
       </ion-list-header>
 
