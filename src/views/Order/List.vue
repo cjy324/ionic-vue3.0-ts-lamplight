@@ -174,8 +174,8 @@
         </ion-button>
       </ion-list>
       
-      <div v-else class="ifEmptyOeders my-auto mx-auto">
-        <div class="py-2 px-4">
+      <div v-else class="dark-back ifEmptyOeders my-auto mx-auto">
+        <div class="dark py-2 px-4 text-black">
           로그인 후 이용가능합니다.
           <ion-custom-link to="/member/main">Log-In</ion-custom-link>하러가기
         </div>
