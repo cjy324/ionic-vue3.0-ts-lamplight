@@ -5,6 +5,7 @@
   "scope": "/",
   "start_url": "/",
   "name": "상장례",
+  "short_name": "상장례",
  
   "icons": [
       {

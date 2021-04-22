@@ -44,7 +44,8 @@ abstract class HttpClient {
       // 요청이 이루어 졌으나 응답을 받지 못했습니다.
       // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
       // Node.js의 http.ClientRequest 인스턴스입니다.
-      alert('서버 또는 네트워크의 상태가 좋지 않습니다.');
+      // 21.04.22 삭제
+      //alert('서버 또는 네트워크의 상태가 좋지 않습니다.');
     }
     else {
       // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
@@ -502,8 +503,8 @@ export class MainApi extends HttpClient {
   public constructor() {
     super(
       axios.create({
+        //baseURL:'http://localhost:8021/',
         baseURL:'https://www.sangjangrye.kr/',
-        //baseURL:'http://10.0.2.2/',  //안드로이드 테스트용 로컬호스트 경로
       })
     );
   }
