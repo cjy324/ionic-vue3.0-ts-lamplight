@@ -1,6 +1,5 @@
-package io.ionic.starter;
+package io.ionic.sangjangrye;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 

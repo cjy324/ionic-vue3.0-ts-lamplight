@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package io.ionic.sangjangrye;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

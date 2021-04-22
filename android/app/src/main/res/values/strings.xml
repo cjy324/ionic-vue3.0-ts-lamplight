@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">상장례</string>
     <string name="title_activity_main">상장례</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="package_name">io.ionic.sangjangrye</string>
+    <string name="custom_url_scheme">io.ionic.sangjangrye</string>
     <string name="default_notification_channel_id">1</string>
     <string name="default_notification_channel_name">first</string>
 </resources>

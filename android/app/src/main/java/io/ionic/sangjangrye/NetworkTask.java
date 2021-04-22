@@ -1,13 +1,11 @@
-package io.ionic.starter;
+package io.ionic.sangjangrye;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class NetworkTask extends AppCompatActivity {

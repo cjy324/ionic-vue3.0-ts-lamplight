@@ -121,8 +121,8 @@
           <ion-button v-if="state.order.stepLevel > 1 && state.order.stepLevel < 4" color="light" @click="changeStepLevel(state.order.id, state.order.stepLevel)" expand="block">
             다음 단계 진행 
             (
-            <font-awesome-icon class="text-xl ml-1 text-white" icon="caret-right"/>
-            <font-awesome-icon class="text-xl mr-1 text-white" icon="caret-right"/>
+            <font-awesome-icon class="text-xl ml-1 text-black" icon="caret-right"/>
+            <font-awesome-icon class="text-xl mr-1 text-black" icon="caret-right"/>
             {{returnToString(state.order.stepLevel+1)}}
             )
           </ion-button>
@@ -172,7 +172,17 @@
 .step-fifth{
   --background:var(--ion-color-medium-shade);
 }
-
+@media (prefers-color-scheme: dark) {
+    .dark {
+        color: white;
+    }
+    .dark-b{
+      border-color: rgb(212, 212, 212);
+    }
+    .dark-back{
+      background-color: black;
+    }
+}
 </style>
 
 <script lang="ts">
