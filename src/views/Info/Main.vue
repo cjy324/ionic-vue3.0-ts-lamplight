@@ -10,7 +10,7 @@
               상장례
             </div>
             <div class="mb-8">
-              ver 1.0.0
+              ver 1.0.1
             </div>
             <div v-if="globalState.isLogined">
               <ion-button @click="logout" class="font-bold text-md" color="warning">
