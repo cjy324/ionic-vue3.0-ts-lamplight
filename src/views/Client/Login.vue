@@ -105,6 +105,12 @@ export default defineComponent ({
     //기존 then()방식과 과정상 큰 차이는 없지만 아직 then의 개념은 익숙치 않아 await 방식으로 변경
     
     async function login(loginId: string, loginPw: string) {
+
+      //21.04.28 PW sha256 암호화
+      const crypto = require('crypto');
+      const password = loginPw;
+      const secret = 'MySecretKey1$1$234';
+      loginPw = crypto.createHmac('sha256', secret).update(password).digest('hex');
       
       const axiosResponse = await mainService.client_authKey(loginId, loginPw)
 

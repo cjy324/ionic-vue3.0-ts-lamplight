@@ -274,6 +274,13 @@ export default defineComponent ({
       }
 
       async function modify(id: number, loginPw: string, name: string, cellphoneNo: string, email: string, region: string, genFileIdsStr1: string) {
+        
+        //21.04.28 PW sha256 암호화
+        const crypto = require('crypto');
+        const password = loginPw;
+        const secret = 'MySecretKey1$1$234';
+        loginPw = crypto.createHmac('sha256', secret).update(password).digest('hex');
+        
         const axRes = await  mainService.client_doModify(id, loginPw, name, cellphoneNo, email, region, genFileIdsStr1);
   
           util.showAlert(axRes.data.msg);
