@@ -7,7 +7,7 @@
     </ion-buttons>
     <ion-list>          
       <ion-item-divider class="dark-back bg-white pt-4">
-        <img slot="start" class="h-32 h-32 rounded-full mr-4 mb-4" :src="mainService.getExpertThumbImgUrl(state.expert.id)" @error="this.onerror=null;replaceByDefault($event)">
+        <img slot="start" class="h-32 w-32 rounded-full mr-4 mb-4" :src="mainService.getExpertThumbImgUrl(state.expert.id)" @error="this.onerror=null;replaceByDefault($event)">
       </ion-item-divider>
         
       <ion-item color="medium">
