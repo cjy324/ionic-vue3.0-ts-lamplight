@@ -88,11 +88,6 @@ export default defineComponent ({
     const route = useRoute();
     const mainService = useMainService();
 
-    // function confirmAlert(){
-    //   const msg = '해당 내용으로 가입하시겠습니까?'
-    //   util.showAlertConfirm(msg)
-    // }
-
     function checkAndAddReview() {
       
       // 평점 체크
@@ -143,7 +138,6 @@ export default defineComponent ({
           if ( axRes.data.fail ) {
             return;
           }
-          //const newReviewId = axRes.data.body.id;
 
           window.location.replace('/review/list?expertId='+ relId);
       }

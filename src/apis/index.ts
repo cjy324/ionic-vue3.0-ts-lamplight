@@ -502,7 +502,8 @@ export class MainApi extends HttpClient {
   public constructor() {
     super(
       axios.create({
-        baseURL:'http://192.168.0.20:8021/',
+        //baseURL:'http://192.168.0.20:8021/',
+        baseURL:'http://localhost:8021/', //로컬 테스트용
         //baseURL:'http://10.0.2.2/',  //안드로이드 테스트용 로컬호스트 경로
       })
     );
