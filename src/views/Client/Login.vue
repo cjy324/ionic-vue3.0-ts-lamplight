@@ -109,7 +109,7 @@ export default defineComponent ({
       //21.04.28 PW sha256 암호화
       const crypto = require('crypto');
       const password = loginPw;
-      const secret = 'MySecretKey1$1$234';
+      const secret = 'SecretKey2$5$984';
       loginPw = crypto.createHmac('sha256', secret).update(password).digest('hex');
       
       const axiosResponse = await mainService.client_authKey(loginId, loginPw)

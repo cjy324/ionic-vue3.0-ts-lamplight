@@ -503,8 +503,8 @@ export class MainApi extends HttpClient {
   public constructor() {
     super(
       axios.create({
-        baseURL:'http://localhost:8021/',
-        //baseURL:'https://www.sangjangrye.kr/',
+        //baseURL:'http://localhost:8021/',
+        baseURL:'https://www.sangjangrye.kr/',
       })
     );
   }
